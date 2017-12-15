@@ -1,0 +1,57 @@
+{
+  "Store": {//店家資訊
+    "-L05fjkdfjkdjfa": { //用push的話是亂數
+      "storeID":"1",
+      "storeName": "XX便當",
+      "phone": "04-1234567",
+      "address": "台中市台灣大道2段xX號",
+      "startTime": "09:00",
+      "endTime": "20:00",
+      "deliveryCondition": "訂三個便當以上",
+      "storeType": "便當店",
+      "menuImagePaht": "img/XX便當.jpg"
+    }
+  },
+  "Meal":{//資訊
+    "-L05fnvmcvmz;":{//用push的話是亂數
+      "mealID": "1",
+      "mealName": "排骨便當",
+      "storeID": "1",
+      "price":"30"
+    }
+  },
+  "teamOrder": {//團訂資訊
+    "-L05anvmctuirpwool": {//用push的話是亂數
+      "teamOrderID": "001",
+      "orderEndTime":"2017/12/13-10:30:00",
+      "storeID":"1"
+      "members":[
+        {
+          "userID":"user1",
+          "order":[
+            {"mealID":"炒飯","number":"1"},
+            {"mealID":"鍋貼","number":"10"}
+          ]
+        },
+        {
+          "userID":"user2",
+          "order":[
+            {"mealID":"炒飯","number":"2"},
+            {"mealID":"鍋貼","number":"15"}
+          ]
+        }
+      ]
+      
+    }
+  }
+}
+
+
+
+// "orderList":{
+//   "person2":{"meal1": "8(mealID)","meal1count": "10", "meal2": "12(mealID)", "meal2count": "20"},
+//   "person3":{"meal1": "10(mealID)"},
+//   "person4":{"meal1": "12(mealID)", "meal2": "21(mealID)", "meal3": "3(mealID)"},
+//   "person5":{"meal1": "9(mealID)", "meal2": "17(mealID)"},
+//   "排骨便當":{"person1": "阿a", "person2": "阿b","person3": "阿c","person4": "阿d","person5": "阿e"}
+// }
