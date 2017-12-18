@@ -6,9 +6,19 @@ new Vue({
       {dishName:'鍋貼',number:2,subtotal:120},
     ],
     orders:[
-        {userID:'Clover',dishName:'炒飯',number:1,subtotal:60},
-        {userID:'Clover',dishName:'鍋貼',number:2,subtotal:120},
-        {userID:'Kent',dishName:'酸辣湯',number:1,subtotal:20},
+      {userID:'Clover',
+      order:[
+        {dishName:'炒飯',number:1,subtotal:60},
+        {dishName:'鍋貼',number:2,subtotal:120}
+      ]
+    },
+    {userID:'Kent',
+    order:[
+      {dishName:'炒飯',number:1,subtotal:60},
+      {dishName:'鍋貼',number:2,subtotal:120}
+    ]
+  }
+        
     ]
   },
   computed:{

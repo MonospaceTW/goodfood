@@ -21,10 +21,12 @@
         <ul>
           <li v-for="(order,index) in orders">
             {{order.userID}}
-            {{order.dishName}}
-            x{{order.number}}
-            {{order.subtotal}}元
             
+            <span v-for="dish in orders[index].order">
+                {{dish.dishName}}
+                x{{dish.number}}
+                小計{{dish.subtotal}}
+              </span>
           </li>
         </ul>
 
