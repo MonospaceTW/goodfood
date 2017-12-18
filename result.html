@@ -14,21 +14,24 @@
         <li v-for="(item,index) in items">
           {{item.dishName}}
           x{{item.number}}
-          總共{{item.subtotal}}元</li>
+          </li>
       </ul>
+      <div>總共{{total}}元</div>
       <h2>訂單</h2>
         <ul>
           <li v-for="(order,index) in orders">
             {{order.userID}}
-            <!-- <span v-for="iorder in iorders">
-            {{iorder.dishName}}            
-            </span> -->
-            {{order.iorders[index].dishName}}
+            {{order.dishName}}
+            x{{order.number}}
+            {{order.subtotal}}元
             
           </li>
         </ul>
+
+        
   </div>
   
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
   <script src="js/result.js"></script>
 </body>
