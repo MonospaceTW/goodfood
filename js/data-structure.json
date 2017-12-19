@@ -1,7 +1,7 @@
 {
-  "stores": {//店家資訊
+  "stores": { //店家資訊
     "-L05fjkdfjkdjfa": { //用push的話是亂數
-      "storeID":"1",
+      "storeID": "1",
       "storeName": "XX便當",
       "phone": "04-1234567",
       "address": "台中市台灣大道2段xX號",
@@ -12,44 +12,58 @@
       "menuImage": "img/XX便當.jpg"
     }
   },
-  "dishes":{//資訊
-    "-L05fnvmcvmz;":{//用push的話是亂數
+  "dishes": { //資訊
+    "-L05fnvmcvmz;": { //用push的話是亂數
       "dishID": "1",
       "dishName": "排骨便當",
       "storeID": "1",
-      "price":"30"
+      "price": "30"
     }
   },
-  "orders": {//團訂資訊
-    "-L05anvmctuirpwool": {//用push的話是亂數
+  "orders": { //團訂資訊
+    "-L05anvmctuirpwool": { //用push的話是亂數
       "orderID": "001",
-      "orderEndTime":"2017/12/13-10:30:00",
-      "storeID":"1",
-      "total":500,
+      "orderEndTime": "2017/12/13-10:30:00",
+      "storeID": "1",
+      "total": 500,
       "active": true,
-      "members":[
+      "members": [
         {
-          "userID":"user1",
-          "order":[
-            {"dishID":"1","count":"1","subtotal":30},
-            {"dishID":"2","count":"10","subtotal":30}
+          "userID": "user1",
+          "name": "Clover",
+          "order": [
+            {
+              "dishID": "1",
+              "count": "1",
+              "subtotal": 30
+            },
+            {
+              "dishID": "2",
+              "count": "10",
+              "subtotal": 30
+            }
           ]
         },
         {
-          "userID":"user2",
-          "order":[
-            {"dishID":"1","count":"1","subtotal":30},
-            {"dishID":"2","count":"10","subtotal":30}
+          "userID": "user2",
+          "name": "Clover",
+          "order": [
+            {
+              "dishID": "1",
+              "count": "1",
+              "subtotal": 30
+            },
+            {
+              "dishID": "2",
+              "count": "10",
+              "subtotal": 30
+            }
           ]
         }
       ]
-      
     }
   }
 }
-
-
-
 // "orderList":{
 //   "person2":{"meal1": "8(dishID)","meal1count": "10", "meal2": "12(dishID)", "meal2count": "20"},
 //   "person3":{"meal1": "10(dishID)"},
