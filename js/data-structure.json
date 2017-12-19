@@ -31,15 +31,15 @@
         {
           "userID":"user1",
           "order":[
-            {"dishID":"1","number":"1","subtotal":30},
-            {"dishID":"2","number":"10","subtotal":30}
+            {"dishID":"1","count":"1","subtotal":30},
+            {"dishID":"2","count":"10","subtotal":30}
           ]
         },
         {
           "userID":"user2",
           "order":[
-            {"dishID":"1","number":"1","subtotal":30},
-            {"dishID":"2","number":"10","subtotal":30}
+            {"dishID":"1","count":"1","subtotal":30},
+            {"dishID":"2","count":"10","subtotal":30}
           ]
         }
       ]
