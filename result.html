@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  
+
 </head>
+
 <body>
   <div id="result">
-      <h2>訂單</h2>
-      <ul>
-        <li v-for="(item,index) in items">
-          {{item.dishName}}
-          x{{item.number}}
-          </li>
-      </ul>
-      <div>總共{{total}}元</div>
-      <h2>訂單</h2>
-        <ul>
-          <li v-for="(order,index) in orders">
-            {{order.userID}}
-            
-            <span v-for="dish in orders[index].order">
-                {{dish.dishName}}
-                x{{dish.number}}
-                小計{{dish.subtotal}}
-              </span>
-          </li>
-        </ul>
+    <h2>訂單</h2>
+    <ul>
+      <li v-for="(item,index) in items">
+        {{item.dishName}} x{{item.number}}
+      </li>
+    </ul>
+    <div>總共{{total}}元</div>
+    <h2>訂單</h2>
+    <ul>
+      <template v-for="(order,index) in orders">
+        <li>
+          {{order.name}}
+          <div v-for="dish in orders[index].order">
+            {{dish.dishName}} x{{dish.number}} 小計{{dish.subtotal}}
+          </div>
+        </li>
+      </template>
 
-        
+    </ul>
+
+    {{totalOrders}}
   </div>
-  
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
   <script src="js/result.js"></script>
 </body>
+
 </html>
