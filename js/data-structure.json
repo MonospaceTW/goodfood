@@ -26,6 +26,7 @@
       "orderEndTime":"2017/12/13-10:30:00",
       "storeID":"1",
       "total":500,
+      "active": true,
       "members":[
         {
           "userID":"user1",
