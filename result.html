@@ -14,11 +14,11 @@
     <h2>訂單</h2>
     <ul>
       <li v-for="(item,index) in items">
-        {{item.dishName}} x{{item.number}}
+        {{item.dishName}} x{{item.count}}
       </li>
     </ul>
     <div>總共{{total}}元</div>
-    <h2>訂單</h2>
+    <h2>詳細訂單</h2>
     <ul>
       <template v-for="(order,index) in orders">
         <li>
@@ -37,6 +37,19 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
+      authDomain: "goodfood-39158.firebaseapp.com",
+      databaseURL: "https://goodfood-39158.firebaseio.com",
+      projectId: "goodfood-39158",
+      storageBucket: "goodfood-39158.appspot.com",
+      messagingSenderId: "940303768399"
+    };
+    firebase.initializeApp(config);
+  </script>
 
   <script src="js/result.js"></script>
 </body>

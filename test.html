@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const orders = [
+      {
+        userID: 0,
+        name: 'Clover',
+        order: [
+          { dishName: '炒飯', number: 1, subtotal: 60 },
+          { dishName: '鍋貼', number: 2, subtotal: 120 }
+        ]
+      },
+      {
+        userID: 1,
+        name: 'Kent',
+        order: [
+          { dishName: '炒飯', number: 2, subtotal: 120 },
+          { dishName: '水餃', number: 3, subtotal: 120 }
+        ]
+      }
+
+    ];
+
+
+    let items = [];
+    // let item = {};
+    for (let i = 0; i < orders.length; i++) {
+      // let item = {};
+      for (let j = 0; j < orders[i].order.length; j++) {
+        let item = {};
+        item.dishName = orders[i].order[j].dishName;
+        item.number = orders[i].order[j].number;
+        items.push(item);
+      }
+
+    }
+
+    console.log(items);  
+  </script>
+</body>
+
+</html>
