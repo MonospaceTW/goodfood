@@ -42,7 +42,8 @@
               "count": "10",
               "subtotal": 30
             }
-          ]
+          ],
+          "userTotal": 60
         },
         {
           "userID": "user2",
@@ -58,7 +59,8 @@
               "count": "10",
               "subtotal": 30
             }
-          ]
+          ],
+          "userTotal": 60
         }
       ]
     }
