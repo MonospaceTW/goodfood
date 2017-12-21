@@ -98,9 +98,13 @@
           {storeID: 2, dishId: 27, dishName: '香煎鱈魚飯', count: 0, price: 80},
           {storeID: 2, dishId: 28, dishName: '紅燒牛腩飯', count: 0, price: 85},
         ],
+        subTotal: [],
+        total: 0,
       }
     },
-
+    // created(){
+    //   console.log(this.orderDish);
+    // },
     methods: {
       add(index){
         this.dishes[index].count += 1;
@@ -112,13 +116,21 @@
       },
       userOrder(){
         const orderDish = this.dishes.filter((dish)=>{
-          //return dish;
           return dish.count >= 1;
         });
+        console.log(orderDish[0].count);
+        for (let allSubtotal in orderDish){
+          this.subTotal.push(orderDish[allSubtotal].count * orderDish[allSubtotal].price);
+        }
+        console.log(this.subTotal);
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        this.total = this.subTotal.reduce(reducer);
+        console.log(this.total);
         this.orderList.push({
           userID: this.userID,
           name: this.name,
           order: orderDish,
+          userTotal: this.total,
         });
         this.orderList = JSON.stringify(this.orderList);
         location.href = "orderConfirm.html?orderList=" + this.orderList;
