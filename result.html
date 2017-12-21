@@ -11,6 +11,9 @@
 
 <body>
   <div id="result">
+    <div>
+      <a href="order.html">我要加定</a>
+    </div>
     <h2>訂單</h2>
     <ul>
       <li v-for="(item,index) in items">
@@ -18,11 +21,11 @@
       </li>
     </ul>
     <div>總共{{total}}元</div>
-    <h2>詳細訂單</h2>
+    <h2>團訂明細</h2>
     <ul>
       <template v-for="(order,index) in orders">
         <li>
-          {{order.name}}
+          名字：{{order.name}}
           <div v-for="dish in orders[index].order">
             {{dish.dishName}} x{{dish.count}}
           </div>
