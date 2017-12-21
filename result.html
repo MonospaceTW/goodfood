@@ -5,32 +5,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-<<<<<<< HEAD
+  <title>result</title>
 
-=======
   <script src="js/vue.js"></script>
->>>>>>> feature/order
 </head>
 
 <body>
-<<<<<<< HEAD
   <div id="result">
+    <div>
+      <a href="order.html">我要加定</a>
+    </div>
     <h2>訂單</h2>
     <ul>
       <li v-for="(item,index) in items">
-        {{item.dishName}} x{{item.number}}
+        {{item.dishName}} x{{item.count}}
       </li>
     </ul>
     <div>總共{{total}}元</div>
-    <h2>訂單</h2>
+    <h2>團訂明細</h2>
     <ul>
       <template v-for="(order,index) in orders">
         <li>
-          {{order.name}}
+          名字：{{order.name}}
           <div v-for="dish in orders[index].order">
-            {{dish.dishName}} x{{dish.number}} 小計{{dish.subtotal}}
+            {{dish.dishName}} x{{dish.count}}
           </div>
+          小計{{order.userTotal}}
         </li>
       </template>
 
@@ -42,64 +42,21 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
+      authDomain: "goodfood-39158.firebaseapp.com",
+      databaseURL: "https://goodfood-39158.firebaseio.com",
+      projectId: "goodfood-39158",
+      storageBucket: "goodfood-39158.appspot.com",
+      messagingSenderId: "940303768399"
+    };
+    firebase.initializeApp(config);
+  </script>
 
   <script src="js/result.js"></script>
-=======
-  <div id="app"></div>
-  <script type="text/x-template" id="my-component">
-    <div>
-      <ul>
-        <li v-for="(item, index) in dishes">
-          <span>{{item.dishName}}</span>
-          <span>{{item.count}} (個/份)</span>
-          <span>{{item.price * item.count}} 元</span>
-        </li>
-      </ul>
-      <span>總金額 {{total}} 元</span>
-    </div>
-  </script>
-<script>
-  var helper = {
-    getParameterByName: function(name, url) {
-      var regex, results;
-      if (!url) {
-        url = window.location.href;
-      }
-      name = name.replace(/[\[\]]/g, '\\$&');
-      regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i');
-      results = regex.exec(url);
-      if (!results) {
-        return null;
-      }
-      if (!results[2]) {
-        return '';
-      }
-      return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-  };
-
-  let orderList = helper.getParameterByName("orderList"); 
-  //console.log(orderList);
-
-  Vue.component('my-component', {
-  template: '#my-component',
-  data: function(){
-    return {
-
-    }
-  },
-  created(){
-
-    }
-  });
-  const vm = new Vue({
-    el: '#app',
-    data: {
-
-    },
-  });
-</script>
->>>>>>> feature/order
 </body>
 
 </html>
