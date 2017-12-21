@@ -87,15 +87,15 @@ firebase.database().ref("order/member").on('value', function (snapshot) {
 let vm = new Vue({
   el: '#result',
   data: {
-    items: [],
+    totalOrders: [],
     orders: [],
     total: 0
   },
 
   methods: {
-    update: function (data, dataDetail) {
-      this.orders = data;
-      this.items = dataDetail;
+    update: function (orders, totalOrderCountFilter) {
+      this.orders = orders;
+      this.totalOrders = totalOrderCountFilter;
       console.log(this.orders);
     },
     computedTotal: function () {
