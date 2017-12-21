@@ -40,7 +40,7 @@ let orders = [];
 // 從資料庫取得詳細訂單資料
 firebase.database().ref("order/member").on('value', function (snapshot) {
   orders = snapshot.val();
-  console.log(orders);
+  // console.log(orders);
 
   // 產生總訂單
   const computedOrders = [];
@@ -74,18 +74,25 @@ firebase.database().ref("order/member").on('value', function (snapshot) {
   }
   // console.log(totalOrderCount);
 
+  // 點單
+  const totalOrderCountFilter = totalOrderCount.filter(function (item) {
+    return item.count !== 0;
+  });
+  console.log(totalOrderCountFilter);
+
+
   // render
   new Vue({
     el: '#result',
     data: {
-      items: totalOrderCount,
+      items: totalOrderCountFilter,
       orders: orders
     },
     computed: {
       total() {
         let total = 0;
-        for (let i = 0; i < dishes.length; i++) {
-
+        for (let i = 0; i < orders.length; i++) {
+          total += orders[i].userTotal;
         }
         return total;
       },
