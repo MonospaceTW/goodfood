@@ -1,9 +1,4 @@
 // 菜單資料
-// let dishes = [
-//   { dishID: 1, dishName: '炒飯', price: 60, storeID: 'a' },
-//   { dishID: 2, dishName: '鍋貼', price: 60, storeID: 'a' },
-//   { dishID: 3, dishName: '水餃', price: 40, storeID: 'a' },
-// ];
 
 let dishes = [
   { storeID: 2, dishId: 1, dishName: '合菜便當', count: 0, price: 60 },
@@ -80,26 +75,38 @@ firebase.database().ref("order/member").on('value', function (snapshot) {
   });
   console.log(totalOrderCountFilter);
 
-
-  // render
-  new Vue({
-    el: '#result',
-    data: {
-      items: totalOrderCountFilter,
-      orders: orders
-    },
-    computed: {
-      total() {
-        let total = 0;
-        for (let i = 0; i < orders.length; i++) {
-          total += orders[i].userTotal;
-        }
-        return total;
-      },
-    }
-
-  });
-
-
+  vm.update(orders, totalOrderCountFilter);
+  // vm.total();
   // callback結束
 });
+
+
+// render
+let vm = new Vue({
+  el: '#result',
+  data: {
+    items: [],
+    orders: [],
+    total: 0
+  },
+  computed: {
+
+
+  },
+  methods: {
+    update: function (data, dataDetail) {
+      this.orders = data;
+      this.items = dataDetail;
+      console.log(this.orders);
+    },
+    total: function (data, dataDetail) {
+      let total = 0;
+      for (let i = 0; i < orders.length; i++) {
+        total += orders[i].userTotal;
+      }
+      this.total = total;
+    }
+  }
+
+});
+
