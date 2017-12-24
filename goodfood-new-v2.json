@@ -1,0 +1,221 @@
+{
+  "store": {
+    "-L0E-F1sGjumHDHqi0a-": {
+      "storeId": 1,
+      "storeName": "老三的飯",
+      "phone": "0925-143-099",
+      "address": "台中市北區大德街59號",
+      "openTime": "10:00",
+      "closeTime": "20:00",
+      "deliveryCondition": "四個以上",
+      "storeType": "中式",
+      "menuImage": "img/老三的飯.jpg"
+    }
+  },
+  "dish": {
+    "-L0E-F1sGjumHDHqi0ca": {
+      "dishId": 1,
+      "dishName": "雙主菜便當",
+      "storeId": 1,
+      "price": 110
+    },
+    "-L0E-F1sGjumHDHqi0cb": {
+      "dishId": 2,
+      "dishName": "雙主菜便當",
+      "storeId": 1,
+      "price": 90
+    },
+    "-L0E-F1sGjumHDHqi0cc": {
+      "dishId": 3,
+      "dishName": "合菜便當",
+      "storeId": 1,
+      "price": 60
+    },
+    "-L0E-F1sGjumHDHqi0cd": {
+      "dishId": 4,
+      "dishName": "紅燒排骨飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0ce": {
+      "dishId": 5,
+      "dishName": "酥炸雞腿飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0cf": {
+      "dishId": 6,
+      "dishName": "蒜泥白肉飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0cg": {
+      "dishId": 7,
+      "dishName": "宮保雞丁飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0ch": {
+      "dishId": 8,
+      "dishName": "迷迭香腿排飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0ci": {
+      "dishId": 9,
+      "dishName": "香煎嫩排飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0cj": {
+      "dishId": 10,
+      "dishName": "蜜汁雞腿飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0ck": {
+      "dishId": 11,
+      "dishName": "客家油雞飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0cl": {
+      "dishId": 12,
+      "dishName": "古早味排骨飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0cm": {
+      "dishId": 13,
+      "dishName": "秋刀魚飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0cn": {
+      "dishId": 14,
+      "dishName": "老三烤肉飯",
+      "storeId": 1,
+      "price": 65
+    },
+    "-L0E-F1sGjumHDHqi0co": {
+      "dishId": 15,
+      "dishName": "蜜汁腿排飯",
+      "storeId": 1,
+      "price": 70
+    },
+    "-L0E-F1sGjumHDHqi0cp": {
+      "dishId": 16,
+      "dishName": "老三魯排骨飯",
+      "storeId": 1,
+      "price": 70
+    },
+    "-L0E-F1sGjumHDHqi0cq": {
+      "dishId": 17,
+      "dishName": "香煎銀班魚飯",
+      "storeId": 1,
+      "price": 70
+    },
+    "-L0E-F1sGjumHDHqi0cr": {
+      "dishId": 18,
+      "dishName": "老三招牌飯",
+      "storeId": 1,
+      "price": 70
+    },
+    "-L0E-F1sGjumHDHqi0cs": {
+      "dishId": 19,
+      "dishName": "酥炸雞排飯",
+      "storeId": 1,
+      "price": 75
+    },
+    "-L0E-F1sGjumHDHqi0ct": {
+      "dishId": 20,
+      "dishName": "碳烤雞排飯",
+      "storeId": 1,
+      "price": 75
+    },
+    "-L0E-F1sGjumHDHqi0cu": {
+      "dishId": 21,
+      "dishName": "煎虱目魚肚飯",
+      "storeId": 1,
+      "price": 75
+    },
+    "-L0E-F1sGjumHDHqi0cv": {
+      "dishId": 22,
+      "dishName": "碳烤大雞腿飯",
+      "storeId": 1,
+      "price": 75
+    },
+    "-L0E-F1sGjumHDHqi0cw": {
+      "dishId": 23,
+      "dishName": "廣東魯雞腿飯",
+      "storeId": 1,
+      "price": 75
+    },
+    "-L0E-F1sGjumHDHqi0cx": {
+      "dishId": 24,
+      "dishName": "酥炸大雞腿飯",
+      "storeId": 1,
+      "price": 75
+    },
+    "-L0E-F1sGjumHDHqi0cy": {
+      "dishId": 25,
+      "dishName": "蜜汁大雞腿飯",
+      "storeId": 1,
+      "price": 75
+    },
+    "-L0E-F1sGjumHDHqi0cz": {
+      "dishId": 26,
+      "dishName": "吉士豬排飯",
+      "storeId": 1,
+      "price": 75
+    },
+    "-L0E-F1sGjumHDHqi0da": {
+      "dishId": 27,
+      "dishName": "香煎鱈魚飯",
+      "storeId": 1,
+      "price": 80
+    },
+    "-L0E-F1sGjumHDHqi0db": {
+      "dishId": 28,
+      "dishName": "紅燒牛腩飯",
+      "storeId": 1,
+      "price": 85
+    }
+  },
+  "order": {
+    "-L0E-F1sGjumHDHqi0aa": {
+      "orderId": 1,
+      "orderEndTime": "2017-12-25 10:30",
+      "sotreId": 1
+    }
+  },
+  "orderDetail" : {
+    "-L0EDp_pHbNv7ey01aaa": {
+      "orderId": 1,
+      "memberId": 1,
+      "dishId": 22,
+      "count": 4,
+      "subTotal": 300
+    },
+    "-L0EDp_pHbNv7ey01aab": {
+      "orderId": 1,
+      "memberId": 1,
+      "dishId": 13,
+      "count": 4,
+      "subTotal": 260
+    },
+    "-L0EDp_pHbNv7ey01aac": {
+      "orderId": 1,
+      "memberId": 1,
+      "dishId": 28,
+      "count": 4,
+      "subTotal": 340
+    }
+  },
+  "member": {
+    "-L0EDp_q9ErqPIfrhila": {
+      "memberId": 1,
+      "name": "Robert"
+    }
+  }
+}
