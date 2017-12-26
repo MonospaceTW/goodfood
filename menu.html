@@ -4,80 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>storeInfo</title>
-  <script src="js/vue.js"></script>
-  <script src="js/moment.js"></script>
+  <title>Document</title>
 </head>
+
 <body>
-  <div id="app">
-    <my-component></my-component>
+  <div id="menu">
+
+    <ul>
+      <li v-for="dish in dishes">{{dish.dishName}}</li>
+    </ul>
+
   </div>
 
-<script type="text/x-template" id="my-component">
-  <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <a href="order.html?storeId=-L1HLLfOK0EBcVFjBjPy&orderId=1">
-                <img src="images/老三便當.jpg" alt="老三便當" style="width:500px; height:300px">
-            </a>
-        </div>
-    </div>
-    <div class="row">
-        <a href="order.html?storeId=-L1HLLfOK0EBcVFjBjPy&orderId=1" @click="teamOrder">
-            團購
-        </a>
-    </div>
-  </div>
-</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
+      authDomain: "goodfood-39158.firebaseapp.com",
+      databaseURL: "https://goodfood-39158.firebaseio.com",
+      projectId: "goodfood-39158",
+      storageBucket: "goodfood-39158.appspot.com",
+      messagingSenderId: "940303768399"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script>
+    let dishes = [];
+    let storeId = '-L0E-F1sGjumHDHqi0a-';
+    firebase.database().ref("dish").orderByChild("storeId").equalTo(storeId).once('value').then(function (snapshot) {
+      snapshot.forEach(function (data) {
+        // console.log(data.val());
+        dishes.push(data.val());
+      });
+      console.log(dishes);
 
-<script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
-    authDomain: "goodfood-39158.firebaseapp.com",
-    databaseURL: "https://goodfood-39158.firebaseio.com",
-    projectId: "goodfood-39158",
-    storageBucket: "goodfood-39158.appspot.com",
-    messagingSenderId: "940303768399"
-  };
-  firebase.initializeApp(config);
-</script>
 
-<script>
+      let vm = new Vue({
+        el: '#menu',
+        data: {
+          dishes: dishes
+        },
 
-  moment().format();
-
-  let order = firebase.database().ref('order');
-  let store = firebase.database().ref('store');
-
-    Vue.component('my-component', {
-    template: '#my-component',
-    data: function() {
-      return {
-        nowTime: '',
-        endTime: '',
-      }
-    },
-    created(){
-      this.nowTime = moment();
-      this.nowTime = this.nowTime._d;
-      this.endTime = moment().add(30, 'm');
-      this.endTime = this.endTime._d;
-      console.log(this.endTime);
-    },
-    methods: {
-      teamOrder(){
-
-      }
-    }
-  });
-  const vm = new Vue({
-    el: '#app',
-    data: {
-
-    }
-  });
-</script>
+      });
+      // callback end
+    });
+  </script>
 </body>
+
 </html>
