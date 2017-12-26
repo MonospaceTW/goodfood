@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="menu">
+
+    <ul>
+      <li v-for="dish in dishes">{{dish.dishName}}</li>
+    </ul>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
+      authDomain: "goodfood-39158.firebaseapp.com",
+      databaseURL: "https://goodfood-39158.firebaseio.com",
+      projectId: "goodfood-39158",
+      storageBucket: "goodfood-39158.appspot.com",
+      messagingSenderId: "940303768399"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script>
+    let dishes = [];
+    firebase.database().ref("dish").once('value').then(function (snapshot) {
+      snapshot.forEach(function (data) {
+        // console.log(data.val());
+        dishes.push(data.val());
+      });
+      console.log(dishes);
+
+
+      let vm = new Vue({
+        el: '#menu',
+        data: {
+          dishes: dishes
+        },
+
+      });
+      // callback end
+    });
+  </script>
+</body>
+
+</html>
