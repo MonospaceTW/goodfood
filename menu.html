@@ -33,7 +33,8 @@
   </script>
   <script>
     let dishes = [];
-    firebase.database().ref("dish").once('value').then(function (snapshot) {
+    let storeId = '-L0E-F1sGjumHDHqi0a-';
+    firebase.database().ref("dish").orderByChild("storeId").equalTo(storeId).once('value').then(function (snapshot) {
       snapshot.forEach(function (data) {
         // console.log(data.val());
         dishes.push(data.val());
