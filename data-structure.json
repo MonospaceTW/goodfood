@@ -33,8 +33,8 @@
           "count": 1
         }
       ],
-      "orderDetail": [
-        {
+      "orderDetail": {
+        "L05anvmctuirpwool": {
           "userId": "L0EDp_q9ErqPIfrhila",
           "name": "Clover",
           "order": [
@@ -46,12 +46,7 @@
           ],
           "userTotal": 60
         }
-      ]
-    }
-  },
-  "member": {
-    "-L0EDp_q9ErqPIfrhila": {
-      "name": "Clover"
+      }
     }
   }
 }
