@@ -1,3 +1,28 @@
+// 從網址取得訂單ID&店家ID
+var helper = {
+  getParameterByName: function (name, url) {
+    var regex, results;
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, '\\$&');
+    regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i');
+    results = regex.exec(url);
+    if (!results) {
+      return null;
+    }
+    if (!results[2]) {
+      return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+};
+
+let orderId = helper.getParameterByName("orderId");
+let storeId = helper.getParameterByName("storeId");
+console.log(orderId);
+
+// 取得店家資訊
 let dishes = [];
 let orders = [];
 let store = {};
@@ -10,7 +35,7 @@ firebase.database().ref("store").once('value').then(function (snapshot) {
 console.log(store);
 
 
-// 菜單資料
+// 取得菜單資料
 firebase.database().ref("dish").once('value').then(function (snapshot) {
   snapshot.forEach(function (data) {
     // console.log(data.val());
@@ -22,7 +47,7 @@ firebase.database().ref("dish").once('value').then(function (snapshot) {
 
 
   // 從資料庫取得詳細訂單資料
-  firebase.database().ref("order/-L1LhNkVxQHq7y4R2T9e/orderDetail/").on('value', function (snapshot) {
+  firebase.database().ref("/order/" + orderId + "/orderDetail/").on('value', function (snapshot) {
     snapshot.forEach(function (data) {
       orders.push(data.val());
       // console.log(data.val());
