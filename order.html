@@ -45,7 +45,6 @@
   firebase.initializeApp(config);
 </script>
 <script>
-  moment().format();
   var helper = {
     getParameterByName: function(name, url) {
       var regex, results;
@@ -65,11 +64,13 @@
     }
   };
 
-  var storeId = helper.getParameterByName("storeId"); 
+  let storeId = helper.getParameterByName("storeId");
+  //console.log(storeId);
 
   let dish = firebase.database().ref('dish');
   let member = firebase.database().ref('member');
   let order = firebase.database().ref('order');
+  let store = firebase.database().ref('store');
 
   Vue.component('my-component', {
     template: '#my-component',
@@ -86,6 +87,7 @@
     },
     created(){
       const self = this;
+      //console.log(storeId);
       dish.orderByChild("storeId").equalTo(storeId).once('value').then( function(snapshot) {
         //console.log(snapshot.val());
         snapshot.forEach( function(data) {
@@ -94,6 +96,7 @@
         });
       });
       //console.log(self.dishes);
+
 
     },
     methods: {
@@ -106,8 +109,6 @@
         this.dishes[index].count += 1;
       },
       order(){
-        this.memberKey = member.push({name: this.name}).key;
-        console.log(this.memberKey);
         for(let item in this.dishes){
           if(this.dishes[item].count >=1){
             this.total += this.dishes[item].price * this.dishes[item].count;
@@ -117,14 +118,14 @@
         }
         console.log(this.total);
         
-        this.orderKey = order.push({
-          orderDetail: {
-            userId: '',
-            name: this.name,
-            order: this.totalOrder,
-            userTotal: this.total,
-            }
-        }).key;
+        // this.orderKey = order.push({
+        //   orderDetail: {
+        //     userId: '',
+        //     name: this.name,
+        //     order: this.totalOrder,
+        //     userTotal: this.total,
+        //     }
+        // }).key;
         
       }
     },
