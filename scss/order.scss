@@ -1,6 +1,6 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
-@mixin btn($fontsize) {
-    font-size: $fontsize;
+@mixin btn {
+    font-size: 13px;
     border-radius: 15px;
     text-align: center;
     padding: 5px 8px;
@@ -15,7 +15,6 @@ $font-m:12px;
 $font-s:11px;
 body {
     font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
-    font-weight: 500;
 }
 
 .container {
@@ -74,9 +73,9 @@ body {
 
 .wrap {
     width: 100%;
-    float: left;
+    margin-bottom: 95px;
     .order-name {
-        margin-top: 50px;
+        float: left;
         padding-top: 20px;
         margin-left: 20px;
         .myname {
@@ -85,8 +84,10 @@ body {
             letter-spacing: 3px;
         }
         #name {
-            width: 30%;
+            width: 32%;
             height: 22px;
+            border: 1px solid #d8d8d8;
+            padding: 10px;
         }
     }
     .button {
@@ -96,19 +97,19 @@ body {
         flex-direction: column;
         margin-right: 25px;
         .order-btn {
-            @include btn(13px);
+            @include btn();
             background: $maincolor;
             letter-spacing: 3px;
             margin-bottom: 8px;
         }
         .result-btn {
-            @include btn(13px);
+            @include btn();
             border: 1px solid $maincolor;
             letter-spacing: 1.5px;
             margin-bottom: 8px;
         }
         .share-btn {
-            @include btn(13px);
+            @include btn();
             border: 1px solid $maincolor;
             letter-spacing: 2px;
         }
@@ -130,10 +131,9 @@ body {
             text-decoration: none;
         }
     }
-}
-
-.clearfix {
-    clear: both;
+    .clearfix {
+        clear: both;
+    }
 }
 
 .navbar {

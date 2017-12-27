@@ -1,7 +1,6 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
 body {
   font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
-  font-weight: 500;
 }
 
 .container {
@@ -58,10 +57,10 @@ body {
 
 .wrap {
   width: 100%;
-  float: left;
+  margin-bottom: 95px;
 }
 .wrap .order-name {
-  margin-top: 50px;
+  float: left;
   padding-top: 20px;
   margin-left: 20px;
 }
@@ -71,8 +70,10 @@ body {
   letter-spacing: 3px;
 }
 .wrap .order-name #name {
-  width: 30%;
+  width: 32%;
   height: 22px;
+  border: 1px solid #d8d8d8;
+  padding: 10px;
 }
 .wrap .button {
   width: 28%;
@@ -127,8 +128,7 @@ body {
   border: 1px solid #525252;
   text-decoration: none;
 }
-
-.clearfix {
+.wrap .clearfix {
   clear: both;
 }
 
