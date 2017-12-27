@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/moment.js"></script>
 </head>
 
 <body>
@@ -14,9 +16,12 @@
       <li v-for="dish in dishes">{{dish.dishName}}</li>
     </ul>
 
+    <a href="order.html?soterId=-L0E-F1sGjumHDHqi0a-" @click="teamOrder">團訂</a>
+
+
+
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -31,21 +36,43 @@
     firebase.initializeApp(config);
   </script>
   <script>
+    const now = new Date();
+    //console.log(now);
+
+    
+    const order = firebase.database().ref('order');
+
     let dishes = [];
-    let storeId = '-L0E-F1sGjumHDHqi0a-';
+    const storeId = '-L0E-F1sGjumHDHqi0a-';
     firebase.database().ref("dish").orderByChild("storeId").equalTo(storeId).once('value').then(function (snapshot) {
       snapshot.forEach(function (data) {
         // console.log(data.val());
         dishes.push(data.val());
       });
-      console.log(dishes);
+      //console.log(dishes);
 
 
       let vm = new Vue({
         el: '#menu',
         data: {
-          dishes: dishes
+          dishes: dishes,
+          orderEndTime: ''
+          
         },
+        created(){
+          this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
+          console.log(this.orderEndTime);
+
+
+        },
+        methods: {
+          teamOrder(){
+            const teamOrderKey = order.push({
+              orderEndTime: this.orderEndTime,
+              storeId: storeId,
+            });
+          }
+        }
 
       });
       // callback end
