@@ -1,49 +1,33 @@
-// 菜單資料
-
-// let dishes = [
-//   { storeID: 2, dishId: 1, dishName: '合菜便當', count: 0, price: 60 },
-//   { storeID: 2, dishId: 2, dishName: '雙主菜便當', count: 0, price: 65 },
-//   { storeID: 2, dishId: 3, dishName: '雙主菜便當', count: 0, price: 65 },
-//   { storeID: 2, dishId: 4, dishName: '紅燒排骨飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 5, dishName: '酥炸雞腿飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 6, dishName: '蒜泥白肉飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 7, dishName: '宮保雞丁飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 8, dishName: '迷迭香腿排飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 9, dishName: '香煎嫩雞排飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 10, dishName: '蜜汁雞腿飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 11, dishName: '客家油雞飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 12, dishName: '古早味排骨飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 13, dishName: '秋刀魚飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 14, dishName: '老三烤肉飯', count: 0, price: 65 },
-//   { storeID: 2, dishId: 15, dishName: '蜜汁腿排飯', count: 0, price: 70 },
-//   { storeID: 2, dishId: 16, dishName: '老三魯排骨飯', count: 0, price: 70 },
-//   { storeID: 2, dishId: 17, dishName: '香煎銀班魚飯', count: 0, price: 70 },
-//   { storeID: 2, dishId: 18, dishName: '老三招牌飯', count: 0, price: 70 },
-//   { storeID: 2, dishId: 19, dishName: '酥炸雞排飯', count: 0, price: 75 },
-//   { storeID: 2, dishId: 20, dishName: '炭烤雞排飯', count: 0, price: 75 },
-//   { storeID: 2, dishId: 21, dishName: '煎虱目魚肚飯', count: 0, price: 75 },
-//   { storeID: 2, dishId: 22, dishName: '炭烤大雞腿飯', count: 0, price: 75 },
-//   { storeID: 2, dishId: 23, dishName: '廣東滷雞腿飯', count: 0, price: 75 },
-//   { storeID: 2, dishId: 24, dishName: '酥炸大雞腿飯', count: 0, price: 75 },
-//   { storeID: 2, dishId: 25, dishName: '蜜汁大雞腿飯', count: 0, price: 75 },
-//   { storeID: 2, dishId: 26, dishName: '吉士豬排飯', count: 0, price: 75 },
-//   { storeID: 2, dishId: 27, dishName: '香煎鱈魚飯', count: 0, price: 80 },
-//   { storeID: 2, dishId: 28, dishName: '紅燒牛腩飯', count: 0, price: 85 },
-// ];
 let dishes = [];
+let orders = [];
+let store = {};
+firebase.database().ref("store").once('value').then(function (snapshot) {
+  snapshot.forEach(function (data) {
+    store = data.val();
+  });
+  vm.updateStore();
+});
+console.log(store);
+
+
+// 菜單資料
 firebase.database().ref("dish").once('value').then(function (snapshot) {
   snapshot.forEach(function (data) {
     // console.log(data.val());
     dishes.push(data.val());
+
   });
-  console.log(dishes);
+  // console.log(dishes);
 
 
-  let orders = [];
+
   // 從資料庫取得詳細訂單資料
-  firebase.database().ref("order/-L1G6nrnOYC9LVlijcWg").on('value', function (snapshot) {
-    orders = snapshot.val();
-    console.log(orders);
+  firebase.database().ref("order/-L1LhNkVxQHq7y4R2T9e/orderDetail/").on('value', function (snapshot) {
+    snapshot.forEach(function (data) {
+      orders.push(data.val());
+      // console.log(data.val());
+    });
+    // console.log(orders);
 
     // 產生總訂單
     const computedOrders = [];
@@ -96,12 +80,16 @@ firebase.database().ref("dish").once('value').then(function (snapshot) {
 let vm = new Vue({
   el: '#result',
   data: {
+    store: {},
     totalOrders: [],
     orders: [],
     total: 0
   },
 
   methods: {
+    updateStore() {
+      this.store = store;
+    },
     update: function (orders, totalOrderCountFilter) {
       this.orders = orders;
       this.totalOrders = totalOrderCountFilter;
