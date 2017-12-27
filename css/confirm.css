@@ -99,7 +99,7 @@ body {
   display: inline-block;
   font-size: 11px;
 }
-.navbar a:visited {
+.navbar a {
   color: #fff;
 }
 .navbar a:hover {

@@ -147,7 +147,7 @@ hr {
   display: inline-block;
   font-size: 11px;
 }
-.navbar a:visited {
+.navbar a {
   color: #ee5d30;
 }
 .navbar a:hover {
