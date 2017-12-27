@@ -115,17 +115,17 @@
             this.total += this.dishes[item].price * this.dishes[item].count;
             console.log(this.dishes[item]);
             this.totalOrder.push(this.dishes[item]);
+            
           }
         }
-        console.log(this.total);
+        //console.log(this.total);
+        for (let item in this.totalOrder){
+          this.totalOrder[item].price = (this.totalOrder[item].price * this.totalOrder[item].count);
+        }
         
-        this.orderKey = order.child(orderId).child("orderDetail").push(
-          {
-            userId: "L0EDp_q9ErqPIfrhila",
-            name: this.name,
-            order: this.totalOrder,
-            userTotal: this.total
-          }).key;
+        this.totalOrder = JSON.stringify(this.totalOrder);
+        //console.log(this.totalOrder);
+        location.href = "orderConfirm.html?totalOrder=" + this.totalOrder + "&orderId=" + orderId + "&name=" + this.name + "&storeId=" + storeId ;
         
       }
     },

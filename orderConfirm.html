@@ -14,17 +14,17 @@
 <script type="text/x-template" id="my-component">
   <div>
     <ul>
-      <li v-for="(item, index) in dishes">
+      <li v-for="(item, index) in totalOrder">
         <span>{{item.dishName}}</span>
         <span>{{item.count}} (個/份)</span>
-        <span>{{item.price * item.count}} 元</span>
+        <span>{{item.price}} 元</span>
       </li>
     </ul>
     <span>總金額 {{total}} 元</span>
     <br>
     <span>我是</span>
-    <input type="text" v-model="name">
-    <a href="result.html?orderId=1" @click="orderConfirm">確認訂單</a>
+    <span>{{name}}</span>
+    <a href="#" @click="orderConfirm">確認訂單</a>
 
 
   </div>
@@ -45,7 +45,7 @@
 </script>
 
 <script>
-  const member = firebase.database().ref("order/member");
+  let order = firebase.database().ref('order');
   
   var helper = {
     getParameterByName: function(name, url) {
@@ -66,57 +66,51 @@
     }
   };
 
-  let orderList = helper.getParameterByName("orderList"); 
+  let orderId = helper.getParameterByName("orderId");
+  let storeId = helper.getParameterByName("storeId");
+  let name = helper.getParameterByName("name"); 
+  let totalOrder = helper.getParameterByName("totalOrder");
   //console.log(orderList);
 
   Vue.component('my-component', {
   template: '#my-component',
   data: function(){
     return {
-      orderListnew: [],
       name: '',
-      dishes: [],
-      userSubtotal: 0,
-      allSubtotal: 0,
-      total: 0,
-      members: [],
-      //userTotalList: [],
+      subTotal: 0,
+      totalOrder: [],
+      total: 0
     }
   },
   created(){
-    this.orderListnew = JSON.parse(orderList);
-    //console.log(this.orderListnew);
-    this.name =this.orderListnew[0].name;
-    //console.log(this.name);
-    this.dishes = this.orderListnew[0].order;
-    //console.log(this.dishes);
-    this.total = this.orderListnew[0].userTotal;
-    //console.log(this.total);
+    // order.child("-L1LhNkVxQHq7y4R2T9e").child('orderDetail').once('value').then(function(snapshot){
+    //   console.log(snapshot.val());
+    //   snapshot.forEach(function(data){
+    //     console.log(data.val());
+    //   });
+    // });
+    this.name = name;
+    this.totalOrder = JSON.parse(totalOrder);
+    console.log(this.totalOrder);
+    for(let item in this.totalOrder){
+      this.total += this.totalOrder[item].price;
+    }
+    console.log(this.total);
   },
   mounted(){
-    const self = this;
-    member.once('value').then(function(snapshot){
-      snapshot.forEach(function(data){
-        console.log(data.val());
-        self.members.push(data.val());
-      });
-      console.log(self.members);
-    });
+
   },
   methods: {
     orderConfirm(){
-      
-      for(let item in this.members){
-        this.orderListnew.push(this.members[item]);
-      }
-      console.log(this.orderListnew);
-      
-
-      member.set(this.orderListnew);
-      
-
-   
-
+      this.orderKey = order.child(orderId).child("orderDetail").push(
+          {
+            userId: "L0EDp_q9ErqPIfrhila",
+            name: this.name,
+            order: this.totalOrder,
+            userTotal: this.total
+          }).key;
+          location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;
+          
     }
   },
 
