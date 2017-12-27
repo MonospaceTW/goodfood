@@ -65,7 +65,9 @@
   };
 
   let storeId = helper.getParameterByName("storeId");
+  let orderId = helper.getParameterByName("orderId");
   //console.log(storeId);
+  console.log(orderId);
 
   let dish = firebase.database().ref('dish');
   let member = firebase.database().ref('member');
@@ -82,7 +84,6 @@
         orderKey: '',
         totalOrder: [],
         total: 0,
-        userTotal: 0,
       }
     },
     created(){
@@ -118,14 +119,13 @@
         }
         console.log(this.total);
         
-        // this.orderKey = order.push({
-        //   orderDetail: {
-        //     userId: '',
-        //     name: this.name,
-        //     order: this.totalOrder,
-        //     userTotal: this.total,
-        //     }
-        // }).key;
+        this.orderKey = order.child(orderId).child("orderDetail").push(
+          {
+            userId: "L0EDp_q9ErqPIfrhila",
+            name: this.name,
+            order: this.totalOrder,
+            userTotal: this.total
+          }).key;
         
       }
     },
