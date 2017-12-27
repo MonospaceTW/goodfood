@@ -16,7 +16,7 @@
       <li v-for="dish in dishes">{{dish.dishName}}</li>
     </ul>
 
-    <a href="order.html?soterId=-L0E-F1sGjumHDHqi0a-" @click="teamOrder">團訂</a>
+    <a href="order.html?soterId=-L1LeGds02yWfMcvMwIn" @click="teamOrder">團訂</a>
 
 
 
@@ -43,7 +43,7 @@
     const order = firebase.database().ref('order');
 
     let dishes = [];
-    const storeId = '-L0E-F1sGjumHDHqi0a-';
+    const storeId = '-L1LeGds02yWfMcvMwIn';
     firebase.database().ref("dish").orderByChild("storeId").equalTo(storeId).once('value').then(function (snapshot) {
       snapshot.forEach(function (data) {
         // console.log(data.val());
@@ -56,14 +56,11 @@
         el: '#menu',
         data: {
           dishes: dishes,
-          orderEndTime: ''
-          
+          orderEndTime: '' 
         },
         created(){
           this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
           console.log(this.orderEndTime);
-
-
         },
         methods: {
           teamOrder(){

@@ -65,7 +65,7 @@
   };
 
   var storeId = helper.getParameterByName("storeId"); 
-
+  console.log(storeId);
   let dish = firebase.database().ref('dish');
   let member = firebase.database().ref('member');
   let order = firebase.database().ref('order');
@@ -116,14 +116,14 @@
         }
         console.log(this.total);
         
-        this.orderKey = order.push({
-          orderDetail: {
-            userId: '',
-            name: this.name,
-            order: this.totalOrder,
-            userTotal: this.total,
-            }
-        }).key;
+        // this.orderKey = order.push({
+        //   orderDetail: {
+        //     userId: '',
+        //     name: this.name,
+        //     order: this.totalOrder,
+        //     userTotal: this.total,
+        //     }
+        // }).key;
         
       }
     },
