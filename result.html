@@ -24,7 +24,7 @@
             <p>電話:{{store.phone}}</p>
         </div>
         <div class="button">
-            <a href="order.html" class="order-more">我要加訂</a>
+            <a :href="'order.html?orderId=' + orderId" class="order-more">我要加訂</a>
         </div>
         <div class="deadline">截止時間:{{orderEndTime}}</div>
         <div class="result-list">
