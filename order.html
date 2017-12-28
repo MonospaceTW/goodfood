@@ -1,35 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>order</title>
-  <script src="js/vue.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/311a41a163.js"></script>
+    <link rel="stylesheet" href="css/order.css">
+    <title>訂購頁</title>
+    <script src="js/vue.js"></script>
+    <script src="js/moment.js"></script>
 </head>
+
 <body>
+  
   <div id="app">
-    <!-- <my-component :prop-c="userName" :prop-e0="orderList" :prop-e="dishes"></my-component> -->
     <my-component></my-component>
   </div>
-  <script type="text/x-template" id="my-component">
-    <div>
-      <ul>
-        <li v-for="(item, index) in dishes">
-          <span>{{item.dishName}}</span>
-          <button type="button" @click="reduce(index)">-</button>
-          <input type="text" v-model="item.count"/>
-          <button type="button" @click="add(index)">+</button>
-          <span>{{item.price}}元</span>
-        </li>
-      </ul>
-      <span>我是</span>
-      <input type="text" v-model="name">
-      <a href="#" @click="userOrder">下訂單</a>
-      <a href="orderResult.html?orderId=1">看團訂結果</a>
-      <a href="order.html?orderId=1">分享這頁</a>
+
+<script type="text/x-template" id="my-component">
+  <div>
+    <div class="container">
+      <div class="wrapper">
+          <div class="order-title">八方雲集鍋貼水餃專賣店</div>
+          <div class="order-list">
+            <ul>
+                <li v-for="(item, index) in dishes">
+                  <span>{{item.dishName}}</span>
+                  <span class="text-right">{{item.price}}TWD</span>
+                  <span class="text-right">
+                      <i class="fa fa-minus-circle icon" aria-hidden="true" @click="reduce(index)"></i>
+                      <input type="text" v-model="item.count" class="text" />
+                      <i class="fa fa-plus-circle icon" aria-hidden="true" @click="add(index)"></i>
+                  </span>
+                  <span class="text-right">{{item.price * item.count}}TWD</span>
+                </li>
+              </ul>
+          </div>
+          <p class="order-total">
+              <span>
+                  總共{{countTotal}}元
+              </span>
+          </p>
+          <div class="wrap">
+              <div class="order-name">
+                  <label class="myname" for="name">我是</label>
+                  <input id="name" type="text" placeholder="請輸入名字" name="name" v-model="name">
+                  <div class="button">
+                      <a href="#" class="order-btn">下訂單</a>
+                      <a href="result.html?orderId=-L1LhNkVxQHq7y4R2T9e&storeId=-L1LeGds02yWfMcvMwIn" class="result-btn">看團購結果</a>
+                      <a href="order.html?orderId=-L1LhNkVxQHq7y4R2T9e&storeId=-L1LeGds02yWfMcvMwIn" class="share-btn">分享這頁</a>
+                  </div>
+              </div>
+              <div class="clearfix"></div>
+          </div>
+      </div>
     </div>
-  </script>
+    <div class="navbar">
+        <a href="index.html" class="fa fa-home" aria-hidden="true"></a>
+        <a href="user.html" class="fa fa-user-o" aria-hidden="true"></a>
+    </div>
+
+  </div>
+</script>
   
 <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
 <script>
@@ -45,98 +80,110 @@
   firebase.initializeApp(config);
 </script>
 <script>
-  var usersRef = firebase.database().ref('users');
+  var helper = {
+    getParameterByName: function(name, url) {
+      var regex, results;
+      if (!url) {
+        url = window.location.href;
+      }
+      name = name.replace(/[\[\]]/g, '\\$&');
+      regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i');
+      results = regex.exec(url);
+      if (!results) {
+        return null;
+      }
+      if (!results[2]) {
+        return '';
+      }
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+  };
+
+  let storeId = helper.getParameterByName("storeId");
+  let orderId = helper.getParameterByName("orderId");
+  //console.log(storeId);
+  //console.log(orderId);
+
+  let dish = firebase.database().ref('dish');
+  let member = firebase.database().ref('member');
+  let order = firebase.database().ref('order');
+  let store = firebase.database().ref('store');
 
   Vue.component('my-component', {
-    // props: {
-    //   propC: {
-    //     type: String,
-    //     required: true
-    //   },
-    //   propE0: {
-    //     type: Object,
-    //   },
-    //   propE: {
-    //     type: Object,
-    //     default: function () {
-    //     return { message: 'hello' }
-    //     }
-    //   }
-    // },
     template: '#my-component',
-    data: function(){
+    data: function() {
       return {
+        dishes: [],
         name: '',
-        orderList: [],
-        dishes:[
-          {storeID: 2, dishId: 1, dishName: '合菜便當', count: 0, price: 60},
-          {storeID: 2, dishId: 2,  dishName: '雙主菜便當', count: 0, price: 65},
-          {storeID: 2, dishId: 3,  dishName: '雙主菜便當', count: 0, price: 65},
-          {storeID: 2, dishId: 4, dishName: '紅燒排骨飯', count: 0, price: 65},
-          {storeID: 2, dishId: 5, dishName: '酥炸雞腿飯', count: 0, price: 65},
-          {storeID: 2, dishId: 6, dishName: '蒜泥白肉飯', count: 0, price: 65},
-          {storeID: 2, dishId: 7, dishName: '宮保雞丁飯', count: 0, price: 65},
-          {storeID: 2, dishId: 8, dishName: '迷迭香腿排飯', count: 0, price: 65},
-          {storeID: 2, dishId: 9, dishName: '香煎嫩雞排飯', count: 0, price: 65},
-          {storeID: 2, dishId: 10, dishName: '蜜汁雞腿飯', count: 0, price: 65},
-          {storeID: 2, dishId: 11, dishName: '客家油雞飯', count: 0, price: 65},
-          {storeID: 2, dishId: 12, dishName: '古早味排骨飯', count: 0, price: 65},
-          {storeID: 2, dishId: 13, dishName: '秋刀魚飯', count: 0, price: 65},
-          {storeID: 2, dishId: 14, dishName: '老三烤肉飯', count: 0, price: 65},
-          {storeID: 2, dishId: 15, dishName: '蜜汁腿排飯', count: 0, price: 70},
-          {storeID: 2, dishId: 16, dishName: '老三魯排骨飯', count: 0, price: 70},
-          {storeID: 2, dishId: 17, dishName: '香煎銀班魚飯', count: 0, price: 70},
-          {storeID: 2, dishId: 18, dishName: '老三招牌飯', count: 0, price: 70},
-          {storeID: 2, dishId: 19, dishName: '酥炸雞排飯', count: 0, price: 75},
-          {storeID: 2, dishId: 20, dishName: '炭烤雞排飯', count: 0, price: 75},
-          {storeID: 2, dishId: 21, dishName: '煎虱目魚肚飯', count: 0, price: 75},
-          {storeID: 2, dishId: 22, dishName: '炭烤大雞腿飯', count: 0, price: 75},
-          {storeID: 2, dishId: 23, dishName: '廣東滷雞腿飯', count: 0, price: 75},
-          {storeID: 2, dishId: 24, dishName: '酥炸大雞腿飯', count: 0, price: 75},
-          {storeID: 2, dishId: 25, dishName: '蜜汁大雞腿飯', count: 0, price: 75},
-          {storeID: 2, dishId: 26, dishName: '吉士豬排飯', count: 0, price: 75},
-          {storeID: 2, dishId: 27, dishName: '香煎鱈魚飯', count: 0, price: 80},
-          {storeID: 2, dishId: 28, dishName: '紅燒牛腩飯', count: 0, price: 85},
-        ],
-        subTotal: [],
+        memberKey: '',
+        orderKey: '',
+        totalOrder: [],
         total: 0,
       }
     },
-    // created(){
-    //   console.log(this.orderDish);
-    // },
+    created(){
+      const self = this;
+      //console.log(storeId);
+      dish.orderByChild("storeId").equalTo(storeId).once('value').then( function(snapshot) {
+        //console.log(snapshot.val());
+        snapshot.forEach( function(data) {
+          //console.log(data.val());
+          self.dishes.push(data.val());
+        });
+      });
+      //console.log(self.dishes);
+
+      
+
+
+    },
     methods: {
+      reduce(index){
+        if(this.dishes[index].count >=1){
+          this.dishes[index].count -= 1;        
+        }
+      },
       add(index){
         this.dishes[index].count += 1;
+
       },
-      reduce(index){
-        if(this.dishes[index].count >= 1){
-          this.dishes[index].count -= 1;
+      order(){
+        for(let item in this.dishes){
+          if(this.dishes[item].count >=1){
+            this.total += this.dishes[item].price * this.dishes[item].count;
+            console.log(this.dishes[item]);
+            this.totalOrder.push(this.dishes[item]);
+            
+          }
         }
-      },
-      userOrder(){
-        const orderDish = this.dishes.filter((dish)=>{
-          return dish.count >= 1;
-        });
-        console.log(orderDish[0].count);
-        for (let allSubtotal in orderDish){
-          this.subTotal.push(orderDish[allSubtotal].count * orderDish[allSubtotal].price);
+        //console.log(this.total);
+        for (let item in this.totalOrder){
+          this.totalOrder[item].price = (this.totalOrder[item].price * this.totalOrder[item].count);
         }
-        console.log(this.subTotal);
-        const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        this.total = this.subTotal.reduce(reducer);
-        console.log(this.total);
-        this.orderList.push({
-          userID: this.userID,
-          name: this.name,
-          order: orderDish,
-          userTotal: this.total,
-        });
-        this.orderList = JSON.stringify(this.orderList);
-        location.href = "orderConfirm.html?orderList=" + this.orderList;
+        
+        this.totalOrder = JSON.stringify(this.totalOrder);
+        //console.log(this.totalOrder);
+        location.href = "orderConfirm.html?totalOrder=" + this.totalOrder + "&orderId=" + orderId + "&name=" + this.name + "&storeId=" + storeId ;
+        
       }
     },
-
+    computed: {
+      countTotal: function() {
+        let total = 0;
+        let subTotalList = [];
+        for(let item in this.dishes){
+          if(this.dishes[item].count >=1){
+            let subTotal = 0;
+            subTotal = this.dishes[item].price * this.dishes[item].count;
+            subTotalList.push(subTotal);
+          }
+        }
+        for(let item in subTotalList){
+          total += subTotalList[item];
+        }
+        return total;
+      }
+    }
   });
 
   const vm = new Vue({
@@ -145,6 +192,6 @@
     },
   });
 </script>
-
 </body>
+
 </html>
