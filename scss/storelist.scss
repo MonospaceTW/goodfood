@@ -1,0 +1,55 @@
+    @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+    $maincolor:#ee5d30;
+    $fontcolor:#525252;
+    $font-xl:17px;
+    $font-l:14px;
+    $font-m:12px;
+    $font-s:11px;
+    body {
+        font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+    }
+
+    .title {
+        text-align: center;
+        font-size: 18px;
+        color: $fontcolor;
+        margin-top: 20px;
+    }
+
+    img {
+        padding: 0 0 10px 20px;
+    }
+
+    .shop-list {
+        padding-top: 20px;
+        .shop-name {
+            color: $maincolor;
+            font-size: $font-l;
+        }
+        .shop-type,
+        .open-time {
+            color: $fontcolor;
+            font-size: $font-m;
+            margin-top: 5px;
+        }
+    }
+
+    .navbar {
+        position: fixed;
+        width: 100%;
+        background: rgb(255, 255, 255);
+        box-shadow: 0 -10px 20px #ebebeb;
+        bottom: 0;
+        font-size: 1.5rem;
+        .text {
+            display: inline-block;
+            font-size: $font-s;
+        }
+        a {
+            color: #ee5d30;
+        }
+        a:hover {
+            text-decoration: none;
+            color: rgb(141, 141, 141);
+        }
+    }

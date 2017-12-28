@@ -1,0 +1,115 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+body {
+  font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0;
+  height: 120vh;
+}
+
+.menu-img {
+  position: relative;
+  text-align: center;
+}
+.menu-img .img-title {
+  position: absolute;
+  top: 40%;
+  bottom: 50%;
+  width: 100%;
+  letter-spacing: 3px;
+  color: white;
+}
+
+.menu-list {
+  position: absolute;
+  top: 30%;
+  left: 12%;
+  width: 75%;
+  height: auto;
+  background: #fff;
+  box-shadow: 0 5px 8px 3px #e2e2e2;
+  border-radius: 15px;
+}
+.menu-list ul {
+  padding: 0 25px;
+}
+.menu-list li {
+  list-style-type: none;
+  padding: 10px 0 0 15px;
+}
+.menu-list span {
+  display: inline-block;
+  width: 45%;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+.menu-list span:last-child {
+  text-align: right;
+}
+.menu-list .menu-info {
+  color: #525252;
+  text-align: center;
+  letter-spacing: 3px;
+  position: absolute;
+  top: 120%;
+  width: 100%;
+  z-index: 1;
+  font-size: 13px;
+  text-align: center;
+  line-height: 5px;
+}
+.menu-list .menu-msg {
+  color: #525252;
+  text-align: center;
+  letter-spacing: 3px;
+  position: absolute;
+  width: 100%;
+  top: 150%;
+  text-align: center;
+  font-size: 12px;
+}
+.menu-list .button {
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  top: 170%;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+.menu-list .menu-btn {
+  background: #ee5d30;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 30px;
+  letter-spacing: 3px;
+  padding: 10px 50px;
+}
+.menu-list .menu-btn:hover {
+  background: #ff6c3f;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  background: white;
+  box-shadow: 0 -10px 20px #ebebeb;
+  bottom: 0;
+  left: 0;
+  font-size: 1.5rem;
+}
+.navbar .text {
+  display: inline-block;
+  font-size: 11px;
+}
+.navbar a {
+  color: #ee5d30;
+}
+.navbar a:hover {
+  text-decoration: none;
+  color: #8d8d8d;
+}

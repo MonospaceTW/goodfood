@@ -1,0 +1,123 @@
+    @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+    @mixin textstyle {
+        color: $fontcolor;
+        text-align: center;
+        letter-spacing: 3px;
+    }
+
+    $maincolor:#ee5d30;
+    $fontcolor:#525252;
+    $font-xl:17px;
+    $font-l:14px;
+    $font-m:12px;
+    $font-s:11px;
+    body {
+        font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+    }
+
+    .container {
+        margin: 0 auto;
+        padding: 0;
+        height: 120vh;
+    }
+
+    .menu-img {
+        position: relative;
+        text-align: center;
+        .img-title {
+            position: absolute;
+            top: 40%;
+            bottom: 50%;
+            width: 100%;
+            letter-spacing: 3px;
+            color: rgb(255, 255, 255);
+        }
+    }
+
+    .menu-list {
+        position: absolute;
+        top: 30%;
+        left: 12%;
+        width: 75%;
+        height: auto;
+        background: #fff;
+        box-shadow: 0 5px 8px 3px rgb(226, 226, 226);
+        border-radius: 15px;
+        ul {
+            padding: 0 25px;
+        }
+        li {
+            list-style-type: none;
+            padding: 10px 0 0 15px;
+        }
+        span {
+            display: inline-block;
+            width: 45%;
+            font-size: $font-l;
+            letter-spacing: 2px;
+        }
+        span:last-child {
+            text-align: right;
+        }
+        .menu-info {
+            @include textstyle();
+            position: absolute;
+            top: 120%;
+            width: 100%;
+            z-index: 1;
+            font-size: 13px;
+            text-align: center;
+            line-height: 5px;
+        }
+        .menu-msg {
+            @include textstyle();
+            position: absolute;
+            width: 100%;
+            top: 150%;
+            text-align: center;
+            font-size: 12px;
+        }
+        .button {
+            display: inline-block;
+            position: absolute;
+            width: 100%;
+            top: 170%;
+            height: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .menu-btn {
+            background: $maincolor;
+            color: #fff;
+            font-size: $font-l;
+            border-radius: 30px;
+            letter-spacing: 3px;
+            padding: 10px 50px;
+        }
+        .menu-btn:hover {
+            background: #ff6c3f;
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+
+    .navbar {
+        position: fixed;
+        width: 100%;
+        background: rgb(255, 255, 255);
+        box-shadow: 0 -10px 20px #ebebeb;
+        bottom: 0;
+        left: 0;
+        font-size: 1.5rem;
+        .text {
+            display: inline-block;
+            font-size: $font-s;
+        }
+        a {
+            color: #ee5d30;
+        }
+        a:hover {
+            text-decoration: none;
+            color: rgb(141, 141, 141);
+        }
+    }
