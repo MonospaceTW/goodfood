@@ -15,7 +15,8 @@
       <template v-for="(value, key) in stores">
         <li>
           <a :href='"menu.html?storeId=" + key'>{{value.storeName}}</a>
-
+          <br> {{value.storeType}}
+          <br> 營業時間：{{value.openTime}}~{{value.closeTime}}
         </li>
       </template>
 
