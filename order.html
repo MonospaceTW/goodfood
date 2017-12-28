@@ -2,25 +2,25 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
-        crossorigin="anonymous">
-    <script src="https://use.fontawesome.com/311a41a163.js"></script>
-    <link rel="stylesheet" href="css/order.css">
-    <title>訂購頁</title>
-    <script src="js/vue.js"></script>
-    <script src="js/moment.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <script src="https://use.fontawesome.com/311a41a163.js"></script>
+  <link rel="stylesheet" href="css/order.css">
+  <title>訂購頁</title>
+  <script src="js/vue.js"></script>
+  <script src="js/moment.js"></script>
 </head>
 
 <body>
-  
+
   <div id="app">
     <my-component></my-component>
   </div>
 
-<script type="text/x-template" id="my-component">
+  <script type="text/x-template" id="my-component">
   <div>
     <div class="container">
       <div class="wrapper">
@@ -65,133 +65,133 @@
 
   </div>
 </script>
-  
-<script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
-    authDomain: "goodfood-39158.firebaseapp.com",
-    databaseURL: "https://goodfood-39158.firebaseio.com",
-    projectId: "goodfood-39158",
-    storageBucket: "goodfood-39158.appspot.com",
-    messagingSenderId: "940303768399"
-  };
-  firebase.initializeApp(config);
-</script>
-<script>
-  var helper = {
-    getParameterByName: function(name, url) {
-      var regex, results;
-      if (!url) {
-        url = window.location.href;
-      }
-      name = name.replace(/[\[\]]/g, '\\$&');
-      regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i');
-      results = regex.exec(url);
-      if (!results) {
-        return null;
-      }
-      if (!results[2]) {
-        return '';
-      }
-      return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-  };
 
-  let storeId = helper.getParameterByName("storeId");
-  let orderId = helper.getParameterByName("orderId");
-  //console.log(storeId);
-  //console.log(orderId);
-
-  let dish = firebase.database().ref('dish');
-  let member = firebase.database().ref('member');
-  let order = firebase.database().ref('order');
-  let store = firebase.database().ref('store');
-
-  Vue.component('my-component', {
-    template: '#my-component',
-    data: function() {
-      return {
-        dishes: [],
-        name: '',
-        memberKey: '',
-        orderKey: '',
-        totalOrder: [],
-        total: 0,
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
+      authDomain: "goodfood-39158.firebaseapp.com",
+      databaseURL: "https://goodfood-39158.firebaseio.com",
+      projectId: "goodfood-39158",
+      storageBucket: "goodfood-39158.appspot.com",
+      messagingSenderId: "940303768399"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script>
+    var helper = {
+      getParameterByName: function (name, url) {
+        var regex, results;
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, '\\$&');
+        regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i');
+        results = regex.exec(url);
+        if (!results) {
+          return null;
+        }
+        if (!results[2]) {
+          return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
       }
-    },
-    created(){
-      const self = this;
-      //console.log(storeId);
-      dish.orderByChild("storeId").equalTo(storeId).once('value').then( function(snapshot) {
-        //console.log(snapshot.val());
-        snapshot.forEach( function(data) {
-          //console.log(data.val());
-          self.dishes.push(data.val());
+    };
+
+    let storeId = helper.getParameterByName("storeId");
+    let orderId = helper.getParameterByName("orderId");
+    //console.log(storeId);
+    //console.log(orderId);
+
+    let dish = firebase.database().ref('dish');
+    let member = firebase.database().ref('member');
+    let order = firebase.database().ref('order');
+    let store = firebase.database().ref('store');
+
+    Vue.component('my-component', {
+      template: '#my-component',
+      data: function () {
+        return {
+          dishes: [],
+          name: '',
+          memberKey: '',
+          orderKey: '',
+          totalOrder: [],
+          total: 0,
+        }
+      },
+      created() {
+        const self = this;
+        //console.log(storeId);
+        dish.orderByChild("storeId").equalTo(storeId).once('value').then(function (snapshot) {
+          //console.log(snapshot.val());
+          snapshot.forEach(function (data) {
+            //console.log(data.val());
+            self.dishes.push(data.val());
+          });
         });
-      });
-      //console.log(self.dishes);
-
-      
+        //console.log(self.dishes);
 
 
-    },
-    methods: {
-      reduce(index){
-        if(this.dishes[index].count >=1){
-          this.dishes[index].count -= 1;        
-        }
-      },
-      add(index){
-        this.dishes[index].count += 1;
+
 
       },
-      order(){
-        for(let item in this.dishes){
-          if(this.dishes[item].count >=1){
-            this.total += this.dishes[item].price * this.dishes[item].count;
-            console.log(this.dishes[item]);
-            this.totalOrder.push(this.dishes[item]);
-            
+      methods: {
+        reduce(index) {
+          if (this.dishes[index].count >= 1) {
+            this.dishes[index].count -= 1;
           }
-        }
-        //console.log(this.total);
-        for (let item in this.totalOrder){
-          this.totalOrder[item].price = (this.totalOrder[item].price * this.totalOrder[item].count);
-        }
-        
-        this.totalOrder = JSON.stringify(this.totalOrder);
-        //console.log(this.totalOrder);
-        location.href = "confirm.html?totalOrder=" + this.totalOrder + "&orderId=" + orderId + "&name=" + this.name + "&storeId=" + storeId ;
-        
-      }
-    },
-    computed: {
-      countTotal: function() {
-        let total = 0;
-        let subTotalList = [];
-        for(let item in this.dishes){
-          if(this.dishes[item].count >=1){
-            let subTotal = 0;
-            subTotal = this.dishes[item].price * this.dishes[item].count;
-            subTotalList.push(subTotal);
-          }
-        }
-        for(let item in subTotalList){
-          total += subTotalList[item];
-        }
-        return total;
-      }
-    }
-  });
+        },
+        add(index) {
+          this.dishes[index].count += 1;
 
-  const vm = new Vue({
-    el: '#app',
-    data: {
-    },
-  });
-</script>
+        },
+        order() {
+          for (let item in this.dishes) {
+            if (this.dishes[item].count >= 1) {
+              this.total += this.dishes[item].price * this.dishes[item].count;
+              console.log(this.dishes[item]);
+              this.totalOrder.push(this.dishes[item]);
+
+            }
+          }
+          //console.log(this.total);
+          for (let item in this.totalOrder) {
+            this.totalOrder[item].price = (this.totalOrder[item].price * this.totalOrder[item].count);
+          }
+
+          this.totalOrder = JSON.stringify(this.totalOrder);
+          //console.log(this.totalOrder);
+          location.href = "confirm.html?totalOrder=" + this.totalOrder + "&orderId=" + orderId + "&name=" + this.name + "&storeId=" + storeId;
+
+        }
+      },
+      computed: {
+        countTotal: function () {
+          let total = 0;
+          let subTotalList = [];
+          for (let item in this.dishes) {
+            if (this.dishes[item].count >= 1) {
+              let subTotal = 0;
+              subTotal = this.dishes[item].price * this.dishes[item].count;
+              subTotalList.push(subTotal);
+            }
+          }
+          for (let item in subTotalList) {
+            total += subTotalList[item];
+          }
+          return total;
+        }
+      }
+    });
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+      },
+    });
+  </script>
 </body>
 
 </html>
