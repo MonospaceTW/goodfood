@@ -114,6 +114,7 @@ let vm = new Vue({
   el: '#result',
   data: {
     orderId: orderId,
+    storeId: storeId,
     store: {},
     totalOrders: [],
     orders: [],
