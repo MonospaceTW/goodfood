@@ -19,17 +19,15 @@ var helper = {
 };
 
 let orderId = helper.getParameterByName("orderId");
-let storeId = helper.getParameterByName("storeId");
+let storeId = helper.getParameterByName("storeId"); //-L1LeGds02yWfMcvMwIn
 console.log(orderId);
 
 // 取得店家資訊
 let dishes = [];
 let orders = [];
 let store = {};
-firebase.database().ref("store").once('value').then(function (snapshot) {
-  snapshot.forEach(function (data) {
-    store = data.val();
-  });
+firebase.database().ref("store/" + storeId).once('value').then(function (snapshot) {
+  store = snapshot.val();
   vm.updateStore();
 });
 console.log(store);

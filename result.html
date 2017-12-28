@@ -16,12 +16,12 @@
     <div id="result" class="container">
         <div class="result-title">團訂結果</div>
         <hr />
-        <div class="result-subtitle">八方雲集鍋貼水餃專賣店</div>
+        <div class="result-subtitle">{{store.storeName}}</div>
         <div class="result-info">
-            <p>滿500元可外送</p>
-            <p>營業時間9:00-21:00</p>
-            <p>地址:台中市台中路123號</p>
-            <p>電話:04-24803248</p>
+            <p>{{store.deliveryCondition}}</p>
+            <p>營業時間:{{store.openTime}}~{{store.closeTime}}</p>
+            <p>地址:{{store.address}}</p>
+            <p>電話:{{store.phone}}</p>
         </div>
         <div class="button">
             <a href="order.html" class="order-more">我要加訂</a>
@@ -30,31 +30,16 @@
         <div class="result-list">
             <div class="listtop-1">訂單</div>
             <ul>
-                <li>
-                    <span>招牌鍋貼</span>
-                    <span class="cont">x1</span>
-                    <span>60TWD</span>
+                <li v-for="(item,index) in totalOrders">
+                    <span>{{item.dishName}}</span>
+                    <span class="cont">x{{item.count}}</span>
                 </li>
-                <li>
-                    <span>酸辣湯</span>
-                    <span class="cont">x1</span>
-                    <span>60TWD</span>
-                </li>
-                <li>
-                    <span>酸辣湯</span>
-                    <span class="cont">x1</span>
-                    <span>60TWD</span>
-                </li>
-                <li>
-                    <span>酸辣湯</span>
-                    <span class="cont">x1</span>
-                    <span>60TWD</span>
-                </li>
+
             </ul>
             <P class="total-1">
                 <span>總計</span>
                 <span></span>
-                <span>120TWD</span>
+                <span>{{total}}TWD</span>
             </P>
             <div class="listtop-2">訂單明細</div>
             <ul class="outer">
