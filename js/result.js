@@ -19,13 +19,14 @@ var helper = {
 };
 
 let orderId = helper.getParameterByName("orderId");
-let storeId = helper.getParameterByName("storeId"); //-L1LeGds02yWfMcvMwIn
-console.log(orderId);
+let storeId = helper.getParameterByName("storeId");
+// ?orderId=-L1LhNkVxQHq7y4R2T9e&storeId=-L1LeGds02yWfMcvMwIn
 
 // 取得店家資訊
 let dishes = [];
 let orders = [];
 let store = {};
+let orderEndTime = "";
 firebase.database().ref("store/" + storeId).once('value').then(function (snapshot) {
   store = snapshot.val();
   vm.updateStore();
@@ -42,9 +43,13 @@ firebase.database().ref("dish").once('value').then(function (snapshot) {
   });
   // console.log(dishes);
 
+  firebase.database().ref("/order/" + orderId).once('value').then(function (snapshot) {
+    orderEndTime = snapshot.val().orderEndTime;
+    vm.updateOrderEndTime();
+  });
 
 
-  // 從資料庫取得詳細訂單資料
+  // 取得詳細訂單資料
   firebase.database().ref("/order/" + orderId + "/orderDetail/").on('value', function (snapshot) {
     snapshot.forEach(function (data) {
       orders.push(data.val());
@@ -57,7 +62,6 @@ firebase.database().ref("dish").once('value').then(function (snapshot) {
     for (let i = 0; i < orders.length; i++) {
       for (let j = 0; j < orders[i].order.length; j++) {
         let item = {};
-        item.dishId = orders[i].order[j].dishId;
         item.dishName = orders[i].order[j].dishName;
         item.count = orders[i].order[j].count;
         computedOrders.push(item);
@@ -106,10 +110,14 @@ let vm = new Vue({
     store: {},
     totalOrders: [],
     orders: [],
+    orderEndTime: "",
     total: 0
   },
 
   methods: {
+    updateOrderEndTime() {
+      this.orderEndTime = orderEndTime;
+    },
     updateStore() {
       this.store = store;
     },
