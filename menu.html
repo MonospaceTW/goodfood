@@ -43,8 +43,32 @@
 
     const order = firebase.database().ref('order');
 
+    // 從網址列取得storeId
+    var helper = {
+      getParameterByName: function (name, url) {
+        var regex, results;
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, '\\$&');
+        regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i');
+        results = regex.exec(url);
+        if (!results) {
+          return null;
+        }
+        if (!results[2]) {
+          return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+    };
+
+    let storeId = helper.getParameterByName("storeId");
+    // http://localhost:8080/menu.html?storeId=-L1LeGds02yWfMcvMwIn
+
+    // 取得菜單
     let dishes = [];
-    const storeId = '-L1LeGds02yWfMcvMwIn';
+    // const storeId = '-L1LeGds02yWfMcvMwIn';
     firebase.database().ref("dish").orderByChild("storeId").equalTo(storeId).once('value').then(function (snapshot) {
       snapshot.forEach(function (data) {
         // console.log(data.val());
