@@ -1,0 +1,52 @@
+{
+  "store": { //店家資訊
+    "-L05fjkdfjkdjfa": { //ID
+      "storeName": "XX便當",
+      "phone": "04-1234567",
+      "address": "台中市台灣大道2段xX號",
+      "openTime": "09:00",
+      "closeTime": "20:00",
+      "deliveryCondition": "訂三個便當以上",
+      "storeType": "中式",
+      "menuImage": "img/XX便當.jpg"
+    }
+  },
+  "dish": { //資訊
+    "-L05fnvmcvmz;": { //ID
+      "dishName": "排骨便當",
+      "storeId": "L05fjkdfjkdjfa",
+      "price": "30"
+    }
+  },
+  "order": {
+    "-L05anvmctuirpwool": {
+      "orderEndTime": "2017/12/13-10:30:00",
+      "storeId": "L05fjkdfjkdjfa",
+      "total": 500,
+      "totalOrder": [
+        {
+          "dishName": "排骨便當",
+          "count": 2
+        },
+        {
+          "dishName": "機腿便當",
+          "count": 1
+        }
+      ],
+      "orderDetail": {
+        "L05anvmctuirpwool": {
+          "userId": "L0EDp_q9ErqPIfrhila",
+          "name": "Clover",
+          "order": [
+            {
+              "dishId": "L05fnvmcvmz",
+              "count": "1",
+              "subtotal": 30
+            }
+          ],
+          "userTotal": 60
+        }
+      }
+    }
+  }
+}

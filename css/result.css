@@ -1,0 +1,156 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+body {
+  font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.result-title {
+  color: #ee5d30;
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 17px;
+  padding-top: 20px;
+}
+
+hr {
+  border: 0.5px solid #ee5d30;
+  margin-top: 5px;
+}
+
+.result-subtitle {
+  color: #525252;
+  text-align: center;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.result-info p {
+  color: #525252;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 3px;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.button {
+  display: inline-block;
+  width: 95px;
+  height: 30px;
+  background: #ee5d30;
+  text-align: center;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 3px 0 0 35px;
+}
+.button .order-more {
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.button:hover {
+  background: #fff;
+  border: 1px solid #ee5d30;
+}
+
+.order-more:hover {
+  color: #ee5d30;
+  text-decoration: none;
+}
+
+.deadline {
+  color: #525252;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-align: right;
+  margin: -25px 30px 0 0;
+}
+
+.result-list {
+  width: 100%;
+  color: #525252;
+  margin-bottom: 50px;
+}
+.result-list .listtop-1 {
+  color: #525252;
+  text-align: center;
+  letter-spacing: 2px;
+  border-bottom: 1.5px solid #ee5d30;
+  border-top: 1.5px solid #ee5d30;
+  margin-top: 60px;
+}
+.result-list ul {
+  font-size: 14px;
+  padding: 10px 20px;
+}
+.result-list span {
+  display: inline-block;
+  vertical-align: text-top;
+  width: 31%;
+  padding: 2px;
+}
+.result-list .cont {
+  text-align: center;
+}
+.result-list span:last-child {
+  text-align: right;
+}
+.result-list li {
+  letter-spacing: 3px;
+  list-style-type: none;
+  border-bottom: 1px solid #e4e4e4;
+}
+.result-list .total-1 {
+  font-size: 14px;
+  letter-spacing: 3px;
+  padding: 10px 20px;
+  margin-top: -30px;
+}
+.result-list .listtop-2 {
+  color: #525252;
+  text-align: center;
+  letter-spacing: 2px;
+  border-bottom: 1.5px solid #ee5d30;
+  border-top: 1.5px solid #ee5d30;
+  margin: 40px 0 20px 0;
+}
+.result-list .outer {
+  font-size: 14px;
+  padding: 0;
+  margin: -5px 0 -10px 0;
+}
+.result-list .inner {
+  display: inline-block;
+  width: 23.5%;
+}
+.result-list .total-2 {
+  font-size: 14px;
+  text-align: right;
+  letter-spacing: 3px;
+  margin-top: 15px;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  background: white;
+  box-shadow: 0 -10px 20px #ebebeb;
+  bottom: 0;
+  font-size: 1.5rem;
+}
+.navbar .text {
+  display: inline-block;
+  font-size: 11px;
+}
+.navbar a {
+  color: #ee5d30;
+}
+.navbar a:hover {
+  text-decoration: none;
+  color: #8d8d8d;
+}
