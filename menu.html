@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
   <div id="menu">
 
     <ul>
-      <li v-for="dish in dishes">{{dish.dishName}}</li>
+      <li v-for="dish in dishes">{{dish.dishName}}　　{{dish.price}} </li>
     </ul>
 
     <a href="order.html?soterId=-L1LeGds02yWfMcvMwIn" @click="teamOrder">團訂</a>
@@ -39,7 +40,7 @@
     const now = new Date();
     //console.log(now);
 
-    
+
     const order = firebase.database().ref('order');
 
     let dishes = [];
@@ -56,14 +57,14 @@
         el: '#menu',
         data: {
           dishes: dishes,
-          orderEndTime: '' 
+          orderEndTime: ''
         },
-        created(){
+        created() {
           this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
           console.log(this.orderEndTime);
         },
         methods: {
-          teamOrder(){
+          teamOrder() {
             const teamOrderKey = order.push({
               orderEndTime: this.orderEndTime,
               storeId: storeId,
