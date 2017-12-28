@@ -23,6 +23,7 @@ let storeId = helper.getParameterByName("storeId");
 // ?orderId=-L1LhNkVxQHq7y4R2T9e&storeId=-L1LeGds02yWfMcvMwIn
 
 // 取得店家資訊
+let dish = {};
 let dishes = [];
 let orders = [];
 let store = {};
@@ -31,18 +32,22 @@ firebase.database().ref("store/" + storeId).once('value').then(function (snapsho
   store = snapshot.val();
   vm.updateStore();
 });
-console.log(store);
+// console.log(store);
 
 
 // 取得菜單資料
 firebase.database().ref("dish").once('value').then(function (snapshot) {
   snapshot.forEach(function (data) {
+    // console.log(data.key);
     // console.log(data.val());
-    dishes.push(data.val());
+    dish = data.val();
+    dish.dishId = data.key;
+    dishes.push(dish);
 
   });
   // console.log(dishes);
 
+  // 取得團定截止時間
   firebase.database().ref("/order/" + orderId).once('value').then(function (snapshot) {
     orderEndTime = snapshot.val().orderEndTime;
     vm.updateOrderEndTime();
@@ -62,12 +67,13 @@ firebase.database().ref("dish").once('value').then(function (snapshot) {
     for (let i = 0; i < orders.length; i++) {
       for (let j = 0; j < orders[i].order.length; j++) {
         let item = {};
+        item.dishId = orders[i].order[j].dishId;
         item.dishName = orders[i].order[j].dishName;
         item.count = orders[i].order[j].count;
         computedOrders.push(item);
       }
     }
-    // console.log(computedOrders);
+    console.log(computedOrders);
 
     const totalOrderCount = [];
     for (i = 0; i < dishes.length; i++) {
