@@ -1,0 +1,116 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+$maincolor:#ee5d30;
+$fontcolor:#525252;
+$font-xl:17px;
+$font-l:14px;
+$font-m:12px;
+$font-s:11px;
+body {
+    font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+    text-align: center;
+    background: $maincolor;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+.confirm-img {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.wrapper {
+    .confirm-title {
+        color: #fff;
+        text-align: center;
+        letter-spacing: 3px;
+        padding-top: 50px;
+    }
+    .confirm-list {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 20px;
+        ul {
+            padding-left: 0;
+        }
+        span {
+            width: 40%;
+            display: inline-block;
+            font-size: $font-l;
+            color: $fontcolor;
+            vertical-align: text-top;
+        }
+        li {
+            background: rgb(243, 243, 243);
+            list-style-type: none;
+            letter-spacing: 3px;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 15px;
+        }
+    }
+    .confirm-total {
+        font-size: $font-l;
+        color: #fff;
+        letter-spacing: 3px;
+        text-align: right;
+        margin-right: 12%;
+    }
+    .confirm-name {
+        float: left;
+        font-size: $font-l;
+        color: #fff;
+        letter-spacing: 3px;
+    }
+    .button {
+        float: right;
+        font-size: $font-l;
+        background: rgb(0, 173, 253);
+        border-radius: 15px;
+        letter-spacing: 3px;
+        text-align: center;
+        cursor: pointer;
+        padding: 5px 15px;
+    }
+}
+
+.button:hover {
+    background: rgb(3, 166, 241);
+}
+
+.confirm-btn:visited {
+    color: #fff;
+}
+
+.confirm-btn:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.wrap {
+    margin: 30px 30px 50px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.navbar {
+    position: fixed;
+    background: $maincolor;
+    width: 100%;
+    bottom: 0;
+    font-size: 1.5rem;
+    .text {
+        display: inline-block;
+        font-size: $font-s;
+    }
+    a {
+        color: #fff;
+    }
+    a:hover {
+        text-decoration: none;
+        color: rgb(141, 141, 141);
+    }
+}

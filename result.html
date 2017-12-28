@@ -2,64 +2,113 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>result</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/result.css">
+    <script src="https://use.fontawesome.com/311a41a163.js"></script>
+    <title>團訂結果</title>
 </head>
 
 <body>
-  <div id="result">
-    <div>
-      {{store.storeName}} {{store.deliveryCondition}} 地址：{{store.address}} 電話：{{store.phone}} 營業時間：{{store.openTime}}~{{store.closeTime}}
-
+    <div class="container">
+        <div class="result-title">團訂結果</div>
+        <hr />
+        <div class="result-subtitle">八方雲集鍋貼水餃專賣店</div>
+        <div class="result-info">
+            <p>滿500元可外送</p>
+            <p>營業時間9:00-21:00</p>
+            <p>地址:台中市台中路123號</p>
+            <p>電話:04-24803248</p>
+        </div>
+        <div class="button">
+            <a href="order.html" class="order-more">我要加訂</a>
+        </div>
+        <div class="deadline">截止時間:10:30</div>
+        <div class="result-list">
+            <div class="listtop-1">訂單</div>
+            <ul>
+                <li>
+                    <span>招牌鍋貼</span>
+                    <span class="cont">x1</span>
+                    <span>60TWD</span>
+                </li>
+                <li>
+                    <span>酸辣湯</span>
+                    <span class="cont">x1</span>
+                    <span>60TWD</span>
+                </li>
+                <li>
+                    <span>酸辣湯</span>
+                    <span class="cont">x1</span>
+                    <span>60TWD</span>
+                </li>
+                <li>
+                    <span>酸辣湯</span>
+                    <span class="cont">x1</span>
+                    <span>60TWD</span>
+                </li>
+            </ul>
+            <P class="total-1">
+                <span>總計</span>
+                <span></span>
+                <span>120TWD</span>
+            </P>
+            <div class="listtop-2">訂單明細</div>
+            <ul class="outer">
+                <li>
+                    <span class="inner">Clover</span>
+                    <span class="inner">咖哩鍋貼</span>
+                    <span class="inner">x100</span>
+                    <span class="inner">60TWD</span>
+                </li>
+                <li>
+                    <span class="inner">Kent</span>
+                    <span class="inner">咖哩蔬菜鍋貼</span>
+                    <span class="inner">x100</span>
+                    <span class="inner">120TWD</span>
+                </li>
+                <li>
+                    <span class="inner">Clover</span>
+                    <span class="inner">咖哩鍋貼</span>
+                    <span class="inner">x100</span>
+                    <span class="inner">60TWD</span>
+                </li>
+                <li>
+                    <span class="inner">Kent</span>
+                    <span class="inner">咖哩蔬菜鍋貼</span>
+                    <span class="inner">x100</span>
+                    <span class="inner">120TWD</span>
+                </li>
+                <li>
+                    <span class="inner">Kent</span>
+                    <span class="inner">咖哩蔬菜鍋貼</span>
+                    <span class="inner">x100</span>
+                    <span class="inner">120TWD</span>
+                </li>
+                <li>
+                    <span class="inner">Kent</span>
+                    <span class="inner">咖哩蔬菜鍋貼</span>
+                    <span class="inner">x100</span>
+                    <span class="inner">120TWD</span>
+                </li>
+            </ul>
+            <p class="total-2">
+                <span></span>
+                <span></span>
+                <span>100TWD</span>
+            </p>
+        </div>
     </div>
-    <div>
-      <a href="order.html">我要加定</a>
+    <div class="navbar">
+        <a href="confirm.html" class="fa fa-caret-left" aria-hidden="true">
+            <div class="text">Back</div>
+        </a>
+        <a href="index.html" class="fa fa-home" aria-hidden="true"></a>
+        <a href="#" class="fa fa-user-o" aria-hidden="true"></a>
     </div>
-    <h2>訂單</h2>
-    <ul>
-      <li v-for="(item,index) in totalOrders">
-        {{item.dishName}} x{{item.count}}
-      </li>
-    </ul>
-    <div>總共{{total}}元</div>
-    <h2>團訂明細</h2>
-    <ul>
-      <template v-for="(order,index) in orders">
-        <li>
-          名字：{{order.name}}
-          <div v-for="dish in orders[index].order">
-            {{dish.dishName}} x{{dish.count}}
-          </div>
-          小計{{order.userTotal}}
-        </li>
-      </template>
-
-    </ul>
-
-
-
-  </div>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
-      authDomain: "goodfood-39158.firebaseapp.com",
-      databaseURL: "https://goodfood-39158.firebaseio.com",
-      projectId: "goodfood-39158",
-      storageBucket: "goodfood-39158.appspot.com",
-      messagingSenderId: "940303768399"
-    };
-    firebase.initializeApp(config);
-  </script>
-
-  <script src="js/result.js"></script>
 </body>
 
 </html>
