@@ -113,6 +113,7 @@ firebase.database().ref("dish").once('value').then(function (snapshot) {
 let vm = new Vue({
   el: '#result',
   data: {
+    orderId: orderId,
     store: {},
     totalOrders: [],
     orders: [],
