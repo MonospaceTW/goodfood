@@ -88,7 +88,7 @@ body {
   text-align: center;
   padding: 5px 8px;
   cursor: pointer;
-  background: #ee5d30;
+  background: #ed5d30;
   letter-spacing: 3px;
   margin-bottom: 8px;
 }
@@ -98,7 +98,7 @@ body {
   text-align: center;
   padding: 5px 8px;
   cursor: pointer;
-  border: 1px solid #ee5d30;
+  border: 1px solid #ed5d30;
   letter-spacing: 1.5px;
   margin-bottom: 8px;
 }
@@ -108,8 +108,11 @@ body {
   text-align: center;
   padding: 5px 8px;
   cursor: pointer;
-  border: 1px solid #ee5d30;
+  border: 1px solid #ed5d30;
   letter-spacing: 2px;
+}
+.wrap .button a {
+  color: #ed5d30;
 }
 .wrap .button .order-btn:visited {
   color: #fff;
@@ -120,7 +123,8 @@ body {
 }
 .wrap .button .result-btn:visited,
 .wrap .button .share-btn:visited {
-  color: #ee5d30;
+  color: #ed5d30;
+  border: 1px solid #ed5d30;
 }
 .wrap .button .result-btn:hover,
 .wrap .button .share-btn:hover {
@@ -136,12 +140,12 @@ body {
   position: fixed;
   width: 100%;
   background: white;
-  box-shadow: 0 -10px 20px #ebebeb;
+  box-shadow: 0 0 20px #ebebeb;
   bottom: 0;
   font-size: 1.5rem;
 }
 .navbar a {
-  color: #ee5d30;
+  color: #ed5d30;
 }
 .navbar a:hover {
   text-decoration: none;

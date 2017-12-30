@@ -1,43 +1,39 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
 body {
-  font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+  font-family: 'Noto Sans TC', 'Microsoft JhengHei', 'sans-serif';
+  background: url(/img/menu.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
-.container {
+.wrapper {
   margin: 0 auto;
-  padding: 0;
-  height: 120vh;
 }
 
-.menu-img {
-  position: relative;
+.img-title {
   text-align: center;
-}
-.menu-img .img-title {
-  position: absolute;
-  top: 40%;
-  bottom: 50%;
   width: 100%;
   letter-spacing: 3px;
   color: white;
+  margin-top: 30%;
 }
 
 .menu-list {
-  position: absolute;
-  top: 30%;
-  left: 12%;
-  width: 75%;
-  height: auto;
+  width: 296px;
+  color: #525252;
+  font-size: 14px;
+  text-align: left;
   background: #fff;
   box-shadow: 0 5px 8px 3px #e2e2e2;
   border-radius: 15px;
+  margin: 65px 0 0 38px;
 }
 .menu-list ul {
-  padding: 0 25px;
+  padding: 2px 10px 20px 25px;
 }
 .menu-list li {
   list-style-type: none;
-  padding: 10px 0 0 15px;
+  padding: 10px 0 0 10px;
 }
 .menu-list span {
   display: inline-block;
@@ -48,56 +44,50 @@ body {
 .menu-list span:last-child {
   text-align: right;
 }
-.menu-list .menu-info {
+
+.menu-info {
   color: #525252;
-  text-align: center;
-  letter-spacing: 3px;
-  position: absolute;
-  top: 120%;
-  width: 100%;
-  z-index: 1;
   font-size: 13px;
+  line-height: 8px;
   text-align: center;
-  line-height: 5px;
+  margin: 34px 0 30px 0;
 }
-.menu-list .menu-msg {
+
+.menu-msg {
   color: #525252;
+  font-size: 13px;
+  line-height: 8px;
   text-align: center;
-  letter-spacing: 3px;
-  position: absolute;
-  width: 100%;
-  top: 150%;
-  text-align: center;
-  font-size: 12px;
 }
-.menu-list .button {
-  display: inline-block;
-  position: absolute;
+
+.button {
   width: 100%;
-  top: 170%;
-  height: 30px;
   text-align: center;
-  cursor: pointer;
+  margin: 18px 0 91px 0;
 }
-.menu-list .menu-btn {
-  background: #ee5d30;
+.button .menu-btn {
+  background: #ff7044;
+  font-size: 13px;
+  padding: 12px 74px;
+  border-radius: 15px;
+}
+.button a {
   color: #fff;
-  font-size: 14px;
-  border-radius: 30px;
-  letter-spacing: 3px;
-  padding: 10px 50px;
 }
-.menu-list .menu-btn:hover {
-  background: #ff6c3f;
+.button .menu-btn:hover {
+  background: #ed5d30;
   color: #fff;
   text-decoration: none;
+}
+.button .menu-btn:visited {
+  color: #fff;
 }
 
 .navbar {
   position: fixed;
   width: 100%;
   background: white;
-  box-shadow: 0 -10px 20px #ebebeb;
+  box-shadow: 0 0 20px #ebebeb;
   bottom: 0;
   left: 0;
   font-size: 1.5rem;
@@ -112,4 +102,7 @@ body {
 .navbar a:hover {
   text-decoration: none;
   color: #8d8d8d;
+}
+.navbar a:visited {
+  color: #ee5d30;
 }

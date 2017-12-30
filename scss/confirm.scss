@@ -1,5 +1,5 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
-$maincolor:#ee5d30;
+$maincolor:#ed5d30;
 $fontcolor:#525252;
 $font-xl:17px;
 $font-l:14px;
@@ -50,13 +50,18 @@ body {
             border-radius: 15px;
         }
     }
-    .confirm-total {
-        font-size: $font-l;
-        color: #fff;
-        letter-spacing: 3px;
-        text-align: right;
-        margin-right: 12%;
-    }
+}
+
+.confirm-total {
+    font-size: $font-l;
+    color: rgb(27, 27, 27);
+    letter-spacing: 3px;
+    text-align: right;
+    margin-right: 12%;
+}
+
+.wrap {
+    margin: 30px 30px 50px;
     .confirm-name {
         float: left;
         font-size: $font-l;
@@ -66,34 +71,30 @@ body {
     .button {
         float: right;
         font-size: $font-l;
-        background: rgb(0, 173, 253);
+        background: #e7d115;
         border-radius: 15px;
         letter-spacing: 3px;
         text-align: center;
         cursor: pointer;
         padding: 5px 15px;
+        margin-bottom: 10px;
     }
-}
-
-.button:hover {
-    background: rgb(3, 166, 241);
-}
-
-.confirm-btn:visited {
-    color: #fff;
-}
-
-.confirm-btn:hover {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.wrap {
-    margin: 30px 30px 50px;
-}
-
-.clearfix {
-    clear: both;
+    .button:hover {
+        background: #ffe815;
+    }
+    a {
+        color: #131313;
+    }
+    .confirm-btn:hover {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    .confirm-btn:visited {
+        color: #131313;
+    }
+    .clearfix {
+        clear: both;
+    }
 }
 
 .navbar {
@@ -104,13 +105,13 @@ body {
     font-size: 1.5rem;
     .text {
         display: inline-block;
-        font-size: $font-s;
+        font-size: 14px;
     }
     a {
         color: #fff;
     }
     a:hover {
         text-decoration: none;
-        color: rgb(141, 141, 141);
+        color: #fff;
     }
 }
