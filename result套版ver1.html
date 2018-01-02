@@ -10,11 +10,6 @@
     <link rel="stylesheet" href="css/result.css">
     <script src="https://use.fontawesome.com/311a41a163.js"></script>
     <title>團訂結果</title>
-    <style>
-        li .inner-name-2:nth-child(2) {
-            display: none !important;
-        }
-    </style>
 </head>
 
 <body>
@@ -35,11 +30,9 @@
         <div class="result-list">
             <div class="listtop-1">訂單</div>
             <ul>
-
                 <li v-for="(item,index) in totalOrders">
                     <span>{{item.dishName}}</span>
                     <span class="cont">x{{item.count}}</span>
-                    <span class="inner-digital">{{item.price}}TWD</span>
                 </li>
 
             </ul>
@@ -48,54 +41,35 @@
                 <span></span>
                 <span>{{total}}TWD</span>
             </P>
-
             <div class="listtop-2">訂單明細</div>
-            <!--Clover訂單明細-->
             <ul class="outer">
                 <template v-for="(order,index) in orders">
-
                     <li>
-                        <span class="inner-name-2">{{order.name}}</span>
-                        <template v-for="dish in orders[index].order">
-                            <span class="inner-name-2"></span>
-                            <span class="inner-wrap">
-                                <span class="inner-type-2">{{dish.dishName}}</span>
-                                <span class="inner-cont-2">x{{dish.count}}</span>
-                                <div class="clearfix"></div>
-                            </span>
-                            <span class="inner-total"></span>
-                        </template>
-
-                        <div class="user-total">{{order.userTotal}}TWD</div>
+                        <span class="inner">{{order.name}}</span>
+                        <span class="inner">
+                            <div v-for="dish in orders[index].order">{{dish.dishName}}</div>
+                        </span>
+                        <span class="inner">
+                            <div v-for="dish in orders[index].order">x{{dish.count}}</div>
+                        </span>
+                        <span class="inner">{{order.userTotal}}TWD</span>
                     </li>
                 </template>
-
-
-
             </ul>
             <p class="total-2">
-                <span>總計</span>
                 <span></span>
-<<<<<<< HEAD
                 <span></span>
-                <!-- <span>{{total}}TWD</span> -->
-=======
-                <span>{{total}}TWD</span>
->>>>>>> feature/result
+                <span>100TWD</span>
             </p>
-
-
-
         </div>
     </div>
     <div class="navbar">
         <a href="confirm.html" class="fa fa-caret-left" aria-hidden="true">
             <div class="text">Back</div>
         </a>
-        <a href="storelist.html" class="fa fa-home" aria-hidden="true"></a>
+        <a href="storeList.html" class="fa fa-home" aria-hidden="true"></a>
         <a href="#" class="fa fa-user-o" aria-hidden="true"></a>
     </div>
-
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>

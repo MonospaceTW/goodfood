@@ -11,7 +11,7 @@
                     letter-spacing: 2px;
                 }
 
-                $maincolor:#ee5d30;
+                $maincolor:#ed5d30;
                 $fontcolor:#525252;
                 $font-xl:17px;
                 $font-l:14px;
@@ -46,21 +46,25 @@
 
                 .result-info p {
                     @include textstyle2();
-                    line-height: 3px;
-                    font-size: $font-l;
+                    line-height: 1px;
+                    font-size: 12px;
                     margin-top: 15px;
                 }
 
                 .button {
                     display: inline-block;
-                    width: 95px;
-                    height: 30px;
-                    background: $maincolor;
+                    width: 100%;
                     text-align: center;
-                    border-radius: 30px;
+                    margin-top: 10px;
                     cursor: pointer;
-                    margin: 3px 0 0 35px;
                     .order-more {
+                        background: $maincolor;
+                        width: 95px;
+                        height: 30px;
+                        border-radius: 20px;
+                        padding: 5px 15px;
+                    }
+                    a {
                         color: #fff;
                         font-size: $font-m;
                         letter-spacing: 3px;
@@ -82,7 +86,7 @@
                     font-size: $font-m;
                     letter-spacing: 3px;
                     text-align: right;
-                    margin: -25px 30px 0 0;
+                    margin: 6px 120px 13px 0;
                 }
 
                 .result-list {
@@ -93,20 +97,25 @@
                         @include textstyle2;
                         border-bottom: 1.5px solid $maincolor;
                         border-top: 1.5px solid $maincolor;
-                        margin-top: 60px;
+                        margin-top: 28px;
                     }
                     ul {
+                        width: 100%;
                         font-size: $font-l;
-                        padding: 10px 20px;
-                    }
-                    span {
-                        display: inline-block;
-                        vertical-align: text-top;
-                        width: 31%;
-                        padding: 2px;
-                    }
-                    .cont {
-                        text-align: center;
+                        padding-left: 0;
+                        margin-top: 15px;
+                        .inner-type-1 {
+                            display: inline-block;
+                            width: 55%;
+                        }
+                        .inner-cont-1 {
+                            display: inline-block;
+                            width: 15%;
+                        }
+                        .inner-digital {
+                            display: inline-block;
+                            width: 25%;
+                        }
                     }
                     span:last-child {
                         text-align: right;
@@ -115,12 +124,13 @@
                         letter-spacing: 3px;
                         list-style-type: none;
                         border-bottom: 1px solid rgb(228, 228, 228);
+                        padding-top: 10px;
                     }
                     .total-1 {
+                        width: 100%;
                         font-size: $font-l;
                         letter-spacing: 3px;
-                        padding: 10px 20px;
-                        margin-top: -30px;
+                        text-align: right;
                     }
                     .listtop-2 {
                         @include textstyle2;
@@ -131,16 +141,41 @@
                     .outer {
                         font-size: $font-l;
                         padding: 0;
-                        margin: -5px 0 -10px 0;
-                    }
-                    .inner {
-                        display: inline-block;
-                        width: 23.5%;
+                        margin: -5px 0 0 0;
+                        width: 100%;
+                        .inner-name-2 {
+                            display: inline-block;
+                            width: 20%;
+                            
+                        }
+                        .inner-wrap {
+                            width: 50%;
+                            display: inline-block;
+                            .inner-type-2 {
+                                display: inline-block;
+                                width: 70%;
+                            }
+                            .inner-cont-2 {
+                                width: 30%;
+                            }
+                        }
+                        .clearfix {
+                            clear: both;
+                        }
+                        .inner-total {
+                            display: inline-block;
+                            width: 25%;
+                        }
+
+                        .user-total {
+                            text-align: right;
+                        }
                     }
                     .total-2 {
                         font-size: $font-l;
                         text-align: right;
                         letter-spacing: 3px;
+                        border-bottom: 1.5px solid #cccaca;
                         margin-top: 15px;
                     }
                 }
@@ -149,12 +184,12 @@
                     position: fixed;
                     width: 100%;
                     background: rgb(255, 255, 255);
-                    box-shadow: 0 -10px 20px #ebebeb;
+                    box-shadow: 0 0 20px #ebebeb;
                     bottom: 0;
                     font-size: 1.5rem;
                     .text {
                         display: inline-block;
-                        font-size: $font-s;
+                        font-size: 14px;
                     }
                     a {
                         color: #ee5d30;
