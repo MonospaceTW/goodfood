@@ -14,12 +14,8 @@ body {
 
 hr {
   border: 0.5px solid #ed5d30;
-<<<<<<< HEAD
   margin-top: 5px;
 }
-=======
-  margin-top: 5px; }
->>>>>>> feature/result
 
 .result-subtitle {
   color: #525252;
@@ -34,19 +30,14 @@ hr {
   letter-spacing: 2px;
   line-height: 1px;
   font-size: 12px;
-<<<<<<< HEAD
   margin-top: 15px;
 }
-=======
-  margin-top: 15px; }
->>>>>>> feature/result
 
 .button {
   display: inline-block;
   width: 100%;
   text-align: center;
   margin-top: 10px;
-<<<<<<< HEAD
   cursor: pointer;
 }
 .button .order-more {
@@ -61,19 +52,6 @@ hr {
   font-size: 12px;
   letter-spacing: 3px;
 }
-=======
-  cursor: pointer; }
-  .button .order-more {
-    background: #ed5d30;
-    width: 95px;
-    height: 30px;
-    border-radius: 20px;
-    padding: 5px 15px; }
-  .button a {
-    color: #fff;
-    font-size: 12px;
-    letter-spacing: 3px; }
->>>>>>> feature/result
 
 .button:hover {
   background: #fff;
@@ -81,29 +59,20 @@ hr {
 
 .order-more:hover {
   color: #ed5d30;
-<<<<<<< HEAD
   text-decoration: none;
 }
-=======
-  text-decoration: none; }
->>>>>>> feature/result
 
 .deadline {
   color: #525252;
   font-size: 12px;
   letter-spacing: 3px;
   text-align: right;
-<<<<<<< HEAD
   margin: 6px 120px 13px 0;
 }
-=======
-  margin: 6px 120px 13px 0; }
->>>>>>> feature/result
 
 .result-list {
   width: 100%;
   color: #525252;
-<<<<<<< HEAD
   margin-bottom: 50px;
 }
 .result-list .listtop-1 {
@@ -190,84 +159,11 @@ hr {
   border-bottom: 1.5px solid #cccaca;
   margin-top: 15px;
 }
-=======
-  margin-bottom: 50px; }
-  .result-list .listtop-1 {
-    color: #525252;
-    text-align: center;
-    letter-spacing: 2px;
-    border-bottom: 1.5px solid #ed5d30;
-    border-top: 1.5px solid #ed5d30;
-    margin-top: 28px; }
-  .result-list ul {
-    width: 100%;
-    font-size: 14px;
-    padding-left: 0;
-    margin-top: 15px; }
-    .result-list ul .inner-type-1 {
-      display: inline-block;
-      width: 55%; }
-    .result-list ul .inner-cont-1 {
-      display: inline-block;
-      width: 15%; }
-    .result-list ul .inner-digital {
-      display: inline-block;
-      width: 25%; }
-  .result-list span:last-child {
-    text-align: right; }
-  .result-list li {
-    letter-spacing: 3px;
-    list-style-type: none;
-    border-bottom: 1px solid #e4e4e4;
-    padding-top: 10px; }
-  .result-list .total-1 {
-    width: 100%;
-    font-size: 14px;
-    letter-spacing: 3px;
-    text-align: right; }
-  .result-list .listtop-2 {
-    color: #525252;
-    text-align: center;
-    letter-spacing: 2px;
-    border-bottom: 1.5px solid #ed5d30;
-    border-top: 1.5px solid #ed5d30;
-    margin: 40px 0 20px 0; }
-  .result-list .outer {
-    font-size: 14px;
-    padding: 0;
-    margin: -5px 0 0 0;
-    width: 100%; }
-    .result-list .outer .inner-name-2 {
-      display: inline-block;
-      width: 20%; }
-    .result-list .outer .inner-wrap {
-      width: 50%;
-      display: inline-block; }
-      .result-list .outer .inner-wrap .inner-type-2 {
-        display: inline-block;
-        width: 70%; }
-      .result-list .outer .inner-wrap .inner-cont-2 {
-        width: 30%; }
-    .result-list .outer .clearfix {
-      clear: both; }
-    .result-list .outer .inner-total {
-      display: inline-block;
-      width: 25%; }
-    .result-list .outer .user-total {
-      text-align: right; }
-  .result-list .total-2 {
-    font-size: 14px;
-    text-align: right;
-    letter-spacing: 3px;
-    border-bottom: 1.5px solid #cccaca;
-    margin-top: 15px; }
->>>>>>> feature/result
 
 .navbar {
   position: fixed;
   width: 100%;
   background: white;
-<<<<<<< HEAD
   box-shadow: 0 0 20px #ebebeb;
   bottom: 0;
   font-size: 1.5rem;
@@ -283,19 +179,3 @@ hr {
   text-decoration: none;
   color: #8d8d8d;
 }
-=======
-  -webkit-box-shadow: 0 0 20px #ebebeb;
-  box-shadow: 0 0 20px #ebebeb;
-  bottom: 0;
-  font-size: 1.5rem; }
-  .navbar .text {
-    display: inline-block;
-    font-size: 14px; }
-  .navbar a {
-    color: #ee5d30; }
-  .navbar a:hover {
-    text-decoration: none;
-    color: #8d8d8d; }
-
-
->>>>>>> feature/result
