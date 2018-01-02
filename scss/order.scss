@@ -7,7 +7,7 @@
     cursor: pointer;
 }
 
-$maincolor:#ee5d30;
+$maincolor:#ed5d30;
 $fontcolor:#525252;
 $font-xl:17px;
 $font-l:14px;
@@ -113,6 +113,9 @@ body {
             border: 1px solid $maincolor;
             letter-spacing: 2px;
         }
+        a {
+            color: $maincolor;
+        }
         .order-btn:visited {
             color: #fff;
         }
@@ -123,6 +126,7 @@ body {
         .result-btn:visited,
         .share-btn:visited {
             color: $maincolor;
+            border: 1px solid $maincolor;
         }
         .result-btn:hover,
         .share-btn:hover {
@@ -140,7 +144,7 @@ body {
     position: fixed;
     width: 100%;
     background: rgb(255, 255, 255);
-    box-shadow: 0 -10px 20px #ebebeb;
+    box-shadow: 0 0 20px #ebebeb;
     bottom: 0;
     font-size: 1.5rem;
     a {
