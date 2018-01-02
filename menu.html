@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/moment.js"></script>
+</head>
+
+<body>
+  <div id="menu">
+
+    <ul>
+      <li v-for="dish in dishes">{{dish.dishName}}　　{{dish.price}} </li>
+    </ul>
+
+    <a href="#" @click="teamOrder">團訂</a>
+
+
+
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
+      authDomain: "goodfood-39158.firebaseapp.com",
+      databaseURL: "https://goodfood-39158.firebaseio.com",
+      projectId: "goodfood-39158",
+      storageBucket: "goodfood-39158.appspot.com",
+      messagingSenderId: "940303768399"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script>
+    const now = new Date();
+    //console.log(now);
+
+
+    const order = firebase.database().ref('order');
+
+    // 從網址列取得storeId
+    var helper = {
+      getParameterByName: function (name, url) {
+        var regex, results;
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, '\\$&');
+        regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i');
+        results = regex.exec(url);
+        if (!results) {
+          return null;
+        }
+        if (!results[2]) {
+          return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+    };
+
+    let storeId = helper.getParameterByName("storeId");
+    // http://localhost:8080/menu.html?storeId=-L1LeGds02yWfMcvMwIn
+
+    // 取得菜單
+    let dishes = [];
+    // const storeId = '-L1LeGds02yWfMcvMwIn';
+    firebase.database().ref("dish").orderByChild("storeId").equalTo(storeId).once('value').then(function (snapshot) {
+      snapshot.forEach(function (data) {
+        // console.log(data.val());
+        dishes.push(data.val());
+      });
+      //console.log(dishes);
+
+
+      let vm = new Vue({
+        el: '#menu',
+        data: {
+          dishes: dishes,
+          orderEndTime: ''
+        },
+        created() {
+          this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm');
+          console.log(this.orderEndTime);
+        },
+        methods: {
+          teamOrder() {
+            const teamOrderKey = order.push({
+              orderEndTime: this.orderEndTime,
+              storeId: storeId,
+            }).key;
+
+            location.href = "order.html?orderId=" + teamOrderKey + "&storeId=" + storeId;
+
+          }
+        }
+
+      });
+      // callback end
+    });
+  </script>
+</body>
+
+</html>
