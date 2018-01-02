@@ -143,30 +143,6 @@
       }
       //console.log(self.total);
 
-
-
-      
-      // order.child(orderId).child("orderDetail").once('value').then(function(snapshot){
-      //   snapshot.forEach(function(data){
-      //     console.log(data.val());
-      //   });
-      // });
-
-      dish.once('value').then(function(snapshot){
-        snapshot.forEach(function(data){
-          //console.log(data.val());
-          self.menu.push(data.val());
-
-        });
-      });
-      //console.log(self.menu);
-      // order.child(orderId).child("totalOrder").once('value').then(function(snapshot){
-      //   snapshot.forEach(function(data){
-      //     let val = data.val();
-      //     //console.log(val);
-      //     self.totalOrder.push(val);
-      //   });
-      // });
     },
     mounted(){
 
@@ -180,42 +156,6 @@
           name: this.name,
           order: this.userOrder,
           userTotal: this.total
-        });
-        order.child(orderId).child("orderDetail").on('value', function(snapshot){
-
-          snapshot.forEach(function(data){
-            //console.log(data.val().order);
-            let order = data.val().order;
-            //console.log(self.orderList);
-            self.orderList.push(order);
-          });
-          //console.log(self.orderList);
-          for(let i = 0; i < self.orderList.length; i++){
-
-              //console.log(self.orderList[i]);
-              for(let item in self.orderList[i]){
-                //console.log(self.orderList[i][item].count);
-                self.orderEach.push(self.orderList[i][item]);
-              }
-          }
-          //console.log(self.orderEach);
-
-          
-          for(let i = 0; i < self.menu.length; i++){
-            for(let j = 0; j < self.orderEach.length; j++){
-              if(self.menu[i].dishId == self.orderEach[j].dishId){
-                self.menu[i].count += self.orderEach[j].count;
-              }
-            }
-          }
-          //console.log(self.menu);
-          for (let i = 0 ; i < self.menu.length; i++){
-            if(self.menu[i].count >= 1){
-              //console.log(self.menu[i]);
-              self.totalOrder.push(self.menu[i]);
-            }
-          }
-          order.child(orderId).child("totalOrder").set(self.totalOrder);
         });
 
         location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;  

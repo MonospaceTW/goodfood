@@ -50,7 +50,7 @@
                   <input id="name" type="text" placeholder="請輸入名字" name="name" v-model="name">
                   <div class="button">
                       <a href="#" class="order-btn" @click="order">下訂單</a>
-                      <a href="result.html?orderId=-L1LhNkVxQHq7y4R2T9e&storeId=-L1LeGds02yWfMcvMwIn" class="result-btn">看團購結果</a>
+                      <a href="#" class="result-btn" @click="watchResult">看團購結果</a>
                       <a href="order.html?orderId=-L1LhNkVxQHq7y4R2T9e&storeId=-L1LeGds02yWfMcvMwIn" class="share-btn">分享這頁</a>
                   </div>
               </div>
@@ -164,7 +164,9 @@
           this.userOrder = JSON.stringify(this.userOrder);
           //console.log(this.userOrder);
           location.href = "confirm.html?userOrder=" + this.userOrder + "&orderId=" + orderId + "&name=" + this.name + "&storeId=" + storeId;
-
+        },
+        watchResult(){
+          location.href ="result.html?orderId=" + orderId + "&storeId=" + storeId;
         }
       },
       computed: {
