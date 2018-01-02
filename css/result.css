@@ -8,7 +8,7 @@ body {
 }
 
 .result-title {
-  color: #ee5d30;
+  color: #ed5d30;
   text-align: center;
   letter-spacing: 2px;
   font-size: 17px;
@@ -16,7 +16,7 @@ body {
 }
 
 hr {
-  border: 0.5px solid #ee5d30;
+  border: 0.5px solid #ed5d30;
   margin-top: 5px;
 }
 
@@ -32,22 +32,26 @@ hr {
   color: #525252;
   text-align: center;
   letter-spacing: 2px;
-  line-height: 3px;
-  font-size: 14px;
+  line-height: 1px;
+  font-size: 12px;
   margin-top: 15px;
 }
 
 .button {
   display: inline-block;
-  width: 95px;
-  height: 30px;
-  background: #ee5d30;
+  width: 100%;
   text-align: center;
-  border-radius: 30px;
+  margin-top: 10px;
   cursor: pointer;
-  margin: 3px 0 0 35px;
 }
 .button .order-more {
+  background: #ed5d30;
+  width: 95px;
+  height: 30px;
+  border-radius: 20px;
+  padding: 5px 15px;
+}
+.button a {
   color: #fff;
   font-size: 12px;
   letter-spacing: 3px;
@@ -59,7 +63,7 @@ hr {
 }
 
 .order-more:hover {
-  color: #ee5d30;
+  color: #ed5d30;
   text-decoration: none;
 }
 
@@ -68,7 +72,7 @@ hr {
   font-size: 12px;
   letter-spacing: 3px;
   text-align: right;
-  margin: -25px 30px 0 0;
+  margin: 6px 120px 13px 0;
 }
 
 .result-list {
@@ -80,22 +84,27 @@ hr {
   color: #525252;
   text-align: center;
   letter-spacing: 2px;
-  border-bottom: 1.5px solid #ee5d30;
-  border-top: 1.5px solid #ee5d30;
-  margin-top: 60px;
+  border-bottom: 1.5px solid #ed5d30;
+  border-top: 1.5px solid #ed5d30;
+  margin-top: 28px;
 }
 .result-list ul {
+  width: 100%;
   font-size: 14px;
-  padding: 10px 20px;
+  padding-left: 0;
+  margin-top: 15px;
 }
-.result-list span {
+.result-list ul .inner-type-1 {
   display: inline-block;
-  vertical-align: text-top;
-  width: 31%;
-  padding: 2px;
+  width: 55%;
 }
-.result-list .cont {
-  text-align: center;
+.result-list ul .inner-cont-1 {
+  display: inline-block;
+  width: 15%;
+}
+.result-list ul .inner-digital {
+  display: inline-block;
+  width: 25%;
 }
 .result-list span:last-child {
   text-align: right;
@@ -104,34 +113,55 @@ hr {
   letter-spacing: 3px;
   list-style-type: none;
   border-bottom: 1px solid #e4e4e4;
+  padding-top: 10px;
 }
 .result-list .total-1 {
+  width: 100%;
   font-size: 14px;
   letter-spacing: 3px;
-  padding: 10px 20px;
-  margin-top: -30px;
+  text-align: right;
 }
 .result-list .listtop-2 {
   color: #525252;
   text-align: center;
   letter-spacing: 2px;
-  border-bottom: 1.5px solid #ee5d30;
-  border-top: 1.5px solid #ee5d30;
+  border-bottom: 1.5px solid #ed5d30;
+  border-top: 1.5px solid #ed5d30;
   margin: 40px 0 20px 0;
 }
 .result-list .outer {
   font-size: 14px;
   padding: 0;
-  margin: -5px 0 -10px 0;
+  margin: -5px 0 0 0;
+  width: 100%;
 }
-.result-list .inner {
+.result-list .outer .inner-name-2 {
   display: inline-block;
-  width: 23.5%;
+  width: 20%;
+}
+.result-list .outer .inner-wrap {
+  width: 50%;
+  display: inline-block;
+}
+.result-list .outer .inner-wrap .inner-type-2 {
+  display: inline-block;
+  width: 70%;
+}
+.result-list .outer .inner-wrap .inner-cont-2 {
+  width: 30%;
+}
+.result-list .outer .clearfix {
+  clear: both;
+}
+.result-list .outer .inner-total {
+  display: inline-block;
+  width: 25%;
 }
 .result-list .total-2 {
   font-size: 14px;
   text-align: right;
   letter-spacing: 3px;
+  border-bottom: 1.5px solid #cccaca;
   margin-top: 15px;
 }
 
@@ -139,13 +169,13 @@ hr {
   position: fixed;
   width: 100%;
   background: white;
-  box-shadow: 0 -10px 20px #ebebeb;
+  box-shadow: 0 0 20px #ebebeb;
   bottom: 0;
   font-size: 1.5rem;
 }
 .navbar .text {
   display: inline-block;
-  font-size: 11px;
+  font-size: 14px;
 }
 .navbar a {
   color: #ee5d30;
