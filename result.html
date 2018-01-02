@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="css/result.css">
     <script src="https://use.fontawesome.com/311a41a163.js"></script>
     <title>團訂結果</title>
+    <style>
+        li .inner-name-2:nth-child(2) {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,106 +29,56 @@
             <p>電話:{{store.phone}}</p>
         </div>
         <div class="button">
-            <a href="order.html" class="order-more">我要加訂</a>
+            <a :href="'order.html?orderId=' + orderId + '&storeId=' + storeId" class="order-more">我要加訂</a>
         </div>
-        <div class="deadline">截止時間:10:30</div>
+        <div class="deadline">截止時間:{{orderEndTime}}</div>
         <div class="result-list">
             <div class="listtop-1">訂單</div>
             <ul>
-                <li>
-                    <span class="inner-type-1">招牌鍋貼</span>
-                    <span class="inner-cont-1">x1</span>
-                    <span class="inner-digital">60TWD</span>
+
+                <li v-for="(item,index) in totalOrders">
+                    <span>{{item.dishName}}</span>
+                    <span class="cont">x{{item.count}}</span>
+                    <span class="inner-digital">{{item.price}}TWD</span>
                 </li>
-                <li>
-                    <span class="inner-type-1">咖哩鍋貼</span>
-                    <span class="inner-cont-1">x1</span>
-                    <span class="inner-digital">60TWD</span>
-                </li>
-                <li>
-                    <span class="inner-type-1">港式小籠湯包</span>
-                    <span class="inner-cont-1">x1</span>
-                    <span class="inner-digital">60TWD</span>
-                </li>
+
             </ul>
             <P class="total-1">
                 <span>總計</span>
                 <span></span>
-                <span>120TWD</span>
+                <span>{{total}}TWD</span>
             </P>
+
             <div class="listtop-2">訂單明細</div>
             <!--Clover訂單明細-->
             <ul class="outer">
-                <li>
-                    <span class="inner-name-2">Clover</span>
-                    <span class="inner-wrap">
-                        <span class="inner-type-2">咖哩鍋貼</span>
-                        <span class="inner-cont-2">x100</span>
-                        <div class="clearfix"></div>
-                    </span>
-                    <span class="inner-total">60TWD</span>
-                </li>
-                <li>
-                    <span class="inner-name-2"></span>
-                    <span class="inner-wrap">
-                        <span class="inner-type-2">蔬菜濃湯</span>
-                        <span class="inner-cont-2">x1</span>
-                        <div class="clearfix"></div>
-                    </span>
-                    <span class="inner-total">60TWD</span>
-                </li>
-                <li>
-                    <span class="inner-name-2"></span>
-                    <span class="inner-wrap">
-                        <span class="inner-type-2">港式小籠湯包</span>
-                        <span class="inner-cont-2">x1</span>
-                        <div class="clearfix"></div>
-                    </span>
-                    <span class="inner-total">60TWD</span>
-                </li>
+                <template v-for="(order,index) in orders">
+
+                    <li>
+                        <span class="inner-name-2">{{order.name}}</span>
+                        <template v-for="dish in orders[index].order">
+                            <span class="inner-name-2"></span>
+                            <span class="inner-wrap">
+                                <span class="inner-type-2">{{dish.dishName}}</span>
+                                <span class="inner-cont-2">x{{dish.count}}</span>
+                                <div class="clearfix"></div>
+                            </span>
+                            <span class="inner-total"></span>
+                        </template>
+
+                        <div class="user-total">{{order.userTotal}}TWD</div>
+                    </li>
+                </template>
+
+
 
             </ul>
             <p class="total-2">
                 <span>總計</span>
                 <span></span>
-                <span>180TWD</span>
+                <span>{{total}}TWD</span>
             </p>
-            <!--Paula訂單明細-->
-            <ul class="outer">
-                <li>
-                    <span class="inner-name-2">Paula</span>
-                    <span class="inner-wrap">
-                        <span class="inner-type-2">咖哩鍋貼</span>
-                        <span class="inner-cont-2">x1</span>
-                        <div class="clearfix"></div>
-                    </span>
-                    <span class="inner-total">60TWD</span>
-                </li>
-                <li>
-                    <span class="inner-name-2"></span>
-                    <span class="inner-wrap">
-                        <span class="inner-type-2">蔬菜濃湯</span>
-                        <span class="inner-cont-2">x1</span>
-                        <div class="clearfix"></div>
-                    </span>
-                    <span class="inner-total">60TWD</span>
-                </li>
-                <li>
-                    <span class="inner-name-2"></span>
-                    <span class="inner-wrap">
-                        <span class="inner-type-2">港式小籠湯包</span>
-                        <span class="inner-cont-2">x1</span>
-                        <div class="clearfix"></div>
-                    </span>
-                    <span class="inner-total">60TWD</span>
-                </li>
 
-            </ul>
-            <p class="total-2">
-                <span>總計</span>
-                <span></span>
-                <span>180TWD</span>
-            </p>
 
 
         </div>

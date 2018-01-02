@@ -146,6 +146,7 @@
                         .inner-name-2 {
                             display: inline-block;
                             width: 20%;
+                            
                         }
                         .inner-wrap {
                             width: 50%;
@@ -164,6 +165,10 @@
                         .inner-total {
                             display: inline-block;
                             width: 25%;
+                        }
+
+                        .user-total {
+                            text-align: right;
                         }
                     }
                     .total-2 {
