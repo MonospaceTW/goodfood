@@ -131,6 +131,10 @@
                         font-size: $font-l;
                         letter-spacing: 3px;
                         text-align: right;
+
+                        :nth-child(3){
+                            text-align: right
+                        }
                     }
                     .listtop-2 {
                         @include textstyle2;
