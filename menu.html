@@ -13,9 +13,8 @@
 
 <body>
 
-
   <div id="menu" class="wrapper">
-    <div class="img-title">八方雲集鍋貼水餃專賣店</div>
+    <div class="img-title">{{storeName}}</div>
     <div class="menu-list">
       <ul>
         <template v-for="dish in dishes">
@@ -29,10 +28,10 @@
       </ul>
     </div>
     <div class="menu-info">
-      <p>滿500元可外送 </p>
-      <p>營業時間:9:00-21:00</p>
-      <p>地址：台中市台中路123號</p>
-      <p>電話：04-24803248</p>
+      <p>{{deliveryCondition}} </p>
+      <p>營業時間:{{openTime}}-{{closeTime}}</p>
+      <p>地址：{{address}}</p>
+      <p>電話：{{phone}}</p>
     </div>
     <div class="menu-msg">
       團購截止時間：開團後半小時截止
@@ -90,6 +89,52 @@
     let storeId = helper.getParameterByName("storeId");
     // http://localhost:8080/menu.html?storeId=-L1LeGds02yWfMcvMwIn
 
+
+
+
+
+    let vm = new Vue({
+      el: '#menu',
+      data: {
+        dishes: [],
+        orderEndTime: '',
+        storeName: "",
+        deliveryCondition: "",
+        openTime: "",
+        closeTime: "",
+        address: "",
+        phone: ""
+      },
+      created() {
+        this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
+        console.log(this.orderEndTime);
+      },
+      methods: {
+        teamOrder() {
+          const teamOrderKey = order.push({
+            orderEndTime: this.orderEndTime,
+            storeId: storeId,
+          }).key;
+          location.href = "order.html?orderId=" + teamOrderKey + "&storeId=" + storeId;
+        }
+      }
+    });
+
+
+    // 取得店家資訊
+    firebase.database().ref("store/").child(storeId).once('value').then(function (store) {
+      console.log(store.val());
+      let storeInfo = store.val();
+      vm.storeName = storeInfo.storeName;
+      vm.deliveryCondition = storeInfo.deliveryCondition;
+      vm.openTime = storeInfo.openTime;
+      vm.closeTime = storeInfo.closeTime;
+      vm.address = storeInfo.address;
+      vm.phone = storeInfo.phone;
+      // // store callback end
+    });
+
+
     // 取得菜單
     let dishes = [];
     // const storeId = '-L1LeGds02yWfMcvMwIn';
@@ -99,33 +144,12 @@
         dishes.push(data.val());
       });
       //console.log(dishes);
+      vm.dishes = dishes;
 
 
-      let vm = new Vue({
-        el: '#menu',
-        data: {
-          dishes: dishes,
-          orderEndTime: ''
-        },
-        created() {
-          this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
-          console.log(this.orderEndTime);
-        },
-        methods: {
-          teamOrder() {
-            const teamOrderKey = order.push({
-              orderEndTime: this.orderEndTime,
-              storeId: storeId,
-            }).key;
-
-            location.href = "order.html?orderId=" + teamOrderKey + "&storeId=" + storeId;
-
-          }
-        }
-
-      });
-      // callback end
+      // dish callback end
     });
+
   </script>
 </body>
 
