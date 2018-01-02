@@ -84,7 +84,7 @@
           orderEndTime: ''
         },
         created() {
-          this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
+          this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm');
           console.log(this.orderEndTime);
         },
         methods: {
