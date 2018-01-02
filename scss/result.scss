@@ -1,0 +1,196 @@
+                @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+                @mixin textstyle1 {
+                    color: $maincolor;
+                    text-align: center;
+                    letter-spacing: 2px;
+                }
+
+                @mixin textstyle2 {
+                    color: $fontcolor;
+                    text-align: center;
+                    letter-spacing: 2px;
+                }
+
+                $maincolor:#ed5d30;
+                $fontcolor:#525252;
+                $font-xl:17px;
+                $font-l:14px;
+                $font-m:12px;
+                $font-s:11px;
+                body {
+                    font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+                }
+
+                .container {
+                    margin: 0 auto;
+                }
+
+                .result-title {
+                    @include textstyle1;
+                    font-size: $font-xl;
+                    padding-top: 20px;
+                }
+
+                hr {
+                    border: 0.5px solid $maincolor;
+                    margin-top: 5px;
+                }
+
+                .result-subtitle {
+                    @include textstyle2();
+                    font: {
+                        weight: 500;
+                        size: $font-xl;
+                    }
+                }
+
+                .result-info p {
+                    @include textstyle2();
+                    line-height: 1px;
+                    font-size: 12px;
+                    margin-top: 15px;
+                }
+
+                .button {
+                    display: inline-block;
+                    width: 100%;
+                    text-align: center;
+                    margin-top: 10px;
+                    cursor: pointer;
+                    .order-more {
+                        background: $maincolor;
+                        width: 95px;
+                        height: 30px;
+                        border-radius: 20px;
+                        padding: 5px 15px;
+                    }
+                    a {
+                        color: #fff;
+                        font-size: $font-m;
+                        letter-spacing: 3px;
+                    }
+                }
+
+                .button:hover {
+                    background: #fff;
+                    border: 1px solid #ee5d30;
+                }
+
+                .order-more:hover {
+                    color: $maincolor;
+                    text-decoration: none;
+                }
+
+                .deadline {
+                    color: $fontcolor;
+                    font-size: $font-m;
+                    letter-spacing: 3px;
+                    text-align: right;
+                    margin: 6px 120px 13px 0;
+                }
+
+                .result-list {
+                    width: 100%;
+                    color: $fontcolor;
+                    margin-bottom: 50px;
+                    .listtop-1 {
+                        @include textstyle2;
+                        border-bottom: 1.5px solid $maincolor;
+                        border-top: 1.5px solid $maincolor;
+                        margin-top: 28px;
+                    }
+                    ul {
+                        width: 100%;
+                        font-size: $font-l;
+                        padding-left: 0;
+                        margin-top: 15px;
+                        .inner-type-1 {
+                            display: inline-block;
+                            width: 55%;
+                        }
+                        .inner-cont-1 {
+                            display: inline-block;
+                            width: 15%;
+                        }
+                        .inner-digital {
+                            display: inline-block;
+                            width: 25%;
+                        }
+                    }
+                    span:last-child {
+                        text-align: right;
+                    }
+                    li {
+                        letter-spacing: 3px;
+                        list-style-type: none;
+                        border-bottom: 1px solid rgb(228, 228, 228);
+                        padding-top: 10px;
+                    }
+                    .total-1 {
+                        width: 100%;
+                        font-size: $font-l;
+                        letter-spacing: 3px;
+                        text-align: right;
+                    }
+                    .listtop-2 {
+                        @include textstyle2;
+                        border-bottom: 1.5px solid $maincolor;
+                        border-top: 1.5px solid $maincolor;
+                        margin: 40px 0 20px 0;
+                    }
+                    .outer {
+                        font-size: $font-l;
+                        padding: 0;
+                        margin: -5px 0 0 0;
+                        width: 100%;
+                        .inner-name-2 {
+                            display: inline-block;
+                            width: 20%;
+                        }
+                        .inner-wrap {
+                            width: 50%;
+                            display: inline-block;
+                            .inner-type-2 {
+                                display: inline-block;
+                                width: 70%;
+                            }
+                            .inner-cont-2 {
+                                width: 30%;
+                            }
+                        }
+                        .clearfix {
+                            clear: both;
+                        }
+                        .inner-total {
+                            display: inline-block;
+                            width: 25%;
+                        }
+                    }
+                    .total-2 {
+                        font-size: $font-l;
+                        text-align: right;
+                        letter-spacing: 3px;
+                        border-bottom: 1.5px solid #cccaca;
+                        margin-top: 15px;
+                    }
+                }
+
+                .navbar {
+                    position: fixed;
+                    width: 100%;
+                    background: rgb(255, 255, 255);
+                    box-shadow: 0 0 20px #ebebeb;
+                    bottom: 0;
+                    font-size: 1.5rem;
+                    .text {
+                        display: inline-block;
+                        font-size: 14px;
+                    }
+                    a {
+                        color: #ee5d30;
+                    }
+                    a:hover {
+                        text-decoration: none;
+                        color: rgb(141, 141, 141);
+                    }
+                }

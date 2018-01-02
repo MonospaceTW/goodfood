@@ -1,0 +1,153 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+body {
+  font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.order-title {
+  font-size: 17px;
+  text-align: center;
+  margin-top: 50px;
+  letter-spacing: 3px;
+}
+
+.wrapper .order-list {
+  width: 90%;
+  margin-top: 30px;
+}
+.wrapper .order-list ul {
+  padding-left: 0;
+  margin-left: 30px;
+}
+.wrapper .order-list span {
+  width: 45%;
+  display: inline-block;
+  letter-spacing: 3px;
+  font-size: 14px;
+  color: #525252;
+  vertical-align: text-top;
+  margin-top: 5px;
+}
+.wrapper .order-list li {
+  color: #525252;
+  background: #F4F4F4;
+  list-style-type: none;
+  border-radius: 15px;
+  padding: 8px 10px 10px 25px;
+  margin: 10px auto;
+}
+.wrapper .order-list .icon {
+  font-size: 18px;
+  color: #ff9844;
+}
+.wrapper .order-list .text {
+  width: 35%;
+  border: none;
+}
+.wrapper .order-total {
+  font-size: 14px;
+  color: #525252;
+  letter-spacing: 3px;
+  text-align: right;
+  margin-right: 30px;
+}
+
+.wrap {
+  width: 100%;
+  margin-bottom: 95px;
+}
+.wrap .order-name {
+  float: left;
+  padding-top: 20px;
+  margin-left: 20px;
+}
+.wrap .order-name .myname {
+  color: #525252;
+  font-size: 14px;
+  letter-spacing: 3px;
+}
+.wrap .order-name #name {
+  width: 32%;
+  height: 22px;
+  border: 1px solid #d8d8d8;
+  padding: 10px;
+}
+.wrap .button {
+  width: 28%;
+  display: flex;
+  float: right;
+  flex-direction: column;
+  margin-right: 25px;
+}
+.wrap .button .order-btn {
+  font-size: 13px;
+  border-radius: 15px;
+  text-align: center;
+  padding: 5px 8px;
+  cursor: pointer;
+  background: #ed5d30;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+.wrap .button .result-btn {
+  font-size: 13px;
+  border-radius: 15px;
+  text-align: center;
+  padding: 5px 8px;
+  cursor: pointer;
+  border: 1px solid #ed5d30;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+.wrap .button .share-btn {
+  font-size: 13px;
+  border-radius: 15px;
+  text-align: center;
+  padding: 5px 8px;
+  cursor: pointer;
+  border: 1px solid #ed5d30;
+  letter-spacing: 2px;
+}
+.wrap .button a {
+  color: #ed5d30;
+}
+.wrap .button .order-btn:visited {
+  color: #fff;
+}
+.wrap .button .order-btn:hover {
+  background: #ff5b2a;
+  text-decoration: none;
+}
+.wrap .button .result-btn:visited,
+.wrap .button .share-btn:visited {
+  color: #ed5d30;
+  border: 1px solid #ed5d30;
+}
+.wrap .button .result-btn:hover,
+.wrap .button .share-btn:hover {
+  color: #525252;
+  border: 1px solid #525252;
+  text-decoration: none;
+}
+.wrap .clearfix {
+  clear: both;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  background: white;
+  box-shadow: 0 0 20px #ebebeb;
+  bottom: 0;
+  font-size: 1.5rem;
+}
+.navbar a {
+  color: #ed5d30;
+}
+.navbar a:hover {
+  text-decoration: none;
+  color: #8d8d8d;
+}

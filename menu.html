@@ -5,23 +5,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>店家資訊</title>
+  <link rel="stylesheet" href="css/menu.css">
   <script src="js/vue.js"></script>
   <script src="js/moment.js"></script>
 </head>
 
 <body>
-  <div id="menu">
-
-    <ul>
-      <li v-for="dish in dishes">{{dish.dishName}}　　{{dish.price}} </li>
-    </ul>
-
-    <a href="#" @click="teamOrder">團訂</a>
 
 
+  <div id="menu" class="wrapper">
+    <div class="img-title">八方雲集鍋貼水餃專賣店</div>
+    <div class="menu-list">
+      <ul>
+        <template v-for="dish in dishes">
+          <li>
+            <span>{{dish.dishName}}</span>
+            <span>{{dish.price}}TWD</span>
+          </li>
+        </template>
 
+
+      </ul>
+    </div>
+    <div class="menu-info">
+      <p>滿500元可外送 </p>
+      <p>營業時間:9:00-21:00</p>
+      <p>地址：台中市台中路123號</p>
+      <p>電話：04-24803248</p>
+    </div>
+    <div class="menu-msg">
+      團購截止時間：開團後半小時截止
+    </div>
+    <div class="button">
+      <a href="#" class="menu-btn" @click="teamOrder">我要團購</a>
+    </div>
+    <div class="navbar">
+      <a href="storelist.html" class="fa fa-home" aria-hidden="true"></a>
+      <a href="user.html" class="fa fa-user-o" aria-hidden="true"></a>
+    </div>
   </div>
+
 
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   <script>
