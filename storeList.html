@@ -5,24 +5,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>storeList</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <script src="https://use.fontawesome.com/311a41a163.js"></script>
+  <link rel="stylesheet" href="css/storelist.css">
+  <title>合作餐廳</title>
 </head>
 
 <body>
 
-  <div id="storeList">
-    <ul>
-      <template v-for="(value, key) in stores">
-        <li>
-          <a :href='"menu.html?storeId=" + key'>{{value.storeName}}</a>
-          <br> {{value.storeType}}
-          <br> 營業時間：{{value.openTime}}~{{value.closeTime}}
-        </li>
-      </template>
 
-    </ul>
+
+  <div class="title">合作餐廳</div>
+  <div class="container" id="storeList">
+    <template v-for="(value, key) in stores">
+
+      <div class="row">
+        <div class="col-5 ">
+          <a :href='"menu.html?storeId=" + key'>
+            <img src="img/shop1.jpg" alt="img" width="100%">
+          </a>
+        </div>
+        <div class="col-7">
+          <div class="shop-list">
+            <a :href='"menu.html?storeId=" + key' class="shop-name">{{value.storeName}}</a>
+            <div class="shop-type mt-2">{{value.storeType}}料理</div>
+            <div class="open-time"> 營業時間：{{value.openTime}}~{{value.closeTime}}</div>
+          </div>
+        </div>
+        <div class="w-100 horizon-line"></div>
+      </div>
+    </template>
+
+
 
   </div>
+  <div class="navbar">
+    <a href="storelist.html">
+      <img src="img/home.svg" alt="home">
+    </a>
+    <a href="user.html" class="fa fa-user-o" aria-hidden="true"></a>
+  </div>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
