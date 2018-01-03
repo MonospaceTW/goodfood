@@ -71,8 +71,9 @@ hr {
   color: #525252;
   font-size: 12px;
   letter-spacing: 3px;
-  text-align: right;
-  margin: 6px 120px 13px 0;
+  text-align: center;
+  margin: 10px auto;
+  width: 60%;
 }
 
 .result-list {
