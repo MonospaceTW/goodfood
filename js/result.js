@@ -90,17 +90,20 @@ firebase.database().ref("dish").once('value').then(function (snapshot) {
       orderCount.count = totalOrders.reduce(function (initial, currentValue) {
         return initial + currentValue.count;
       }, 0);
+      orderCount.subtotal = orderCount.count * dishes[i].price;
       totalOrderCount.push(orderCount);
     }
     // console.log(totalOrderCount);
 
-    // 點單
+    // 過濾掉點單數量為0個的
     const totalOrderCountFilter = totalOrderCount.filter(function (item) {
       return item.count !== 0;
     });
-    // console.log(totalOrderCountFilter);
+    console.log(totalOrderCountFilter);
 
+    // 更新至Vue
     vm.update(orders, totalOrderCountFilter);
+    // 計算總價
     vm.computedTotal();
 
 

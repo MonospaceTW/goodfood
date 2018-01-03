@@ -85,8 +85,9 @@
                     color: $fontcolor;
                     font-size: $font-m;
                     letter-spacing: 3px;
-                    text-align: right;
-                    margin: 6px 120px 13px 0;
+                    text-align: center;
+                    margin: 10px auto;
+                    width: 60%;
                 }
 
                 .result-list {
@@ -120,6 +121,11 @@
                     span:last-child {
                         text-align: right;
                     }
+                    // .totallist {
+                    //     display: flex;
+                    //     justify-content: space-between;
+                    // }
+
                     li {
                         letter-spacing: 3px;
                         list-style-type: none;
@@ -131,6 +137,10 @@
                         font-size: $font-l;
                         letter-spacing: 3px;
                         text-align: right;
+
+                        :nth-child(3){
+                            text-align: right
+                        }
                     }
                     .listtop-2 {
                         @include textstyle2;

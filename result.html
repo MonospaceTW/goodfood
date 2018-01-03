@@ -36,10 +36,10 @@
             <div class="listtop-1">訂單</div>
             <ul>
 
-                <li v-for="(item,index) in totalOrders">
-                    <span>{{item.dishName}}</span>
-                    <span class="cont">x{{item.count}}</span>
-                    <span class="inner-digital">{{item.price}}TWD</span>
+                <li class="totallist" v-for="(item,index) in totalOrders">
+                    <span class="inner-type-1">{{item.dishName}}</span>
+                    <span class="inner-cont-1">x{{item.count}}</span>
+                    <span class="inner-digital">{{item.subtotal}}TWD</span>
                 </li>
 
             </ul>

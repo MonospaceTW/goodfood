@@ -1,16 +1,19 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
 body {
-  font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif'; }
+  font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+}
 
 .container {
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 .result-title {
   color: #ed5d30;
   text-align: center;
   letter-spacing: 2px;
   font-size: 17px;
-  padding-top: 20px; }
+  padding-top: 20px;
+}
 
 hr {
   border: 0.5px solid #ed5d30;
@@ -22,7 +25,8 @@ hr {
   text-align: center;
   letter-spacing: 2px;
   font-weight: 500;
-  font-size: 17px; }
+  font-size: 17px;
+}
 
 .result-info p {
   color: #525252;
@@ -55,7 +59,8 @@ hr {
 
 .button:hover {
   background: #fff;
-  border: 1px solid #ee5d30; }
+  border: 1px solid #ee5d30;
+}
 
 .order-more:hover {
   color: #ed5d30;
@@ -66,8 +71,9 @@ hr {
   color: #525252;
   font-size: 12px;
   letter-spacing: 3px;
-  text-align: right;
-  margin: 6px 120px 13px 0;
+  text-align: center;
+  margin: 10px auto;
+  width: 60%;
 }
 
 .result-list {
@@ -116,6 +122,9 @@ hr {
   letter-spacing: 3px;
   text-align: right;
 }
+.result-list .total-1 :nth-child(3) {
+  text-align: right;
+}
 .result-list .listtop-2 {
   color: #525252;
   text-align: center;
@@ -152,6 +161,9 @@ hr {
   display: inline-block;
   width: 25%;
 }
+.result-list .outer .user-total {
+  text-align: right;
+}
 .result-list .total-2 {
   font-size: 14px;
   text-align: right;
@@ -179,3 +191,5 @@ hr {
   text-decoration: none;
   color: #8d8d8d;
 }
+
+
