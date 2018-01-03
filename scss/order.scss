@@ -24,11 +24,13 @@ body {
 .order-title {
     font-size: $font-xl;
     text-align: center;
-    margin-top: 50px;
     letter-spacing: 3px;
 }
 
 .wrapper {
+padding-top: 50px;
+    padding-bottom: 100px;
+    
     .order-list {
         width: 90%;
         margin-top: 30px;
@@ -73,7 +75,6 @@ body {
 
 .wrap {
     width: 100%;
-    margin-bottom: 95px;
     .order-name {
         float: left;
         padding-top: 20px;
@@ -155,3 +156,48 @@ body {
         color: rgb(141, 141, 141);
     }
 }
+
+
+.box {
+    position: relative;
+  }
+
+  .lightbox {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .lightbox .msg {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    width: 60%;
+    margin: auto;
+    height: 100px;
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .lightbox .msg .boxtitle {
+    font-size: 1.1rem;
+  }
+
+  .lightbox .msg .close {
+    position: absolute;
+    top: -5px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    background-color: white;
+    font-size: 16px;
+  }
