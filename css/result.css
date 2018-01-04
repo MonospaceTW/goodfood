@@ -193,4 +193,48 @@ hr {
   color: #8d8d8d;
 }
 
+.container {
+  position: relative;
+}
+
+.lightbox {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.lightbox .msg {
+  position: absolute;
+  top: 150px;
+  left: 0;
+  right: 0;
+  width: 60%;
+  margin: auto;
+  height: 100px;
+  background-color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.lightbox .msg .boxtitle {
+  font-size: 1.1rem;
+}
+
+.lightbox .msg .close {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  background-color: white;
+  font-size: 16px;
+}
+
 

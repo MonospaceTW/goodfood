@@ -15,82 +15,94 @@
             display: none !important;
         }
     </style>
+
 </head>
 
 <body>
-    <div id="result" class="container">
-        <div class="result-title">團訂結果</div>
-        <hr />
-        <div class="result-subtitle">{{store.storeName}}</div>
-        <div class="result-info">
-            <p>{{store.deliveryCondition}}</p>
-            <p>營業時間:{{store.openTime}}~{{store.closeTime}}</p>
-            <p>地址:{{store.address}}</p>
-            <p>電話:{{store.phone}}</p>
-        </div>
-        <div class="button">
-            <a :href="'order.html?orderId=' + orderId + '&storeId=' + storeId" class="order-more">我要加訂</a>
-        </div>
-        <div class="deadline">截止時間:{{orderEndTime}}</div>
-        <div class="result-list">
-            <div class="listtop-1">訂單</div>
-            <ul>
+    <div id="result">
+        <div class="container">
+            <div class="result-title">團訂結果</div>
+            <hr />
+            <div class="result-subtitle">{{store.storeName}}</div>
+            <div class="result-info">
+                <p>{{store.deliveryCondition}}</p>
+                <p>營業時間:{{store.openTime}}~{{store.closeTime}}</p>
+                <p>地址:{{store.address}}</p>
+                <p>電話:{{store.phone}}</p>
+            </div>
+            <div class="button">
+                <a :href="'order.html?orderId=' + orderId + '&storeId=' + storeId" class="order-more">我要加訂</a>
+            </div>
+            <div class="deadline">截止時間:{{orderEndTime}}</div>
+            <div class="result-list">
+                <div class="listtop-1">訂單</div>
+                <ul>
 
-                <li class="totallist" v-for="(item,index) in totalOrders">
-                    <span class="inner-type-1">{{item.dishName}}</span>
-                    <span class="inner-cont-1">x{{item.count}}</span>
-                    <span class="inner-digital">{{item.subtotal}}TWD</span>
-                </li>
-
-            </ul>
-            <P class="total-1">
-                <span>總計</span>
-                <span></span>
-                <span>{{total}}TWD</span>
-            </P>
-
-            <div class="listtop-2">訂單明細</div>
-            <!--Clover訂單明細-->
-            <ul class="outer">
-                <template v-for="(order,index) in orders">
-
-                    <li>
-                        <span class="inner-name-2">{{order.name}}</span>
-                        <template v-for="dish in orders[index].order">
-                            <span class="inner-name-2"></span>
-                            <span class="inner-wrap">
-                                <span class="inner-type-2">{{dish.dishName}}</span>
-                                <span class="inner-cont-2">x{{dish.count}}</span>
-                                <div class="clearfix"></div>
-                            </span>
-                            <span class="inner-total"></span>
-                        </template>
-
-                        <div class="user-total">{{order.userTotal}}TWD</div>
+                    <li class="totallist" v-for="(item,index) in totalOrders">
+                        <span class="inner-type-1">{{item.dishName}}</span>
+                        <span class="inner-cont-1">x{{item.count}}</span>
+                        <span class="inner-digital">{{item.subtotal}}TWD</span>
                     </li>
-                </template>
+
+                </ul>
+                <P class="total-1">
+                    <span>總計</span>
+                    <span></span>
+                    <span>{{total}}TWD</span>
+                </P>
+
+                <div class="listtop-2">訂單明細</div>
+                <!--Clover訂單明細-->
+                <ul class="outer">
+                    <template v-for="(order,index) in orders">
+
+                        <li>
+                            <span class="inner-name-2">{{order.name}}</span>
+                            <template v-for="dish in orders[index].order">
+                                <span class="inner-name-2"></span>
+                                <span class="inner-wrap">
+                                    <span class="inner-type-2">{{dish.dishName}}</span>
+                                    <span class="inner-cont-2">x{{dish.count}}</span>
+                                    <div class="clearfix"></div>
+                                </span>
+                                <span class="inner-total"></span>
+                            </template>
+
+                            <div class="user-total">{{order.userTotal}}TWD</div>
+                        </li>
+                    </template>
 
 
 
-            </ul>
-            <p class="total-2">
-                <span>總計</span>
-                <span></span>
-                <span>{{total}}TWD</span>
-            </p>
+                </ul>
+                <p class="total-2">
+                    <span>總計</span>
+                    <span></span>
+                    <span>{{total}}TWD</span>
+                </p>
 
 
 
+            </div>
+
+
+            <div class="lightbox" @click="closeBox">
+                <div class="msg">
+                    <div class="close" @click="closeBox">x</div>
+                    <div class="boxtitle">邀請大家來團訂吧！</div>
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_inline_share_toolbox"></div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="navbar">
-        <a href="confirm.html" class="fa fa-share-alt" aria-hidden="true">
-        </a>
-        <a href="storeList.html" class="fa fa-home" aria-hidden="true"></a>
-        <a href="#" class="fa fa-user-o" aria-hidden="true"></a>
-    </div>
+        <div class="navbar" id="navbar">
+            <a href="#" class="fa fa-share-alt" aria-hidden="true" @click="share">
+            </a>
+            <a href="storeList.html" class="fa fa-home" aria-hidden="true"></a>
+            <a href="#" class="fa fa-user-o" aria-hidden="true"></a>
+        </div>
 
-
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
@@ -106,6 +118,8 @@
         };
         firebase.initializeApp(config);
     </script>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a45e5ae798027f5"></script>
 
     <script src="js/result.js"></script>
 </body>

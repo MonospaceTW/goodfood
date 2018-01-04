@@ -143,6 +143,12 @@ let vm = new Vue({
         total += this.orders[i].userTotal;
       }
       this.total = total;
+    },
+    closeBox() {
+      document.querySelector(".lightbox").style.display = "none";
+    },
+    share() {
+      document.querySelector(".lightbox").style.display = "block";
     }
   }
 
