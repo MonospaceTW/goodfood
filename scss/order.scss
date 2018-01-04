@@ -28,9 +28,8 @@ body {
 }
 
 .wrapper {
-padding-top: 50px;
+    padding-top: 50px;
     padding-bottom: 100px;
-    
     .order-list {
         width: 90%;
         margin-top: 30px;
@@ -100,22 +99,22 @@ padding-top: 50px;
         .order-btn {
             @include btn();
             background: $maincolor;
+            color: #fff;
             letter-spacing: 3px;
             margin-bottom: 8px;
         }
         .result-btn {
             @include btn();
+            color: $maincolor;
             border: 1px solid $maincolor;
             letter-spacing: 1.5px;
             margin-bottom: 8px;
         }
         .share-btn {
             @include btn();
+            color: $maincolor;
             border: 1px solid $maincolor;
             letter-spacing: 2px;
-        }
-        a {
-            color: $maincolor;
         }
         .order-btn:visited {
             color: #fff;
@@ -157,12 +156,11 @@ padding-top: 50px;
     }
 }
 
-
 .box {
     position: relative;
-  }
+}
 
-  .lightbox {
+.lightbox {
     display: none;
     position: absolute;
     top: 0;
@@ -170,9 +168,9 @@ padding-top: 50px;
     width: 100vw;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
-  }
+}
 
-  .lightbox .msg {
+.lightbox .msg {
     position: absolute;
     top: 100px;
     left: 0;
@@ -184,13 +182,13 @@ padding-top: 50px;
     text-align: center;
     padding: 10px;
     border-radius: 10px;
-  }
+}
 
-  .lightbox .msg .boxtitle {
+.lightbox .msg .boxtitle {
     font-size: 1.1rem;
-  }
+}
 
-  .lightbox .msg .close {
+.lightbox .msg .close {
     position: absolute;
     top: -5px;
     right: 0;
@@ -200,4 +198,4 @@ padding-top: 50px;
     border-radius: 50%;
     background-color: white;
     font-size: 16px;
-  }
+}
