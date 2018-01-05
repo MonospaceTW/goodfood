@@ -41,14 +41,14 @@
                     <li class="totallist" v-for="(item,index) in totalOrders">
                         <span class="inner-type-1">{{item.dishName}}</span>
                         <span class="inner-cont-1">x{{item.count}}</span>
-                        <span class="inner-digital">{{item.subtotal}}TWD</span>
+                        <span class="inner-digital">${{item.subtotal}}</span>
                     </li>
 
                 </ul>
                 <P class="total-1">
                     <span>總計</span>
                     <span></span>
-                    <span>{{total}}TWD</span>
+                    <span>${{total}}</span>
                 </P>
 
                 <div class="listtop-2">訂單明細</div>
@@ -68,7 +68,7 @@
                                 <span class="inner-total"></span>
                             </template>
 
-                            <div class="user-total">{{order.userTotal}}TWD</div>
+                            <div class="user-total">${{order.userTotal}}</div>
                         </li>
                     </template>
 
@@ -78,7 +78,7 @@
                 <p class="total-2">
                     <span>總計</span>
                     <span></span>
-                    <span>{{total}}TWD</span>
+                    <span>${{total}}</span>
                 </p>
 
 
