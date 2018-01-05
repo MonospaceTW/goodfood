@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="navbar">
-        <a href="order.html" class="fa fa-caret-left" aria-hidden="true">
+        <a href="#" class="fa fa-caret-left" aria-hidden="true" @click="back">
           <div class="text">Back</div>
         </a>
         <a href="storelist.html">
@@ -145,7 +145,6 @@
 
     },
     mounted(){
-
     },
     methods: {
       orderConfirm(){
@@ -159,6 +158,9 @@
         });
 
         location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;  
+      },
+      back(){
+        location.href ="order.html?orderId=" + orderId + "&storeId=" + storeId;
       }
     },
   
