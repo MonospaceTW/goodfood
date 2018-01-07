@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>店家資訊</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <script src="https://use.fontawesome.com/311a41a163.js"></script>
+
   <link rel="stylesheet" href="css/menu.css">
   <script src="js/vue.js"></script>
   <script src="js/moment.js"></script>
@@ -19,8 +23,8 @@
       <ul>
         <template v-for="dish in dishes">
           <li>
-            <span>{{dish.dishName}}</span>
-            <span>{{dish.price}}TWD</span>
+            <span class="dishname">{{dish.dishName}}</span>
+            <span class="price">${{dish.price}}</span>
           </li>
         </template>
 
@@ -40,8 +44,12 @@
       <a href="#" class="menu-btn" @click="teamOrder">我要團購</a>
     </div>
     <div class="navbar">
-      <a href="storeList.html" class="fa fa-home" aria-hidden="true"></a>
-      <a href="#" class="fa fa-user-o" aria-hidden="true"></a>
+      <a href="index.html">
+        <img src="images/icon-orange-home.png" alt="home" width="25">
+      </a>
+      <a href="member.html">
+        <img src="images/icon-orange-member.png" alt="member" width="20">
+      </a>
     </div>
   </div>
 
@@ -149,7 +157,6 @@
 
       // dish callback end
     });
-
   </script>
 </body>
 
