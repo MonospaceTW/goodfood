@@ -21,10 +21,6 @@ body {
   width: 90%;
   margin-top: 30px;
 }
-.wrapper .order-list ul {
-  padding-left: 0;
-  margin-left: 30px;
-}
 .wrapper .order-list span {
   width: 45%;
   display: inline-block;
@@ -33,6 +29,12 @@ body {
   color: #525252;
   vertical-align: text-top;
   margin-top: 5px;
+}
+.wrapper .order-list .dishname {
+  width: 70%;
+}
+.wrapper .order-list .price {
+  width: 20%;
 }
 .wrapper .order-list li {
   color: #525252;
@@ -49,13 +51,14 @@ body {
 .wrapper .order-list .text {
   width: 35%;
   border: none;
+  text-align: center;
 }
 .wrapper .order-total {
+  width: 90%;
   font-size: 14px;
   color: #525252;
   letter-spacing: 3px;
   text-align: right;
-  margin-right: 30px;
 }
 
 .wrap {
@@ -70,15 +73,19 @@ body {
   color: #525252;
   font-size: 14px;
   letter-spacing: 3px;
+  padding-top: 20px;
 }
 .wrap .order-name #name {
-  width: 32%;
+  width: 30%;
   height: 22px;
   border: 1px solid #d8d8d8;
-  padding: 10px;
+}
+.wrap .order-name input::-webkit-input-placeholder {
+  font-size: 14px;
+  text-align: center;
 }
 .wrap .button {
-  width: 28%;
+  width: 32%;
   display: flex;
   float: right;
   flex-direction: column;
@@ -93,7 +100,7 @@ body {
   background: #ed5d30;
   color: #fff;
   letter-spacing: 3px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .wrap .button .result-btn {
   font-size: 13px;
@@ -104,7 +111,7 @@ body {
   color: #ed5d30;
   border: 1px solid #ed5d30;
   letter-spacing: 1.5px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .wrap .button .share-btn {
   font-size: 13px;
@@ -115,6 +122,7 @@ body {
   color: #ed5d30;
   border: 1px solid #ed5d30;
   letter-spacing: 2px;
+  margin-bottom: 10px;
 }
 .wrap .button .order-btn:visited {
   color: #fff;
@@ -148,6 +156,7 @@ body {
 }
 .navbar a {
   color: #ed5d30;
+  padding-right: 0;
 }
 .navbar a:hover {
   text-decoration: none;
