@@ -58,10 +58,14 @@
         </div>
       </div>
       <div class="navbar">
-        <a href="order.html" class="fa fa-caret-left" aria-hidden="true">
+        <a href="#" class="fa fa-caret-left" aria-hidden="true" @click="back">
           <div class="text">Back</div>
         </a>
+<<<<<<< HEAD
         <a href="storeList.html">
+=======
+        <a href="index.html">
+>>>>>>> 2cd89dc2dc1ddceb110d0897feeacc8fade81e4a
           <img src="img/home.svg" alt="">
         </a>
       </div>
@@ -113,6 +117,7 @@
     //console.log(orderList);
 
     Vue.component('my-component', {
+<<<<<<< HEAD
       template: '#my-component',
       data: function () {
         return {
@@ -175,6 +180,73 @@
 
 
 
+=======
+    template: '#my-component',
+    data: function(){
+      return {
+        name: '',
+        subTotal: 0,
+        userOrder: [],
+        total: 0,
+        menu: [],
+        orderList: [],
+        orderEach: [],
+        totalOrder: [],
+        totalOrderList: [],
+        
+      }
+    },
+    created(){
+      var self = this;
+      // order.child("-L1LhNkVxQHq7y4R2T9e").child('orderDetail').once('value').then(function(snapshot){
+      //   console.log(snapshot.val());
+      //   snapshot.forEach(function(data){
+      //     console.log(data.val());
+      //   });
+      // });
+      self.name = name;
+      self.userOrder = JSON.parse(userOrder);
+      //console.log(this.userOrder);
+      for(let item in self.userOrder){
+        self.total += self.userOrder[item].price;
+      }
+      //console.log(self.total);
+
+    },
+    mounted(){
+    },
+    methods: {
+      orderConfirm(){
+        const self = this;
+        // order.child("totalOrder").set()
+        order.child(orderId).child("orderDetail").push({
+          userId: "L0EDp_q9ErqPIfrhila",
+          name: this.name,
+          order: this.userOrder,
+          userTotal: this.total
+        });
+
+        location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;  
+      },
+      back(){
+        location.href ="order.html?orderId=" + orderId + "&storeId=" + storeId;
+      }
+    },
+  
+  });
+  
+  const vm = new Vue({
+    el: '#app',
+    data: {
+    },
+  });
+  
+  
+  
+  
+  
+    
+>>>>>>> 2cd89dc2dc1ddceb110d0897feeacc8fade81e4a
     //demo.$firebaseRefs.anArray.update(JSON.parse(orderList));
   </script>
 </body>

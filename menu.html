@@ -5,23 +5,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>店家資訊</title>
+  <link rel="stylesheet" href="css/menu.css">
   <script src="js/vue.js"></script>
   <script src="js/moment.js"></script>
 </head>
 
 <body>
-  <div id="menu">
 
-    <ul>
-      <li v-for="dish in dishes">{{dish.dishName}}　　{{dish.price}} </li>
-    </ul>
+  <div id="menu" class="wrapper">
+    <div class="img-title">{{storeName}}</div>
+    <div class="menu-list">
+      <ul>
+        <template v-for="dish in dishes">
+          <li>
+            <span>{{dish.dishName}}</span>
+            <span>{{dish.price}}TWD</span>
+          </li>
+        </template>
 
-    <a href="#" @click="teamOrder">團訂</a>
 
-
-
+      </ul>
+    </div>
+    <div class="menu-info">
+      <p>{{deliveryCondition}} </p>
+      <p>營業時間:{{openTime}}-{{closeTime}}</p>
+      <p>地址：{{address}}</p>
+      <p>電話：{{phone}}</p>
+    </div>
+    <div class="menu-msg">
+      團購截止時間：開團後半小時截止
+    </div>
+    <div class="button">
+      <a href="#" class="menu-btn" @click="teamOrder">我要團購</a>
+    </div>
+    <div class="navbar">
+      <a href="storeList.html" class="fa fa-home" aria-hidden="true"></a>
+      <a href="#" class="fa fa-user-o" aria-hidden="true"></a>
+    </div>
   </div>
+
 
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   <script>
@@ -66,6 +89,52 @@
     let storeId = helper.getParameterByName("storeId");
     // http://localhost:8080/menu.html?storeId=-L1LeGds02yWfMcvMwIn
 
+
+
+
+
+    let vm = new Vue({
+      el: '#menu',
+      data: {
+        dishes: [],
+        orderEndTime: '',
+        storeName: "",
+        deliveryCondition: "",
+        openTime: "",
+        closeTime: "",
+        address: "",
+        phone: ""
+      },
+      created() {
+        this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
+        console.log(this.orderEndTime);
+      },
+      methods: {
+        teamOrder() {
+          const teamOrderKey = order.push({
+            orderEndTime: this.orderEndTime,
+            storeId: storeId,
+          }).key;
+          location.href = "order.html?orderId=" + teamOrderKey + "&storeId=" + storeId;
+        }
+      }
+    });
+
+
+    // 取得店家資訊
+    firebase.database().ref("store/").child(storeId).once('value').then(function (store) {
+      console.log(store.val());
+      let storeInfo = store.val();
+      vm.storeName = storeInfo.storeName;
+      vm.deliveryCondition = storeInfo.deliveryCondition;
+      vm.openTime = storeInfo.openTime;
+      vm.closeTime = storeInfo.closeTime;
+      vm.address = storeInfo.address;
+      vm.phone = storeInfo.phone;
+      // // store callback end
+    });
+
+
     // 取得菜單
     let dishes = [];
     // const storeId = '-L1LeGds02yWfMcvMwIn';
@@ -75,33 +144,12 @@
         dishes.push(data.val());
       });
       //console.log(dishes);
+      vm.dishes = dishes;
 
 
-      let vm = new Vue({
-        el: '#menu',
-        data: {
-          dishes: dishes,
-          orderEndTime: ''
-        },
-        created() {
-          this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm');
-          console.log(this.orderEndTime);
-        },
-        methods: {
-          teamOrder() {
-            const teamOrderKey = order.push({
-              orderEndTime: this.orderEndTime,
-              storeId: storeId,
-            }).key;
-
-            location.href = "order.html?orderId=" + teamOrderKey + "&storeId=" + storeId;
-
-          }
-        }
-
-      });
-      // callback end
+      // dish callback end
     });
+
   </script>
 </body>
 
