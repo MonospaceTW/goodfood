@@ -33,7 +33,7 @@
           <img src="img/confirm.svg" alt="確認訂購">
         </div>
         <div class="wrapper">
-          <div class="confirm-title ">八方雲集鍋貼水餃專賣店</div>
+          <div class="confirm-title ">{{storeName}}</div>
           <div class="confirm-list ">
             <ul>
               <li v-for="(item, index) in userOrder">
@@ -83,8 +83,9 @@
   </script>
 
   <script>
-    let order = firebase.database().ref('order');
-    let dish = firebase.database().ref('dish');
+    const order = firebase.database().ref('order');
+    const dish = firebase.database().ref('dish');
+    const store = firebase.database().ref('store');
 
 
     let helper = {
@@ -125,6 +126,7 @@
         orderEach: [],
         totalOrder: [],
         totalOrderList: [],
+        storeName: '',
         
       }
     },
@@ -143,6 +145,9 @@
         self.total += self.userOrder[item].price;
       }
       //console.log(self.total);
+      store.child(storeId).once('value').then(function(snapshot){
+        self.storeName = snapshot.val().storeName;
+      });
 
     },
     mounted(){
