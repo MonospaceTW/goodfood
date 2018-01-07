@@ -23,6 +23,7 @@
       <div class="row">
         <div class="col-5 ">
           <a :href='"menu.html?storeId=" + key'>
+            <!-- <img :src="value.menuImage" alt="img" width="100%"> -->
             <img src="img/shop1.jpg" alt="img" width="100%">
           </a>
         </div>
@@ -65,13 +66,40 @@
   <script>
     let stores;
     firebase.database().ref('store').once('value').then(function (snapshot) {
-      console.log(snapshot.key);
+      //console.log(snapshot.key);
       stores = snapshot.val();
-      console.log(stores);
-
+      //console.log(stores);
       vm.updateStore();
+      snapshot.forEach(function(data){
+        console.log(data.val().menuImage);
+      })
     });
-
+    Vue.component('my-component', {
+      template: '#my-component',
+      data: function () {
+        return {
+          dishes: [],
+          name: '',
+          memberKey: '',
+          orderKey: '',
+          userOrder: [],
+          total: 0,
+        }
+      },
+      created() {
+        const self = this;
+        //console.log(storeId);
+        dish.orderByChild("storeId").equalTo(storeId).once('value').then(function (snapshot) {
+          //console.log(snapshot.val());
+          snapshot.forEach(function (data) {
+            //console.log(data.val());
+            self.dishes.push(data.val());
+          });
+        });
+      },
+      methods: {
+      },
+    });
     let vm = new Vue({
       el: '#storeList',
       data: {
@@ -81,7 +109,6 @@
         updateStore() {
           this.stores = stores;
         }
-
       }
     });
 
