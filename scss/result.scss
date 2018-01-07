@@ -23,6 +23,7 @@
 
                 .container {
                     margin: 0 auto;
+                    margin-bottom: 70px;
                 }
 
                 .result-title {
@@ -71,13 +72,9 @@
                     }
                 }
 
-                .button:hover {
-                    background: #fff;
-                    border: 1px solid #ee5d30;
-                }
-
                 .order-more:hover {
-                    color: $maincolor;
+                    color: #fff;
+                    background: #ff6739;
                     text-decoration: none;
                 }
 
@@ -121,11 +118,6 @@
                     span:last-child {
                         text-align: right;
                     }
-                    // .totallist {
-                    //     display: flex;
-                    //     justify-content: space-between;
-                    // }
-
                     li {
                         letter-spacing: 3px;
                         list-style-type: none;
@@ -137,8 +129,7 @@
                         font-size: $font-l;
                         letter-spacing: 3px;
                         text-align: right;
-
-                        :nth-child(3){
+                         :nth-child(3) {
                             text-align: right
                         }
                     }
@@ -146,20 +137,19 @@
                         @include textstyle2;
                         border-bottom: 1.5px solid $maincolor;
                         border-top: 1.5px solid $maincolor;
-                        margin: 40px 0 20px 0;
+                        margin: 40px 0 0 0;
                     }
                     .outer {
                         font-size: $font-l;
                         padding: 0;
-                        margin: -5px 0 0 0;
+                        margin: -2px 0 0 0;
                         width: 100%;
                         .inner-name-2 {
                             display: inline-block;
                             width: 20%;
-                            
                         }
                         .inner-wrap {
-                            width: 50%;
+                            width: 100%;
                             display: inline-block;
                             .inner-type-2 {
                                 display: inline-block;
@@ -176,7 +166,6 @@
                             display: inline-block;
                             width: 25%;
                         }
-
                         .user-total {
                             text-align: right;
                         }
@@ -185,7 +174,6 @@
                         font-size: $font-l;
                         text-align: right;
                         letter-spacing: 3px;
-                        border-bottom: 1.5px solid #cccaca;
                         margin-top: 15px;
                     }
                 }
@@ -197,9 +185,8 @@
                     box-shadow: 0 0 20px #ebebeb;
                     bottom: 0;
                     font-size: 1.5rem;
-                    .text {
-                        display: inline-block;
-                        font-size: 14px;
+                    .icon {
+                        color: orange;
                     }
                     a {
                         color: #ee5d30;
@@ -213,7 +200,7 @@
                 .container {
                     position: relative;
                 }
-        
+
                 .lightbox {
                     display: none;
                     position: absolute;
@@ -223,7 +210,7 @@
                     height: 100%;
                     background-color: rgba(0, 0, 0, 0.4);
                 }
-        
+
                 .lightbox .msg {
                     position: absolute;
                     top: 150px;
@@ -237,11 +224,11 @@
                     padding: 10px;
                     border-radius: 10px;
                 }
-        
+
                 .lightbox .msg .boxtitle {
                     font-size: 1.1rem;
                 }
-        
+
                 .lightbox .msg .close {
                     position: absolute;
                     top: -5px;
