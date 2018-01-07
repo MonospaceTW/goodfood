@@ -24,7 +24,7 @@
     <div>
       <div class="container box">
         <div class="wrapper">
-          <div class="order-title">老三的飯</div>
+          <div class="order-title">{{storeName}}</div>
           <div class="order-list">
             <ul>
               <li v-for="(item, index) in dishes">
@@ -139,6 +139,7 @@
           orderKey: '',
           userOrder: [],
           total: 0,
+          storeName: '',
         }
       },
       created() {
@@ -152,7 +153,9 @@
           });
         });
         //console.log(self.dishes);
-
+        store.child(storeId).once('value').then(function(snapshot){
+          self.storeName = snapshot.val().storeName;
+        });
 
 
 
