@@ -33,10 +33,6 @@ body {
     .order-list {
         width: 90%;
         margin-top: 30px;
-        ul {
-            padding-left: 0;
-            margin-left: 30px;
-        }
         span {
             width: 45%;
             display: inline-block;
@@ -45,6 +41,12 @@ body {
             color: $fontcolor;
             vertical-align: text-top;
             margin-top: 5px;
+        }
+        .dishname {
+            width: 70%;
+        }
+        .price {
+            width: 20%;
         }
         li {
             color: $fontcolor;
@@ -61,14 +63,15 @@ body {
         .text {
             width: 35%;
             border: none;
+            text-align: center;
         }
     }
     .order-total {
+        width: 90%;
         font-size: $font-l;
         color: $fontcolor;
         letter-spacing: 3px;
         text-align: right;
-        margin-right: 30px;
     }
 }
 
@@ -82,16 +85,20 @@ body {
             color: $fontcolor;
             font-size: $font-l;
             letter-spacing: 3px;
+            padding-top: 20px;
         }
         #name {
-            width: 32%;
+            width: 30%;
             height: 22px;
             border: 1px solid #d8d8d8;
-            padding: 10px;
+        }
+        input::-webkit-input-placeholder {
+            font-size: 14px;
+            text-align: center;
         }
     }
     .button {
-        width: 28%;
+        width: 32%;
         display: flex;
         float: right;
         flex-direction: column;
@@ -101,20 +108,21 @@ body {
             background: $maincolor;
             color: #fff;
             letter-spacing: 3px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .result-btn {
             @include btn();
             color: $maincolor;
             border: 1px solid $maincolor;
             letter-spacing: 1.5px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .share-btn {
             @include btn();
             color: $maincolor;
             border: 1px solid $maincolor;
             letter-spacing: 2px;
+            margin-bottom: 10px;
         }
         .order-btn:visited {
             color: #fff;
@@ -149,6 +157,7 @@ body {
     font-size: 1.5rem;
     a {
         color: $maincolor;
+        padding-right: 0;
     }
     a:hover {
         text-decoration: none;

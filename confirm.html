@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>    
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
-      crossorigin="anonymous">
+    crossorigin="anonymous">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://use.fontawesome.com/311a41a163.js"></script>
   <link rel="stylesheet" href="css/confirm.css">
@@ -13,18 +13,19 @@
   <script src="js/vue.js"></script>
   <script src="js/moment.js"></script>
   <style>
-    .text{
+    .text {
       margin-left: 6px;
     }
   </style>
 </head>
+
 <body>
 
-<div id="app">
-  <my-component></my-component>
-</div>
-    
-  
+  <div id="app">
+    <my-component></my-component>
+  </div>
+
+
   <script type="text/x-template" id="my-component">
     <div>
       <div class="container">
@@ -35,13 +36,13 @@
           <div class="confirm-title ">八方雲集鍋貼水餃專賣店</div>
           <div class="confirm-list ">
             <ul>
-                <li v-for="(item, index) in userOrder">
-                  <span>{{item.dishName}}</span>
-                  <span class="text-right">{{item.count}}份</span>
-                  <span></span>
-                  <span class="text-right">{{item.price}}TWD</span>
-                </li>
-              </ul>
+              <li v-for="(item, index) in userOrder">
+                <span class="text-left">{{item.dishName}}</span>
+                <span class="text-right">{{item.count}}份</span>
+                <span></span>
+                <span class="text-right">{{item.price}}TWD</span>
+              </li>
+            </ul>
           </div>
 
           <p class="confirm-total">
@@ -60,13 +61,17 @@
         <a href="#" class="fa fa-caret-left" aria-hidden="true" @click="back">
           <div class="text">Back</div>
         </a>
+<<<<<<< HEAD
+        <a href="storeList.html">
+=======
         <a href="index.html">
+>>>>>>> 2cd89dc2dc1ddceb110d0897feeacc8fade81e4a
           <img src="img/home.svg" alt="">
         </a>
       </div>
     </div>
   </script>
-  
+
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -80,14 +85,14 @@
     };
     firebase.initializeApp(config);
   </script>
-  
+
   <script>
     let order = firebase.database().ref('order');
     let dish = firebase.database().ref('dish');
 
-    
+
     let helper = {
-      getParameterByName: function(name, url) {
+      getParameterByName: function (name, url) {
         var regex, results;
         if (!url) {
           url = window.location.href;
@@ -104,14 +109,78 @@
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
       }
     };
-  
+
     let orderId = helper.getParameterByName("orderId");
     let storeId = helper.getParameterByName("storeId");
-    let name = helper.getParameterByName("name"); 
+    let name = helper.getParameterByName("name");
     let userOrder = helper.getParameterByName("userOrder");
     //console.log(orderList);
-  
+
     Vue.component('my-component', {
+<<<<<<< HEAD
+      template: '#my-component',
+      data: function () {
+        return {
+          name: '',
+          subTotal: 0,
+          userOrder: [],
+          total: 0,
+          menu: [],
+          orderList: [],
+          orderEach: [],
+          totalOrder: [],
+          totalOrderList: [],
+
+        }
+      },
+      created() {
+        var self = this;
+        // order.child("-L1LhNkVxQHq7y4R2T9e").child('orderDetail').once('value').then(function(snapshot){
+        //   console.log(snapshot.val());
+        //   snapshot.forEach(function(data){
+        //     console.log(data.val());
+        //   });
+        // });
+        self.name = name;
+        self.userOrder = JSON.parse(userOrder);
+        //console.log(this.userOrder);
+        for (let item in self.userOrder) {
+          self.total += self.userOrder[item].price;
+        }
+        //console.log(self.total);
+
+      },
+      mounted() {
+
+      },
+      methods: {
+        orderConfirm() {
+          const self = this;
+          // order.child("totalOrder").set()
+          order.child(orderId).child("orderDetail").push({
+            userId: "L0EDp_q9ErqPIfrhila",
+            name: this.name,
+            order: this.userOrder,
+            userTotal: this.total
+          });
+
+          location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;
+        }
+      },
+
+    });
+
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+    });
+
+
+
+
+
+
+=======
     template: '#my-component',
     data: function(){
       return {
@@ -177,9 +246,8 @@
   
   
     
+>>>>>>> 2cd89dc2dc1ddceb110d0897feeacc8fade81e4a
     //demo.$firebaseRefs.anArray.update(JSON.parse(orderList));
-  
-  
   </script>
 </body>
 

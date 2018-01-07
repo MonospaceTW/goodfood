@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw">
 
 <head>
   <meta charset="UTF-8">
@@ -21,62 +21,66 @@
   </div>
 
   <script type="text/x-template" id="my-component">
-  <div>
-    <div class="container box">
-      <div class="wrapper">
+    <div>
+      <div class="container box">
+        <div class="wrapper">
           <div class="order-title">老三的飯</div>
           <div class="order-list">
             <ul>
-                <li v-for="(item, index) in dishes">
-                  <span>{{item.dishName}}</span>
-                  <span class="text-right">{{item.price}}TWD</span>
-                  <span class="text-right">
-                      <i class="fa fa-minus-circle icon" aria-hidden="true" @click="reduce(index)"></i>
-                      <input type="text" v-model="item.count" class="text" />
-                      <i class="fa fa-plus-circle icon" aria-hidden="true" @click="add(index)"></i>
-                  </span>
-                  <span class="text-right">{{item.price * item.count}}TWD</span>
-                </li>
-              </ul>
+              <li v-for="(item, index) in dishes">
+                <span class="dishname">{{item.dishName}}</span>
+                <span class="text-right price">${{item.price}}</span>
+                <span class="text-left">
+                  <i class="fa fa-minus-circle icon" aria-hidden="true" @click="reduce(index)"></i>
+                  <input type="text" v-model="item.count" class="text" />
+                  <i class="fa fa-plus-circle icon" aria-hidden="true" @click="add(index)"></i>
+                </span>
+                <span class="text-right">${{item.price * item.count}}</span>
+              </li>
+            </ul>
           </div>
           <p class="order-total">
-              <span>
-                  總共{{countTotal}}元
-              </span>
+            <span>
+              總共{{countTotal}}元
+            </span>
           </p>
           <div class="wrap">
-              <div class="order-name">
-                  <label class="myname" for="name">我是</label>
-                  <input id="name" type="text" placeholder="請輸入名字" name="name" v-model="name">
-                  <div class="button">
-                      <a href="#" class="order-btn" @click="order">下訂單</a>
-                      <a href="#" class="result-btn" @click="watchResult">看團購結果</a>
-                      <a href="#" class="share-btn" @click="share">分享這頁</a>
-                  </div>
+            <div class="order-name">
+              <label class="myname" for="name">我是</label>
+              <input id="name" type="text" placeholder="請輸入名字" name="name" v-model="name">
+              <div class="button">
+                <a href="#" class="order-btn" @click="order">下訂單</a>
+                <a href="#" class="result-btn" @click="watchResult">看團購結果</a>
+                <a href="#" class="share-btn" @click="share">分享這頁</a>
               </div>
-              <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
           </div>
-      </div>
-      <!-- 分享lightbox -->
-      <div class="lightbox" @click="closeBox">
+        </div>
+        <!-- 分享lightbox -->
+        <div class="lightbox" @click="closeBox">
           <div class="msg">
             <div class="close" @click="closeBox">x</div>
             <div class="boxtitle">邀請大家來團訂吧！</div>
             <!-- Go to www.addthis.com/dashboard to customize your tools -->
             <div class="addthis_inline_share_toolbox"></div>
           </div>
+        </div>
+
       </div>
-      
-    </div>
-    <div class="navbar">
-        <a href="index.html" class="fa fa-home" aria-hidden="true"></a>
-        <a href="user.html" class="fa fa-user-o" aria-hidden="true"></a>
-    </div>
+      <div class="navbar">
+        <a href="index.html">
+          <img src="images/icon-orange-home.png" alt="home" width="25">
+        </a>
+        <a href="user.html"></a>
+        <img src="images/icon-orange-member.png" alt="member" width="20">
+        </a>
+      </div>
 
 
-    
-  </div>
-</script>
+
+    </div>
+  </script>
 
   <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
   <script>
@@ -179,7 +183,8 @@
 
           this.userOrder = JSON.stringify(this.userOrder);
           //console.log(this.userOrder);
-          location.href = "confirm.html?userOrder=" + this.userOrder + "&orderId=" + orderId + "&name=" + this.name + "&storeId=" + storeId;
+          location.href = "confirm.html?userOrder=" + this.userOrder + "&orderId=" + orderId + "&name=" + this.name +
+            "&storeId=" + storeId;
         },
         watchResult() {
           location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;
@@ -213,8 +218,7 @@
 
     const vm = new Vue({
       el: '#app',
-      data: {
-      },
+      data: {},
     });
   </script>
 </body>
