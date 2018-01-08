@@ -12,11 +12,6 @@
   <title>訂購確認</title>
   <script src="js/vue.js"></script>
   <script src="js/moment.js"></script>
-  <style>
-    .text {
-      margin-left: 6px;
-    }
-  </style>
 </head>
 
 <body>
@@ -37,10 +32,12 @@
           <div class="confirm-list ">
             <ul>
               <li v-for="(item, index) in userOrder">
-                <span class="text-left">{{item.dishName}}</span>
-                <span class="text-right">{{item.count}}份</span>
-                <span></span>
-                <span class="text-right">{{item.price}}TWD</span>
+
+                <span class="text-left dishname">{{item.dishName}}</span>
+                <span class="text-right count">{{item.count}}份</span>
+                <span class="dishname"></span>
+                <span class="text-right count">${{item.price}}</span>
+
               </li>
             </ul>
           </div>
@@ -58,11 +55,12 @@
         </div>
       </div>
       <div class="navbar">
-        <a href="#" class="fa fa-caret-left" aria-hidden="true" @click="back">
+        <a href="order.html" @click="back">
+          <img src="images/buttom-white-left.png" alt="back" width="10">
           <div class="text">Back</div>
         </a>
         <a href="index.html">
-          <img src="img/home.svg" alt="">
+          <img src="img/home.svg" alt="home">
         </a>
       </div>
     </div>
@@ -114,75 +112,73 @@
     //console.log(orderList);
 
     Vue.component('my-component', {
-    template: '#my-component',
-    data: function(){
-      return {
-        name: '',
-        subTotal: 0,
-        userOrder: [],
-        total: 0,
-        menu: [],
-        orderList: [],
-        orderEach: [],
-        totalOrder: [],
-        totalOrderList: [],
-        storeName: '',
-        
-      }
-    },
-    created(){
-      var self = this;
-      // order.child("-L1LhNkVxQHq7y4R2T9e").child('orderDetail').once('value').then(function(snapshot){
-      //   console.log(snapshot.val());
-      //   snapshot.forEach(function(data){
-      //     console.log(data.val());
-      //   });
-      // });
-      self.name = name;
-      self.userOrder = JSON.parse(userOrder);
-      //console.log(this.userOrder);
-      for(let item in self.userOrder){
-        self.total += self.userOrder[item].price;
-      }
-      //console.log(self.total);
-      store.child(storeId).once('value').then(function(snapshot){
-        self.storeName = snapshot.val().storeName;
-      });
+      template: '#my-component',
+      data: function () {
+        return {
+          name: '',
+          subTotal: 0,
+          userOrder: [],
+          total: 0,
+          menu: [],
+          orderList: [],
+          orderEach: [],
+          totalOrder: [],
+          totalOrderList: [],
+          storeName: '',
 
-    },
-    mounted(){
-    },
-    methods: {
-      orderConfirm(){
-        const self = this;
-        // order.child("totalOrder").set()
-        order.child(orderId).child("orderDetail").push({
-          userId: "L0EDp_q9ErqPIfrhila",
-          name: this.name,
-          order: this.userOrder,
-          userTotal: this.total
+        }
+      },
+      created() {
+        var self = this;
+        // order.child("-L1LhNkVxQHq7y4R2T9e").child('orderDetail').once('value').then(function(snapshot){
+        //   console.log(snapshot.val());
+        //   snapshot.forEach(function(data){
+        //     console.log(data.val());
+        //   });
+        // });
+        self.name = name;
+        self.userOrder = JSON.parse(userOrder);
+        //console.log(this.userOrder);
+        for (let item in self.userOrder) {
+          self.total += self.userOrder[item].price;
+        }
+        //console.log(self.total);
+        store.child(storeId).once('value').then(function (snapshot) {
+          self.storeName = snapshot.val().storeName;
         });
 
-        location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;  
       },
-      back(){
-        location.href ="order.html?orderId=" + orderId + "&storeId=" + storeId;
-      }
-    },
-  
-  });
-  
-  const vm = new Vue({
-    el: '#app',
-    data: {
-    },
-  });
-  
-  
-  
-  
-  
-    
+      mounted() {},
+      methods: {
+        orderConfirm() {
+          const self = this;
+          // order.child("totalOrder").set()
+          order.child(orderId).child("orderDetail").push({
+            userId: "L0EDp_q9ErqPIfrhila",
+            name: this.name,
+            order: this.userOrder,
+            userTotal: this.total
+          });
+
+          location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;
+        },
+        back() {
+          location.href = "order.html?orderId=" + orderId + "&storeId=" + storeId;
+        }
+      },
+
+    });
+
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+    });
+
+
+
+
+
+
     //demo.$firebaseRefs.anArray.update(JSON.parse(orderList));
   </script>
 </body>
