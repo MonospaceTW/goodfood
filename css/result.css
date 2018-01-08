@@ -5,6 +5,7 @@ body {
 
 .container {
   margin: 0 auto;
+  margin-bottom: 70px;
 }
 
 .result-title {
@@ -57,13 +58,9 @@ hr {
   letter-spacing: 3px;
 }
 
-.button:hover {
-  background: #fff;
-  border: 1px solid #ee5d30;
-}
-
 .order-more:hover {
-  color: #ed5d30;
+  color: #fff;
+  background: #ff6739;
   text-decoration: none;
 }
 
@@ -131,12 +128,12 @@ hr {
   letter-spacing: 2px;
   border-bottom: 1.5px solid #ed5d30;
   border-top: 1.5px solid #ed5d30;
-  margin: 40px 0 20px 0;
+  margin: 40px 0 0 0;
 }
 .result-list .outer {
   font-size: 14px;
   padding: 0;
-  margin: -5px 0 0 0;
+  margin: -2px 0 0 0;
   width: 100%;
 }
 .result-list .outer .inner-name-2 {
@@ -144,7 +141,7 @@ hr {
   width: 20%;
 }
 .result-list .outer .inner-wrap {
-  width: 50%;
+  width: 100%;
   display: inline-block;
 }
 .result-list .outer .inner-wrap .inner-type-2 {
@@ -168,7 +165,6 @@ hr {
   font-size: 14px;
   text-align: right;
   letter-spacing: 3px;
-  border-bottom: 1.5px solid #cccaca;
   margin-top: 15px;
 }
 
@@ -176,14 +172,12 @@ hr {
   position: fixed;
   width: 100%;
   background: white;
-  -webkit-box-shadow: 0 0 20px #ebebeb;
   box-shadow: 0 0 20px #ebebeb;
   bottom: 0;
   font-size: 1.5rem;
 }
-.navbar .text {
-  display: inline-block;
-  font-size: 14px;
+.navbar .icon {
+  color: orange;
 }
 .navbar a {
   color: #ee5d30;
@@ -236,5 +230,3 @@ hr {
   background-color: white;
   font-size: 16px;
 }
-
-

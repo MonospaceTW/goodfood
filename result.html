@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw">
 
 <head>
     <meta charset="UTF-8">
@@ -68,12 +68,9 @@
                                 <span class="inner-total"></span>
                             </template>
 
-                            <div class="user-total">${{order.userTotal}}</div>
+                            <div class="user-total">合計${{order.userTotal}}</div>
                         </li>
                     </template>
-
-
-
                 </ul>
                 <p class="total-2">
                     <span>總計</span>
@@ -96,10 +93,14 @@
             </div>
         </div>
         <div class="navbar" id="navbar">
-            <a href="#" class="fa fa-share-alt" aria-hidden="true" @click="share">
+            <a href="#" class="fa fa-share-alt icon" aria-hidden="true" @click="share">
             </a>
-            <a href="storeList.html" class="fa fa-home" aria-hidden="true"></a>
-            <a href="#" class="fa fa-user-o" aria-hidden="true"></a>
+            <a href="index.html">
+                <img src="img/icon-orange-home.png" alt="home" width="25">
+            </a>
+            <a href="#">
+                <img src="img/icon-orange-member.png" alt="member" width="20">
+            </a>
         </div>
 
     </div>
