@@ -89,11 +89,12 @@ body {
         }
         #name {
             width: 30%;
-            height: 22px;
             border: 1px solid #d8d8d8;
+            padding: 4px 0;
         }
         input::-webkit-input-placeholder {
             font-size: 14px;
+            color: #b3b3b3;
             text-align: center;
         }
     }
