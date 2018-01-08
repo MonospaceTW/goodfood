@@ -123,6 +123,7 @@
                         list-style-type: none;
                         border-bottom: 1px solid rgb(228, 228, 228);
                         padding-top: 10px;
+                        vertical-align: text-top;
                     }
                     .total-1 {
                         width: 100%;
@@ -137,34 +138,35 @@
                         @include textstyle2;
                         border-bottom: 1.5px solid $maincolor;
                         border-top: 1.5px solid $maincolor;
-                        margin: 40px 0 0 0;
+                        margin: 40px 0 20px 0;
                     }
                     .outer {
+                        width: 100%;
                         font-size: $font-l;
                         padding: 0;
-                        margin: -2px 0 0 0;
-                        width: 100%;
+                        margin-top: -5px;
                         .inner-name-2 {
-                            display: inline-block;
                             width: 20%;
+                            display: inline-block;
+                            line-height: 0;
                         }
                         .inner-wrap {
-                            width: 100%;
+                            width: 60%;
                             display: inline-block;
+                            line-height: 10px;
                             .inner-type-2 {
-                                display: inline-block;
                                 width: 70%;
+                                line-height: 0;
+                                display: inline-block;
                             }
                             .inner-cont-2 {
                                 width: 30%;
+                                text-align: right;
                             }
                         }
-                        .clearfix {
-                            clear: both;
-                        }
                         .inner-total {
+                            width: 20%;
                             display: inline-block;
-                            width: 25%;
                         }
                         .user-total {
                             text-align: right;

@@ -112,6 +112,7 @@ hr {
   list-style-type: none;
   border-bottom: 1px solid #e4e4e4;
   padding-top: 10px;
+  vertical-align: text-top;
 }
 .result-list .total-1 {
   width: 100%;
@@ -128,35 +129,36 @@ hr {
   letter-spacing: 2px;
   border-bottom: 1.5px solid #ed5d30;
   border-top: 1.5px solid #ed5d30;
-  margin: 40px 0 0 0;
+  margin: 40px 0 20px 0;
 }
 .result-list .outer {
+  width: 100%;
   font-size: 14px;
   padding: 0;
-  margin: -2px 0 0 0;
-  width: 100%;
+  margin-top: -5px;
 }
 .result-list .outer .inner-name-2 {
-  display: inline-block;
   width: 20%;
+  display: inline-block;
+  line-height: 0;
 }
 .result-list .outer .inner-wrap {
-  width: 100%;
+  width: 60%;
   display: inline-block;
+  line-height: 10px;
 }
 .result-list .outer .inner-wrap .inner-type-2 {
-  display: inline-block;
   width: 70%;
+  line-height: 0;
+  display: inline-block;
 }
 .result-list .outer .inner-wrap .inner-cont-2 {
   width: 30%;
-}
-.result-list .outer .clearfix {
-  clear: both;
+  text-align: right;
 }
 .result-list .outer .inner-total {
+  width: 20%;
   display: inline-block;
-  width: 25%;
 }
 .result-list .outer .user-total {
   text-align: right;
