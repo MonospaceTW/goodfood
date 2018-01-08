@@ -34,6 +34,12 @@ firebase.database().ref("store/" + storeId).once('value').then(function (snapsho
 });
 // console.log(store);
 
+// 取得團定截止時間
+firebase.database().ref("/order/" + orderId).once('value').then(function (snapshot) {
+  orderEndTime = snapshot.val().orderEndTime;
+  vm.updateOrderEndTime();
+});
+
 
 // 取得菜單資料
 firebase.database().ref("dish").once('value').then(function (snapshot) {
@@ -47,15 +53,13 @@ firebase.database().ref("dish").once('value').then(function (snapshot) {
   });
   // console.log(dishes);
 
-  // 取得團定截止時間
-  firebase.database().ref("/order/" + orderId).once('value').then(function (snapshot) {
-    orderEndTime = snapshot.val().orderEndTime;
-    vm.updateOrderEndTime();
-  });
+
 
 
   // 取得詳細訂單資料
   firebase.database().ref("/order/" + orderId + "/orderDetail/").on('value', function (snapshot) {
+    // 先把訂單歸零避免重複添加
+    orders = [];
     snapshot.forEach(function (data) {
       orders.push(data.val());
       // console.log(data.val());
@@ -102,7 +106,10 @@ firebase.database().ref("dish").once('value').then(function (snapshot) {
     console.log(totalOrderCountFilter);
 
     // 更新至Vue
-    vm.update(orders, totalOrderCountFilter);
+    vm.orders = orders;
+    vm.totalOrders = totalOrderCountFilter;
+
+    // vm.update(orders, totalOrderCountFilter);
     // 計算總價
     vm.computedTotal();
 
