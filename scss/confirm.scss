@@ -28,26 +28,32 @@ body {
         padding-top: 50px;
     }
     .confirm-list {
-        width: 90%;
+        width: 80%;
         margin: 0 auto;
         margin-top: 20px;
         ul {
             padding-left: 0;
         }
+        li {
+            background: rgb(243, 243, 243);
+            list-style-type: none;
+            letter-spacing: 3px;
+            padding: 5px 5px;
+            margin-bottom: 5px;
+            border-radius: 15px;
+        }
         span {
-            width: 40%;
             display: inline-block;
             font-size: $font-l;
             color: $fontcolor;
             vertical-align: text-top;
         }
-        li {
-            background: rgb(243, 243, 243);
-            list-style-type: none;
-            letter-spacing: 3px;
-            padding: 5px;
-            margin: 5px;
-            border-radius: 15px;
+        .dishname {
+            width: 60%;
+            display: inline-block;
+        }
+        .count {
+            width: 20%;
         }
     }
 }

@@ -21,27 +21,33 @@ body {
   padding-top: 50px;
 }
 .wrapper .confirm-list {
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
   margin-top: 20px;
 }
 .wrapper .confirm-list ul {
   padding-left: 0;
 }
+.wrapper .confirm-list li {
+  background: #f3f3f3;
+  list-style-type: none;
+  letter-spacing: 3px;
+  padding: 5px 5px;
+  margin-bottom: 5px;
+  border-radius: 15px;
+}
 .wrapper .confirm-list span {
-  width: 40%;
   display: inline-block;
   font-size: 14px;
   color: #525252;
   vertical-align: text-top;
 }
-.wrapper .confirm-list li {
-  background: #f3f3f3;
-  list-style-type: none;
-  letter-spacing: 3px;
-  padding: 5px;
-  margin: 5px;
-  border-radius: 15px;
+.wrapper .confirm-list .dishname {
+  width: 60%;
+  display: inline-block;
+}
+.wrapper .confirm-list .count {
+  width: 20%;
 }
 
 .confirm-total {
