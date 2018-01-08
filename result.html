@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw">
 
 <head>
     <meta charset="UTF-8">
@@ -41,14 +41,14 @@
                     <li class="totallist" v-for="(item,index) in totalOrders">
                         <span class="inner-type-1">{{item.dishName}}</span>
                         <span class="inner-cont-1">x{{item.count}}</span>
-                        <span class="inner-digital">{{item.subtotal}}TWD</span>
+                        <span class="inner-digital">${{item.subtotal}}</span>
                     </li>
 
                 </ul>
                 <P class="total-1">
                     <span>總計</span>
                     <span></span>
-                    <span>{{total}}TWD</span>
+                    <span>${{total}}</span>
                 </P>
 
                 <div class="listtop-2">訂單明細</div>
@@ -68,17 +68,14 @@
                                 <span class="inner-total"></span>
                             </template>
 
-                            <div class="user-total">{{order.userTotal}}TWD</div>
+                            <div class="user-total">合計${{order.userTotal}}</div>
                         </li>
                     </template>
-
-
-
                 </ul>
                 <p class="total-2">
                     <span>總計</span>
                     <span></span>
-                    <span>{{total}}TWD</span>
+                    <span>${{total}}</span>
                 </p>
 
 
@@ -96,10 +93,19 @@
             </div>
         </div>
         <div class="navbar" id="navbar">
-            <a href="#" class="fa fa-share-alt" aria-hidden="true" @click="share">
+            <a href="#" class="fa fa-share-alt icon" aria-hidden="true" @click="share">
             </a>
+            <a href="index.html">
+                <img src="img/icon-orange-home.png" alt="home" width="25">
+            </a>
+            <a href="#">
+                <img src="img/icon-orange-member.png" alt="member" width="20">
+            </a>
+<<<<<<< HEAD
             <a href="index.html" class="fa fa-home" aria-hidden="true"></a>
             <a href="#" class="fa fa-user-o" aria-hidden="true"></a>
+=======
+>>>>>>> feature/result
         </div>
 
     </div>
