@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="navbar">
-        <a href="order.html" @click="back">
+        <a href="#" @click="back">
           <img src="images/buttom-white-left.png" alt="back" width="10">
           <div class="text">Back</div>
         </a>
@@ -153,14 +153,21 @@
         orderConfirm() {
           const self = this;
           // order.child("totalOrder").set()
-          order.child(orderId).child("orderDetail").push({
-            userId: "L0EDp_q9ErqPIfrhila",
-            name: this.name,
-            order: this.userOrder,
-            userTotal: this.total
-          });
+          if(self.total > 0){
+            order.child(orderId).child("orderDetail").push({
+              userId: "L0EDp_q9ErqPIfrhila",
+              name: this.name,
+              order: this.userOrder,
+              userTotal: this.total
+            });
 
-          location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;
+            location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;
+          }else{
+            alert('請先點餐');
+            location.href = "order.html?orderId=" + orderId + "&storeId=" + storeId;
+
+          }
+
         },
         back() {
           location.href = "order.html?orderId=" + orderId + "&storeId=" + storeId;
