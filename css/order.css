@@ -18,11 +18,14 @@ body {
   padding-bottom: 100px;
 }
 .wrapper .order-list {
-  width: 90%;
+  width: 100%;
   margin-top: 30px;
 }
+.wrapper .order-list ul {
+  padding-left: 0;
+}
 .wrapper .order-list span {
-  width: 45%;
+  width: 50%;
   display: inline-block;
   letter-spacing: 3px;
   font-size: 14px;
@@ -31,30 +34,34 @@ body {
   margin-top: 5px;
 }
 .wrapper .order-list .dishname {
-  width: 70%;
+  width: 80%;
 }
 .wrapper .order-list .price {
-  width: 20%;
+  width: 15%;
 }
 .wrapper .order-list li {
   color: #525252;
   background: #F4F4F4;
   list-style-type: none;
   border-radius: 15px;
-  padding: 8px 10px 10px 25px;
+  padding: 8px 25px 10px 30px;
   margin: 10px auto;
 }
 .wrapper .order-list .icon {
   font-size: 18px;
   color: #ff9844;
 }
+.wrapper .order-list .digital {
+  width: 45%;
+}
 .wrapper .order-list .text {
-  width: 35%;
+  width: 25%;
   border: none;
   text-align: center;
 }
-.wrapper .order-total {
-  width: 90%;
+
+.order-total {
+  width: 95%;
   font-size: 14px;
   color: #525252;
   letter-spacing: 3px;
