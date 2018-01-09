@@ -167,40 +167,27 @@
         add(index) {
           this.dishes[index].count += 1;
         },
-        order() { <<
-          << << < HEAD
-          if (this.name.length >= 1) { ===
-            === =
-            if (this.name.length >= 1) { >>>
-              >>> > 85 fece527a74fb0db83abd6629233274958bc4d4
-              for (let item in this.dishes) {
-                if (this.dishes[item].count >= 1) {
-                  this.total += this.dishes[item].price * this.dishes[item].count;
-                  console.log(this.dishes[item]);
-                  this.userOrder.push(this.dishes[item]);
-                }
+        order() {
+          if (this.name.length >= 1) {
+            for (let item in this.dishes) {
+              if (this.dishes[item].count >= 1) {
+                this.total += this.dishes[item].price * this.dishes[item].count;
+                console.log(this.dishes[item]);
+                this.userOrder.push(this.dishes[item]);
               }
-              //console.log(this.total);
-              for (let item in this.userOrder) {
-                this.userOrder[item].price = (this.userOrder[item].price * this.userOrder[item].count);
-              }
+            }
+            //console.log(this.total);
+            for (let item in this.userOrder) {
+              this.userOrder[item].price = (this.userOrder[item].price * this.userOrder[item].count);
+            }
 
-              this.userOrder = JSON.stringify(this.userOrder);
-              //console.log(this.userOrder);
-              location.href = "confirm.html?userOrder=" + this.userOrder + "&orderId=" + orderId + "&name=" + this.name +
-                "&storeId=" + storeId; <<
-              << << < HEAD
-            } else {
-              alert('請輸入名字');
-            } ===
-            === =
+            this.userOrder = JSON.stringify(this.userOrder);
+            //console.log(this.userOrder);
+            location.href = "confirm.html?userOrder=" + this.userOrder + "&orderId=" + orderId + "&name=" + this.name +
+              "&storeId=" + storeId;
           } else {
             alert('請輸入名字');
           }
-
-          >>>
-          >>> > 85 fece527a74fb0db83abd6629233274958bc4d4
-
         },
         watchResult() {
           location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;
