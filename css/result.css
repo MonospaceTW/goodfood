@@ -145,11 +145,9 @@ hr {
 .result-list .outer .inner-wrap {
   width: 60%;
   display: inline-block;
-  line-height: 10px;
 }
 .result-list .outer .inner-wrap .inner-type-2 {
   width: 70%;
-  line-height: 0;
   display: inline-block;
 }
 .result-list .outer .inner-wrap .inner-cont-2 {
@@ -174,6 +172,7 @@ hr {
   position: fixed;
   width: 100%;
   background: white;
+  -webkit-box-shadow: 0 0 20px #ebebeb;
   box-shadow: 0 0 20px #ebebeb;
   bottom: 0;
   font-size: 1.5rem;
@@ -232,3 +231,5 @@ hr {
   background-color: white;
   font-size: 16px;
 }
+
+
