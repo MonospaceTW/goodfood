@@ -68,8 +68,7 @@
     firebase.initializeApp(config);
   </script>
   <script>
-    const now = new Date();
-    //console.log(now);
+
 
 
     const order = firebase.database().ref('order');
@@ -114,11 +113,14 @@
         phone: ""
       },
       created() {
-        this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
-        console.log(this.orderEndTime);
+
       },
       methods: {
         teamOrder() {
+          const now = new Date();
+          //console.log(now);
+          this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
+          console.log(this.orderEndTime);
           const teamOrderKey = order.push({
             orderEndTime: this.orderEndTime,
             storeId: storeId,
