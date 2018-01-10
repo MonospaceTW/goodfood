@@ -31,11 +31,8 @@ body {
     padding-top: 50px;
     padding-bottom: 100px;
     .order-list {
-        width: 100%;
+        width: 90%;
         margin-top: 30px;
-        ul {
-            padding-left: 0;
-        }
         span {
             width: 50%;
             display: inline-block;
@@ -56,7 +53,7 @@ body {
             background: #F4F4F4;
             list-style-type: none;
             border-radius: 15px;
-            padding: 8px 25px 10px 30px;
+            padding: 10px 10px 10px 15px;
             margin: 10px auto;
         }
         .icon {
@@ -75,7 +72,7 @@ body {
 }
 
 .order-total {
-    width: 95%;
+    width: 90%;
     font-size: $font-l;
     color: $fontcolor;
     letter-spacing: 3px;
@@ -154,6 +151,12 @@ body {
     .clearfix {
         clear: both;
     }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .navbar {
