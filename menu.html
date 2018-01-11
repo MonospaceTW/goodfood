@@ -11,48 +11,55 @@
   <script src="https://use.fontawesome.com/311a41a163.js"></script>
 
   <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/login.css">
   <script src="js/vue.js"></script>
   <script src="js/moment.js"></script>
+  <script src="js/login.js"></script>
 </head>
 
 <body>
+  <div id="menu">
+    <button id="signoutSmtBtn" @click="signout">Signout</button>
 
-  <div id="menu" class="wrapper">
-    <div class="img-title">{{storeName}}</div>
-    <div class="menu-list">
-      <ul>
-        <template v-for="dish in dishes">
-          <li>
-            <span class="dishname">{{dish.dishName}}</span>
-            <span class="price">${{dish.price}}</span>
-          </li>
-        </template>
+    <login v-bind:login-state="loginState"></login>
+
+    <div class="wrapper">
+
+      <div class="img-title">{{storeName}}</div>
+      <div class="menu-list">
+        <ul>
+          <template v-for="dish in dishes">
+            <li>
+              <span class="dishname">{{dish.dishName}}</span>
+              <span class="price">${{dish.price}}</span>
+            </li>
+          </template>
 
 
-      </ul>
-    </div>
-    <div class="menu-info">
-      <p>{{deliveryCondition}} </p>
-      <p>營業時間:{{openTime}}-{{closeTime}}</p>
-      <p>地址：{{address}}</p>
-      <p>電話：{{phone}}</p>
-    </div>
-    <div class="menu-msg">
-      團購截止時間：開團後半小時截止
-    </div>
-    <div class="button">
-      <a href="#" class="menu-btn" @click="teamOrder">我要團購</a>
-    </div>
-    <div class="navbar">
-      <a href="index.html">
-        <img src="images/icon-orange-home.png" alt="home" width="25">
-      </a>
-      <a href="member.html">
-        <img src="images/icon-orange-member.png" alt="member" width="20">
-      </a>
+        </ul>
+      </div>
+      <div class="menu-info">
+        <p>{{deliveryCondition}} </p>
+        <p>營業時間:{{openTime}}-{{closeTime}}</p>
+        <p>地址：{{address}}</p>
+        <p>電話：{{phone}}</p>
+      </div>
+      <div class="menu-msg">
+        團購截止時間：開團後半小時截止
+      </div>
+      <div class="button">
+        <a href="#" class="menu-btn" @click.prevent="checkLogin">我要團購</a>
+      </div>
+      <div class="navbar">
+        <a href="index.html">
+          <img src="images/icon-orange-home.png" alt="home" width="25">
+        </a>
+        <a href="member.html">
+          <img src="images/icon-orange-member.png" alt="member" width="20">
+        </a>
+      </div>
     </div>
   </div>
-
 
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   <script>
@@ -68,6 +75,7 @@
     firebase.initializeApp(config);
   </script>
   <script>
+
 
 
 
@@ -110,12 +118,32 @@
         openTime: "",
         closeTime: "",
         address: "",
-        phone: ""
+        phone: "",
+        loginState: true
       },
-      created() {
 
-      },
       methods: {
+        signout() {
+          firebase.auth().signOut().then(function () {
+            console.log("User sign out!");
+          }, function (error) {
+            console.log("User sign out error!");
+          })
+        },
+        checkLogin() {
+          firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+              // teamOrder();
+              this.loginState = true;
+
+              console.log("User is logined", user)
+            } else {
+              this.loginState = false;
+
+              console.log("User is not logined yet.");
+            }
+          });
+        },
         teamOrder() {
           const now = new Date();
           //console.log(now);
