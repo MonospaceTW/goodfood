@@ -8,6 +8,7 @@ body {
 
 .wrapper {
   margin: 0 auto;
+  padding-top:  30%;
 }
 
 .img-title {
@@ -15,7 +16,7 @@ body {
   width: 100%;
   letter-spacing: 3px;
   color: white;
-  margin-top: 30%;
+  /* margin-top: 30%; */
 }
 
 .menu-list {

@@ -17,7 +17,7 @@ Vue.component('login', {
   props: ['loginState'],
   data() {
     return {
-
+      displayName: '',
       email: '',
       password: '',
     }
@@ -31,13 +31,13 @@ Vue.component('login', {
         console.log(errorMsg);
       });
     },
-    // login() {
-    //   firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function (error) {
-    //     // Handle Errors here.
-    //     var errorCode = error.code;
-    //     var errorMessage = error.message;
-    //     console.log(errorMessage);
-    //   })
-    // }
+    login() {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorMessage);
+      });
+    }
   }
 });
