@@ -30,6 +30,24 @@ Vue.component('login', {
         var errorMsg = error.message;
         console.log(errorMsg);
       });
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          console.log("User is logined", user)
+          user.updateProfile({
+            displayName: this.displayName,
+          }).then(function () {
+            // Update successful.
+            console.log('update success');
+          }).catch(function (error) {
+            // An error happened.
+            console.log('error');
+          });
+          console.log('name：' + user.displayName);
+
+        } else {
+          console.log("User is not logined yet.");
+        }
+      });
     },
     login() {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function (error) {
@@ -38,6 +56,15 @@ Vue.component('login', {
         var errorMessage = error.message;
         console.log(errorMessage);
       });
+      // var user = firebase.auth().currentUser;
+      // if (user) {
+      //   this.$emit('updateLogin');
+      //   console.log("User is logined", user)
+
+      // } else {
+      //   console.log("User is not logined yet.");
+
+      // }
     }
   }
 });

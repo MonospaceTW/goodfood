@@ -48,7 +48,7 @@
         團購截止時間：開團後半小時截止
       </div>
       <div class="button">
-        <a href="#" class="menu-btn" @click.prevent="checkLogin">我要團購</a>
+        <a href="#menu" class="menu-btn" @click="checkLogin">我要團購</a>
       </div>
       <div class="navbar">
         <a href="index.html">
@@ -131,9 +131,19 @@
           })
         },
         checkLogin() {
+          // var user = firebase.auth().currentUser;
+          // if (user) {
+          //   this.loginState = true;
+          //   console.log("User is logined", user)
+
+          // } else {
+          //   this.loginState = false;
+          //   console.log("User is not logined yet.");
+
+          // }
           firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              // teamOrder();
+              this.teamOrder();
               this.loginState = true;
 
               console.log("User is logined", user)
@@ -144,6 +154,9 @@
             }
           });
         },
+        // updateLogin() {
+        //   this.loginState = true;
+        // },
         teamOrder() {
           const now = new Date();
           //console.log(now);
