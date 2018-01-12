@@ -10,8 +10,6 @@
   <script src="https://use.fontawesome.com/311a41a163.js"></script>
   <link rel="stylesheet" href="css/order.css">
   <title>訂購頁</title>
-  <script src="js/vue.js"></script>
-  <script src="js/moment.js"></script>
 </head>
 
 <body>
@@ -83,19 +81,10 @@
     </div>
   </script>
 
-  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
-      authDomain: "goodfood-39158.firebaseapp.com",
-      databaseURL: "https://goodfood-39158.firebaseio.com",
-      projectId: "goodfood-39158",
-      storageBucket: "goodfood-39158.appspot.com",
-      messagingSenderId: "940303768399"
-    };
-    firebase.initializeApp(config);
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/moment.js"></script>
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a45e5ae798027f5"></script>
 
@@ -203,12 +192,12 @@
         },
         handleInput(event, index) {
           let value = event.target.value;
-          if(value == undefined || value == NaN || value == '' || value == null){
+          if (value == undefined || value == NaN || value == '' || value == null) {
             value = 0;
           }
           Math.abs(value);
           parseInt(value);
-          this.dishes[index].count =  parseInt(value);
+          this.dishes[index].count = parseInt(value);
 
           console.log(value);
         }
@@ -230,7 +219,7 @@
           return total;
         },
       },
-      beforeMount(){
+      beforeMount() {
 
       }
     });
