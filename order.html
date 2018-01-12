@@ -146,18 +146,6 @@
           
         }
       },
-      beforeCreate(){
-        // firebase.auth().signOut();
-        firebase.auth().onAuthStateChanged(firebaseUser => {
-          if(firebaseUser) {
-          console.log(firebaseUser);
-          //console.log(firebaseUser.email);
-          this.name = firebaseUser.displayName;
-          }else{
-            console.log('not loggen in');
-          }
-        });
-      },
       created() {
         const self = this;
         //console.log(storeId);
@@ -184,7 +172,7 @@
           this.dishes[index].count += 1;
         },
         order() {
-          if (this.currentUserId != '') {
+          if (this.name.length >= 1) {
             for (let item in this.dishes) {
               parseInt(this.dishes[item].count);
               if (this.dishes[item].count >= 1) {
@@ -203,8 +191,7 @@
             location.href = "confirm.html?userOrder=" + this.userOrder + "&orderId=" + orderId + "&name=" + this.name +
               "&storeId=" + storeId;
           } else {
-            //alert('請輸先登入');
-            this.FbSignIn();
+            alert('請輸入名字');
           }
         },
         watchResult() {
@@ -227,34 +214,6 @@
           this.dishes[index].count =  parseInt(value);
           //console.log(value);
         },
-                //fb登入
-        FbSignIn() {
-          const provider = new firebase.auth.FacebookAuthProvider();
-          provider.addScope('user_birthday');
-          let self = this;
-          console.log(self);
-          //登入開始
-          firebase.auth().signInWithPopup(provider).then(function (result) {
-            let token = result.credential.accessToken;
-            //登入成功後設立使用者資料
-            self.name = result.user.displayName;
-            console.log(self.name);
-            self.currentUserId = result.user.uid;
-            //開啟畫面
-            self.splash = !self.splash;
-            // 使用者資訊
-          }).catch(function (error) {
-            // 處理錯誤
-            let errorCode = error.code;
-            // 如果一組帳戶同時使用兩種登入模式
-            if (errorCode === 'auth/account-exists-with-different-credential') {
-              alert('You have already signed up with a different auth provider for that email.');
-            } else {
-              console.error(error);
-            }
-          });
-          //登入結束
-        }
 
       },
       computed: {
@@ -274,9 +233,6 @@
           return total;
         },
       },
-      beforeMount(){
-
-      }
     });
 
     const vm = new Vue({
