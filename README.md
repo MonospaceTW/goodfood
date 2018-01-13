@@ -23,6 +23,7 @@ A：應該是有人會忘記寫而沒訂到便當
 配置
  設定你的 firebase 配置檔 < ./js/config.js >
 
+```javascript
  var config = {
   apiKey: "{your-firebase-api-key}",
   authDomain: "專案ID.firebaseapp.com",
@@ -32,6 +33,7 @@ A：應該是有人會忘記寫而沒訂到便當
   messagingSenderId: "公開名稱編號"
 };
 firebase.initializeApp(config);
+```
 
 firebase 官方配置教學網址:
 https://firebase.google.com/docs/web/setup?authuser=0&hl=zh-cn
