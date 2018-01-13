@@ -36,6 +36,9 @@ firebase.initializeApp(config);
 ```
 
 firebase 官方配置教學網址:
+
+
+
 https://firebase.google.com/docs/web/setup?authuser=0&hl=zh-cn
 ---
 
