@@ -19,3 +19,24 @@ A：應該是有人會忘記寫而沒訂到便當
 
 負責人只要看著最後填寫的結果聯絡便當店就好
 
+---
+配置
+ 設定你的 firebase 配置檔 < ./js/config.js >
+
+ var config = {
+  apiKey: "{your-firebase-api-key}",
+  authDomain: "專案ID.firebaseapp.com",
+  databaseURL: "https://專案ID.firebaseio.com",
+  projectId: "專案ID",
+  storageBucket: "專案ID.appspot.com",
+  messagingSenderId: "公開名稱編號"
+};
+firebase.initializeApp(config);
+
+firebase 官方配置教學網址:
+https://firebase.google.com/docs/web/setup?authuser=0&hl=zh-cn
+---
+
+ 
+
+
