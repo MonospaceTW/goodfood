@@ -20,8 +20,8 @@ A：應該是有人會忘記寫而沒訂到便當
 負責人只要看著最後填寫的結果聯絡便當店就好
 
 ---
-### 系統配置
-#### 1. 註冊Firebase並將設定檔更新於 < ./js/config.js >
+### Firebase 配置
+#### 1. 註冊 Firebase 並將設定檔更新於 < ./js/config.js >
 
 ```javascript
  var config = {
@@ -34,7 +34,7 @@ A：應該是有人會忘記寫而沒訂到便當
 };
 firebase.initializeApp(config);
 ```
-firebase 官方配置教學網址:
+### Firebase 官方配置教學網址:
 https://firebase.google.com/docs/web/setup?authuser=0&hl=zh-cn
 
 #### 2. 在Firebase Database設定規則
@@ -49,7 +49,7 @@ https://firebase.google.com/docs/web/setup?authuser=0&hl=zh-cn
   }
 }
 ```
-#### 3. 在Firebase Authentication 登入方式打開電子郵件/密碼登入選項
+#### 3. 在 Firebase Authentication 登入方式打開電子郵件/密碼登入選項
  
 
 
