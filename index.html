@@ -9,21 +9,23 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="css/swiper.min.css">
   <link rel="stylesheet" href="css/index.css">
-  <title>好食在</title>
+  <title>好食在–訂便當系統</title>
 </head>
 
 <body>
   <div id="index">
     <local-swiper :options="swiperOption">
-      <local-slide v-for="store in recommend">{{store.storeName}}</local-slide>
+      <local-slide v-for="store in recommend">
+        <div>{{store.storeName}}</div>
+      </local-slide>
       <div class="swiper-pagination" slot="pagination"></div>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
     </local-swiper>
 
 
-    <button>好手氣</button>
-    <button>看所有店家</button>
+    <a @click.prevent="goodLuck">好手氣</a>
+    <a href="storeList.html">看所有店家</a>
   </div>
 
 
