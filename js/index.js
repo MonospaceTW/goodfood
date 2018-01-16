@@ -27,9 +27,8 @@ firebase.database().ref('store').once('value').then(function (snapshot) {
 function randomStore(rawData, count) {
   var result = [];
   for (var i = 0; i < count; i++) {
-    var ran = Math.floor(Math.random() * (rawData.length - i));
-    result.push(rawData[ran]);
-    rawData[ran] = rawData[rawData.length - i - 1];
+    var ran = Math.floor(Math.random() * rawData.length);
+    result.push(rawData.splice(ran, 1)[0]);
   };
   return result;
 }

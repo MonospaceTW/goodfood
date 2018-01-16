@@ -2,32 +2,46 @@
   width: 100%;
   height: 300px; }
 
+.logo {
+  text-align: center;
+  background-color: #ed5d30; }
+
 .swiper-slide:nth-child(1) {
-  background-color: rgba(208, 218, 108, 0.51); }
+  background-color: rgba(149, 214, 198, 0.93); }
 
 .swiper-slide:nth-child(2) {
-  background-color: rgba(79, 74, 121, 0.07); }
+  background-color: rgba(6, 20, 227, 0.01); }
 
 .swiper-slide:nth-child(3) {
-  background-color: rgba(133, 10, 96, 0.45); }
+  background-color: rgba(131, 97, 211, 0.61); }
 
 .swiper-slide:nth-child(4) {
-  background-color: rgba(108, 104, 39, 0.59); }
+  background-color: rgba(169, 211, 142, 0.91); }
 
 .swiper-slide:nth-child(5) {
-  background-color: rgba(102, 46, 110, 0.43); }
+  background-color: rgba(76, 189, 178, 0.16); }
 
 .swiper-slide:nth-child(6) {
-  background-color: rgba(45, 143, 70, 0.26); }
+  background-color: rgba(213, 162, 224, 0.83); }
 
 .swiper-slide:nth-child(7) {
-  background-color: rgba(90, 66, 104, 0.37); }
+  background-color: rgba(220, 203, 206, 0.53); }
 
 .swiper-slide:nth-child(8) {
-  background-color: rgba(237, 82, 17, 0.54); }
+  background-color: rgba(161, 223, 145, 0.46); }
 
 .swiper-slide:nth-child(9) {
-  background-color: rgba(101, 24, 119, 0.01); }
+  background-color: rgba(215, 118, 128, 0.16); }
 
 .swiper-slide:nth-child(10) {
-  background-color: rgba(3, 45, 115, 0.2); }
+  background-color: rgba(13, 200, 217, 0.73); }
+
+.goodluck, .all-store, .add-store {
+  display: block;
+  margin: 20px auto;
+  width: 70%;
+  line-height: 50px;
+  color: white;
+  text-align: center;
+  background-color: #ed5d30;
+  border-radius: 10px; }

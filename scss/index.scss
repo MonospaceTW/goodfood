@@ -1,6 +1,13 @@
+$maincolor:#ed5d30;
+
 .swiper-container {
   width: 100%;
   height: 300px;
+}
+
+.logo {
+  text-align: center;
+  background-color: $maincolor;
 }
 
 @for $i from 1 through 10 {
@@ -11,4 +18,15 @@
     $alpha: random(100)/100;
     background-color: rgba($red, $green, $blue, $alpha);
   }
+}
+
+.goodluck, .all-store, .add-store {
+  display: block;
+  margin: 20px auto;
+  width: 70%;
+  line-height: 50px;
+  color: white;
+  text-align: center;
+  background-color: $maincolor;
+  border-radius: 10px;
 }

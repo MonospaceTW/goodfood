@@ -14,6 +14,10 @@
 
 <body>
   <div id="index">
+    <div class="logo">
+      <img src="images/logo.svg" alt="">
+    </div>
+
     <local-swiper :options="swiperOption">
       <local-slide v-for="store in recommend">
         <div>{{store.storeName}}</div>
@@ -24,8 +28,9 @@
     </local-swiper>
 
 
-    <a @click.prevent="goodLuck">好手氣</a>
-    <a href="storeList.html">看所有店家</a>
+    <a class="goodluck" href="#" @click.prevent="goodLuck">好手氣</a>
+    <a class="all-store" href="storeList.html">看所有店家</a>
+    <a class="add-store" href="#">＋新增店家</a>
   </div>
 
 
