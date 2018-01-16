@@ -13,7 +13,7 @@ gulp.task('sass', function () {
         })
     ];
 
-    return gulp.src('./scss/**/*.scss')
+    return gulp.src('./scss/index.scss')
         .pipe($.plumber())
         .pipe($.sass().on('error', $.sass.logError)) //此段已編譯完成 CSS
         .pipe($.postcss(plugins))
@@ -47,7 +47,7 @@ gulp.task('browserSync', function () { // 建立本機伺服器
 });
 
 gulp.task('watch', function () { //監控並即時更新
-    gulp.watch('./scss/**/*.scss', ['sass']);
+    gulp.watch('./scss/index.scss', ['sass']);
     // gulp.watch('./*.jade', ['jade']);
 });
 
