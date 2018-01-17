@@ -1,8 +1,25 @@
 $maincolor:#ed5d30;
 
+a {
+  color: white;
+
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+  &:visited {
+    color: whitesmoke;
+  }
+}
+
 .swiper-container {
   width: 100%;
   height: 300px;
+
+  .recommend {
+    height: 100%;
+    cursor: pointer;
+  }
 }
 
 .logo {

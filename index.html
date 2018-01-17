@@ -20,7 +20,7 @@
 
     <local-swiper :options="swiperOption">
       <local-slide v-for="store in recommend">
-        <div>{{store.storeName}}</div>
+        <div class="recommend" @click="goRecommend(store)">{{store.storeName}}</div>
       </local-slide>
       <div class="swiper-pagination" slot="pagination"></div>
       <div class="swiper-button-prev" slot="button-prev"></div>

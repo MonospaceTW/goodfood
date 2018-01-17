@@ -1,40 +1,51 @@
+a {
+  color: white; }
+  a:hover {
+    text-decoration: none;
+    color: white; }
+  a:visited {
+    color: whitesmoke; }
+
 .swiper-container {
   width: 100%;
   height: 300px; }
+  .swiper-container .recommend {
+    height: 100%;
+    cursor: pointer; }
 
 .logo {
   text-align: center;
   background-color: #ed5d30; }
 
 .swiper-slide:nth-child(1) {
-  background-color: rgba(149, 214, 198, 0.93); }
+  background-color: rgba(28, 245, 160, 0.94); }
 
 .swiper-slide:nth-child(2) {
-  background-color: rgba(6, 20, 227, 0.01); }
+  background-color: rgba(93, 38, 235, 0.73); }
 
 .swiper-slide:nth-child(3) {
-  background-color: rgba(131, 97, 211, 0.61); }
+  background-color: rgba(21, 55, 84, 0.95); }
 
 .swiper-slide:nth-child(4) {
-  background-color: rgba(169, 211, 142, 0.91); }
+  background-color: rgba(188, 20, 98, 0.79); }
 
 .swiper-slide:nth-child(5) {
-  background-color: rgba(76, 189, 178, 0.16); }
+  background-color: rgba(88, 141, 105, 0.59); }
 
 .swiper-slide:nth-child(6) {
-  background-color: rgba(213, 162, 224, 0.83); }
+  background-color: rgba(102, 124, 66, 0.15); }
 
 .swiper-slide:nth-child(7) {
-  background-color: rgba(220, 203, 206, 0.53); }
+  background-color: rgba(137, 119, 169, 0.86); }
 
 .swiper-slide:nth-child(8) {
-  background-color: rgba(161, 223, 145, 0.46); }
+  background-color: rgba(167, 15, 38, 0.45); }
 
 .swiper-slide:nth-child(9) {
-  background-color: rgba(215, 118, 128, 0.16); }
+  background-color: rgba(5, 152, 0, 0.96); }
 
 .swiper-slide:nth-child(10) {
-  background-color: rgba(13, 200, 217, 0.73); }
+  background-color: rgba(55, 235, 132, 0.55); }
 
 .goodluck, .all-store, .add-store {
   display: block;
