@@ -7,15 +7,15 @@ a {
     color: whitesmoke; }
 
 .swiper-container {
-  width: 100%;
-  height: 300px; }
+  width: 70%;
+  height: 150px; }
   .swiper-container .recommend {
     height: 100%;
     cursor: pointer; }
 
 .logo {
   text-align: center;
-  background-color: #ed5d30; }
+}
 
 .swiper-slide:nth-child(1) {
   background-color: rgba(28, 245, 160, 0.94); }

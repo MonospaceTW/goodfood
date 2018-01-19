@@ -14,11 +14,12 @@
 
 <body>
   <div id="index">
+    <!-- <a href="login.html" class="mr-3 mt-3 float-right" style="color: #f8a654;">登入</a> -->
     <div class="logo">
-      <img src="images/logo.svg" alt="">
+      <img class="ml-5 mt-5 mb-4" style="width: 103px; height: 100px;"src="images/logo.svg" alt="">
     </div>
-
-    <local-swiper :options="swiperOption">
+    <h3 class="text-center">本日推薦</h3>
+    <local-swiper :options="swiperOption" class="mt-4 mb-5">
       <local-slide v-for="store in recommend">
         <div class="recommend" @click="goRecommend(store)">{{store.storeName}}</div>
       </local-slide>
@@ -37,7 +38,7 @@
 
 
   <script src="js/swiper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
   <script type="text/javascript" src="js/vue-awesome-swiper.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   <script src="js/config.js"></script>

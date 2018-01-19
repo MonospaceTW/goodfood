@@ -13,8 +13,8 @@ a {
 }
 
 .swiper-container {
-  width: 100%;
-  height: 300px;
+  width: 70%;
+  height: 150px;
 
   .recommend {
     height: 100%;
@@ -24,7 +24,6 @@ a {
 
 .logo {
   text-align: center;
-  background-color: $maincolor;
 }
 
 @for $i from 1 through 10 {
