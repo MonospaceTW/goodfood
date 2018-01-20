@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <script src="https://use.fontawesome.com/311a41a163.js"></script>
+  <link rel="stylesheet" href="css/order.css">
+  <title>訂購頁</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <my-component></my-component>
+  </div>
+
+  <script type="text/x-template" id="my-component">
+    <div>
+      <div class="container box">
+        <div class="wrapper">
+          <div class="order-title">{{storeName}}</div>
+          <div class="order-list">
+            <ul>
+              <li v-for="(item, index) in dishes">
+                <span class="dishname">{{item.dishName}}</span>
+                <span class="text-right price">${{item.price}}</span>
+                <span class="text-left">
+                  <i class="fa fa-minus-circle icon" aria-hidden="true" @click="reduce(index)"></i>
+                  <!-- <input class="text" type="text" v-number-only :value="item.count"/> -->
+                  <input class="text" type="number" v-model="item.count" @input="handleInput($event, index)" placeholder=""/>
+                  <i class="fa fa-plus-circle icon" aria-hidden="true" @click="add(index)"></i>
+                </span>
+                <span class="text-right digital">${{item.price * item.count}}</span>
+              </li>
+            </ul>
+          </div>
+          <p class="order-total">
+            <span>
+              總共{{countTotal}}元
+            </span>
+          </p>
+          <div class="wrap">
+            <div class="order-name">
+              <label class="myname" for="name">我是</label>
+              <input id="name" type="text" placeholder="請輸入名字" name="name" v-model="name">
+              <div class="button">
+                <a href="#" class="order-btn" @click="order">下訂單</a>
+                <a href="#" class="result-btn" @click="watchResult">看團購結果</a>
+                <a href="#" class="share-btn" @click="share">分享這頁</a>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <!-- 分享lightbox -->
+        <div class="lightbox" @click="closeBox">
+          <div class="msg">
+            <div class="close" @click="closeBox">x</div>
+            <div class="boxtitle">邀請大家來團訂吧！</div>
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <div class="addthis_inline_share_toolbox"></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="navbar">
+        <a href="index.html">
+          <img src="images/icon-orange-home.png" alt="home" width="25">
+        </a>
+        <a href="user.html"></a>
+        <img src="images/icon-orange-member.png" alt="member" width="20">
+        </a>
+      </div>
+
+
+
+    </div>
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/moment.js"></script>
+  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a45e5ae798027f5"></script>
+
+
+  <script>
+    var helper = {
+      getParameterByName: function (name, url) {
+        var regex, results;
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, '\\$&');
+        regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i');
+        results = regex.exec(url);
+        if (!results) {
+          return null;
+        }
+        if (!results[2]) {
+          return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+    };
+
+    let storeId = helper.getParameterByName("storeId");
+    let orderId = helper.getParameterByName("orderId");
+    //console.log(storeId);
+    //console.log(orderId);
+
+    let dish = firebase.database().ref('dish');
+    let member = firebase.database().ref('member');
+    let order = firebase.database().ref('order');
+    let store = firebase.database().ref('store');
+
+    Vue.component('my-component', {
+      template: '#my-component',
+      data: function () {
+        return {
+          dishes: [],
+          name: '',
+          memberKey: '',
+          orderKey: '',
+          userOrder: [],
+          total: 0,
+          storeName: '',
+        }
+      },
+      created() {
+        const self = this;
+        //console.log(storeId);
+        dish.orderByChild("storeId").equalTo(storeId).once('value').then(function (snapshot) {
+          //console.log(snapshot.val());
+          snapshot.forEach(function (data) {
+            //console.log(data.val());
+            self.dishes.push(data.val());
+          });
+        });
+        //console.log(self.dishes);
+        store.child(storeId).once('value').then(function (snapshot) {
+          self.storeName = snapshot.val().storeName;
+        });
+
+      },
+      methods: {
+        reduce(index) {
+          if (this.dishes[index].count >= 1) {
+            this.dishes[index].count -= 1;
+          }
+        },
+        add(index) {
+          this.dishes[index].count += 1;
+        },
+        order() {
+          if (this.name.length >= 1) {
+            for (let item in this.dishes) {
+              parseInt(this.dishes[item].count);
+              if (this.dishes[item].count >= 1) {
+                this.total += this.dishes[item].price * this.dishes[item].count;
+                console.log(this.dishes[item]);
+                this.userOrder.push(this.dishes[item]);
+              }
+            }
+            //console.log(this.total);
+            for (let item in this.userOrder) {
+              this.userOrder[item].price = (this.userOrder[item].price * this.userOrder[item].count);
+            }
+
+            this.userOrder = JSON.stringify(this.userOrder);
+            //console.log(this.userOrder);
+            location.href = "confirm.html?userOrder=" + this.userOrder + "&orderId=" + orderId + "&name=" + this.name +
+              "&storeId=" + storeId;
+          } else {
+            alert('請輸入名字');
+          }
+        },
+        watchResult() {
+          location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;
+        },
+        // 打開分享按鈕lightbox
+        share() {
+          document.querySelector(".lightbox").style.display = "block";
+        },
+        closeBox() {
+          document.querySelector(".lightbox").style.display = "none";
+        },
+        handleInput(event, index) {
+          let value = event.target.value;
+          if (value == undefined || value == NaN || value == '' || value == null) {
+            value = 0;
+          }
+          Math.abs(value);
+          parseInt(value);
+          this.dishes[index].count = parseInt(value);
+
+          console.log(value);
+        }
+      },
+      computed: {
+        countTotal: function () {
+          let total = 0;
+          let subTotalList = [];
+          for (let item in this.dishes) {
+            if (this.dishes[item].count >= 1) {
+              let subTotal = 0;
+              subTotal = this.dishes[item].price * this.dishes[item].count;
+              subTotalList.push(subTotal);
+            }
+          }
+          for (let item in subTotalList) {
+            total += subTotalList[item];
+          }
+          return total;
+        },
+      },
+      beforeMount() {
+
+      }
+    });
+
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+    });
+  </script>
+</body>
+
+</html>

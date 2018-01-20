@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://use.fontawesome.com/311a41a163.js"></script>
+  <link rel="stylesheet" href="css/confirm.css">
+  <title>訂購確認</title>
+  <script src="js/vue.js"></script>
+  <script src="js/moment.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <my-component></my-component>
+  </div>
+
+
+  <script type="text/x-template" id="my-component">
+    <div>
+      <div class="container">
+        <div class="confirm-img">
+          <img src="img/confirm.svg" alt="確認訂購">
+        </div>
+        <div class="wrapper">
+          <div class="confirm-title ">{{storeName}}</div>
+          <div class="confirm-list ">
+            <ul>
+              <li v-for="(item, index) in userOrder">
+
+                <span class="text-left dishname">{{item.dishName}}</span>
+                <span class="text-right count">{{item.count}}份</span>
+                <span class="dishname"></span>
+                <span class="text-right count">${{item.price}}</span>
+
+              </li>
+            </ul>
+          </div>
+
+          <p class="confirm-total">
+            <span>總共{{total}}元</span>
+          </p>
+          <div class="wrap">
+            <div class="confirm-name">我是{{name}}</div>
+            <div class="button">
+              <a href="#" class="confirm-btn" @click="orderConfirm">確認訂單</a>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar">
+        <a href="#" @click="back">
+          <img src="images/buttom-white-left.png" alt="back" width="10">
+          <div class="text">Back</div>
+        </a>
+        <a href="index.html">
+          <img src="img/home.svg" alt="home">
+        </a>
+      </div>
+    </div>
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
+      authDomain: "goodfood-39158.firebaseapp.com",
+      databaseURL: "https://goodfood-39158.firebaseio.com",
+      projectId: "goodfood-39158",
+      storageBucket: "goodfood-39158.appspot.com",
+      messagingSenderId: "940303768399"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <script>
+    const order = firebase.database().ref('order');
+    const dish = firebase.database().ref('dish');
+    const store = firebase.database().ref('store');
+
+
+    let helper = {
+      getParameterByName: function (name, url) {
+        var regex, results;
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, '\\$&');
+        regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i');
+        results = regex.exec(url);
+        if (!results) {
+          return null;
+        }
+        if (!results[2]) {
+          return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+    };
+
+    let orderId = helper.getParameterByName("orderId");
+    let storeId = helper.getParameterByName("storeId");
+    let name = helper.getParameterByName("name");
+    let userOrder = helper.getParameterByName("userOrder");
+    //console.log(orderList);
+
+    Vue.component('my-component', {
+      template: '#my-component',
+      data: function () {
+        return {
+          name: '',
+          subTotal: 0,
+          userOrder: [],
+          total: 0,
+          menu: [],
+          orderList: [],
+          orderEach: [],
+          totalOrder: [],
+          totalOrderList: [],
+          storeName: '',
+
+        }
+      },
+      created() {
+        var self = this;
+        // order.child("-L1LhNkVxQHq7y4R2T9e").child('orderDetail').once('value').then(function(snapshot){
+        //   console.log(snapshot.val());
+        //   snapshot.forEach(function(data){
+        //     console.log(data.val());
+        //   });
+        // });
+        self.name = name;
+        self.userOrder = JSON.parse(userOrder);
+        //console.log(this.userOrder);
+        for (let item in self.userOrder) {
+          self.total += self.userOrder[item].price;
+        }
+        //console.log(self.total);
+        store.child(storeId).once('value').then(function (snapshot) {
+          self.storeName = snapshot.val().storeName;
+        });
+
+      },
+      mounted() {},
+      methods: {
+        orderConfirm() {
+          const self = this;
+          // order.child("totalOrder").set()
+          if (self.total > 0) {
+            order.child(orderId).child("orderDetail").push({
+              userId: "L0EDp_q9ErqPIfrhila",
+              name: this.name,
+              order: this.userOrder,
+              userTotal: this.total
+            });
+
+            location.href = "result.html?orderId=" + orderId + "&storeId=" + storeId;
+          } else {
+            alert('請先點餐');
+            location.href = "order.html?orderId=" + orderId + "&storeId=" + storeId;
+
+          }
+
+        },
+        back() {
+          location.href = "order.html?orderId=" + orderId + "&storeId=" + storeId;
+        }
+      },
+
+    });
+
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+    });
+
+
+
+
+
+
+    //demo.$firebaseRefs.anArray.update(JSON.parse(orderList));
+  </script>
+</body>
+
+</html>

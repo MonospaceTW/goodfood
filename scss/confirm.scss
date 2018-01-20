@@ -1,0 +1,123 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+$maincolor:#ed5d30;
+$fontcolor:#525252;
+$font-xl:17px;
+$font-l:14px;
+$font-m:12px;
+$font-s:11px;
+body {
+    font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+    text-align: center;
+    background: $maincolor;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+.confirm-img {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.wrapper {
+    .confirm-title {
+        color: #fff;
+        text-align: center;
+        letter-spacing: 3px;
+        padding-top: 50px;
+    }
+    .confirm-list {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 20px;
+        ul {
+            padding-left: 0;
+        }
+        li {
+            background: rgb(243, 243, 243);
+            list-style-type: none;
+            letter-spacing: 3px;
+            padding: 5px 5px;
+            margin-bottom: 5px;
+            border-radius: 15px;
+        }
+        span {
+            display: inline-block;
+            font-size: $font-l;
+            color: $fontcolor;
+            vertical-align: text-top;
+        }
+        .dishname {
+            width: 75%;
+            display: inline-block;
+        }
+        .count {
+            width: 15%;
+        }
+    }
+}
+
+.confirm-total {
+    font-size: $font-l;
+    color: rgb(27, 27, 27);
+    letter-spacing: 3px;
+    text-align: right;
+    margin-right: 9%;
+}
+
+.wrap {
+    margin: 30px 30px 50px;
+    .confirm-name {
+        float: left;
+        font-size: $font-l;
+        color: #fff;
+        letter-spacing: 3px;
+    }
+    .button {
+        float: right;
+        font-size: $font-l;
+        background: #e7d115;
+        border-radius: 15px;
+        letter-spacing: 3px;
+        text-align: center;
+        cursor: pointer;
+        padding: 5px 15px;
+        margin-bottom: 20px;
+    }
+    .button:hover {
+        background: #ffe815;
+    }
+    a {
+        color: #131313;
+    }
+    .confirm-btn:hover {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    .confirm-btn:visited {
+        color: #131313;
+    }
+    .clearfix {
+        clear: both;
+    }
+}
+
+.navbar {
+    position: fixed;
+    background: $maincolor;
+    width: 100%;
+    bottom: 0;
+    font-size: 1.5rem;
+    .text {
+        display: inline-block;
+        font-size: 14px;
+    }
+    a {
+        color: #fff;
+    }
+    a:hover {
+        text-decoration: none;
+        color: #fff;
+    }
+}

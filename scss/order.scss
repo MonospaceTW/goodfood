@@ -1,0 +1,221 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+@mixin btn {
+    font-size: 13px;
+    border-radius: 15px;
+    text-align: center;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+$maincolor:#ed5d30;
+$fontcolor:#525252;
+$font-xl:17px;
+$font-l:14px;
+$font-m:12px;
+$font-s:11px;
+body {
+    font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+}
+
+.container {
+    margin: 0 auto;
+}
+
+.order-title {
+    font-size: $font-xl;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.wrapper {
+    padding-top: 50px;
+    padding-bottom: 100px;
+    .order-list {
+        width: 90%;
+        margin-top: 30px;
+        span {
+            width: 50%;
+            display: inline-block;
+            letter-spacing: 3px;
+            font-size: $font-l;
+            color: $fontcolor;
+            vertical-align: text-top;
+            margin-top: 5px;
+        }
+        .dishname {
+            width: 80%;
+        }
+        .price {
+            width: 15%;
+        }
+        li {
+            color: $fontcolor;
+            background: #F4F4F4;
+            list-style-type: none;
+            border-radius: 15px;
+            padding: 10px 10px 10px 15px;
+            margin: 10px auto;
+        }
+        .icon {
+            font-size: 18px;
+            color: #ff9844;
+        }
+        .digital {
+            width: 45%;
+        }
+        .text {
+            width: 25%;
+            border: none;
+            text-align: center;
+        }
+    }
+}
+
+.order-total {
+    width: 90%;
+    font-size: $font-l;
+    color: $fontcolor;
+    letter-spacing: 3px;
+    text-align: right;
+}
+
+.wrap {
+    width: 100%;
+    .order-name {
+        float: left;
+        padding-top: 20px;
+        margin-left: 20px;
+        .myname {
+            color: $fontcolor;
+            font-size: $font-l;
+            letter-spacing: 3px;
+            padding-top: 20px;
+        }
+        #name {
+            width: 30%;
+            border: 1px solid #d8d8d8;
+            padding: 4px 0;
+        }
+        input::-webkit-input-placeholder {
+            font-size: 14px;
+            color: #b3b3b3;
+            text-align: center;
+        }
+    }
+    .button {
+        width: 32%;
+        display: flex;
+        float: right;
+        flex-direction: column;
+        margin-right: 25px;
+        .order-btn {
+            @include btn();
+            background: $maincolor;
+            color: #fff;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        .result-btn {
+            @include btn();
+            color: $maincolor;
+            border: 1px solid $maincolor;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+        .share-btn {
+            @include btn();
+            color: $maincolor;
+            border: 1px solid $maincolor;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .order-btn:visited {
+            color: #fff;
+        }
+        .order-btn:hover {
+            background: #ff5b2a;
+            text-decoration: none;
+        }
+        .result-btn:visited,
+        .share-btn:visited {
+            color: $maincolor;
+            border: 1px solid $maincolor;
+        }
+        .result-btn:hover,
+        .share-btn:hover {
+            color: $fontcolor;
+            border: 1px solid $fontcolor;
+            text-decoration: none;
+        }
+    }
+    .clearfix {
+        clear: both;
+    }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0 20px #ebebeb;
+    bottom: 0;
+    font-size: 1.5rem;
+    a {
+        color: $maincolor;
+        padding-right: 0;
+    }
+    a:hover {
+        text-decoration: none;
+        color: rgb(141, 141, 141);
+    }
+}
+
+.box {
+    position: relative;
+}
+
+.lightbox {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.lightbox .msg {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    width: 60%;
+    margin: auto;
+    height: 100px;
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.lightbox .msg .boxtitle {
+    font-size: 1.1rem;
+}
+
+.lightbox .msg .close {
+    position: absolute;
+    top: -5px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    background-color: white;
+    font-size: 16px;
+}

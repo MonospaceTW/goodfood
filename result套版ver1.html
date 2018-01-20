@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/result.css">
+    <script src="https://use.fontawesome.com/311a41a163.js"></script>
+    <title>團訂結果</title>
+</head>
+
+<body>
+    <div id="result" class="container">
+        <div class="result-title">團訂結果</div>
+        <hr />
+        <div class="result-subtitle">{{store.storeName}}</div>
+        <div class="result-info">
+            <p>{{store.deliveryCondition}}</p>
+            <p>營業時間:{{store.openTime}}~{{store.closeTime}}</p>
+            <p>地址:{{store.address}}</p>
+            <p>電話:{{store.phone}}</p>
+        </div>
+        <div class="button">
+            <a :href="'order.html?orderId=' + orderId + '&storeId=' + storeId" class="order-more">我要加訂</a>
+        </div>
+        <div class="deadline">截止時間:{{orderEndTime}}</div>
+        <div class="result-list">
+            <div class="listtop-1">訂單</div>
+            <ul>
+                <li v-for="(item,index) in totalOrders">
+                    <span>{{item.dishName}}</span>
+                    <span class="cont">x{{item.count}}</span>
+                </li>
+
+            </ul>
+            <P class="total-1">
+                <span>總計</span>
+                <span></span>
+                <span>{{total}}TWD</span>
+            </P>
+            <div class="listtop-2">訂單明細</div>
+            <ul class="outer">
+                <template v-for="(order,index) in orders">
+                    <li>
+                        <span class="inner">{{order.name}}</span>
+                        <span class="inner">
+                            <div v-for="dish in orders[index].order">{{dish.dishName}}</div>
+                        </span>
+                        <span class="inner">
+                            <div v-for="dish in orders[index].order">x{{dish.count}}</div>
+                        </span>
+                        <span class="inner">{{order.userTotal}}TWD</span>
+                    </li>
+                </template>
+            </ul>
+            <p class="total-2">
+                <span></span>
+                <span></span>
+                <span>100TWD</span>
+            </p>
+        </div>
+    </div>
+    <div class="navbar" id="navbar">
+        <a href="#" class="fa fa-share-alt icon" aria-hidden="true" @click="share">
+        </a>
+        <a href="index.html">
+            <img src="img/icon-orange-home.png" alt="home" width="25">
+        </a>
+        <a href="#">
+            <img src="img/icon-orange-member.png" alt="member" width="20">
+        </a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
+            authDomain: "goodfood-39158.firebaseapp.com",
+            databaseURL: "https://goodfood-39158.firebaseio.com",
+            projectId: "goodfood-39158",
+            storageBucket: "goodfood-39158.appspot.com",
+            messagingSenderId: "940303768399"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script src="js/result.js"></script>
+</body>
+
+</html>

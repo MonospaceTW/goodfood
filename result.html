@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/result.css">
+    <script src="https://use.fontawesome.com/311a41a163.js"></script>
+    <title>團訂結果</title>
+    <style>
+        li .inner-name-2:nth-child(2) {
+            display: none !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="result">
+        <div class="container">
+            <div class="result-title">團訂結果</div>
+            <hr />
+            <div class="result-subtitle">{{store.storeName}}</div>
+            <div class="result-info">
+                <p>{{store.deliveryCondition}}</p>
+                <p>營業時間:{{store.openTime}}~{{store.closeTime}}</p>
+                <p>地址:{{store.address}}</p>
+                <p>電話:{{store.phone}}</p>
+            </div>
+            <div class="button">
+                <a :href="'order.html?orderId=' + orderId + '&storeId=' + storeId" class="order-more">我要加訂</a>
+            </div>
+            <div class="deadline">截止時間:{{orderEndTime}}</div>
+            <div class="result-list">
+                <div class="listtop-1">訂單</div>
+                <ul>
+
+                    <li class="totallist" v-for="(item,index) in totalOrders">
+                        <span class="inner-type-1">{{item.dishName}}</span>
+                        <span class="inner-cont-1">x{{item.count}}</span>
+                        <span class="inner-digital">${{item.subtotal}}</span>
+                    </li>
+
+                </ul>
+                <P class="total-1">
+                    <span>總計</span>
+                    <span></span>
+                    <span>${{total}}</span>
+                </P>
+
+                <div class="listtop-2">訂單明細</div>
+                <!--Clover訂單明細-->
+                <ul class="outer">
+                    <template v-for="(order,index) in orders">
+
+                        <li>
+                            <span class="inner-name-2">{{order.name}}</span>
+                            <template v-for="dish in orders[index].order">
+                                <span class="inner-name-2"></span>
+                                <span class="inner-wrap">
+                                    <span class="inner-type-2">{{dish.dishName}}</span>
+                                    <span class="inner-cont-2">x{{dish.count}}</span>
+
+                                </span>
+                            </template>
+                            <div class="user-total">合計${{order.userTotal}}</div>
+                        </li>
+                    </template>
+                </ul>
+                <p class="total-2">
+                    <span>總計</span>
+                    <span></span>
+                    <span>${{total}}</span>
+                </p>
+
+
+
+            </div>
+
+
+            <div class="lightbox" @click="closeBox">
+                <div class="msg">
+                    <div class="close" @click="closeBox">x</div>
+                    <div class="boxtitle">邀請大家來團訂吧！</div>
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_inline_share_toolbox"></div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar" id="navbar">
+            <a href="#" class="fa fa-share-alt icon" aria-hidden="true" @click="share">
+            </a>
+            <a href="index.html">
+                <img src="img/icon-orange-home.png" alt="home" width="25">
+            </a>
+            <a href="#">
+                <img src="img/icon-orange-member.png" alt="member" width="20">
+            </a>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="js/config.js"></script>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a45e5ae798027f5"></script>
+
+    <script src="js/result.js"></script>
+</body>
+
+</html>

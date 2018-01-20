@@ -1,0 +1,58 @@
+a {
+  color: white; }
+  a:hover {
+    text-decoration: none;
+    color: white; }
+  a:visited {
+    color: whitesmoke; }
+
+.swiper-container {
+  width: 70%;
+  height: 150px; }
+  .swiper-container .recommend {
+    height: 100%;
+    cursor: pointer; }
+
+.logo {
+  text-align: center;
+}
+
+.swiper-slide:nth-child(1) {
+  background-color: rgba(28, 245, 160, 0.94); }
+
+.swiper-slide:nth-child(2) {
+  background-color: rgba(93, 38, 235, 0.73); }
+
+.swiper-slide:nth-child(3) {
+  background-color: rgba(21, 55, 84, 0.95); }
+
+.swiper-slide:nth-child(4) {
+  background-color: rgba(188, 20, 98, 0.79); }
+
+.swiper-slide:nth-child(5) {
+  background-color: rgba(88, 141, 105, 0.59); }
+
+.swiper-slide:nth-child(6) {
+  background-color: rgba(102, 124, 66, 0.15); }
+
+.swiper-slide:nth-child(7) {
+  background-color: rgba(137, 119, 169, 0.86); }
+
+.swiper-slide:nth-child(8) {
+  background-color: rgba(167, 15, 38, 0.45); }
+
+.swiper-slide:nth-child(9) {
+  background-color: rgba(5, 152, 0, 0.96); }
+
+.swiper-slide:nth-child(10) {
+  background-color: rgba(55, 235, 132, 0.55); }
+
+.goodluck, .all-store, .add-store {
+  display: block;
+  margin: 20px auto;
+  width: 70%;
+  line-height: 50px;
+  color: white;
+  text-align: center;
+  background-color: #ed5d30;
+  border-radius: 10px; }

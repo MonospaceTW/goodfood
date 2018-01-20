@@ -1,0 +1,48 @@
+$maincolor:#ed5d30;
+
+a {
+  color: white;
+
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+  &:visited {
+    color: whitesmoke;
+  }
+}
+
+.swiper-container {
+  width: 70%;
+  height: 150px;
+
+  .recommend {
+    height: 100%;
+    cursor: pointer;
+  }
+}
+
+.logo {
+  text-align: center;
+}
+
+@for $i from 1 through 10 {
+  .swiper-slide:nth-child(#{$i}) {
+    $red: random(256)-1;
+    $green: random(256)-1;
+    $blue: random(256)-1;
+    $alpha: random(100)/100;
+    background-color: rgba($red, $green, $blue, $alpha);
+  }
+}
+
+.goodluck, .all-store, .add-store {
+  display: block;
+  margin: 20px auto;
+  width: 70%;
+  line-height: 50px;
+  color: white;
+  text-align: center;
+  background-color: $maincolor;
+  border-radius: 10px;
+}
