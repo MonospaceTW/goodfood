@@ -1,0 +1,234 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+body {
+  font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+}
+
+.container {
+  margin: 0 auto;
+  margin-bottom: 70px;
+}
+
+.result-title {
+  color: #ed5d30;
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 17px;
+  padding-top: 20px;
+}
+
+hr {
+  border: 0.5px solid #ed5d30;
+  margin-top: 5px;
+}
+
+.result-subtitle {
+  color: #525252;
+  text-align: center;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.result-info p {
+  color: #525252;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 1px;
+  font-size: 12px;
+  margin-top: 15px;
+}
+
+.button {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.button .order-more {
+  background: #ed5d30;
+  width: 95px;
+  height: 30px;
+  border-radius: 20px;
+  padding: 5px 15px;
+}
+.button a {
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.order-more:hover {
+  color: #fff;
+  background: #ff6739;
+  text-decoration: none;
+}
+
+.deadline {
+  color: #525252;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-align: center;
+  margin: 10px auto;
+  width: 60%;
+}
+
+.result-list {
+  width: 100%;
+  color: #525252;
+  margin-bottom: 50px;
+}
+.result-list .listtop-1 {
+  color: #525252;
+  text-align: center;
+  letter-spacing: 2px;
+  border-bottom: 1.5px solid #ed5d30;
+  border-top: 1.5px solid #ed5d30;
+  margin-top: 28px;
+}
+.result-list ul {
+  width: 100%;
+  font-size: 14px;
+  padding-left: 0;
+  margin-top: 15px;
+}
+.result-list ul .inner-type-1 {
+  display: inline-block;
+  width: 55%;
+}
+.result-list ul .inner-cont-1 {
+  display: inline-block;
+  width: 15%;
+}
+.result-list ul .inner-digital {
+  display: inline-block;
+  width: 25%;
+}
+.result-list span:last-child {
+  text-align: right;
+}
+.result-list li {
+  letter-spacing: 3px;
+  list-style-type: none;
+  border-bottom: 1px solid #e4e4e4;
+  padding-top: 10px;
+  vertical-align: text-top;
+}
+.result-list .total-1 {
+  width: 100%;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-align: right;
+}
+.result-list .total-1 :nth-child(3) {
+  text-align: right;
+}
+.result-list .listtop-2 {
+  color: #525252;
+  text-align: center;
+  letter-spacing: 2px;
+  border-bottom: 1.5px solid #ed5d30;
+  border-top: 1.5px solid #ed5d30;
+  margin: 40px 0 20px 0;
+}
+.result-list .outer {
+  width: 100%;
+  font-size: 14px;
+  padding: 0;
+  margin-top: -5px;
+}
+.result-list .outer .inner-name-2 {
+  width: 20%;
+  display: inline-block;
+  line-height: 0;
+}
+.result-list .outer .inner-wrap {
+  width: 60%;
+  display: inline-block;
+  line-height: 10px;
+}
+.result-list .outer .inner-wrap .inner-type-2 {
+  width: 70%;
+  line-height: 0;
+  display: inline-block;
+}
+.result-list .outer .inner-wrap .inner-cont-2 {
+  width: 30%;
+  text-align: right;
+}
+.result-list .outer .inner-total {
+  width: 20%;
+  display: inline-block;
+}
+.result-list .outer .user-total {
+  text-align: right;
+}
+.result-list .total-2 {
+  font-size: 14px;
+  text-align: right;
+  letter-spacing: 3px;
+  margin-top: 15px;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  background: white;
+  box-shadow: 0 0 20px #ebebeb;
+  bottom: 0;
+  font-size: 1.5rem;
+}
+.navbar .icon {
+  color: orange;
+}
+.navbar a {
+  color: #ee5d30;
+}
+.navbar a:hover {
+  text-decoration: none;
+  color: #8d8d8d;
+}
+
+.container {
+  position: relative;
+}
+
+.lightbox {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.lightbox .msg {
+  position: absolute;
+  top: 150px;
+  left: 0;
+  right: 0;
+  width: 60%;
+  margin: auto;
+  height: 100px;
+  background-color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.lightbox .msg .boxtitle {
+  font-size: 1.1rem;
+}
+
+.lightbox .msg .close {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  background-color: white;
+  font-size: 16px;
+}
