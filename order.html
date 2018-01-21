@@ -130,9 +130,11 @@
           userOrder: [],
           total: 0,
           storeName: '',
+          logined: false
         }
       },
       created() {
+        //firebase.auth().signOut();
         const self = this;
         //console.log(storeId);
         dish.orderByChild("storeId").equalTo(storeId).once('value').then(function (snapshot) {
@@ -143,8 +145,21 @@
           });
         });
         //console.log(self.dishes);
+
         store.child(storeId).once('value').then(function (snapshot) {
           self.storeName = snapshot.val().storeName;
+        });
+
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+            //console.log(user.displayName);
+            self.name = user.displayName;
+            self.logined = true;
+          } else {
+            // No user is signed in.
+            self.logined = false;
+          }
         });
 
       },
@@ -158,7 +173,11 @@
           this.dishes[index].count += 1;
         },
         order() {
-          if (this.name.length >= 1) {
+          if(this.name.length <= 0){
+            alert('請輸入名字');
+            return;
+          }
+          if (this.logined == true && this.name.length >= 1) {
             for (let item in this.dishes) {
               parseInt(this.dishes[item].count);
               if (this.dishes[item].count >= 1) {
@@ -176,8 +195,9 @@
             //console.log(this.userOrder);
             location.href = "confirm.html?userOrder=" + this.userOrder + "&orderId=" + orderId + "&name=" + this.name +
               "&storeId=" + storeId;
-          } else {
-            alert('請輸入名字');
+          }else {
+              alert('請先登入');
+              location.href = "login.html";
           }
         },
         watchResult() {

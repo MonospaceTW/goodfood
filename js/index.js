@@ -1,5 +1,3 @@
-
-
 firebase.database().ref('store').once('value').then(function (snapshot) {
   // 店家列表
   var stores = [];
@@ -57,7 +55,8 @@ const vm = new Vue({
         disableOnInteraction: true
       },
       loop: true
-    }
+    },
+    loginState: '',
   },
   components: {
     LocalSwiper: VueAwesomeSwiper.swiper,
@@ -67,6 +66,22 @@ const vm = new Vue({
     // swiperB() {
     //   return this.$refs.storeSwiper.swiper
     // }
+  },
+  created(){
+    // firebase.auth().signOut();
+    const self = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        console.log(user);
+        self.loginState = "登出";
+      } else {
+        console.log('not login');
+        // No user is signed in.
+        self.loginState = '登入';
+        
+      }
+    });
   },
   methods: {
     update(recommend) {
@@ -80,7 +95,19 @@ const vm = new Vue({
       if (this.lottery) {
         location.href = "menu.html?storeId=" + this.lottery.key;
       }
+    },
+    toggleSignIn(event){
+      console.log(event);
+      if (this.loginState == '登出') {
+        // User is signed in.
+        firebase.auth().signOut();
+      }else if(this.loginState == '登入') {
+        // No user is signed in.
+        location.href = "login.html";
+      }
+
     }
+
   }
 })
 

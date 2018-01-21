@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Email登入</title>
+  <script src="js/vue.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script src="js/config.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-component></my-component>
+  </div>
+
+<script type="text/x-template" id="my-component">
+  <div>
+    <div class="loginform">
+      <input type="email" placeholder="帳號：" v-model="email">
+      <input type="password" name="" id=""　placeholder="密碼：" v-model="userPassword">
+      <br>
+      <p v-if="nerverSignup">此帳號尚未註冊</p>
+      <br>
+      <a href="#" @click="signin">登入</a>
+      <!-- <a href="#" @click="signout">登出</a> -->
+      <a href="signup.html">註冊</a>
+      <a href="#" @click="forgetpwd">忘記密碼</a>
+    </div>
+  </div>
+</script>
+<script>
+  const auth = firebase.auth();
+  let user = firebase.auth().currentUser;
+
+  Vue.component('my-component', {
+    template: '#my-component',
+    data: function () {
+      return {
+        email: '',
+        userPassword: '',
+        nerverSignup: false
+      }
+    },
+    created(){
+      const self = this;
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log(user);
+          // User is signed in.
+          self.nerverSignup = false;
+          location.reload();
+          window.history.back();
+
+        } else {
+          // No user is signed in.
+          console.log('not login');
+
+        }
+    });
+
+    },
+    methods: {
+      signin(){
+        const promise = auth.signInWithEmailAndPassword(this.email, this.userPassword);
+        //promise.catch(e => console.log(e.message));
+        promise.catch(() => {
+          this.nerverSignup = true;
+        });
+      },
+      // signout(){
+      //   firebase.auth().signOut();
+      // },
+      forgetpwd(){
+        if(this.email == ''){
+          alert('請先輸入 email 帳號');
+        }else{
+          firebase.auth().sendPasswordResetEmail(this.email)
+          .then(function() {
+          // Password reset email sent.
+          alert('請收取信件並重設密碼');
+        })
+          .catch(function(error) {
+          // Error occurred. Inspect error.code.
+        });
+        }
+      }
+    }
+  });
+  const vm = new Vue({
+    el: '#app',
+    data: {
+
+    }
+  });
+</script>
+</body>
+</html>

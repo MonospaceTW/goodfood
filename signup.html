@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Email登入</title>
+  <script src="js/vue.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script src="js/config.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-component></my-component>
+  </div>
+
+<script type="text/x-template" id="my-component">
+  <div>
+    <div class="signupform">
+      <h1>會員註冊</h1>
+      <label for="email">帳號</label>
+      <br>
+      <input type="email" placeholder="papapa321@gmail.com" id="email" v-model="email">
+      <br>
+      <p v-if="alreadySignup">帳號已被使用</p>
+      <label for="displayName">暱稱</label>
+      <br>
+      <input type="text" id="displayName" placeholder="暱稱" v-model="displayName">
+      <br>
+      <br>
+      <label for="userPassword">密碼</label>
+      <br>
+      <input type="password" name="" id="userPassword"　placeholder="密碼" v-model="userPassword">
+      <br>
+      <br>
+      <label for="confirmPassword">確認密碼</label>
+      <br>
+      <input type="password" name="" id="confirmPassword"　placeholder="確認密碼" v-model="confirmPassword">
+      <p v-if="passwordNotmatch">密碼不相符</p>
+      <br>
+      <br>
+      <button @click="signup">送出</button>
+    </div>
+  </div>
+</script>
+<script>
+  const auth = firebase.auth();
+  let user = firebase.auth().currentUser;
+
+  
+
+  Vue.component('my-component', {
+    template: '#my-component',
+    data: function() {
+      return {
+        email: '',
+        userPassword: '',
+        displayName: '',
+        confirmPassword: '',
+        alreadySignup: false,
+        passwordNotmatch: false
+      }
+    },
+    beforeCreate(){
+
+    },
+    created() {
+      const self = this;
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+        } else {
+          // No user is signed in.
+        }
+        console.log(user.displayName);
+      });
+    },
+    methods: {
+      signup(){
+        const self = this;
+        if(self.userPassword != self.confirmPassword){  
+          self.passwordNotmatch = true;
+          return
+        }
+       
+        let nickname = self.displayName;
+        const promise = auth.createUserWithEmailAndPassword(self.email, self.userPassword).then(user => {
+          if (user) {
+            // User is signed in.
+            if(user.emailVerified == false){
+              user.sendEmailVerification().then(function() {
+              // Email sent.
+              console.log('email sent');
+              alert('請收取驗證信');
+              window.history.back();
+              }).catch(function(error) {
+              // An error happened.
+              });
+            }
+          } else {
+            // No user is signed in.
+          }
+
+          user.updateProfile({
+            displayName: nickname,
+            //photoURL: "https://example.com/jane-q-user/profile.jpg"
+          }).then(function() {
+            // Update successful.
+          }).catch(function(error) {
+            // An error happened.
+          });
+
+          let name, email, photoUrl, uid, emailVerified;
+
+
+          if (user != null) {
+            user.providerData.forEach(function (profile) {
+              console.log("Sign-in provider: " + profile.providerId);
+              console.log("  Provider-specific UID: " + profile.uid);
+              console.log("  Name: " + profile.displayName);
+              console.log("  Email: " + profile.email);
+              console.log("  Photo URL: " + profile.photoURL);
+            });
+          }
+        });
+        promise
+          // .catch(e => console.log(e.message));
+          .catch(() => {
+            self.alreadySignup = true;
+          });
+
+
+      }
+    }
+  });
+  const vm = new Vue({
+    el: '#app',
+    data: {
+    }
+  });
+</script>
+</body>
+</html>

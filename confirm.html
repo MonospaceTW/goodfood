@@ -125,11 +125,24 @@
           totalOrder: [],
           totalOrderList: [],
           storeName: '',
+          logined: false
 
         }
       },
       created() {
+        //firebase.auth().signOut();
         var self = this;
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+            console.log(user);
+            self.logined = true;
+          }else {
+            // No user is signed in.
+            console.log('not login');
+            self.logined = false;
+          }
+        });
         // order.child("-L1LhNkVxQHq7y4R2T9e").child('orderDetail').once('value').then(function(snapshot){
         //   console.log(snapshot.val());
         //   snapshot.forEach(function(data){
@@ -147,13 +160,20 @@
           self.storeName = snapshot.val().storeName;
         });
 
+
+
       },
       mounted() {},
       methods: {
         orderConfirm() {
           const self = this;
           // order.child("totalOrder").set()
-          if (self.total > 0) {
+          if(self.logined == false){
+            alert('請先登入');
+            location.href="login.html";
+            return;
+          }
+          if (self.total > 0 ) {
             order.child(orderId).child("orderDetail").push({
               userId: "L0EDp_q9ErqPIfrhila",
               name: this.name,

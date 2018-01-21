@@ -42,19 +42,37 @@ let vm = new Vue({
     openTime: "",
     closeTime: "",
     address: "",
-    phone: ""
+    phone: "",
+    logined: false
   },
   created() {
-    this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
-    console.log(this.orderEndTime);
+    const self = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        self.logined = true;
+      } else {
+        // No user is signed in.
+        self.logined = false;
+      }
+    });
   },
   methods: {
     teamOrder() {
-      const teamOrderKey = order.push({
-        orderEndTime: this.orderEndTime,
-        storeId: storeId,
-      }).key;
-      location.href = "order.html?orderId=" + teamOrderKey + "&storeId=" + storeId;
+      const self = this;
+      if(self.logined == true){
+        this.orderEndTime = moment(now).add(30, 'm').format('YYYY-MM-D HH:mm:ss');
+        //console.log(this.orderEndTime);
+        const teamOrderKey = order.push({
+          orderEndTime: this.orderEndTime,
+          storeId: storeId,
+        }).key;
+        location.href = "order.html?orderId=" + teamOrderKey + "&storeId=" + storeId;
+      }else {
+        alert('請先登入');
+        location.href = "login.html";
+      }
+
     }
   }
 });
