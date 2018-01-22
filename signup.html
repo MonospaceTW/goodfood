@@ -20,9 +20,9 @@
       <h1>會員註冊</h1>
       <label for="email">帳號</label>
       <br>
-      <input type="email" placeholder="papapa321@gmail.com" id="email" v-model="email">
+      <input type="email" placeholder="hahaha321@gmail.com" id="email" v-model="email">
       <br>
-      <p v-if="alreadySignup">帳號已被使用</p>
+      <p >{{errorMsg}}</p>
       <label for="displayName">暱稱</label>
       <br>
       <input type="text" id="displayName" placeholder="暱稱" v-model="displayName">
@@ -57,7 +57,7 @@
         userPassword: '',
         displayName: '',
         confirmPassword: '',
-        alreadySignup: false,
+        errorMsg: '',
         passwordNotmatch: false
       }
     },
@@ -125,8 +125,8 @@
         });
         promise
           // .catch(e => console.log(e.message));
-          .catch(() => {
-            self.alreadySignup = true;
+          .catch((e) => {
+            self.errorMsg = e.message;
           });
 
 
