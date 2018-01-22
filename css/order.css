@@ -12,7 +12,7 @@ body {
 
 .wrapper {
   padding-top: 50px;
-  padding-bottom: 100px; }
+  padding-bottom: 80px; }
   .wrapper .order-list {
     width: 90%;
     margin-top: 30px; }
@@ -55,9 +55,7 @@ body {
 .wrap {
   width: 100%; }
   .wrap .order-name {
-    float: left;
-    padding-top: 20px;
-    margin-left: 20px; }
+    padding: 20px 0 0 50px; }
     .wrap .order-name .myname {
       color: #525252;
       font-size: 14px;
@@ -72,46 +70,45 @@ body {
       color: #b3b3b3;
       text-align: center; }
   .wrap .button {
-    width: 32%;
+    width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    float: right;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
     margin-right: 25px; }
     .wrap .button .order-btn {
       font-size: 13px;
-      border-radius: 15px;
+      border-radius: 21px;
       text-align: center;
-      padding: 5px 8px;
       cursor: pointer;
-      background: #ed5d30;
+      background: #f7a654;
       color: #fff;
       letter-spacing: 3px;
-      margin-bottom: 10px; }
+      margin: 0 72px 10px 72px;
+      padding: 12px 72px; }
     .wrap .button .result-btn {
       font-size: 13px;
-      border-radius: 15px;
+      border-radius: 21px;
       text-align: center;
-      padding: 5px 8px;
       cursor: pointer;
-      color: #ed5d30;
-      border: 1px solid #ed5d30;
+      color: #f7a654;
+      border: 1px solid #f7a654;
       letter-spacing: 1.5px;
-      margin-bottom: 10px; }
+      margin: 0 72px 10px 72px;
+      padding: 12px 60px; }
     .wrap .button .share-btn {
       font-size: 13px;
-      border-radius: 15px;
+      border-radius: 21px;
       text-align: center;
-      padding: 5px 8px;
       cursor: pointer;
-      color: #ed5d30;
-      border: 1px solid #ed5d30;
+      color: #f7a654;
+      border: 1px solid #f7a654;
       letter-spacing: 2px;
-      margin-bottom: 10px; }
+      margin: 0 72px 10px 72px;
+      padding: 12px 60px; }
     .wrap .button .order-btn:visited {
       color: #fff; }
     .wrap .button .order-btn:hover {
@@ -119,8 +116,8 @@ body {
       text-decoration: none; }
     .wrap .button .result-btn:visited,
     .wrap .button .share-btn:visited {
-      color: #ed5d30;
-      border: 1px solid #ed5d30; }
+      color: #f7a654;
+      border: 1px solid #f7a654; }
     .wrap .button .result-btn:hover,
     .wrap .button .share-btn:hover {
       color: #525252;
@@ -139,11 +136,11 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   background: white;
   -webkit-box-shadow: 0 0 20px #ebebeb;
-  box-shadow: 0 0 20px #ebebeb;
+          box-shadow: 0 0 20px #ebebeb;
   bottom: 0;
   font-size: 1.5rem; }
   .navbar a {
-    color: #ed5d30;
+    color: #f7a654;
     padding-right: 0; }
   .navbar a:hover {
     text-decoration: none;
