@@ -3,6 +3,9 @@
 ## 出現 Elements in iteration expect to have 'v-bind:key' directives 錯誤
 
 eslint 出現錯誤提示
+
+
+
 ![image](../imgs/v-for-key-error1.jpg)
 
 
