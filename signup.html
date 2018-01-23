@@ -20,22 +20,21 @@
       <h1>會員註冊</h1>
       <label for="email">帳號</label>
       <br>
-      <input type="email" placeholder="hahaha321@gmail.com" id="email" v-model="email">
+      <input type="email" placeholder="hahaha321@gmail.com" id="email" v-model="email" v-on:focus="emailPlaceholderFocus($event)" v-on:blur="emailPlaceholderBlur($event)">
       <br>
-      <p >{{errorMsg}}</p>
+      <p >{{errorMsg1}}</p>
       <label for="displayName">暱稱</label>
       <br>
-      <input type="text" id="displayName" placeholder="暱稱" v-model="displayName">
+      <input type="text" id="displayName" placeholder="Yummy" v-model="displayName" v-on:focus="displayNamePlaceholderFocus($event)" v-on:blur="displayNamePlaceholderBlur($event)">
       <br>
       <br>
       <label for="userPassword">密碼</label>
       <br>
-      <input type="password" name="" id="userPassword"　placeholder="密碼" v-model="userPassword">
-      <br>
-      <br>
+      <input type="password" name="" id="userPassword"　placeholder="密碼長度不能少於6字元" v-model="userPassword" v-on:focus="userPasswordPlaceholderFocus($event)" v-on:blur="userPasswordPlaceholderBlur($event)">
+      <p >{{errorMsg2}}</p>
       <label for="confirmPassword">確認密碼</label>
       <br>
-      <input type="password" name="" id="confirmPassword"　placeholder="確認密碼" v-model="confirmPassword">
+      <input type="password" name="" id="confirmPassword"　placeholder="請再次輸入密碼" v-model="confirmPassword" v-on:focus="confirmPasswordPlaceholderFocus($event)" v-on:blur="confirmPasswordPlaceholderBlur($event)">
       <p v-if="passwordNotmatch">密碼不相符</p>
       <br>
       <br>
@@ -57,7 +56,8 @@
         userPassword: '',
         displayName: '',
         confirmPassword: '',
-        errorMsg: '',
+        errorMsg1: '',
+        errorMsg2: '',
         passwordNotmatch: false
       }
     },
@@ -72,7 +72,7 @@
         } else {
           // No user is signed in.
         }
-        console.log(user.displayName);
+        //console.log(user.displayName);
       });
     },
     methods: {
@@ -126,11 +126,40 @@
         promise
           // .catch(e => console.log(e.message));
           .catch((e) => {
-            self.errorMsg = e.message;
+            if(e.message == 'Password should be at least 6 characters'){
+              self.errorMsg2 = '密碼長度不能少於6字元';
+            }else if(e.message == 'The email address is already in use by another account.'){
+              self.errorMsg1 = '帳號已被使用';
+            }
           });
 
 
-      }
+      },
+      emailPlaceholderFocus(e){
+        e.target.placeholder="";
+      },
+      emailPlaceholderBlur(e){
+        e.target.placeholder='hahaha321@gmail.com';
+      },
+      displayNamePlaceholderFocus(e){
+        e.target.placeholder="";
+      },
+      displayNamePlaceholderBlur(e){
+        e.target.placeholder='Yummy';
+      },
+      userPasswordPlaceholderFocus(e){
+        e.target.placeholder="";
+      },
+      userPasswordPlaceholderBlur(e){
+        e.target.placeholder="密碼長度不能少於6字元";
+      },
+      confirmPasswordPlaceholderFocus(e){
+        e.target.placeholder="";
+      },
+      confirmPasswordPlaceholderBlur(e){
+        e.target.placeholder="請再次輸入密碼";
+      },
+
     }
   });
   const vm = new Vue({

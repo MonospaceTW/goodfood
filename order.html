@@ -46,14 +46,13 @@
           <div class="wrap">
             <div class="order-name">
               <label class="myname" for="name">我是</label>
-              <input id="name" type="text" placeholder="請輸入名字" name="name" v-model="name">
-              <div class="button">
-                <a href="#" class="order-btn" @click="order">下訂單</a>
-                <a href="#" class="result-btn" @click="watchResult">看團購結果</a>
-                <a href="#" class="share-btn" @click="share">分享這頁</a>
-              </div>
+              <span>{{name}}</span>
             </div>
-            <div class="clearfix"></div>
+            <div class="button">
+              <a href="#" class="order-btn" @click="order">下訂單</a>
+              <a href="#" class="result-btn" @click="watchResult">看團購結果</a>
+              <a href="#" class="share-btn" @click="share">分享這頁</a>
+            </div>
           </div>
         </div>
         <!-- 分享lightbox -->

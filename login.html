@@ -17,10 +17,10 @@
 <script type="text/x-template" id="my-component">
   <div>
     <div class="loginform">
-      <input type="email" placeholder="帳號：" v-model="email">
-      <input type="password" name="" id=""　placeholder="密碼：" v-model="userPassword">
+      <input type="email" placeholder="帳號：" v-model="email" v-on:focus="emailPlaceholderFocus($event)" v-on:blur="emailPlaceholderBlur($event)">
+      <input type="password" name="" id=""　placeholder="密碼：" v-model="userPassword" v-on:focus="userPasswordPlaceholderFocus($event)" v-on:blur="userPasswordPlaceholderBlur($event)">
       <br>
-      <p v-if="nerverSignup">此帳號尚未註冊</p>
+      <p>{{errorMsg}}</p>
       <br>
       <a href="#" @click="signin">登入</a>
       <!-- <a href="#" @click="signout">登出</a> -->
@@ -39,7 +39,7 @@
       return {
         email: '',
         userPassword: '',
-        nerverSignup: false
+        errorMsg: '',
       }
     },
     created(){
@@ -62,10 +62,17 @@
     },
     methods: {
       signin(){
+        const self = this;
         const promise = auth.signInWithEmailAndPassword(this.email, this.userPassword);
         //promise.catch(e => console.log(e.message));
-        promise.catch(() => {
+        promise.catch((e) => {
           this.nerverSignup = true;
+        if(e.message == 'The password is invalid or the user does not have a password.'){
+          self.errorMsg = "請輸入正確密碼"
+        }
+        if(e.message == "There is no user record corresponding to this identifier. The user may have been deleted."){
+          self.errorMsg = "帳號尚未註冊"
+        }
         });
       },
       // signout(){
@@ -84,7 +91,19 @@
           // Error occurred. Inspect error.code.
         });
         }
-      }
+      },
+      emailPlaceholderFocus(e){
+        e.target.placeholder="";
+      },
+      emailPlaceholderBlur(e){
+        e.target.placeholder='帳號：';
+      },
+      userPasswordPlaceholderFocus(e){
+        e.target.placeholder="";
+      },
+      userPasswordPlaceholderBlur(e){
+        e.target.placeholder="密碼：";
+      },
     }
   });
   const vm = new Vue({
