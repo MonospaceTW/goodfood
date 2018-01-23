@@ -81,7 +81,7 @@ body {
 .wrap {
     width: 100%;
     .order-name {
-        padding: 20px 0 0 50px;
+        padding: 20px 0 0 80px;
         .myname {
             color: $fontcolor;
             font-size: $font-l;
@@ -103,29 +103,35 @@ body {
         width: 100%;
         display: flex;
         flex-direction: column;
+        align-items: center;
         margin-right: 25px;
         .order-btn {
+            width: 200px;
+            height: 40px;
             @include btn();
             background: $maincolor;
             color: #fff;
             letter-spacing: 3px;
-            margin: 0 72px 10px 72px;
             padding: 12px 72px;
+            margin-bottom: 16px;
         }
         .result-btn {
+            width: 200px;
+            height: 40px;
             @include btn();
             color: $maincolor;
             border: 1px solid $maincolor;
             letter-spacing: 1.5px;
-            margin: 0 72px 10px 72px;
             padding: 12px 60px;
+            margin-bottom: 16px;
         }
         .share-btn {
+            width: 200px;
+            height: 40px;
             @include btn();
             color: $maincolor;
             border: 1px solid $maincolor;
             letter-spacing: 2px;
-            margin: 0 72px 10px 72px;
             padding: 12px 60px;
         }
         .order-btn:visited {
