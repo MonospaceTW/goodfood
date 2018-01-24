@@ -75,4 +75,13 @@ VUE CLI 的架構為:主架構+子架構
 ![image](../imgs/v-bind.png)
 
 
-- 使用v-bind將data傳送給TodoList.vue。
+- 使用v-bind將data(todos表單)導向給TodoList.vue。
+
+![image](../imgs/v-bindTodoList.png)
+
+- 完成導向後，必須在TodoList.vue的component class處做出prop宣告使這個component(TodoList.vue)可以讀取data(todos表單):
+
+![image](../imgs/todos-prop.png)
+
+
+5. Looping and Rendering Data
