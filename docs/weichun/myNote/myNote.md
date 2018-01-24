@@ -41,14 +41,26 @@ VUE CLI 的架構為:主架構+子架構
 
 3. Importing Components 將TodoList.vue import到 App.vue
 
-- 用 TodoList.vue 取代 HelloWorld.vue: <br>
-  a. 在components資料夾中開啟App.vue <br>
-  b. script處 import 由 HellowWorld 改為 TodoList <br>
+- 用 TodoList.vue 取代 HelloWorld.vue:
+
+
+  a. 在components資料夾中開啟App.vue
+
+
+  b. script處 import 由 HellowWorld 改為 TodoList
+
+
   ![image](../imgs/import.png)
-  <br>
-  c. template 用 <todo-list></todo-list>的方式映出(render)於檔案 TodoList.vue 寫的HTML<br>
+  
+
+
+  c. template 用 <todo-list> </todo-list>的方式映出(render)於檔案 TodoList.vue 寫的HTML
+
+
   ![image](../imgs/importTemplate.png)
-  <br>
+  
+
+
   d. 完成import之後，則main-component-App.vue的頁面就會從原本預設helloWorld畫面轉為顯示sub-component-TodoList.vue的內容
   <br>
 
