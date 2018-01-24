@@ -45,6 +45,3 @@ VUE CLI 的架構為:主架構+子架構(此範例中: App.vue為main component;
 
 - use v-bind  to pass data from the main component to the TodoList component. <todo-list v-bind:todos="todos"></todo-list>
 
-
-![image](../imgs/style.png)
-
