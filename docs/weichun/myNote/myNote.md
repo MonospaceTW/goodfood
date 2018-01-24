@@ -54,7 +54,7 @@ VUE CLI 的架構為:主架構+子架構
   
 
 
-  c. template 用 <todo-list> </todo-list>的方式映出(render)於檔案 TodoList.vue 寫的HTML
+  c. template 用 "<todo-list> </todo-list>"的方式映出(render)於檔案 TodoList.vue 寫的HTML
 
 
   ![image](../imgs/importTemplate.png)
