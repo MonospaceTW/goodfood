@@ -59,6 +59,7 @@ export default {
 
 現在我們要將它引入 main component ( ```App.vue``` ) 中
 詳細操作可參考 ```App.vue``` 內的註解(下圖)
+
 ![img](../imgs/Todo-01.png)
 
 再來為了渲染組件，我們必須修改 ```App.vue``` 當中 ```<template>‵``` 的內容，像是 HTML 元素一樣調用它
@@ -72,6 +73,7 @@ export default {
 
 ### 1-3. 檢視成果
 再經歷以上修改過後的 ```App.vue``` 會長這樣(下圖)
+
 ![img](../imgs/Todo-02.png)
 
 　
