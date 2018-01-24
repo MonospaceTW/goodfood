@@ -31,6 +31,7 @@ node -v
 npm -v
 ```
 若皆有正確，會顯示如下 (白圈範圍為 User Name)
+
 ![image](../imgs/版本檢查.png)
 
 更多關於 npm 的詳細介紹，請參照 [nodejs-wiki-book](https://github.com/nodejs-tw/nodejs-wiki-book/blob/master/zh-tw/node_npm.rst)
@@ -60,6 +61,7 @@ vue -V
 ```
 vue list
 ```
+
 ![image](../imgs/vue-list.png)
 
 可以看到官方提供了6種方法，更詳細的內容可以到 [官方 Github文件](https://github.com/vuejs/vue-cli#official-templates) 了解
@@ -74,7 +76,6 @@ vue init webpack first-vue
 在我們建立(初始化)一個專案後，系統會要求我們填寫一些專案基本資料
 - ```Project name```：專案名稱
 - ```Project description```：專案概述
-- ```Author```：作者
 - ```Vue build```：Runtime + Compiler 及 Runtime-only 兩種
 - ```nstall vue-router```：是否安裝 vue-router
 - ```Use ESLint to lint your code```：是否使用 ESLint 來規範程式碼
@@ -90,7 +91,7 @@ vue init webpack first-vue
 當然也可以一路 Enter 到底，使用系統幫你預填的內容，就可以開始安裝了
 
 更詳細的內容可以參考 [Vue Cli 介紹](https://paper.dropbox.com/doc/Vue-Cli-pbpJGPUyjZy5xuoSFffId)
-
+　
 　
 　
 ### 3-3. 安裝專案環境套件
@@ -110,7 +111,7 @@ npm install
 在這邊我們只需要先知道 ```npm install``` 其實是根據專案內的 **package.json** 檔案內容來決定要安裝哪些套件
 
 我們早先設定的專案環境內容也可以在這邊修改
-
+　
 　
 ## Step 4. 運行專案
 終於可以來跑跑看剛剛那一連串不知道在幹嘛的步驟到底都做了什麼囉！
@@ -124,7 +125,9 @@ dev 即 develop ，開發環境
 在 command-line 跑完後，打開瀏覽器輸入 [http://localhost:8080](http://localhost:8080)
 
 若看到以下畫面
+
 ![image](../imgs/vue-demo.png)
+
 代表上述步驟都沒做錯，已經成功安裝囉！
 　
 　
