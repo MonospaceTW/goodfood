@@ -8,7 +8,7 @@
 
 0. 需先下載 node.js 9.4.0
 
-1. 從github/monospaceTW/goodfood 的 develop 裡面 clone 到自己的local端(建立了一個gfVuecli資料夾)，建立weichun資料夾並push上去，完成自己的 遠端及本地端 branch 分支。
+1. 從github/monospaceTW/goodfood 的 develop 裡面 clone 到自己的local端(在本地端建立了一個vuecli資料夾)，建立branch:weichun並push上去，完成自己的 遠端及本地端 branch。
 
 2. 打開node.js command prompt 執行npm下載
 - cd gfVuecli 進入本地端 branch的資料夾
@@ -22,6 +22,7 @@
 參考網站:[Jeremy Kithome 的文章](https://scotch.io/tutorials/build-a-to-do-app-with-vue-js-2) ; 
 使用樣式 [semantic](https://semantic-ui.com/) 及 [sweetalert](https://sweetalert.js.org/)
 
+
 1. 將 [semantic](https://semantic-ui.com/) 及 [sweetalert](https://sweetalert.js.org/) 放入index裡，才會有如[DEMO](https://todo-vue.herokuapp.com/)的樣式。
 
 
@@ -30,16 +31,28 @@
 2. Vue cli架構:
 
 - Component structure- a main component & sub-components. <br>
-VUE CLI 的架構為:主架構+子架構(此範例中: App.vue為main component;TodoList.vue、Todo.vue為sub-components)
+VUE CLI 的架構為:主架構+子架構
 
-- 建立一個新的vue檔案-TodoList.vue 此新檔案裏面包含三個部分:template, component class and styles sections.
+
+(此範例中: App.vue為main component;TodoList.vue、Todo.vue為sub-components)
+
+- 建立一個新的vue檔案-TodoList.vue 此新檔案裏面包含三個部分:template(visual part), component class(行為、事件、DATA在此區域) and styles sections.
+
+
+3. Importing Components 將TodoList.vue import到 App.vue
 
 - 用 TodoList.vue 取代 HelloWorld.vue: <br>
   a. 在components資料夾中開啟App.vue <br>
   b. script處 import 由 HellowWorld 改為 TodoList <br>
+'''
+// add this line
+import TodoList from './components/TodoList'  
+// remove this line
+import Hello from './components/Hello'
+'''
   c. template 用 <todo-list></todo-list>的方式映出(render)於檔案 TodoList.vue 寫的HTML 
 
-3. Adding Component Data- 在App.vue 增加 to do list 的內容資料
+4. Adding Component Data- 在App.vue 增加 to do list 的內容資料
 
 - todos will have three properties; The title, project and done
 
