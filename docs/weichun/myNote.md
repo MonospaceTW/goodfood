@@ -25,7 +25,7 @@
 1. 將 [semantic](https://semantic-ui.com/) 及 [sweetalert](https://sweetalert.js.org/) 放入index裡，才會有如[DEMO](https://todo-vue.herokuapp.com/)的樣式。
 
 
-![載入樣式](../img/styleSetup.png)
+![image](../img/styleSetup.png)
 
 2. Vue cli架構:
 
