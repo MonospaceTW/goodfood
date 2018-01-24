@@ -39,7 +39,7 @@ VUE CLI 的架構為:主架構+子架構
 - 建立一個新的vue檔案-TodoList.vue 此新檔案裏面包含三個部分:template(visual part), component class(行為、事件、DATA在此區域) and styles sections.
 
 
-3. Importing Components 將TodoList.vue import到 App.vue
+3. Importing Components-將TodoList.vue import到 App.vue
 
 - 用 TodoList.vue 取代 HelloWorld.vue:
 
@@ -54,7 +54,7 @@ VUE CLI 的架構為:主架構+子架構
   
 
 
-  c. template 用 ```<todo-list> </todo-list>```的方式映出(render)於檔案 TodoList.vue 寫的HTML
+  c. template 用 ```<todo-list> </todo-list>```的方式映出(render)於檔案 TodoList.vue 寫的內容
 
 
   ![image](../imgs/importTemplate.png)
@@ -62,12 +62,17 @@ VUE CLI 的架構為:主架構+子架構
 
 
   d. 完成import之後，則main-component-App.vue的頁面就會從原本預設helloWorld畫面轉為顯示sub-component-TodoList.vue的內容
-  <br>
 
 
-4. Adding Component Data- 在App.vue 增加 to do list 的內容資料
+4. Adding Component Data- 在App.vue 增加 todos表單的內容資料
 
-- todos will have three properties; The title, project and done
 
-- use v-bind  to pass data from the main component to the TodoList component. <todo-list v-bind:todos="todos"></todo-list>
+- 須提供data給main-component，這個data會將todos的表單內容顯示。 
 
+
+- todos表單內容(data)有三個部分: 標題(title)、專案(project)、完成(done 用來告知是否完成)
+
+![image](../imgs/v-bind.png)
+
+
+- 使用v-bind將data傳送給TodoList.vue。
