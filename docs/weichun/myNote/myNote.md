@@ -44,12 +44,12 @@ VUE CLI 的架構為:主架構+子架構
 - 用 TodoList.vue 取代 HelloWorld.vue: <br>
   a. 在components資料夾中開啟App.vue <br>
   b. script處 import 由 HellowWorld 改為 TodoList <br>
-'''
-// add this line
+
+' // add this line
 import TodoList from './components/TodoList'  
 // remove this line
-import Hello from './components/Hello'
-'''
+import Hello from './components/Hello' '
+<br>
   c. template 用 <todo-list></todo-list>的方式映出(render)於檔案 TodoList.vue 寫的HTML 
 
 4. Adding Component Data- 在App.vue 增加 to do list 的內容資料
