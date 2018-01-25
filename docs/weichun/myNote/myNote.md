@@ -54,7 +54,7 @@ VUE CLI 的架構為:主架構+子架構
   
 
 
-  c. template 用 ```<todo-list> </todo-list>```的方式映出(render)於檔案 TodoList.vue 寫的內容
+  c. template 用 ```<todo-list> </todo-list>```的方式選染(render)於檔案 TodoList.vue 寫的內容
 
 
   ![image](../imgs/importTemplate.png)
@@ -84,4 +84,107 @@ VUE CLI 的架構為:主架構+子架構
 ![image](../imgs/todos-prop.png)
 
 
-5. Looping and Rendering Data
+5. Looping and Rendering Data- 迴圈 和 渲染 data(todos表單)
+
+- 在TodoList.vue中，為了渲染todos表單裡面的items(Todo、project、complete/pending)，使用```v-for="item in items"```。
+
+```
+<template>
+  <div>
+    // JavaScript expressions in Vue are enclosed in double curly brackets.
+    <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
+    <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
+    <div class='ui centered card' v-for="todo in todos">
+      <div class='content'>
+        <div class='header'>
+          {{ todo.title }}
+        </div>
+        <div class='meta'>
+          {{ todo.project }}
+        </div>
+        <div class='extra content'>
+          <span class='right floated edit icon'>
+            <i class='edit icon'></i>
+          </span>
+        </div>
+      </div>
+      <div class='ui bottom attached green basic button' v-show="todo.done">
+        Completed
+      </div>
+      <div class='ui bottom attached red basic button' v-show="!todo.done">
+        Complete
+      </div>
+  </div>
+</template>
+
+<script type = "text/javascript" >
+
+export default {
+  props: ['todos'],
+};
+</script>
+```
+
+
+6. Editing a Todo- 編輯Todo.vue
+
+- 在src/components處新增一個新的檔案:Todo.vue，並輸入內容:
+
+```<template>
+  <div class='ui centered card'>
+    <div class='content'>
+        <div class='header'>
+            {{ todo.title }}
+        </div>
+        <div class='meta'>
+            {{ todo.project }}
+        </div>
+        <div class='extra content'>
+            <span class='right floated edit icon'>
+            <i class='edit icon'></i>
+          </span>
+        </div>
+    </div>
+    <div class='ui bottom attached green basic button' v-show="todo.done">
+        Completed
+    </div>
+    <div class='ui bottom attached red basic button' v-show="!todo.done">
+        Complete
+    </div>
+</div>
+</template>
+
+<script type="text/javascript">
+  export default {
+    props: ['todo'],
+  };
+</script>
+```
+
+-  可以用```v-for```去簡化他:
+
+
+```
+<template>
+  <div>
+    <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
+    <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
+   // we are now passing the data to the todo component to render the todo list
+    <todo  v-for="todo in todos" v-bind:todo="todo"></todo> 
+  </div>
+</template>
+
+<script type = "text/javascript" >
+
+import Todo from './Todo';
+
+export default {
+  props: ['todos'],
+  components: {
+    Todo,
+  },
+};
+</script>
+```
+
+
