@@ -6,13 +6,13 @@ Markdown是一种可以使用普通文本编辑器编寫的標記語言，它可
 <font color="blue"><b>install vs code markdown Plug-in</b></font>
 
 **1.安裝 Markdown Shortcuts**
-![imgs](imgs/s1.jpg)
+![imgs](./imgs/s1.jpg)
 
 可增加套入markdown的樣式效率,將要套入樣式的字體全選後點快捷鍵即可ex: ctrl+B=粗體
 
 **2.安裝 Markdown Preview Github Styling**
 
-![imgs](imgs/s2.jpg)
+![imgs](./imgs/s2.jpg)
 
 Github 的樣式當底
 
@@ -20,7 +20,7 @@ Github 的樣式當底
 
  預覽視窗預設會連動編輯視窗跟著滾動,可至Markdown設定檔將
 
-![imgs](imgs/sev.png) 
+![imgs](./imgs/sev.png) 
 
 **true改為false**
 
@@ -77,7 +77,7 @@ puts table.to_s
 [參考連結] https://www.google.com
 
 ```
-指定圖片=![image](/imgs/HP7.jpg)
+指定圖片=![image](./imgs/HP7.jpg)
 ```
 
 下方---or***or___為水平線
@@ -105,7 +105,7 @@ puts table.to_s
 ```
 1.
 <a href="https://youtu.be/zHPqO0UnaW8" target="_blank">
-<img src="imgs/HP7.jpg" alt=""></a>
+<img src="./imgs/HP7.jpg" alt=""></a>
 
 ```
 <a href="https://youtu.be/zHPqO0UnaW8" target="_blank">
@@ -114,12 +114,12 @@ puts table.to_s
 
 ```
 2.
-[![IMAGE ALT TEXT HERE](imgs/HP7.jpg)](https://youtu.be/zHPqO0UnaW8)
+[![IMAGE ALT TEXT HERE](./imgs/HP7.jpg)](https://youtu.be/zHPqO0UnaW8)
 
 
 ```
 
-[![IMAGE ALT TEXT HERE](imgs/HP7.jpg)](https://youtu.be/zHPqO0UnaW8)
+[![IMAGE ALT TEXT HERE](./imgs/HP7.jpg)](https://youtu.be/zHPqO0UnaW8)
 
 
 
