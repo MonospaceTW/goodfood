@@ -88,7 +88,7 @@ VUE CLI 的架構為:主架構+子架構
 
 - 在TodoList.vue中，為了渲染todos表單裡面的items(Todo、project、complete/pending)，使用```v-for="item in items"```。
 
-```
+```html
 <template>
   <div>
     // JavaScript expressions in Vue are enclosed in double curly brackets.
@@ -130,7 +130,8 @@ export default {
 
 - 在src/components處新增一個新的檔案:Todo.vue，並輸入內容:
 
-```<template>
+```html
+<template>
   <div class='ui centered card'>
     <div class='content'>
         <div class='header'>
@@ -164,7 +165,7 @@ export default {
 -  可以用```v-for```去簡化他:
 
 
-```
+```html
 <template>
   <div>
     <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
