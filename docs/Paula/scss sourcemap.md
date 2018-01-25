@@ -22,8 +22,16 @@
 
 ![image](./imgs/nin.png) compile後會產生.map的檔案在相對應的資料夾
 
+<font color="maroon">**如何於本機瀏覽狀態來編輯scss存檔後同步至vs code**</font>
 
+ * 開啟專案瀏覽狀態->開發者工具->開啟source->於Preference勾選以下設定
 
+![image](./imgs/ten.png)
 
+* 於workspace Add 自己的專案->於More options開啟專案檢視全部資料夾
+
+![image](./imgs/ele.png)
+
+* 找到要修改的scss檔案做修改後存檔,於vs code就會同步更新.
 
  
