@@ -20,22 +20,6 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./css'));
 });
 
-// gulp.task('babel', () =>
-//     gulp.src('./source/js/**/*.js')
-//     // .pipe(sourcemaps.init())
-//     .pipe($.babel({
-//         presets: ['env']
-//     }))
-//     // .pipe(concat('all.js'))
-//     // .pipe(sourcemaps.write('.'))
-//     .pipe(gulp.dest('./public/js'))
-// );
-
-// gulp.task('bower', function () { // 將 bower 中的組見安裝進來
-//     return gulp.src(mainBowerFiles())
-//         .pipe(gulp.dest('./.tmp/vendors')) // .tmp 是一個暫存的資料夾
-// });
-
 gulp.task('browserSync', function () { // 建立本機伺服器
     browserSync.init({
         server: {
