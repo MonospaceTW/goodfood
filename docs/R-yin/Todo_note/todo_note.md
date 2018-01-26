@@ -93,7 +93,7 @@ export default {
 
 我的理解是
 > 我們需要提供一些資料(組件)內容到 Todo 的主要組件 ( main component )內。預期的 TodoList 有三個主要屬性，分別是 標題，詳細內容 及 是否完成。
-每個組件各有一個函式，用來返還"數據資料值 ( object )"給各自的模版( template )。
+> 每個組件各有一個函式，用來返還"數據資料值 ( object )"給各自的模版( template )。
 
 ### 2-1. 增加組件( cimponent )內的內容屬性
 我們修改 ```App.vue``` 中的內容，增加以下 code
@@ -210,15 +210,176 @@ export default {
   props: ['todos'],
 };
 </script>
-
-<script type = "text/javascript" >
-// 這部份在前段已新增
-export default {
-  props: ['todos'],
-};
-</script>
 ```
 
 截至目前為止，我們的畫面應該會是這樣
 
 ![img](../imgs/Todo-05.png)
+
+## Step 4. [編輯 Todo (Editing a Todo )，重新整理結構](https://scotch.io/tutorials/build-a-to-do-app-with-vue-js-2#toc-editing-a-todo)
+
+為了使 code 更簡潔明確，我們將 todo 模版獨立成一支 ```Todo.vue``` 檔 （創建於 src/components 內，跟 ```TodoList.vue``` 同路徑）
+
+```Todo.vue``` 的 code 如下
+```js
+<template>
+  <div class='ui centered card'>
+    <div class='content'>
+        <div class='header'>
+            {{ todo.title }}
+        </div>
+        <div class='meta'>
+            {{ todo.project }}
+        </div>
+        <div class='extra content'>
+            <span class='right floated edit icon'>
+            <i class='edit icon'></i>
+          </span>
+        </div>
+    </div>
+    <div class='ui bottom attached green basic button' v-show="todo.done">
+        Completed
+    </div>
+    <div class='ui bottom attached red basic button' v-show="!todo.done">
+        Complete
+    </div>
+  </div>
+</template>
+
+<script type="text/javascript">
+  export default {
+    props: ['todo'],
+  };
+</script>
+```
+
+接著我們要回去修改 ```TodoList.vue``` 
+```js
+<template>
+  <div>
+    <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
+    <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
+    <!-- 現在我們使用 todo 組件來傳資料，完成我們的 Todo 清單畫面 -->
+    <todo  v-for="todo in todos" v-bind:todo="todo"></todo>
+  </div>
+</template>
+
+<script type = "text/javascript" >
+
+import Todo from './Todo';
+
+export default {
+  props: ['todos'],
+  components: {
+    Todo,
+  },
+};
+</script>
+```
+
+教學原文
+> In the TodoList component refactor the code to render the Todo component. We will also need to change the way our todos are passed to the Todo component. We can use the v-for attribute on any components we create just like we would in any other element. The syntax will be like this: <my-component v-for="item in items" :key="item.id"></my-component>. Note that from 2.2.0 and above, a key is required when using v-for with components. An important thing to note is that this does not automatically pass the data to the component since components have their own isolated scopes. To pass the data, we have to use props.
+
+~~我真心覺得這段去看 [官方範例](https://cn.vuejs.org/v2/guide/list.html#key) 比較好懂，這段教學我快看到龜覽趴火了..~~
+~~想給作者寄刀片~~ 
+![偷渡熊俠貼圖](https://ithelp.ithome.com.tw/images/emoticon/emoticon03.gif)
+`
+
+
+現在我們替 ```Todo.vue``` 增加一個名為 isEditing 的屬性，用於確認目前這筆項目是否處於「編輯中」的狀態
+
+若該筆項目被點擊，將觸發 ```showForm method（方法 ）```(之後詳述) ，將 isEditing 的屬性值轉為 true ，並將編輯畫面顯示；若為 false ，則顯示一般的 Todo 表單畫面
+
+~~碎碎念：原文教學這段觀念東跳西眺，我還以為是跳跳虎咧，FK~~ 
+
+![img](../imgs/Todo-06.png)
+
+目前我們的 ```Todo.vue``` code 是長這樣
+```js
+<template>
+  <div class='ui centered card'>
+    <!-- 使用 v-show 來判定要不要顯示編輯畫面 -->
+    <div class="content" v-show="!isEditing">
+      <div class='header'>
+          {{ todo.title }}
+      </div>
+      <div class='meta'>
+          {{ todo.project }}
+      </div>
+      <div class='extra content'>
+          <span class='right floated edit icon' v-on:click="showForm">
+          <i class='edit icon'></i>
+        </span>
+      </div>
+    </div>
+    <!-- 顯示編輯畫面 -->
+    <div class="content" v-show="isEditing">
+      <div class='ui form'>
+        <div class='field'>
+          <label>Title</label>
+          <input type='text' v-model="todo.title" >
+        </div>
+        <div class='field'>
+          <label>Project</label>
+          <input type='text' v-model="todo.project" >
+        </div>
+        <div class='ui two button attached buttons'>
+          <button class='ui basic blue button' v-on:click="hideForm">
+            Close X
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class='ui bottom attached green basic button' v-show="!isEditing &&todo.done" disabled>
+        Completed
+    </div>
+    <div class='ui bottom attached red basic button' v-show="!isEditing && !todo.done">
+        Pending
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['todo'],
+  data() {
+    return {
+      isEditing: false,
+    };
+  },
+  methods: {
+    showForm() { // 顯示編輯頁面
+      this.isEditing = true;
+    },
+  },
+};
+</script>
+```
+*請注意，若是參考原教學範例的 code ，此段又多了一個 ```<template>``` ，請記得刪除*
+
+當然除了開啟編輯頁面外，我們也要能關閉編輯頁面回到正常的 todo 列表才對
+所以底下的 ```<script></script>``` 完整 code 應該如下
+```js
+<script>
+export default {
+  props: ['todo'],
+  data() {
+    return {
+      isEditing: false,
+    };
+  },
+  methods: {
+    showForm() {
+      this.isEditing = true;
+    },
+    hideForm() {
+      this.isEditing = false;
+    },
+  },
+};
+</script>
+```
+
+這樣一來我們的編輯功能就完成啦！
+
+![img](../imgs/Todo-01.gif)
