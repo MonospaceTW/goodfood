@@ -172,10 +172,6 @@
           this.dishes[index].count += 1;
         },
         order() {
-          if(this.name.length <= 0){
-            alert('請輸入名字');
-            return;
-          }
           if (this.logined == true && this.name.length >= 1) {
             for (let item in this.dishes) {
               parseInt(this.dishes[item].count);
