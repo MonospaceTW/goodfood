@@ -8,11 +8,25 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  components: {}
 };
 </script>
 
-<style>
+<style lang="scss">
+// @import "../node_modules/susy/sass/susy";
+
+// $susy: (
+//   columns: 12,
+//   container: 1140px,
+//   gutters: 0.25,
+//   global-box-sizing: border-box,
+//   debug: (image: show-columns)
+// );
+// .testing {
+//   @include span(12);
+// }
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
