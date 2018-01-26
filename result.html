@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw">
 
 <head>
     <meta charset="UTF-8">
@@ -41,14 +41,14 @@
                     <li class="totallist" v-for="(item,index) in totalOrders">
                         <span class="inner-type-1">{{item.dishName}}</span>
                         <span class="inner-cont-1">x{{item.count}}</span>
-                        <span class="inner-digital">{{item.subtotal}}TWD</span>
+                        <span class="inner-digital">${{item.subtotal}}</span>
                     </li>
 
                 </ul>
                 <P class="total-1">
                     <span>總計</span>
                     <span></span>
-                    <span>{{total}}TWD</span>
+                    <span>${{total}}</span>
                 </P>
 
                 <div class="listtop-2">訂單明細</div>
@@ -63,22 +63,17 @@
                                 <span class="inner-wrap">
                                     <span class="inner-type-2">{{dish.dishName}}</span>
                                     <span class="inner-cont-2">x{{dish.count}}</span>
-                                    <div class="clearfix"></div>
-                                </span>
-                                <span class="inner-total"></span>
-                            </template>
 
-                            <div class="user-total">{{order.userTotal}}TWD</div>
+                                </span>
+                            </template>
+                            <div class="user-total">合計${{order.userTotal}}</div>
                         </li>
                     </template>
-
-
-
                 </ul>
                 <p class="total-2">
                     <span>總計</span>
                     <span></span>
-                    <span>{{total}}TWD</span>
+                    <span>${{total}}</span>
                 </p>
 
 
@@ -96,28 +91,21 @@
             </div>
         </div>
         <div class="navbar" id="navbar">
-            <a href="#" class="fa fa-share-alt" aria-hidden="true" @click="share">
+            <a href="#" class="fa fa-share-alt icon" aria-hidden="true" @click="share">
             </a>
-            <a href="index.html" class="fa fa-home" aria-hidden="true"></a>
-            <a href="#" class="fa fa-user-o" aria-hidden="true"></a>
+            <a href="index.html">
+                <img src="img/icon-orange-home.png" alt="home" width="25">
+            </a>
+            <a href="#">
+                <img src="img/icon-orange-member.png" alt="member" width="20">
+            </a>
         </div>
 
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
-            authDomain: "goodfood-39158.firebaseapp.com",
-            databaseURL: "https://goodfood-39158.firebaseio.com",
-            projectId: "goodfood-39158",
-            storageBucket: "goodfood-39158.appspot.com",
-            messagingSenderId: "940303768399"
-        };
-        firebase.initializeApp(config);
-    </script>
+    <script src="js/config.js"></script>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a45e5ae798027f5"></script>
 

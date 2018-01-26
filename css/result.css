@@ -5,6 +5,7 @@ body {
 
 .container {
   margin: 0 auto;
+  margin-bottom: 70px;
 }
 
 .result-title {
@@ -57,13 +58,9 @@ hr {
   letter-spacing: 3px;
 }
 
-.button:hover {
-  background: #fff;
-  border: 1px solid #ee5d30;
-}
-
 .order-more:hover {
-  color: #ed5d30;
+  color: #fff;
+  background: #ff6739;
   text-decoration: none;
 }
 
@@ -115,6 +112,7 @@ hr {
   list-style-type: none;
   border-bottom: 1px solid #e4e4e4;
   padding-top: 10px;
+  vertical-align: text-top;
 }
 .result-list .total-1 {
   width: 100%;
@@ -134,32 +132,33 @@ hr {
   margin: 40px 0 20px 0;
 }
 .result-list .outer {
+  width: 100%;
   font-size: 14px;
   padding: 0;
-  margin: -5px 0 0 0;
-  width: 100%;
+  margin-top: -5px;
 }
 .result-list .outer .inner-name-2 {
-  display: inline-block;
   width: 20%;
+  display: inline-block;
+  line-height: 0;
 }
 .result-list .outer .inner-wrap {
-  width: 50%;
+  width: 60%;
   display: inline-block;
+  line-height: 10px;
 }
 .result-list .outer .inner-wrap .inner-type-2 {
-  display: inline-block;
   width: 70%;
+  line-height: 0;
+  display: inline-block;
 }
 .result-list .outer .inner-wrap .inner-cont-2 {
   width: 30%;
-}
-.result-list .outer .clearfix {
-  clear: both;
+  text-align: right;
 }
 .result-list .outer .inner-total {
+  width: 20%;
   display: inline-block;
-  width: 25%;
 }
 .result-list .outer .user-total {
   text-align: right;
@@ -168,7 +167,6 @@ hr {
   font-size: 14px;
   text-align: right;
   letter-spacing: 3px;
-  border-bottom: 1.5px solid #cccaca;
   margin-top: 15px;
 }
 
@@ -180,9 +178,8 @@ hr {
   bottom: 0;
   font-size: 1.5rem;
 }
-.navbar .text {
-  display: inline-block;
-  font-size: 14px;
+.navbar .icon {
+  color: orange;
 }
 .navbar a {
   color: #ee5d30;
@@ -235,5 +232,3 @@ hr {
   background-color: white;
   font-size: 16px;
 }
-
-

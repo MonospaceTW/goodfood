@@ -1,0 +1,244 @@
+                @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+                @mixin textstyle1 {
+                    color: $maincolor;
+                    text-align: center;
+                    letter-spacing: 2px;
+                }
+
+                @mixin textstyle2 {
+                    color: $fontcolor;
+                    text-align: center;
+                    letter-spacing: 2px;
+                }
+
+                $maincolor:#ed5d30;
+                $fontcolor:#525252;
+                $font-xl:17px;
+                $font-l:14px;
+                $font-m:12px;
+                $font-s:11px;
+                body {
+                    font-family: 'Noto Sans TC', 'MicrosoftJhengHeiRegular', 'sans-serif';
+                }
+
+                .container {
+                    margin: 0 auto;
+                    margin-bottom: 70px;
+                }
+
+                .result-title {
+                    @include textstyle1;
+                    font-size: $font-xl;
+                    padding-top: 20px;
+                }
+
+                hr {
+                    border: 0.5px solid $maincolor;
+                    margin-top: 5px;
+                }
+
+                .result-subtitle {
+                    @include textstyle2();
+                    font: {
+                        weight: 500;
+                        size: $font-xl;
+                    }
+                }
+
+                .result-info p {
+                    @include textstyle2();
+                    line-height: 1px;
+                    font-size: 12px;
+                    margin-top: 15px;
+                }
+
+                .button {
+                    display: inline-block;
+                    width: 100%;
+                    text-align: center;
+                    margin-top: 10px;
+                    cursor: pointer;
+                    .order-more {
+                        background: $maincolor;
+                        width: 95px;
+                        height: 30px;
+                        border-radius: 20px;
+                        padding: 5px 15px;
+                    }
+                    a {
+                        color: #fff;
+                        font-size: $font-m;
+                        letter-spacing: 3px;
+                    }
+                }
+
+                .order-more:hover {
+                    color: #fff;
+                    background: #ff6739;
+                    text-decoration: none;
+                }
+
+                .deadline {
+                    color: $fontcolor;
+                    font-size: $font-m;
+                    letter-spacing: 3px;
+                    text-align: center;
+                    margin: 10px auto;
+                    width: 60%;
+                }
+
+                .result-list {
+                    width: 100%;
+                    color: $fontcolor;
+                    margin-bottom: 50px;
+                    .listtop-1 {
+                        @include textstyle2;
+                        border-bottom: 1.5px solid $maincolor;
+                        border-top: 1.5px solid $maincolor;
+                        margin-top: 28px;
+                    }
+                    ul {
+                        width: 100%;
+                        font-size: $font-l;
+                        padding-left: 0;
+                        margin-top: 15px;
+                        .inner-type-1 {
+                            display: inline-block;
+                            width: 55%;
+                        }
+                        .inner-cont-1 {
+                            display: inline-block;
+                            width: 15%;
+                        }
+                        .inner-digital {
+                            display: inline-block;
+                            width: 25%;
+                        }
+                    }
+                    span:last-child {
+                        text-align: right;
+                    }
+                    li {
+                        letter-spacing: 3px;
+                        list-style-type: none;
+                        border-bottom: 1px solid rgb(228, 228, 228);
+                        padding-top: 10px;
+                        vertical-align: text-top;
+                    }
+                    .total-1 {
+                        width: 100%;
+                        font-size: $font-l;
+                        letter-spacing: 3px;
+                        text-align: right;
+                         :nth-child(3) {
+                            text-align: right
+                        }
+                    }
+                    .listtop-2 {
+                        @include textstyle2;
+                        border-bottom: 1.5px solid $maincolor;
+                        border-top: 1.5px solid $maincolor;
+                        margin: 40px 0 20px 0;
+                    }
+                    .outer {
+                        width: 100%;
+                        font-size: $font-l;
+                        padding: 0;
+                        margin-top: -5px;
+                        .inner-name-2 {
+                            width: 20%;
+                            display: inline-block;
+                            line-height: 0;
+                        }
+                        .inner-wrap {
+                            width: 60%;
+                            display: inline-block;
+                            line-height: 10px;
+                            .inner-type-2 {
+                                width: 70%;
+                                line-height: 0;
+                                display: inline-block;
+                            }
+                            .inner-cont-2 {
+                                width: 30%;
+                                text-align: right;
+                            }
+                        }
+                        .inner-total {
+                            width: 20%;
+                            display: inline-block;
+                        }
+                        .user-total {
+                            text-align: right;
+                        }
+                    }
+                    .total-2 {
+                        font-size: $font-l;
+                        text-align: right;
+                        letter-spacing: 3px;
+                        margin-top: 15px;
+                    }
+                }
+
+                .navbar {
+                    position: fixed;
+                    width: 100%;
+                    background: rgb(255, 255, 255);
+                    box-shadow: 0 0 20px #ebebeb;
+                    bottom: 0;
+                    font-size: 1.5rem;
+                    .icon {
+                        color: orange;
+                    }
+                    a {
+                        color: #ee5d30;
+                    }
+                    a:hover {
+                        text-decoration: none;
+                        color: rgb(141, 141, 141);
+                    }
+                }
+
+                .container {
+                    position: relative;
+                }
+
+                .lightbox {
+                    display: none;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.4);
+                }
+
+                .lightbox .msg {
+                    position: absolute;
+                    top: 150px;
+                    left: 0;
+                    right: 0;
+                    width: 60%;
+                    margin: auto;
+                    height: 100px;
+                    background-color: white;
+                    text-align: center;
+                    padding: 10px;
+                    border-radius: 10px;
+                }
+
+                .lightbox .msg .boxtitle {
+                    font-size: 1.1rem;
+                }
+
+                .lightbox .msg .close {
+                    position: absolute;
+                    top: -5px;
+                    right: 0;
+                    width: 20px;
+                    height: 20px;
+                    border: 1px solid gray;
+                    border-radius: 50%;
+                    background-color: white;
+                    font-size: 16px;
+                }

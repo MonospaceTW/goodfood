@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Email登入</title>
+  <script src="js/vue.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script src="js/config.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-component></my-component>
+  </div>
+
+<script type="text/x-template" id="my-component">
+  <div>
+    <div class="loginform">
+      <input type="email" placeholder="帳號：" v-model="email" v-on:focus="emailPlaceholderFocus($event)" v-on:blur="emailPlaceholderBlur($event)">
+      <input type="password" name="" id=""　placeholder="密碼：" v-model="userPassword" v-on:focus="userPasswordPlaceholderFocus($event)" v-on:blur="userPasswordPlaceholderBlur($event)">
+      <br>
+      <p>{{errorMsg}}</p>
+      <br>
+      <a href="#" @click="signin">登入</a>
+      <!-- <a href="#" @click="signout">登出</a> -->
+      <a href="signup.html">註冊</a>
+      <a href="#" @click="forgetpwd">忘記密碼</a>
+    </div>
+  </div>
+</script>
+<script>
+  const auth = firebase.auth();
+  let user = firebase.auth().currentUser;
+
+  Vue.component('my-component', {
+    template: '#my-component',
+    data: function () {
+      return {
+        email: '',
+        userPassword: '',
+        errorMsg: '',
+      }
+    },
+    created(){
+      const self = this;
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log(user);
+          // User is signed in.
+          self.nerverSignup = false;
+          location.reload();
+          window.history.back();
+
+        } else {
+          // No user is signed in.
+          console.log('not login');
+
+        }
+    });
+
+    },
+    methods: {
+      signin(){
+        const self = this;
+        const promise = auth.signInWithEmailAndPassword(this.email, this.userPassword);
+        //promise.catch(e => console.log(e.message));
+        promise.catch((e) => {
+          this.nerverSignup = true;
+        if(e.message == 'The password is invalid or the user does not have a password.'){
+          self.errorMsg = "請輸入正確密碼"
+        }
+        if(e.message == "There is no user record corresponding to this identifier. The user may have been deleted."){
+          self.errorMsg = "帳號尚未註冊"
+        }
+        });
+      },
+      // signout(){
+      //   firebase.auth().signOut();
+      // },
+      forgetpwd(){
+        if(this.email == ''){
+          alert('請先輸入 email 帳號');
+        }else{
+          firebase.auth().sendPasswordResetEmail(this.email)
+          .then(function() {
+          // Password reset email sent.
+          alert('請收取信件並重設密碼');
+        })
+          .catch(function(error) {
+          // Error occurred. Inspect error.code.
+        });
+        }
+      },
+      emailPlaceholderFocus(e){
+        e.target.placeholder="";
+      },
+      emailPlaceholderBlur(e){
+        e.target.placeholder='帳號：';
+      },
+      userPasswordPlaceholderFocus(e){
+        e.target.placeholder="";
+      },
+      userPasswordPlaceholderBlur(e){
+        e.target.placeholder="密碼：";
+      },
+    }
+  });
+  const vm = new Vue({
+    el: '#app',
+    data: {
+
+    }
+  });
+</script>
+</body>
+</html>

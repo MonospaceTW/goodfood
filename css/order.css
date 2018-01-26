@@ -55,7 +55,7 @@ body {
 .wrap {
   width: 100%; }
   .wrap .order-name {
-    padding: 20px 0 0 80px; }
+    padding: 20px 0 0 50px; }
     .wrap .order-name .myname {
       color: #525252;
       font-size: 14px;
@@ -78,13 +78,8 @@ body {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
     margin-right: 25px; }
     .wrap .button .order-btn {
-      width: 200px;
-      height: 40px;
       font-size: 13px;
       border-radius: 21px;
       text-align: center;
@@ -92,11 +87,9 @@ body {
       background: #f7a654;
       color: #fff;
       letter-spacing: 3px;
-      padding: 12px 72px;
-      margin-bottom: 16px; }
+      margin: 0 72px 10px 72px;
+      padding: 12px 72px; }
     .wrap .button .result-btn {
-      width: 200px;
-      height: 40px;
       font-size: 13px;
       border-radius: 21px;
       text-align: center;
@@ -104,11 +97,9 @@ body {
       color: #f7a654;
       border: 1px solid #f7a654;
       letter-spacing: 1.5px;
-      padding: 12px 60px;
-      margin-bottom: 16px; }
+      margin: 0 72px 10px 72px;
+      padding: 12px 60px; }
     .wrap .button .share-btn {
-      width: 200px;
-      height: 40px;
       font-size: 13px;
       border-radius: 21px;
       text-align: center;
@@ -116,6 +107,7 @@ body {
       color: #f7a654;
       border: 1px solid #f7a654;
       letter-spacing: 2px;
+      margin: 0 72px 10px 72px;
       padding: 12px 60px; }
     .wrap .button .order-btn:visited {
       color: #fff; }
