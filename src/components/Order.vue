@@ -1,19 +1,61 @@
 <script>
-// var firebase = require("firebase");
+var firebase = require("firebase");
 
 export default {
   data() {
     return {
       orderId: "orderId",
-      storeId: "storeId"
+      storeId: "storeId",
+      dishes: [
+        {
+          dishName: "排骨便當",
+          storeId: "L05fjkdfjkdjfa",
+          price: 30,
+          dishId: "-L05fnvmcvmz",
+          count: 0
+        },
+        {
+          dishName: "雞腿便當",
+          storeId: "L05fjkdfjkdjfa",
+          price: 50,
+          dishId: "-L05fnvmcvmz",
+          count: 0
+        }
+      ]
     };
   },
   methods: {
+    add(index) {
+      this.dishes[index].count += 1;
+      console.log(this.dishes[index].count);
+    },
+    subtract(index) {
+      if (this.dishes[index].count >= 1) {
+        this.dishes[index].count -= 1;
+      }
+    },
+    subtotal(index) {
+      return this.dishes[index].count * this.dishes[index].price;
+    },
+
     order() {
       this.$router.push({
         name: "ComfirmOrder",
         params: { storeId: this.storeId, orderId: this.orderId }
       });
+    }
+  },
+  computed: {
+    total() {
+      let subtotal = [];
+      for (let i in this.dishes) {
+        subtotal.push(this.dishes[i].count * this.dishes[i].price);
+      }
+      console.log(subtotal);
+      let total = subtotal.reduce(function(previousVal, currentVal) {
+        return previousVal + currentVal;
+      }, 0);
+      return total;
     }
   }
 };
@@ -24,22 +66,22 @@ export default {
   <h1 class="store_name">便當店名</h1>
   
     <ul>
-      <li class="item">
+      <li class="item" v-for="(dish,index) in dishes" v-bind:key="index">
         <div class="menu">
-          <div class="menu_name">咖哩鍋貼</div>
-          <div class="price">$50</div>
+          <div class="menu_name">{{dish.dishName}}</div>
+          <div class="price">${{dish.price}}</div>
         </div>
         <div class="menu">
           <div class="counter">
-            <button>-</button>
-            <div>1</div>
-            <button>+</button>
+            <button @click="subtract(index)">-</button>
+            <div>{{dish.count}}</div>
+            <button @click="add(index)">+</button>
           </div>
-          <div class="subtotal">$50</div>
+          <div class="subtotal">${{subtotal(index)}}</div>
         </div>
       </li>
     </ul>
- 
+ <div class="total">總共{{total}}元</div>
 
   <a class="order" href="#" @click="order">下訂單</a>
   <a class="result" href="#">看團定結果</a>
@@ -63,6 +105,8 @@ li {
 }
 
 .item {
+  padding: 10px;
+  margin: 10px 0;
   border-radius: 15px;
   background-color: rgb(223, 222, 222);
 }
@@ -84,6 +128,10 @@ li {
   text-align: center;
   border: 1px orange solid;
   border-radius: 20px;
+}
+
+.total {
+  text-align: right;
 }
 
 .order {
