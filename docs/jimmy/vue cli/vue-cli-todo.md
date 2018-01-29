@@ -7,7 +7,7 @@
 
 ### Vue CLI - todoList 說明
 
-[Vue CLI - todoList 說明](https://github.com/MonospaceTW/goodfood/blob/jimmy/docs/jimmy/vue%20cli/vue-cli - todoList.md)
+[Vue CLI - todoList 說明](https://github.com/MonospaceTW/goodfood/blob/jimmy/docs/jimmy/vue%20cli/vue-cli-todoList.md)
 
 
 ### 在練習這個教學範例時的發生問題
