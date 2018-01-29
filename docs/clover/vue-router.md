@@ -198,7 +198,7 @@ src/App.vue
 網址為：
 http://www.網址/#/Order/ID啥的/其他參數
 
-### 4.Programmatic Navigation
+###  4.Programmatic Navigation
 如果不把link寫在template，寫在methods裡面的話可以用push：
 this.$router.push({})
 
