@@ -13,7 +13,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/Order',
+      path: '/order',
       component: Order
     }
   ]
@@ -29,12 +29,12 @@ src/App.vue
 </template>
 ```
 
-http://www.網址/#/Order
+http://www.網址/#/order
 
 ### 巢狀路由
 
 網址：
-http://www.網址/#/Order/Product
+http://www.網址/#/order/product
 
 src/router/index.js
 ```
@@ -48,11 +48,11 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/Order',
+      path: '/order',
       component: Order,
       children: [
         {
-          path: 'Product',
+          path: 'product',
           component: Product
         },
       ]
@@ -60,18 +60,27 @@ export default new Router({
   ]
 })
 ```
+src/components/Order.vue
+```
+<template>
+  <div>
+    Order
+    <router-view></router-view>
+  </div>
+</template>
+```
 
 
 ## 二、動態比對參數
 
 ### 1.params
-在path內使用冒號來動態綁定params (EX:path: '/Order/:id)
+在path內使用冒號來動態綁定params (EX:path: '/order/:id)
 若參數為可有可無的話則加上?，可顯示無參數的頁面
-(EX:path: '/Order/:id?)
+(EX:path: '/order/:id?)
 
 ```
 {
-      path: '/Order/:id?',
+      path: '/order/:id?',
       component: Order
     }
 ```
@@ -87,7 +96,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/Order/:id?',
+      path: '/order/:id?',
       component: Order
     }
   ]
@@ -97,7 +106,7 @@ export default new Router({
 ### 在component內調用網址的參數
 
 網址列為：
-http://www.網址/#/Order
+http://www.網址/#/order
 
 src/components/Order.vue
 ```
@@ -111,7 +120,7 @@ src/components/Order.vue
 ## 2.query
 
 網址列為：
-http://www.網址/#/Order?id=xxx
+http://www.網址/#/order?id=xxx
 
 path不用加參數
 src/router/index.js
@@ -125,7 +134,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/Order',
+      path: '/order',
       component: Order
     }
   ]
@@ -147,7 +156,7 @@ src/components/Order.vue
 ### 1.基本寫法
 ```
 <template>
- <router-link :to="/Order">Order</router-link> 
+ <router-link to="/order">Order</router-link> 
 </template>
 ```
 ### 2.具名路由
@@ -157,8 +166,8 @@ src/components/Order.vue
 ```
 routes: [
     {
-      path: '/Order',
-      name:'Order',
+      path: '/order',
+      name:'order',
       component: Order
     }
   ]
@@ -167,7 +176,7 @@ routes: [
 src/App.vue
 ```
 <template>
- <router-link :to="Order">Order</router-link> 
+ <router-link :to="{name:'order'}">Order</router-link> 
 </template>
 ```
 
@@ -178,8 +187,8 @@ src/App.vue
 ```
 routes: [
     {
-      path: '/Order/:id/:something',
-      name:'Order',
+      path: '/order/:id/:something',
+      name:'order',
       component: Order
     }
   ]
@@ -189,8 +198,9 @@ src/App.vue
 ```
 <template>
   <router-link :to="{
-    name:'Order', 
-    params: { id: 'ID啥的', something: '其他參數'}}">
+    name:'order', 
+    params: { id: 'ID啥的', something: '其他參數'}
+    }">
     Order
   </router-link> 
 </template>
@@ -201,6 +211,7 @@ http://www.網址/#/Order/ID啥的/其他參數
 ###  4.Programmatic Navigation
 如果不把link寫在template，寫在methods裡面的話可以用push：
 this.$router.push({})
+Q:但是用push的方法的話，網址列不會顯示router的路徑？
 
 src/App.vue
 ```
@@ -215,7 +226,7 @@ export default {
   methods: {
     order() {
       this.$router.push({
-        name: "ComfirmOrder",
+        name: "order",
         params: { storeId: this.storeId, orderId: this.orderId }
       });
     }
@@ -266,10 +277,10 @@ new Router({
 })
 ```
 
-預設hash mode，用＃的方式，不管後面網址怎麼變，實際上都是從index進入
+* 預設hash mode，用＃的方式，不管後面網址怎麼變，實際上都是從index進入
 http://www.網址/#/todo
 
-history mode
+* history mode
 不會都從index讀取而是使用真實路徑
 需要在server設定URL rewrite，否則無法直接讀取網址
 http://www.網址/todo
