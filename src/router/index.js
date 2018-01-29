@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import todoList from "@/components/todoList";
+import App from '@/App'
 import Order from "@/components/Order";
 import ComfirmOrder from "@/components/ComfirmOrder";
 
@@ -10,17 +9,31 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/',
+      name: 'App',
+      component: App,
+      children: [
 
-    {
-      path: '/Order',
-      name: 'Order',
-      component: Order
+        {
+          path: 'order/:store_id?/:order_id?',
+          name: 'order',
+          component: Order,
+          props: true
+        },
+        {
+          path: 'comfirm_order/:store_id?/:order_id?',
+          name: 'comfirm_order',
+          component: ComfirmOrder,
+          props: true
+        },
+
+      ]
     },
-    {
-      path: '/ComfirmOrder/:storeId/:orderId',
-      name: 'ComfirmOrder',
-      component: ComfirmOrder,
-      props: true
-    },
+
+
+
+
+
   ]
 })
