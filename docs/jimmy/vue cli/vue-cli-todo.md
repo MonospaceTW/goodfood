@@ -1,9 +1,62 @@
-# Vue Cli TodoList 教學
+# Vue CLI - todoList 發生狀況與解決方法
 
-[教學網址](https://scotch.io/tutorials/build-a-to-do-app-with-vue-js-2)
+###  建立 Vue CLI 環境
+
+[建立 Vue CLI 環境](https://github.com/MonospaceTW/goodfood/blob/jimmy/docs/jimmy/vue%20cli/vue-cli.md)
+
+
+### Vue CLI - todoList 說明
+
+[Vue CLI - todoList 說明](https://github.com/MonospaceTW/goodfood/blob/jimmy/docs/jimmy/vue%20cli/vue-cli - todoList.md)
+
 
 ### 在練習這個教學範例時的發生問題
-1. 教學的範例程式碼沒有將 CreateTodo 這個 child components import 到 App.vue中
+1. 使用v-for 渲染待辦事項 缺少 </div> 結尾標籤
+
+解決方法:
+使用以下程式碼:
+```
+<template>
+  <div>
+    // JavaScript expressions in Vue are enclosed in double curly brackets.
+    <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
+    <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
+    <div class='ui centered card' v-for="todo in todos" :key="todo.id">
+      <div class='content'>
+        <div class='header'>
+          {{ todo.title }}
+        </div>
+        <div class='meta'>
+          {{ todo.project }}
+        </div>
+        <div class='extra content'>
+          <span class='right floated edit icon'>
+            <i class='edit icon'></i>
+          </span>
+        </div>
+      </div>
+      <div class='ui bottom attached green basic button' v-show="todo.done">
+        Completed
+      </div>
+      <div class='ui bottom attached red basic button' v-show="!todo.done">
+        Complete
+      </div>
+      <!-- 在下方補上缺少的結尾</div>標籤 -->
+      </div>
+  </div>
+</template>
+
+<script type = "text/javascript" >
+
+export default {
+  props: ['todos'],
+};
+</script>
+```
+
+--- 
+
+2. 教學的範例程式碼沒有將 CreateTodo 這個 child components import 到 App.vue中
 
 解決方法:
 
@@ -189,9 +242,62 @@ export default {
 
 
 ---
+3. 將待辦事項從 Pending 要改成 Completed 時 缺少 v-on 來監聽點擊事件觸發完成方法
+
+解決方法:
+在 Pending 的 div 中 增加 v-on 監聽點擊事件觸發 completeTodo 方法
+
+```
+<template>
+<div class='ui centered card'>
+    // Todo shown when we are not in editing mode.
+    <div class="content" v-show="!isEditing">
+      <div class='header'>
+          {{ todo.title }}
+      </div>
+      <div class='meta'>
+          {{ todo.project }}
+      </div>
+      <div class='extra content'>
+          <span class='right floated edit icon' v-on:click="showForm">
+          <i class='edit icon'></i>
+        </span>
+        <!-- 增加刪除Icon -->
+        <span class='right floated trash icon' v-on:click="deleteTodo(todo)">
+          <i class='trash icon'></i>
+        </span>
+      </div>
+    </div>
+    // form is visible when we are in editing mode
+    <div class="content" v-show="isEditing">
+      <div class='ui form'>
+        <div class='field'>
+          <label>Title</label>
+          <input type='text' v-model="todo.title" >
+        </div>
+        <div class='field'>
+          <label>Project</label>
+          <input type='text' v-model="todo.project" >
+        </div>
+        <div class='ui two button attached buttons'>
+          <button class='ui basic blue button' v-on:click="hideForm">
+            Close X
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class='ui bottom attached green basic button' v-show="!isEditing &&todo.done" disabled>
+        Completed
+    </div>
+    <div class='ui bottom attached red basic button' v-on:click="completeTodo(todo)" v-show="!isEditing && !todo.done">
+        Pending
+    </div>
+  </div>
+</template>
+```
 
 
-2. 子組件觸發事件給父組件接收，教學範例事件名稱錯誤
+4. 子組件觸發事件給父組件接收，教學範例事件名稱錯誤
 
 範例中錯誤的語法:
 
@@ -228,6 +334,12 @@ export default {
 
   [使用 v-on 绑定自定義事件](https://cn.vuejs.org/v2/guide/components.html#%E4%BD%BF%E7%94%A8-v-on-%E7%BB%91%E5%AE%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6)
 
+
+---
+
+原文出處:
+
+[原文教學網址](https://scotch.io/tutorials/build-a-to-do-app-with-vue-js-2)
 
 
 
