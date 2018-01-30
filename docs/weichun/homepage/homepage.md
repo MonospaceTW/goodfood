@@ -8,7 +8,7 @@
 <div class="flex-container">
   <div class="flex-item">
    <img src="../imgs/logo.svg" style="height:150px;width:150px;">
-   <p style="margin-left:40px; color:#b15814;">SET LUNCH</p>
+   <p class="home-text">SET LUNCH</p>
   </div>
 </div>
 
@@ -32,6 +32,10 @@ margin: auto;
 </style>
 
 ```
+
+顯示畫面如下:
+
+  ![image](../imgs/homepage.png)
 
 - 一秒跳轉google
 
