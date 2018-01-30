@@ -7,7 +7,7 @@
 
 <div class="flex-container">
   <div class="flex-item">
-   <img src="../imgs/logo.svg" style="height:150px;width:150px;">
+   <img src="../imgs/logo.svg" class="home-logo">
    <p class="home-text">SET LUNCH</p>
   </div>
 </div>
@@ -27,6 +27,12 @@ margin: auto;
      margin-left:40px; 
      color:#b15814;
      font-size: 16px;
+}
+
+
+.home-logo{
+     height:150px;
+     width:150px;
 }
 
 </style>
