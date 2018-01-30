@@ -14,6 +14,15 @@
 
 ![image](./imgs/for.png)
 
+若gulp編譯後衛產出sourcemap請檢查是否有以下這兩段
+
+```java
+
+.pipe(sourcemaps.init())//產出前的呼叫
+.pipe(sourcemaps.write('./debug'))//())最後方括弧為必填值,不然系統無法產出
+
+```
+
 **若無須放入子資料夾以根目錄表示法**
 
 ![image](./imgs/six.png)
@@ -22,7 +31,8 @@
 
 ![image](./imgs/nin.png) compile後會產生.map的檔案在相對應的資料夾
 
-<font color="maroon">**如何於本機瀏覽狀態來編輯scss存檔後同步至vs code**</font>
+<h3><font color="blue">
+如何於本機瀏覽狀態來編輯scss存檔後同步至vs code</font></h3>
 
  * 開啟專案瀏覽狀態->開發者工具->開啟source->於Preference勾選以下設定
 

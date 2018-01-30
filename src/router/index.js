@@ -2,14 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import todoList from "@/components/todoList";
-import Menu from "@/components/Menu";
+import Result from "@/components/Result";
 
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/HelloWorld',
       name: 'HelloWorld',
       component: HelloWorld
@@ -20,9 +19,9 @@ export default new Router({
       component: todoList
     },
     {
-      path: '/Menu',
-      name: 'Menu',
-      component: Menu
+      path: '/Result',
+      name: 'Result',
+      component: Result
     },
   ]
 })
