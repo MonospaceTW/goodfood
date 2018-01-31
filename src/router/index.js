@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import App from '@/App'
-import Order from "@/components/Order";
-import ComfirmOrder from "@/components/ComfirmOrder";
-import NotFound from "@/components/NotFound";
-
+import Order from '@/components/Order'
+import ComfirmOrder from '@/components/ComfirmOrder'
+import NotFound from '@/components/NotFound'
 
 Vue.use(Router)
 
@@ -23,26 +22,23 @@ export default new Router({
           props: true
         },
         {
-          path: 'comfirm_order/:store_id?/:order_id?',
+          path: 'comfirm_order',
           name: 'comfirm_order',
-          component: ComfirmOrder,
-          props: true
+          component: ComfirmOrder
+          // props: true
         },
         {
           path: 'not_found',
           name: 'not_found',
-          component: NotFound,
-        },
+          component: NotFound
+        }
 
       ]
     },
     {
       path: '*',
       redirect: { name: 'not_found' }
-    },
-
-
-
+    }
 
   ]
 })
