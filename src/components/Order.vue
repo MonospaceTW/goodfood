@@ -1,11 +1,15 @@
 <script>
-var firebase = require("firebase");
+/* eslint-disable */
+// var firebase = require('firebase');
+import ComfirmOrder from "./ComfirmOrder";
 
 export default {
   data() {
     return {
       orderId: "orderId",
       storeId: "storeId",
+      thisOrder: [],
+      comfirmed: false,
       dishes: [
         {
           dishName: "排骨便當",
@@ -24,10 +28,16 @@ export default {
       ]
     };
   },
+  components: {
+    ComfirmOrder
+  },
+  mounted() {
+    this.thisOrder = JSON.parse(sessionStorage.getItem("order"));
+    console.log(this.thisOrder);
+  },
   methods: {
     add(index) {
       this.dishes[index].count += 1;
-      console.log(this.dishes[index].count);
     },
     subtract(index) {
       if (this.dishes[index].count >= 1) {
@@ -35,21 +45,39 @@ export default {
       }
     },
     subtotal(index) {
-      return this.dishes[index].count * this.dishes[index].price;
+      let dish = this.dishes[index];
+      dish.subtotal = dish.count * dish.price;
+      return dish.subtotal;
     },
 
     order() {
-      this.$router.push({
-        name: "ComfirmOrder",
-        params: { storeId: this.storeId, orderId: this.orderId }
-      });
+      let dishes = this.dishes;
+      this.thisOrder = [];
+      for (let i in dishes) {
+        if (dishes[i].count >= 1) {
+          this.thisOrder.push(dishes[i]);
+        }
+      }
+      this.comfirmed = true;
+      console.log(this.thisOrder);
+      // sessionStorage.setItem('order', JSON.stringify(this.thisOrder));
+      // this.$router.push({
+      //   name: 'comfirm_order',
+      //   params: { storeId: this.storeId, orderId: this.orderId }
+      // });
+    },
+    edit() {
+      this.comfirmed = false;
+      console.log("edit");
     }
   },
   computed: {
     total() {
       let subtotal = [];
       for (let i in this.dishes) {
-        subtotal.push(this.dishes[i].count * this.dishes[i].price);
+        if (this.dishes[i].count >= 1) {
+          subtotal.push(this.dishes[i].count * this.dishes[i].price);
+        }
       }
       console.log(subtotal);
       let total = subtotal.reduce(function(previousVal, currentVal) {
@@ -63,6 +91,7 @@ export default {
 
 <template>
 <div class="container">
+  <comfirm-order v-show="comfirmed" :thisOrder="thisOrder" :total="total" @cancel="edit"></comfirm-order>
   <h1 class="store_name">便當店名</h1>
   
     <ul>
@@ -83,14 +112,14 @@ export default {
     </ul>
  <div class="total">總共{{total}}元</div>
 
-  <a class="order" href="#" @click="order">下訂單</a>
-  <a class="result" href="#">看團定結果</a>
-  <a class="share" href="#">分享這頁</a>
+  <a class="order_btn" href="#" @click="order">下訂單</a>
+  <a class="result_btn" href="#">看團定結果</a>
+  <a class="share_btn" href="#">分享這頁</a>
 </div>
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 li {
   list-style: none;
 }
@@ -98,6 +127,7 @@ li {
 .container {
   width: 90%;
   margin: 0 auto;
+  position: relative;
 }
 
 .store_name {
@@ -117,9 +147,9 @@ li {
   justify-content: space-between;
 }
 
-.order,
-.result,
-.share {
+.order_btn,
+.result_btn,
+.share_btn {
   display: block;
   margin: 0 auto;
   width: 200px;
@@ -134,7 +164,7 @@ li {
   text-align: right;
 }
 
-.order {
+.order_btn {
   background-color: orange;
 }
 </style>
