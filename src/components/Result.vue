@@ -40,7 +40,13 @@
             <div class="count">x1</div>
             <div class="price">$60</div>
         </div>
-        <div class="digital">$120</div>
+        <div class="row">
+            <div class="name"></div>
+            <div class="item_2"></div>
+            <div class="count"></div>
+            <div class="price row_digital_2">$120</div>
+        </div>
+        
 </div> 
 </template>
 
@@ -109,6 +115,7 @@ hr {
   display: flex;
   width: 90%;
   line-height: 18px;
+  text-align: left;
   margin: 13px 10px;
 }
 
@@ -116,9 +123,12 @@ hr {
   margin-top: 20px;
 }
 
+.row_digital_2 {
+  margin-top: 12px;
+}
+
 .count {
   width: 20%;
-  text-align: left;
 }
 
 .price {
@@ -127,22 +137,13 @@ hr {
 }
 .item {
   width: 60%;
-  text-align: left;
 }
 
 .item_2 {
   width: 35%;
-  text-align: left;
 }
 .name {
   width: 25%;
-  text-align: left;
-}
-
-.digital {
-  width: 93.5%;
-  margin-top: 20px;
-  text-align: right;
 }
 </style>
 
