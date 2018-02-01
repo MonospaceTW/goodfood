@@ -3,8 +3,8 @@
     <router-view/>
   </div>
 </template>
-
 <script>
+import 'normalize.css'
 export default {
   name: "App",
   components: {}
@@ -12,5 +12,4 @@ export default {
 </script>
 
 <style lang="scss">
-
 </style>
