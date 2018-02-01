@@ -1,27 +1,14 @@
 <template>
   <div>
-    <homepage></homepage>
-    
+    <router-view/>
   </div>
 </template>
 
 <script>
-
-import homepage from './components/homepage'  
 export default {
-   components: {
-    homepage
-  }
-}
+  name: "App"
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
 </style>

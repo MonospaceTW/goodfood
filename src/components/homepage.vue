@@ -4,7 +4,7 @@
    <img src="../imgs/logo.svg" class="home-logo">
    <p class="home-text">SET LUNCH</p>
 
-   <button>吃飯囉</button>
+   <button class="home-btn"><a href="http://google.com">吃飯囉</a></button>
   </div>
 </div>
 
@@ -13,9 +13,7 @@
 <script type = "text/javascript" >
 
 export default {
-};
-
-
+}
 // setTimeout( "location.href='http://google.com'", 100000 )
 </script>
 
@@ -35,14 +33,26 @@ margin: auto;
 }
 
 .home-text{
-     margin-left:40px; 
+     text-align: center;
      color:#b15814;
      font-size: 16px;
 }
 
 .home-logo{
-     height:150px;
-     width:150px;
+    text-align: center;
+     height:200px;
+     width:200px;
 }
 
+.home-btn{
+
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border: 1px orange solid;
+  border-radius: 20px;
+}
 </style>
