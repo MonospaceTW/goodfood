@@ -37,20 +37,20 @@
 </template>
 <script>
 export default {
-  props: ['store_id'],
-  data () {
+  props: ["store_id"],
+  data() {
     return {
-      order_id: 'order_id'
-    }
+      order_id: "order_id"
+    };
   },
   methods: {
-    teamOrder () {
+    teamOrder() {
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
 ol, ul{
   list-style: none;
 }
