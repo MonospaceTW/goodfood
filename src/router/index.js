@@ -1,4 +1,7 @@
 import Vue from "vue";
+import Result from "@/components/Result";
+import todoList from "@/components/todoList";
+import HelloWorld from "@/components/HelloWorld";
 import Router from "vue-router";
 import storeinfo from "../components/storeInfo";
 import App from "@/App";
@@ -11,6 +14,21 @@ Vue.use(Router);
 export default new Router({
   mode: "history",
   routes: [
+    {
+      path: "/HelloWorld",
+      name: "HelloWorld",
+      component: HelloWorld
+    },
+    {
+      path: "/todo",
+      name: "todoList",
+      component: todoList
+    },
+    {
+      path: "/Result",
+      name: "Result",
+      component: Result
+    },
     {
       path: "/",
       name: "App",
