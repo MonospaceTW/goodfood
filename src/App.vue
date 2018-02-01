@@ -6,15 +6,10 @@
 <script>
 import 'normalize.css'
 export default {
-  name: 'App',
-  data () {
-    return {
-      show: false
-    }
-  }
-}
+  name: "App",
+  components: {}
+};
 </script>
-<style>
-/* #app {
-} */
+
+<style lang="scss">
 </style>
