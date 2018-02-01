@@ -54,7 +54,7 @@ VUE CLI 的架構為:主架構+子架構
   
 
 
-  c. template 用 ```<todo-list> </todo-list>```的方式映出(render)於檔案 TodoList.vue 寫的內容
+  c. template 用 ```<todo-list> </todo-list>```的方式選染(render)於檔案 TodoList.vue 寫的內容
 
 
   ![image](../imgs/importTemplate.png)
@@ -84,4 +84,185 @@ VUE CLI 的架構為:主架構+子架構
 ![image](../imgs/todos-prop.png)
 
 
-5. Looping and Rendering Data
+5. Looping and Rendering Data- 迴圈 和 渲染 data(todos表單)
+
+- 在TodoList.vue中，為了渲染todos表單裡面的items(Todo、project、complete/pending)，使用```v-for="item in items"```。
+
+```html
+<template>
+  <div>
+    // JavaScript expressions in Vue are enclosed in double curly brackets.
+    <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
+    <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
+    <div class='ui centered card' v-for="todo in todos">
+      <div class='content'>
+        <div class='header'>
+          {{ todo.title }}
+        </div>
+        <div class='meta'>
+          {{ todo.project }}
+        </div>
+        <div class='extra content'>
+          <span class='right floated edit icon'>
+            <i class='edit icon'></i>
+          </span>
+        </div>
+      </div>
+      <div class='ui bottom attached green basic button' v-show="todo.done">
+        Completed
+      </div>
+      <div class='ui bottom attached red basic button' v-show="!todo.done">
+        Complete
+      </div>
+  </div>
+</template>
+
+<script type = "text/javascript" >
+
+export default {
+  props: ['todos'],
+};
+</script>
+```
+
+
+6. Editing a Todo- 編輯Todo.vue
+
+- 為了使code更乾淨，在src/components處新增一個新的檔案:Todo.vue，並輸入內容:
+
+```html
+<template>
+  <div class='ui centered card'>
+    <div class='content'>
+        <div class='header'>
+            {{ todo.title }}
+        </div>
+        <div class='meta'>
+            {{ todo.project }}
+        </div>
+        <div class='extra content'>
+            <span class='right floated edit icon'>
+            <i class='edit icon'></i>
+          </span>
+        </div>
+    </div>
+    <div class='ui bottom attached green basic button' v-show="todo.done">
+        Completed
+    </div>
+    <div class='ui bottom attached red basic button' v-show="!todo.done">
+        Complete
+    </div>
+</div>
+</template>
+
+<script type="text/javascript">
+  export default {
+    props: ['todo'],
+  };
+</script>
+```
+
+-  用```v-for``` 及 ```v-bind``` 與 ```props```將TodoList.vue pass給Todo.vue:
+
+## 此為 TodoList.vue的code
+```html
+
+<template>
+  <div>
+    <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
+    <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
+   // we are now passing the data to the todo component to render the todo list
+    <todo  v-for="todo in todos" v-bind:todo="todo"></todo> 
+  </div>
+</template>
+
+<script type = "text/javascript" >
+
+import Todo from './Todo';
+
+export default {
+  props: ['todos'],
+  components: {
+    Todo,
+  },
+};
+</script>
+```
+
+- Let's add a property to the Todo component class called isEditing.
+
+## 此為在 Todo.vue的code
+```html
+
+<template>
+  <div class='ui centered card'>
+    // Todo shown when we are not in editing mode.
+    <div class="content" v-show="!isEditing">
+      <div class='header'>
+          {{ todo.title }}
+      </div>
+      <div class='meta'>
+          {{ todo.project }}
+      </div>
+      <div class='extra content'>
+          <span class='right floated edit icon' v-on:click="showForm">
+          <i class='edit icon'></i>
+        </span>
+      </div>
+    </div>
+    // form is visible when we are in editing mode
+    <div class="content" v-show="isEditing">
+      <div class='ui form'>
+        <div class='field'>
+          <label>Title</label>
+          <input type='text' v-model="todo.title" >
+        </div>
+        <div class='field'>
+          <label>Project</label>
+          <input type='text' v-model="todo.project" >
+        </div>
+        <div class='ui two button attached buttons'>
+          <button class='ui basic blue button' v-on:click="hideForm">
+            Close X
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class='ui bottom attached green basic button' v-show="!isEditing &&todo.done" disabled>
+        Completed
+    </div>
+    <div class='ui bottom attached red basic button' v-show="!isEditing && !todo.done">
+        Pending
+    </div>
+  </div>
+</template>
+```
+
+
+- In addition to the showForm method we will need to add a hideForm method to close the form when the cancel button is clicked. Let's see what our script now looks like.
+
+```html
+
+<script>
+export default {
+  props: ['todo'],
+  data() {
+    return {
+      isEditing: false,
+    };
+  },
+  methods: {
+    showForm() {
+      this.isEditing = true;
+    },
+    hideForm() {
+      this.isEditing = false;
+    },
+  },
+};
+</script>
+
+```
+
+
+7. Deleting a Todo

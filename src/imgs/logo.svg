@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="77px" height="77px" viewBox="0 0 77 77" enable-background="new 0 0 77 77" xml:space="preserve">
+<filter  width="129.2%" height="128.0%" id="filter-1" filterUnits="objectBoundingBox" y="-10.0%" x="-14.6%">
+	<feOffset  result="shadowOffsetOuter1" in="SourceAlpha" dy="2" dx="0"></feOffset>
+	<feGaussianBlur  stdDeviation="2" result="shadowBlurOuter1" in="shadowOffsetOuter1"></feGaussianBlur>
+	
+		<feColorMatrix  type="matrix" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.15 0" result="shadowMatrixOuter1" in="shadowBlurOuter1">
+		</feColorMatrix>
+	<feMerge>
+		<feMergeNode  in="shadowMatrixOuter1"></feMergeNode>
+		<feMergeNode  in="SourceGraphic"></feMergeNode>
+	</feMerge>
+</filter>
+<title>set-lunch-logo</title>
+<desc>Created with Sketch.</desc>
+<g id="首頁" transform="translate(-149.000000, -79.000000)">
+	<g id="set-lunch-logo" transform="translate(149.000000, 79.000000)">
+		<circle id="Oval-9" fill="#F8A654" cx="38.5" cy="38.5" r="38.5"/>
+		
+			<g id="Group-6-Copy" transform="translate(38.000000, 39.000000) rotate(1.000000) translate(-38.000000, -39.000000) translate(14.000000, 14.000000)" filter="url(#filter-1)">
+			<g id="Group-5_1_" transform="translate(-0.000000, 0.558552)">
+				
+					<linearGradient id="Oval-6-Copy_2_" gradientUnits="userSpaceOnUse" x1="-264.5096" y1="319.0613" x2="-264.0637" y2="318.7981" gradientTransform="matrix(40.1832 -7.8285 -7.9846 -41.1688 13204.8223 11088.1777)">
+					<stop  offset="0" style="stop-color:#DEDDDD"/>
+					<stop  offset="1" style="stop-color:#FFFFFF"/>
+				</linearGradient>
+				<path id="Oval-6-Copy_1_" fill="url(#Oval-6-Copy_2_)" d="M30.73,23.707c0.175,7.625,28.096,15.77,7.564,19.389
+					C17.762,46.717,7.264,47.823,3.686,27.535C0.109,7.246,10.476,5.418,31.69,1.678c15.917-2.807,7.89,7.023,2.674,15.17
+					C32.629,19.559,30.687,21.803,30.73,23.707z"/>
+			</g>
+			<path id="Oval-6_1_" fill="#FFFFFF" d="M21.256,45.68c-9.551-0.029-15.055-3.986-17.469-17.677
+				C0.21,7.716,10.439,5.912,31.37,2.222c14.757-2.602,8.922,5.355,7.964,7.087s-1.711,3.301-5.144,8.904
+				c-3.079,5.454-5.781,10.766-8.105,15.935C24.124,38.509,22.515,42.353,21.256,45.68z"/>
+			
+				<ellipse id="Oval-7_1_" transform="matrix(-0.9998 0.0175 -0.0175 -0.9998 54.7298 23.6228)" fill="#F7A654" cx="27.262" cy="12.05" rx="1.642" ry="1.642"/>
+		</g>
+	</g>
+</g>
+</svg>

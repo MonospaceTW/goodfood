@@ -1,40 +1,27 @@
 import Vue from "vue";
 import Result from "@/components/Result";
-import todoList from "@/components/todoList";
-import HelloWorld from "@/components/HelloWorld";
 import Router from "vue-router";
 import storeinfo from "../components/storeInfo";
 import App from "@/App";
 import Order from "@/components/Order";
 import ComfirmOrder from "@/components/ComfirmOrder";
 import NotFound from "@/components/NotFound";
+import homepage from "../components/homepage.vue";
 
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
   routes: [
     {
-      path: "/HelloWorld",
-      name: "HelloWorld",
-      component: HelloWorld
-    },
-    {
-      path: "/todo",
-      name: "todoList",
-      component: todoList
-    },
-    {
-      path: "/Result",
-      name: "Result",
-      component: Result
+      path:"/loading",
+      name:"homepage",
+      component: homepage
     },
     {
       path: "/",
       name: "App",
       component: App,
-      children: [
-        {
+      children: [{
           path: "storeinfo/:store_id?",
           name: "storeinfo",
           component: storeinfo,
@@ -53,6 +40,11 @@ export default new Router({
           // props: true
         },
         {
+        path: "result",
+        name: "result",
+        component: Result
+      },
+      {
           path: "not_found",
           name: "not_found",
           component: NotFound
@@ -61,7 +53,9 @@ export default new Router({
     },
     {
       path: "*",
-      redirect: { name: "not_found" }
+      redirect: {
+        name: "not_found"
+      }
     }
   ]
 });
