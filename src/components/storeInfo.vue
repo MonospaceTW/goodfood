@@ -36,6 +36,7 @@
   </div>
 </template>
 <script>
+import 'normalize.css';
 export default {
   props: ["store_id"],
   data() {
