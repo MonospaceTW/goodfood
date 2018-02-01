@@ -44,19 +44,19 @@ export default {
     };
   },
   methods: {
-    teamOrder() {
-    }
+    teamOrder() {}
   }
 };
 </script>
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans");
-ol, ul{
+ol,
+ul {
   list-style: none;
 }
-.container{
+.container {
   // font-size: 16px;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: "Noto Sans", sans-serif;
   background: url(../assets/images/menu.jpeg) no-repeat;
   background-size: contain;
   display: flex;
@@ -90,7 +90,7 @@ li {
 p {
   margin-top: 0;
 }
-.temaOrderBtn{
+.temaOrderBtn {
   background: #ff7044;
   font-size: 13px;
   padding: 12px 74px;
