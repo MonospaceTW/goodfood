@@ -25,13 +25,8 @@ export default new Router({
           name: 'order',
           component: Order,
           props: true
-        },
+        }
       ]
-    },
-    {
-      path: '*',
-      redirect: { name: 'not_found' }
     }
-
   ]
 })

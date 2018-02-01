@@ -28,11 +28,11 @@
       <br>
       <p>開團截止時間: 開團半小時後截止</p>
       <router-link :to="{
-        name:'order', 
+        name:'order',
         params: { store_id: this.store_id, order_id: this.order_id}
       }" @click="teamOrder" class="temaOrderBtn">
         我要團購
-      </router-link> 
+      </router-link>
   </div>
 </template>
 <script>
@@ -44,7 +44,7 @@ export default {
     }
   },
   methods: {
-    teamOrder() {
+    teamOrder () {
     }
   }
 }
