@@ -54,12 +54,6 @@ export default {
 ol, ul{
   list-style: none;
 }
-// .banner {
-//   background: url(../assets/images/menu.jpeg) no-repeat;
-//   width: 100vw;
-//   height: 25vh;
-//   background-size: cover;
-// }
 .container{
   // font-size: 16px;
   font-family: 'Noto Sans', sans-serif;
