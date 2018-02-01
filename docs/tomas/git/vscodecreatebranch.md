@@ -16,6 +16,4 @@
 
 點選上方的建立新的分支
 
-![image](../imgs/newbranchname.png)
-
 
