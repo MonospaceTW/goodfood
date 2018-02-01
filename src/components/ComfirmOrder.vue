@@ -3,8 +3,6 @@
 
 export default {
   props: ["thisOrder", "total"],
-
-  mounted() {},
   methods: {
     cancel() {
       this.$emit("cancel");
