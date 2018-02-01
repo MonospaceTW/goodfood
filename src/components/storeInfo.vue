@@ -28,35 +28,35 @@
       <br>
       <p>開團截止時間: 開團半小時後截止</p>
       <router-link :to="{
-        name:'order', 
+        name:'order',
         params: { store_id: this.store_id, order_id: this.order_id}
       }" @click="teamOrder" class="temaOrderBtn">
         我要團購
-      </router-link> 
+      </router-link>
   </div>
 </template>
 <script>
 export default {
-  props: ['store_id'],
-  data () {
+  props: ["store_id"],
+  data() {
     return {
-      order_id: 'order_id'
-    }
+      order_id: "order_id"
+    };
   },
   methods: {
-    teamOrder() {
-    }
+    teamOrder() {}
   }
-}
+};
 </script>
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
-ol, ul{
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+ol,
+ul {
   list-style: none;
 }
-.container{
+.container {
   // font-size: 16px;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: "Noto Sans", sans-serif;
   background: url(../assets/images/menu.jpeg) no-repeat;
   background-size: contain;
   display: flex;
@@ -90,7 +90,7 @@ li {
 p {
   margin-top: 0;
 }
-.temaOrderBtn{
+.temaOrderBtn {
   background: #ff7044;
   font-size: 13px;
   padding: 12px 74px;
