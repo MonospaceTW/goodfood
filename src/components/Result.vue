@@ -46,8 +46,7 @@
             <div class="count"></div>
             <div class="price row_digital_2">$120</div>
         </div>
-        
-</div> 
+</div>
 </template>
 
 <style lang='scss'>
@@ -146,4 +145,3 @@ hr {
   width: 25%;
 }
 </style>
-
