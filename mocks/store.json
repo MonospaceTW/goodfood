@@ -1,5 +1,9 @@
 {
   "name": "店家名稱",
+  "orderIn": {
+    "unit": "元 / 份",
+    "count": 300
+  },
   "time": {
     "start": "09:00",
     "end": "17:00"
