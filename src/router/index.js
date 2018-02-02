@@ -13,15 +13,16 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path:"/loading",
-      name:"homepage",
+      path: "/loading",
+      name: "homepage",
       component: homepage
     },
     {
       path: "/",
       name: "App",
       component: App,
-      children: [{
+      children: [
+        {
           path: "storeinfo/:store_id?",
           name: "storeinfo",
           component: storeinfo,
@@ -40,11 +41,11 @@ export default new Router({
           // props: true
         },
         {
-        path: "result",
-        name: "result",
-        component: Result
-      },
-      {
+          path: "result",
+          name: "result",
+          component: Result
+        },
+        {
           path: "not_found",
           name: "not_found",
           component: NotFound
