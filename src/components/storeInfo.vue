@@ -49,6 +49,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../scss/_color.scss";
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans");
 ol,
 ul {
@@ -65,6 +66,7 @@ ul {
   justify-content: flex-start;
   align-items: center;
 }
+
 ul {
   padding-left: 0;
   width: 65%;

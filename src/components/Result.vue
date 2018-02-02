@@ -50,7 +50,7 @@
 </template>
 
 <style lang='scss' scoped>
-@import "../scss/_color.scss";
+@import "../scss/index.scss";
 
 $font-xl: 17px;
 $font-l: 16px;
