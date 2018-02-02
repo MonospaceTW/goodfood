@@ -49,7 +49,7 @@
 </div>
 </template>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 @import "../scss/_reset.scss";
 @import "../scss/_setting.scss";
 $font-xl: 17px;
