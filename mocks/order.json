@@ -37,17 +37,20 @@
     },
     "result": {
       "total": 200,
-      "userID": {
-        "id": "userID",
-        "name": "user.displayName",
-        "mark": "",
-        "order": {
-          "menuID": {
-            "count": 2,
-            "name": "玉米濃湯麵",
-            "price": 100,
-            "total": 200,
-            "options": [{ "name": "烏龍麵" }, { "name": "加辣" }]
+      "users": {
+        "userID": {
+          "id": "userID",
+          "total": 200,
+          "name": "user.displayName",
+          "mark": "",
+          "order": {
+            "menuID": {
+              "count": 2,
+              "name": "玉米濃湯麵",
+              "price": 100,
+              "total": 200,
+              "options": [{ "name": "烏龍麵" }, { "name": "加辣" }]
+            }
           }
         }
       }
