@@ -14,7 +14,7 @@
   },
   "mark": "", //備註
   "menus": {
-    "menuid": {
+    "menuId": {
       "name": "玉米濃湯麵",
       "price": 100,
       "options": [
