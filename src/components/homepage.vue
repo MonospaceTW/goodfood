@@ -11,41 +11,33 @@
 </template>
 
 <script type = "text/javascript" >
-
-export default {
-}
-// setTimeout( "location.href='http://google.com'", 100000 )
+export default {};
 </script>
-
-
 <style>
 .flex-container {
- display: -webkit-flex;
-    display: flex;
-    height: 637px;
-    background-color: #f7a654;
-          
+  display: -webkit-flex;
+  display: flex;
+  height: 637px;
+  background-color: #f7a654;
 }
 
 .flex-item {
-margin: auto;
-
+  margin: auto;
 }
 
-.home-text{
-     text-align: center;
-     color:#b15814;
-     font-size: 16px;
+.home-text {
+  text-align: center;
+  color: #b15814;
+  font-size: 16px;
 }
 
-.home-logo{
-    text-align: center;
-     height:200px;
-     width:200px;
+.home-logo {
+  text-align: center;
+  height: 200px;
+  width: 200px;
 }
 
-.home-btn{
-
+.home-btn {
   display: block;
   margin: 0 auto;
   width: 200px;
