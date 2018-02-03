@@ -2,19 +2,29 @@
 var firebase = require("firebase");
 
 export default {
-  props: ["user"],
+  props: ["user", "storeId", "orderId"],
   data() {
     return {
       total: 0
     };
   },
-  mounted() {},
+  mounted() {
+    firebase
+      .database()
+      .ref("order/" + this.orderId + "/result")
+      .child("total")
+      .once("value")
+      .then(snapshot => {
+        this.total = snapshot.val();
+        console.log(this.total);
+      });
+  },
   methods: {
     comfirmOrder() {
       // 先獲取資料庫的總訂單金額，加上此次訂單金額，再更新上去
       firebase
         .database()
-        .ref("order/orderID/result")
+        .ref("order/" + this.orderId + "/result")
         .child("total")
         .once("value")
         .then(snapshot => {
@@ -26,7 +36,7 @@ export default {
         .then(() => {
           firebase
             .database()
-            .ref("order/orderID/result")
+            .ref("order/" + this.orderId + "/result")
             .child("total")
             .set(this.total);
         });
@@ -34,11 +44,12 @@ export default {
       console.log(this.user);
       firebase
         .database()
-        .ref("order/orderID/result/users")
+        .ref("order/" + this.orderId + "/result/users")
         .push(this.user);
     },
     cancelOrder() {
       this.$emit("cancelOrder");
+      this.$router.go(-1);
     }
   }
 };

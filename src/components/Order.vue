@@ -55,10 +55,11 @@ let menu = {
 };
 
 export default {
+  props: ["storeId", "orderId"],
   data() {
     return {
-      orderId: "orderId",
-      storeId: "storeId",
+      // orderId: "orderId",
+      // storeId: "storeId",
       displayName: "",
       mark: "",
       user: {},
@@ -140,7 +141,7 @@ export default {
 
 <template>
 <div class="container">
-  <comfirm-order v-show="comfirmed" :user="user" @cancelOrder="cancelOrder"></comfirm-order>
+  <comfirm-order v-show="comfirmed" :user="user" :orderId="orderId" :storeId="storeId" @cancelOrder="cancelOrder"></comfirm-order>
   <h1 class="store_name">便當店名</h1>
   
     <ul>
