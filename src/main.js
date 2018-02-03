@@ -8,12 +8,12 @@ const firebase = require("firebase");
 Vue.config.productionTip = false;
 
 var config = {
-  apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
-  authDomain: "goodfood-39158.firebaseapp.com",
-  databaseURL: "https://goodfood-39158.firebaseio.com",
-  projectId: "goodfood-39158",
-  storageBucket: "goodfood-39158.appspot.com",
-  messagingSenderId: "940303768399"
+  apiKey: "AIzaSyABPPoZz3rI62WkpOCanHEwNXMakhHxNGY",
+  authDomain: "goodfood-clover.firebaseapp.com",
+  databaseURL: "https://goodfood-clover.firebaseio.com",
+  projectId: "goodfood-clover",
+  storageBucket: "goodfood-clover.appspot.com",
+  messagingSenderId: "45979887609"
 };
 firebase.initializeApp(config);
 
