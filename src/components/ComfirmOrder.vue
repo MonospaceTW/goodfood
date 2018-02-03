@@ -63,7 +63,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 li {
   list-style: none;
 }
