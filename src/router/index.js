@@ -6,6 +6,7 @@ import App from "@/App";
 import Order from "@/components/Order";
 import Comfirmed from "@/components/Comfirmed";
 import NotFound from "@/components/NotFound";
+import homepage from "../components/homepage.vue";
 
 Vue.use(Router);
 
@@ -16,6 +17,11 @@ export default new Router({
       name: "App",
       component: App,
       children: [
+        {
+          path: "loading",
+          name: "homepage",
+          component: homepage
+        },
         {
           path: "storeinfo/:store_id?",
           name: "storeinfo",

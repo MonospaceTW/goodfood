@@ -1,0 +1,59 @@
+{
+  "orderID": {
+    "store": {
+      "name": "店家名稱",
+      "orderIn": {
+        "unit": "元 / 份",
+        "count": 300
+      },
+      "time": {
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "tel": {
+        "block": "區碼",
+        "num": "號碼"
+      },
+      "endTime": "2018-02-01 11:00:00",
+      "mark": "",
+      "menus": {
+        "menuId": {
+          "name": "玉米濃湯麵",
+          "price": 100,
+          "options": [
+            {
+              "max": 1,
+              "min": 1,
+              "chooses": [{ "name": "烏龍麵" }, { "name": "油麵" }]
+            },
+            {
+              "max": 1,
+              "min": 1,
+              "chooses": [{ "name": "加辣" }, { "name": "不加辣" }]
+            }
+          ]
+        }
+      }
+    },
+    "result": {
+      "total": 200,
+      "users": {
+        "userID": {
+          "id": "userID",
+          "total": 200,
+          "name": "user.displayName",
+          "mark": "",
+          "order": {
+            "menuID": {
+              "count": 2,
+              "name": "玉米濃湯麵",
+              "price": 100,
+              "total": 200,
+              "options": [{ "name": "烏龍麵" }, { "name": "加辣" }]
+            }
+          }
+        }
+      }
+    }
+  }
+}
