@@ -1,58 +1,7 @@
 <script>
 /* eslint-disable */
-// var firebase = require('firebase');
+var firebase = require("firebase");
 import ComfirmOrder from "./ComfirmOrder";
-
-let menu = {
-  menuId1: {
-    name: "玉米濃湯麵",
-    price: 100,
-    options: [
-      {
-        max: 1,
-        min: 1,
-        chooses: [{ name: "烏龍麵" }, { name: "油麵" }]
-      },
-      {
-        max: 1,
-        min: 1,
-        chooses: [{ name: "加辣" }, { name: "不加辣" }]
-      }
-    ]
-  },
-  menuId2: {
-    name: "酸辣麵",
-    price: 50,
-    options: [
-      {
-        max: 1,
-        min: 1,
-        chooses: [{ name: "烏龍麵" }, { name: "油麵" }]
-      },
-      {
-        max: 1,
-        min: 1,
-        chooses: [{ name: "加辣" }, { name: "不加辣" }]
-      }
-    ]
-  },
-  menuId3: {
-    name: "水餃",
-    price: 50,
-    options: [
-      {
-        max: 1,
-        min: 1,
-        chooses: [{ name: "烏龍麵" }, { name: "油麵" }]
-      },
-      {
-        max: 1,
-        min: 1,
-        chooses: [{ name: "加辣" }, { name: "不加辣" }]
-      }
-    ]
-  }
-};
 
 export default {
   props: ["storeId", "orderId"],
@@ -72,18 +21,23 @@ export default {
     ComfirmOrder
   },
   created() {
-    for (let id in menu) {
-      menu[id].count = 0;
-    }
-    // 深層複製物件
-    this.dishes = JSON.parse(JSON.stringify(menu));
-    console.log(this.dishes);
+    firebase
+      .database()
+      .ref("store/" + this.storeId)
+      .child("menus")
+      .once("value")
+      .then(snapshot => {
+        let menu = snapshot.val();
+        for (let id in menu) {
+          menu[id].count = 0;
+        }
+        // 深層複製物件
+        this.dishes = JSON.parse(JSON.stringify(menu));
+      });
   },
   methods: {
     add(id) {
-      console.log(this.dishes[id].count);
       this.dishes[id].count += 1;
-      console.log(this.dishes[id].count);
     },
     subtract(id) {
       if (this.dishes[id].count >= 1) {
@@ -129,7 +83,7 @@ export default {
           subtotal.push(this.dishes[i].count * this.dishes[i].price);
         }
       }
-      console.log(subtotal);
+      // console.log(subtotal);
       let total = subtotal.reduce(function(previousVal, currentVal) {
         return previousVal + currentVal;
       }, 0);
