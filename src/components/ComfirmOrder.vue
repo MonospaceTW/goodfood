@@ -5,7 +5,8 @@ export default {
   props: ["user", "storeId", "orderId"],
   data() {
     return {
-      total: 0
+      total: 0,
+      thisOrderKey: ""
     };
   },
   mounted() {
@@ -42,10 +43,15 @@ export default {
         });
 
       console.log(this.user);
-      firebase
+      this.thisOrderKey = firebase
         .database()
         .ref("order/" + this.orderId + "/result/users")
-        .push(this.user);
+        .push(this.user).key;
+      console.log(this.thisOrderKey);
+      this.$router.replace({
+        name: "comfirmed",
+        params: { orderId: this.orderId, thisOrderKey: this.thisOrderKey }
+      });
     },
     cancelOrder() {
       this.$emit("cancelOrder");
