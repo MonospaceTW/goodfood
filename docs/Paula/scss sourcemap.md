@@ -1,4 +1,4 @@
-# 引入gulp sourcemap流程
+# 引入gulp sourcemap流程 <img src="./imgs/lazyrabbit/lazyrabbit3.png" width="50">
 ---
 ## step1 將這段引入至gulpfile.js
 
