@@ -42,6 +42,8 @@ Flexbox 是一個 CSS3 的盒子模型 ( box model )，顧名思義它就是一�
 
 <h3 id="2">1. display </h3>
 用法:
+
+
 ```java
 #container  {
     display: flex | inline-flex ;
@@ -97,7 +99,7 @@ flex items 會隨著主軸依序排列,而主軸會隨著flex-direction的屬性
 
 ![imgs](./imgs/f3-04.jpg)
 
-<h3 id="5"> 4. justify-content<h3>
+<h3 id="5"> 4. justify-content </h3>
 
 justify-content會依據主軸的軸線,決定子元件之間的間隔方法
 
