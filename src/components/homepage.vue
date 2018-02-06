@@ -1,13 +1,12 @@
 <template>
-<div class="flex-container">
-  <div class="flex-item">
-   <img src="../imgs/logo.svg" class="home-logo">
-   <p class="home-text">SET LUNCH</p>
+  <div class="flex-container">
+    <div class="flex-item">
+    <img src="../imgs/logo.svg"  class="home-logo">
+    <p class="home-text">SET LUNCH</p>
 
-   <button class="home-btn"><a href="http://google.com">吃飯囉</a></button>
+    <button class="home-btn"><a href="http://google.com">吃飯囉</a></button>
+    </div>
   </div>
-</div>
-
 </template>
 
 <script type = "text/javascript" >
@@ -19,17 +18,20 @@ export default {
 
 
 <style>
+
+ @import "../components/reset.css";
+
 .flex-container {
  display: -webkit-flex;
     display: flex;
-    height: 637px;
     background-color: #f7a654;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
           
 }
 
 .flex-item {
-margin: auto;
-
 }
 
 .home-text{
@@ -40,8 +42,7 @@ margin: auto;
 
 .home-logo{
     text-align: center;
-     height:200px;
-     width:200px;
+    width: 200px;    
 }
 
 .home-btn{
