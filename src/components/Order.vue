@@ -1,74 +1,80 @@
 <script>
 /* eslint-disable */
-// var firebase = require('firebase');
+var firebase = require("firebase");
 import ComfirmOrder from "./ComfirmOrder";
+import checkAuth from "@/checkAuth";
 
 export default {
+  props: ["storeId", "orderId"],
   data() {
     return {
-      orderId: "orderId",
-      storeId: "storeId",
+      uid: "",
+      displayName: "",
+      mark: "",
+      user: {},
       thisOrder: [],
       comfirmed: false,
-      dishes: [
-        {
-          dishName: "排骨便當",
-          storeId: "L05fjkdfjkdjfa",
-          price: 30,
-          dishId: "-L05fnvmcvmz",
-          count: 0
-        },
-        {
-          dishName: "雞腿便當",
-          storeId: "L05fjkdfjkdjfa",
-          price: 50,
-          dishId: "-L05fnvmcvmz",
-          count: 0
-        }
-      ]
+      dishes: {}
     };
   },
   components: {
     ComfirmOrder
   },
-  mounted() {
-    this.thisOrder = JSON.parse(sessionStorage.getItem("order"));
-    console.log(this.thisOrder);
+  created() {
+    checkAuth.checkAuth();
+
+    firebase
+      .database()
+      .ref("store/" + this.storeId)
+      .child("menus")
+      .once("value")
+      .then(snapshot => {
+        let menu = snapshot.val();
+        for (let id in menu) {
+          menu[id].count = 0;
+        }
+        // 深層複製物件
+        this.dishes = JSON.parse(JSON.stringify(menu));
+      });
   },
   methods: {
-    add(index) {
-      this.dishes[index].count += 1;
+    add(id) {
+      this.dishes[id].count += 1;
     },
-    subtract(index) {
-      if (this.dishes[index].count >= 1) {
-        this.dishes[index].count -= 1;
+    subtract(id) {
+      if (this.dishes[id].count >= 1) {
+        this.dishes[id].count -= 1;
       }
     },
-    subtotal(index) {
-      let dish = this.dishes[index];
-      dish.subtotal = dish.count * dish.price;
-      return dish.subtotal;
+    subtotal(id) {
+      let dish = this.dishes[id];
+      dish.total = dish.count * dish.price;
+      return dish.total;
     },
 
     order() {
       let dishes = this.dishes;
-      this.thisOrder = [];
+      this.thisOrder = {};
       for (let i in dishes) {
         if (dishes[i].count >= 1) {
-          this.thisOrder.push(dishes[i]);
+          this.thisOrder[i] = dishes[i];
+          console.log(this.thisOrder[i]);
         }
       }
+
+      let user = {};
+      user.id = this.uid;
+      user.name = this.displayName;
+      user.total = this.total;
+      user.mark = this.mark;
+      user.order = this.thisOrder;
+      this.user = JSON.parse(JSON.stringify(user));
+
       this.comfirmed = true;
       console.log(this.thisOrder);
-      // sessionStorage.setItem('order', JSON.stringify(this.thisOrder));
-      // this.$router.push({
-      //   name: 'comfirm_order',
-      //   params: { storeId: this.storeId, orderId: this.orderId }
-      // });
     },
-    edit() {
+    cancelOrder() {
       this.comfirmed = false;
-      console.log("edit");
     }
   },
   computed: {
@@ -79,7 +85,7 @@ export default {
           subtotal.push(this.dishes[i].count * this.dishes[i].price);
         }
       }
-      console.log(subtotal);
+      // console.log(subtotal);
       let total = subtotal.reduce(function(previousVal, currentVal) {
         return previousVal + currentVal;
       }, 0);
@@ -91,27 +97,30 @@ export default {
 
 <template>
 <div class="container">
-  <comfirm-order v-show="comfirmed" :thisOrder="thisOrder" :total="total" @cancel="edit"></comfirm-order>
+  <comfirm-order v-show="comfirmed" :user="user" :orderId="orderId" :storeId="storeId" :uid="uid" @cancelOrder="cancelOrder"></comfirm-order>
   <h1 class="store_name">便當店名</h1>
-  
     <ul>
-      <li class="item" v-for="(dish,index) in dishes" v-bind:key="index">
+      <li class="item" v-for="(dish,id) in dishes" v-bind:key="id">
         <div class="menu">
-          <div class="menu_name">{{dish.dishName}}</div>
+          <div class="menu_name">{{dish.name}}</div>
           <div class="price">${{dish.price}}</div>
         </div>
         <div class="menu">
           <div class="counter">
-            <button @click="subtract(index)">-</button>
+            <button @click="subtract(id)">-</button>
             <div>{{dish.count}}</div>
-            <button @click="add(index)">+</button>
+            <button @click="add(id)">+</button>
           </div>
-          <div class="subtotal">${{subtotal(index)}}</div>
+          <div class="subtotal">${{subtotal(id)}}</div>
         </div>
       </li>
     </ul>
  <div class="total">總共{{total}}元</div>
-
+<div>
+  我是{{displayName}}
+</div>
+<div>
+  備註：<input type="text" v-model="mark"></div>
   <a class="order_btn" href="#" @click="order">下訂單</a>
   <a class="result_btn" href="#">看團定結果</a>
   <a class="share_btn" href="#">分享這頁</a>

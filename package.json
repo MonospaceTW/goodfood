@@ -14,8 +14,9 @@
   },
   "dependencies": {
     "firebase": "^4.9.0",
-    "normalize.css": "^7.0.0",
     "node-sass": "^4.7.2",
+    "normalize.css": "^7.0.0",
+    "simple-vue-validator": "^0.14.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

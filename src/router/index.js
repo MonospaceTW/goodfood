@@ -1,10 +1,14 @@
 import Vue from "vue";
 import Result from "@/components/Result";
 import Router from "vue-router";
-import storeinfo from "../components/storeInfo";
 import App from "@/App";
+import Register from "@/components/Register";
+import Login from "@/components/Login";
+import ForgotPw from "@/components/ForgotPw";
+import StoreList from "@/components/StoreList";
+import storeinfo from "../components/storeInfo";
 import Order from "@/components/Order";
-import ComfirmOrder from "@/components/ComfirmOrder";
+import Comfirmed from "@/components/Comfirmed";
 import NotFound from "@/components/NotFound";
 import homepage from "../components/homepage.vue";
 
@@ -13,15 +17,35 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: "/loading",
-      name: "homepage",
-      component: homepage
-    },
-    {
       path: "/",
       name: "App",
       component: App,
       children: [
+        {
+          path: "register",
+          name: "register",
+          component: Register
+        },
+        {
+          path: "login",
+          name: "login",
+          component: Login
+        },
+        {
+          path: "forgotpw",
+          name: "forgotpw",
+          component: ForgotPw
+        },
+        {
+          path: "loading",
+          name: "homepage",
+          component: homepage
+        },
+        {
+          path: "storelist",
+          name: "storelist",
+          component: StoreList
+        },
         {
           path: "storeinfo/:store_id?",
           name: "storeinfo",
@@ -29,16 +53,16 @@ export default new Router({
           props: true
         },
         {
-          path: "order/:store_id?/:order_id?",
+          path: "order/:storeId?/:orderId?",
           name: "order",
           component: Order,
           props: true
         },
         {
-          path: "comfirm_order",
-          name: "comfirm_order",
-          component: ComfirmOrder
-          // props: true
+          path: "comfirmed/:orderId?/:thisOrderKey?",
+          name: "comfirmed",
+          component: Comfirmed,
+          props: true
         },
         {
           path: "result",
