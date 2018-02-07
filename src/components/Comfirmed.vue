@@ -1,43 +1,43 @@
 <script>
-var firebase = require("firebase");
+// http://localhost:8080/#/comfirmed/-L4PTZlSxhKYlEdWX3kC/-L4QmcwqDhuKGFuztZly
+// var firebase = require("firebase");
 
 export default {
-  props: ["orderId", "thisOrderKey"],
-  created() {
-    firebase
-      .database()
-      .ref("order/" + this.orderId)
-      .once("value")
-      .then(snapshot => {
-        this.order = snapshot.val();
-        // console.log(this.order);
-        const userOrder = this.order.result.users[this.thisOrderKey];
-        this.orderDetail = userOrder.order;
-        this.userTotal = userOrder.total;
-      });
-  },
-  data() {
-    return {
-      order: {
-        store: {
-          name: ""
-        }
-      },
-      orderDetail: {},
-      userTotal: 0
-    };
-  },
-  methods: {}
+  // props: ["orderId", "thisOrderKey"],
+  // created() {
+  //   firebase
+  //     .database()
+  //     .ref("order/" + this.orderId)
+  //     .once("value")
+  //     .then(snapshot => {
+  //       this.order = snapshot.val();
+  //       // console.log(this.order);
+  //       const userOrder = this.order.result.users[this.thisOrderKey];
+  //       this.orderDetail = userOrder.order;
+  //       this.userTotal = userOrder.total;
+  //     });
+  // },
+  // data() {
+  //   return {
+  //     order: {
+  //       store: {
+  //         name: ""
+  //       }
+  //     },
+  //     orderDetail: {},
+  //     userTotal: 0
+  //   };
+  // },
+  // methods: {}
 };
 </script>
 
 <template>
   <div class="container">
     <div class="comfirm_img">
-      
       <img src="../assets/images/confirm.svg" alt="">
     </div>
-    <div class="store_name">{{order.store.name}}</div>
+    <!-- <div class="store_name">{{order.store.name}}</div>
     
     <ul>
       <li class="item" v-for="(dish,id) in orderDetail" :key="id">
@@ -48,7 +48,7 @@ export default {
         <div class="subtotal">${{dish.total}}</div>
       </li>
     </ul>
-    <div class="total">總共{{userTotal}}元</div>
+    <div class="total">總共{{userTotal}}元</div> -->
       <a class="result_btn" href="#">看團定結果</a>
 
   </div>
@@ -108,4 +108,3 @@ li {
   color: $fontcolor;
 }
 </style>
-
