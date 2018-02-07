@@ -79,7 +79,8 @@ export default {
                 .catch(function(error) {
                   console.log(error.message);
                 });
-              this.$router.go(-2);
+              // this.$router.go(-2);
+              this.$router.push({ name: "storelist" });
             })
             .catch(error => {
               console.log(error.message, error.code);
