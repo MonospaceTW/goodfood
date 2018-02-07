@@ -2,6 +2,7 @@
 /* eslint-disable */
 var firebase = require("firebase");
 import ComfirmOrder from "./ComfirmOrder";
+import checkAuth from "@/checkAuth";
 
 export default {
   props: ["storeId", "orderId"],
@@ -20,18 +21,7 @@ export default {
     ComfirmOrder
   },
   created() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.uid = user.uid;
-        this.displayName = user.displayName;
-        // console.log("User is signed in.", user);
-      } else {
-        this.$router.push({
-          name: "login"
-        });
-        // console.log("User is not logined yet.");
-      }
-    });
+    checkAuth.checkAuth();
 
     firebase
       .database()
