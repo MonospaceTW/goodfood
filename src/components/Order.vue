@@ -7,8 +7,7 @@ export default {
   props: ["storeId", "orderId"],
   data() {
     return {
-      // orderId: "orderId",
-      // storeId: "storeId",
+      uid: "",
       displayName: "",
       mark: "",
       user: {},
@@ -21,6 +20,19 @@ export default {
     ComfirmOrder
   },
   created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.uid = user.uid;
+        this.displayName = user.displayName;
+        // console.log("User is signed in.", user);
+      } else {
+        this.$router.push({
+          name: "login"
+        });
+        // console.log("User is not logined yet.");
+      }
+    });
+
     firebase
       .database()
       .ref("store/" + this.storeId)
@@ -61,7 +73,7 @@ export default {
       }
 
       let user = {};
-      user.id = "userID";
+      user.id = this.uid;
       user.name = this.displayName;
       user.total = this.total;
       user.mark = this.mark;
@@ -95,9 +107,8 @@ export default {
 
 <template>
 <div class="container">
-  <comfirm-order v-show="comfirmed" :user="user" :orderId="orderId" :storeId="storeId" @cancelOrder="cancelOrder"></comfirm-order>
+  <comfirm-order v-show="comfirmed" :user="user" :orderId="orderId" :storeId="storeId" :uid="uid" @cancelOrder="cancelOrder"></comfirm-order>
   <h1 class="store_name">便當店名</h1>
-  
     <ul>
       <li class="item" v-for="(dish,id) in dishes" v-bind:key="id">
         <div class="menu">
@@ -116,7 +127,7 @@ export default {
     </ul>
  <div class="total">總共{{total}}元</div>
 <div>
-  我是<input type="text" v-model="displayName">
+  我是{{displayName}}
 </div>
 <div>
   備註：<input type="text" v-model="mark"></div>
