@@ -3,7 +3,7 @@ var firebase = require("firebase");
 var SimpleVueValidation = require("simple-vue-validator");
 var Validator = SimpleVueValidation.Validator.create({
   templates: {
-    required: "必填",
+    required: "此欄位為必填",
     minLength: "密碼長度需大於六字元",
     email: "e-mail格式不符"
   }
@@ -116,7 +116,7 @@ export default {
     <router-link :to="{name:'register'}" replace>註冊</router-link>
   </div>
   <div>
-    <a href="">忘記密碼</a>
+    <router-link :to="{name:'forgotpw'}">忘記密碼</router-link>
   </div>
   
 </div>
