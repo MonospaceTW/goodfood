@@ -2,11 +2,10 @@
 var firebase = require("firebase");
 
 export default {
-  props: ["user", "storeId", "orderId"],
+  props: ["user", "storeId", "orderId", "uid"],
   data() {
     return {
-      total: 0,
-      thisOrderKey: ""
+      total: 0
     };
   },
   mounted() {
@@ -43,14 +42,21 @@ export default {
         });
 
       console.log(this.user);
-      this.thisOrderKey = firebase
+      // this.thisOrderKey = firebase
+      //   .database()
+      //   .ref("order/" + this.orderId + "/result/users")
+      //   .push(this.user).key;
+      // console.log(this.thisOrderKey);
+      let update = {};
+      update[this.uid] = this.user;
+      firebase
         .database()
         .ref("order/" + this.orderId + "/result/users")
-        .push(this.user).key;
-      console.log(this.thisOrderKey);
+        .update(update);
+
       this.$router.replace({
         name: "comfirmed",
-        params: { orderId: this.orderId, thisOrderKey: this.thisOrderKey }
+        params: { orderId: this.orderId }
       });
     },
     cancelOrder() {
