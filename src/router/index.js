@@ -5,6 +5,7 @@ import App from "@/App";
 import Order from "@/components/Order";
 import ComfirmOrder from "@/components/ComfirmOrder";
 import NotFound from "@/components/NotFound";
+import Member from "../components/Member";
 
 Vue.use(Router);
 
@@ -37,6 +38,18 @@ export default new Router({
           path: "not_found",
           name: "not_found",
           component: NotFound
+        },
+        {
+          path: "home",
+          name: "home",
+          component: App
+          // props: true
+        },
+        {
+          path: "member",
+          name: "member",
+          component: Member
+          // props: true
         }
       ]
     },
