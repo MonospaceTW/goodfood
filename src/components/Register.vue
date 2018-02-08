@@ -102,6 +102,9 @@ export default {
             });
         }
       });
+    },
+    cancelRegister() {
+      this.$router.go(-1);
     }
   }
 };
@@ -142,7 +145,7 @@ export default {
     </div>
     <div class="form-group">
       <div class="actions">
-        <button type="button" class="btn">取消</button>
+        <button type="button" class="btn" @click="cancelRegister">取消</button>
         <button type="submit" class="btn btn-primary">送出</button>
       </div>
     </div>
@@ -179,6 +182,11 @@ export default {
   .form-control {
     display: inline-block;
     width: 100%;
+    // border-bottom: 1px solid gray;
+  }
+  .message {
+    color: #f75454;
+    font-size: 12px;
   }
 
   .actions {
