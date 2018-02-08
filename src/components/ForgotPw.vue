@@ -51,17 +51,20 @@ export default {
     validateLogin(errorCode) {
       switch (errorCode) {
         case "auth/user-not-found":
-          this.errorMail = "查無此帳號";
+          this.errorMsg = "查無此帳號";
           break;
         case "auth/invalid-email":
-          this.errorMail = "E-mail格式錯誤";
+          this.errorMsg = "E-mail格式錯誤";
           break;
         case "auth/user-disabled":
-          this.errorMail = "此帳號已停用";
+          this.errorMsg = "此帳號已停用";
           break;
         default:
-          this.errorMail = "發生錯誤，請再試一次";
+          this.errorMsg = "發生錯誤，請再試一次";
       }
+    },
+    resetErrMsg() {
+      this.errorMsg = "";
     }
   }
 };
@@ -79,7 +82,7 @@ export default {
       <div class="form-group" :class="{error: validation.hasError('email')}">
         <div class="label">E-mail</div>
         <div class="content">
-          <input type="text" class="form-control" v-model="email" />
+          <input type="text" class="form-control" v-model="email"  @focus="resetErrMsg" />
         </div>
         <div class="message">{{ validation.firstError('email') }}{{errorMsg}}</div>
       </div>
