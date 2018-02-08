@@ -1,4 +1,5 @@
 <template>
+
 <div class="container">
     <h1 class="result_title">團訂結果</h1>
     <hr />
@@ -9,50 +10,99 @@
         <p>地址：台中市台中路123號</p>
         <p>電話：04-24803248</p>
     </div>
-        <div class="result_btn">我要加訂</div>
         <div class="deadline">截止時間：10:30</div>
-        <div class="listtop_1">訂單</div>
-        <div class="row">
-            <div class="item">招牌海鮮意麵</div>
-            <div class="count">x1</div>
-            <div class="price">$60</div>
-        </div>
-        <div class="row">
-            <div class="item">咖哩鍋貼</div>
-            <div class="count">x1</div>
-            <div class="price">$60</div>
-        </div>
-        <div class="row_digital">
-            <div class="item">總計</div>
-            <div class="count"></div>
-            <div class="price">$120</div>
-            </div>
+        <div class="result_btn">返回訂購頁</div>
         <div class="listtop_2">訂單明細</div>
-        <div class="row">
+
+        <div class="region_top">
+          <div class="row">
             <div class="name">Clover</div>
             <div class="item_2">招牌海鮮意麵</div>
             <div class="count">x1</div>
             <div class="price">$60</div>
+          </div>
+          <div class="row ">
+            <div class="name"></div>
+            <div class="remarks">不要加蔥</div>
+            <div class="count"></div>
+            <div class="price"></div>
+          </div>
         </div>
-        <div class="row">
-            <div class="name">Kant</div>
-            <div class="item_2">咖哩鍋貼</div>
+
+        <div class="region_top">
+          <div class="row">
+            <div class="name">Clover</div>
+            <div class="item_2">招牌海鮮意麵</div>
             <div class="count">x1</div>
             <div class="price">$60</div>
-        </div>
-        <div class="row">
+          </div>
+          <div class="row ">
             <div class="name"></div>
-            <div class="item_2"></div>
+            <div class="remarks">不要加蔥</div>
             <div class="count"></div>
-            <div class="price row_digital_2">$120</div>
+            <div class="price"></div>
+          </div>
         </div>
+
+        <div class="region_top">
+          <div class="row">
+            <div class="name">Clover</div>
+            <div class="item_2">招牌海鮮意麵</div>
+            <div class="count">x1</div>
+            <div class="price">$60</div>
+          </div>
+          <div class="row ">
+            <div class="name"></div>
+            <div class="remarks">不要加蔥</div>
+            <div class="count"></div>
+            <div class="price"></div>
+          </div>
+        </div>
+
+        <div class="listtop_1">訂單</div>
+
+        <div class="region_down">
+          <div class="row">
+            <div class="item">招牌海鮮意麵</div>
+            <div class="count">x1</div>
+            <div class="price">$60</div>
+          </div>
+          <div class="row">
+            <div class="remarks">不要加蔥</div>
+            <div class="count"></div>
+            <div class="price"></div>
+          </div>
+        </div>
+
+        <div class="region_down">
+          <div class="row">
+            <div class="item">招牌海鮮意麵</div>
+            <div class="count">x1</div>
+            <div class="price">$60</div>
+          </div>
+          <div class="row">
+            <div class="remarks">不要加蔥</div>
+            <div class="count"></div>
+            <div class="price"></div>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row_digital">
+            <div class="item row_digital_spacing">總計</div>
+            <div class="count row_digital_spacing"></div>
+            <div class="price row_digital_spacing">$120</div>
+        </div>
+        
 </div>
+
 </template>
 
 <style lang='scss' scoped>
 @import "../scss/index.scss";
 
-$font-xl: 17px;
+$font-xl: 18px;
 $font-l: 16px;
 $font-m: 13px;
 $font-s: 12px;
@@ -60,17 +110,17 @@ $font-s: 12px;
 .container {
   margin: 30px 26px;
   text-align: center;
-  color: $fontcolor;
   font-size: $font-m;
+  color: $gray_two;
 }
 .result_title {
   font-size: $font-xl;
-  color: $maincolor;
+  color: $black;
   margin-bottom: 7px;
 }
 
 hr {
-  border: 0.8px solid $maincolor;
+  border: 0.8px solid $white;
   margin-top: 5px;
 }
 
@@ -85,45 +135,58 @@ hr {
 }
 .result_btn {
   display: block;
-  width: 95px;
-  height: 30px;
-  line-height: 30px;
-  color: #fff;
-  margin: 0 auto;
+  width: 130px;
+  height: 46px;
+  line-height: 46px;
+  color: $orange;
+  margin: 0 auto 21px;
   text-align: center;
-  background: $maincolor;
+  font-size: $font-m;
+  border: 1px solid $btn_primary_border;
   border-radius: 21.5px;
+  box-shadow: $box_shadow;
 }
 .deadline {
   font-size: $font-s;
-  margin: 6px 0 28px 0;
+  color: $red;
+  margin: 11px 0 12px 0;
 }
 .listtop_1,
 .listtop_2 {
   font-size: $font-l;
-  border-bottom: 1.5px solid $maincolor;
-  border-top: 1.5px solid $maincolor;
+  border-bottom: 1.5px solid $white;
+  border-top: 1.5px solid $white;
   padding: 4px 0;
 }
 
 .listtop_2 {
-  margin-top: 60px;
+  margin-top: 21px;
 }
 .row,
 .row_digital {
   display: flex;
-  width: 90%;
+  width: 95%;
   line-height: 18px;
   text-align: left;
   margin: 13px 10px;
 }
 
-.row_digital {
-  margin-top: 20px;
+.row_digital_spacing {
+  margin: -10px 0 50px 0;
 }
 
-.row_digital_2 {
-  margin-top: 12px;
+.remarks {
+  color: $blue;
+  font-size: $font-s;
+  margin-top: -10px;
+}
+
+.regin {
+  line-height: none;
+}
+
+.row_digital {
+  margin-top: 20px;
 }
 
 .count {

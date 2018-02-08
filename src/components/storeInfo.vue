@@ -49,7 +49,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../scss/_color.scss";
+// @import "../scss/_color.scss";
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans");
 ol,
 ul {
