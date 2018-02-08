@@ -36,8 +36,8 @@ export default {
     return {
       orderId: "",
       storeInfo: "",
+      storeInfoAll: [],
       menus: [],
-      menusDetail: [],
       orderData: {}
     };
   },
@@ -51,8 +51,6 @@ export default {
     });
     store.child(storeId).child("menus").once("value").then(function(snapshot) {
       // console.log(snapshot.val());
-      self.menusDetail = snapshot.val();
-
       snapshot.forEach(function(data) {
         self.menus.push(data.val());
       });
@@ -64,31 +62,9 @@ export default {
       const self = this;
       const storeId = self.storeId;
       const storeInfo = self.storeInfo;
-      self.orderId = order.child(storeId).set({
-        "result": {
-          "total": 200,
-          "users": {
-            "userID": {
-              "id": "userID",
-              "total": 200,
-              "name": "user.displayName",
-              "mark": "",
-              "order": {
-                "menuID": {
-                  "count": 2,
-                  "name": "玉米濃湯麵",
-                  "price": 100,
-                  "total": 200,
-                  "options": [{ "name": "烏龍麵" }, { "name": "加辣" }]
-                }
-              }
-            }
-          }
-        }
-      }).key;
+      self.orderId = order.child(storeId).push().key;
       const orderId = self.orderId;
-      order.child(storeId).update(storeInfo);
-
+      order.child(orderId).child(storeId).update(storeInfo);
     }
   }
 };
