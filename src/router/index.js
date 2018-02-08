@@ -17,13 +17,13 @@ export default new Router({
       component: App,
       children: [
         {
-          path: "storeinfo/:store_id?",
+          path: "storeinfo/:storeId?",
           name: "storeinfo",
           component: storeinfo,
           props: true
         },
         {
-          path: "order/:store_id?/:order_id?",
+          path: "order/:storeId?/:orderId?",
           name: "order",
           component: Order,
           props: true

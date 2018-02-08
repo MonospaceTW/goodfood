@@ -4,55 +4,97 @@
     <h1>店家名稱</h1>
     {{this.$route.params.store_id}}
       <ul>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
-        <li><div class="dishName">招牌便當</div><div class="dishPrice">$70</div></li>
+        <li v-for="menu in menus" :key="menu.id"><div class="dishName">{{menu.name}}</div><div class="dishPrice">{{menu.price}}</div></li>
       </ul>
-      <p>外送條件：滿200原可外送</p>
-      <p>營業時間：08:00 ~ 20:00</p>
+      <p>外送條件：滿{{storeInfo.orderIn.count}}{{storeInfo.orderIn.unit}}可外送</p>
+      <p>營業時間：{{storeInfo.time.start}}~{{storeInfo.time.end}}</p>
       <p>地址：台中市北區美德街</p>
-      <p>電話：04-22221111</p>
+      <p>電話：{{storeInfo.tel.block}}-{{storeInfo.tel.num}}</p>
       <br>
       <p>開團截止時間: 開團半小時後截止</p>
       <router-link :to="{
         name:'order',
-        params: { store_id: this.store_id, order_id: this.order_id}
-      }" @click="teamOrder" class="temaOrderBtn">
+        params: { storeId: this.storeId, orderId: this.orderId}
+      }" @click.native="openTeamOrder" class="open-team-order">
         我要團購
       </router-link>
   </div>
 </template>
 <script>
-import 'normalize.css';
+import config from "../config";
+const firebase = require("firebase");
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
+
+const store = firebase.database().ref("store");
+const order = firebase.database().ref("order");
+
 export default {
-  props: ["store_id"],
+  props: ["storeId"],
   data() {
     return {
-      order_id: "order_id"
+      orderId: "",
+      storeInfo: "",
+      menus: [],
+      menusDetail: [],
+      orderData: {}
     };
   },
+  created() {
+    const self = this;
+    const storeId = this.storeId;
+    store.child(storeId).once("value").then(function(snapshot) {
+      // console.log(snapshot.val());
+      self.storeInfo = snapshot.val();
+      // console.log(self.storeInfo);
+    });
+    store.child(storeId).child("menus").once("value").then(function(snapshot) {
+      // console.log(snapshot.val());
+      self.menusDetail = snapshot.val();
+
+      snapshot.forEach(function(data) {
+        self.menus.push(data.val());
+      });
+    });
+    // console.log(self.menus);
+  },
   methods: {
-    teamOrder() {}
+    openTeamOrder() {
+      const self = this;
+      const storeId = self.storeId;
+      const storeInfo = self.storeInfo;
+      self.orderId = order.child(storeId).set({
+        "result": {
+          "total": 200,
+          "users": {
+            "userID": {
+              "id": "userID",
+              "total": 200,
+              "name": "user.displayName",
+              "mark": "",
+              "order": {
+                "menuID": {
+                  "count": 2,
+                  "name": "玉米濃湯麵",
+                  "price": 100,
+                  "total": 200,
+                  "options": [{ "name": "烏龍麵" }, { "name": "加辣" }]
+                }
+              }
+            }
+          }
+        }
+      }).key;
+      const orderId = self.orderId;
+      order.child(storeId).update(storeInfo);
+
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
-ol,
-ul {
+ol, ul {
   list-style: none;
 }
 .container {
@@ -91,7 +133,7 @@ li {
 p {
   margin-top: 0;
 }
-.temaOrderBtn {
+.open-team-order {
   background: #ff7044;
   font-size: 13px;
   padding: 12px 74px;
