@@ -109,7 +109,7 @@ export default {
 
 <template>
   <div class="container">
-    <h1>會員註冊</h1>
+    <h1 class="register_title">會員註冊</h1>
     <div class="layout-form">
   <form action="" @submit.prevent="register">
     <div class="form-group" :class="{error: validation.hasError('email')}">
@@ -142,6 +142,7 @@ export default {
     </div>
     <div class="form-group">
       <div class="actions">
+        <button type="button" class="btn">取消</button>
         <button type="submit" class="btn btn-primary">送出</button>
       </div>
     </div>
@@ -151,10 +152,50 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.register_form {
-  label,
-  input {
-    display: block;
+* {
+  box-sizing: border-box;
+}
+
+.register_title {
+  font-size: 20px;
+  text-align: center;
+}
+
+.layout-form {
+  width: 296px;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 5px 8px 3px #e2e2e2;
+}
+.form-group {
+  margin-bottom: 15px;
+
+  .label {
+    color: #f7a654;
+    font-size: 14px;
+  }
+
+  .form-control {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-around;
+  }
+  .btn {
+    width: 120px;
+    height: 46px;
+    background-color: white;
+    border: #f7a654 1px solid;
+    border-radius: 21px;
+  }
+
+  .btn-primary {
+    color: white;
+    background-color: #f7a654;
   }
 }
 </style>
