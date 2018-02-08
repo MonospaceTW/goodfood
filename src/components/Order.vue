@@ -21,7 +21,18 @@ export default {
     ComfirmOrder
   },
   created() {
-    checkAuth.checkAuth();
+    checkAuth
+      .checkAuth()
+      .then(userInfo => {
+        this.uid = userInfo.uid;
+        this.displayName = userInfo.displayName;
+      })
+      .catch(error => {
+        console.log(error);
+        this.$router.push({
+          name: "login"
+        });
+      });
 
     firebase
       .database()

@@ -1,18 +1,18 @@
 var firebase = require("firebase");
 
 export default {
-  checkAuth: function checkAuth() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.uid = user.uid;
-        this.displayName = user.displayName;
-        console.log("User is signed in.", user);
-      } else {
-        this.$router.push({
-          name: "login"
-        });
-        console.log("User is not logined yet.");
-      }
+  checkAuth: () => {
+    return new Promise((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          let userInfo = {};
+          userInfo.uid = user.uid;
+          userInfo.displayName = user.displayName;
+          resolve(userInfo);
+        } else {
+          reject(new Error("User is not logined yet."));
+        }
+      });
     });
   }
 };
