@@ -1,11 +1,17 @@
 import Vue from "vue";
+import Result from "@/components/Result";
 import Router from "vue-router";
-import storeinfo from "../components/storeInfo";
 import App from "@/App";
+import Register from "@/components/Register";
+import Login from "@/components/Login";
+import ForgotPw from "@/components/ForgotPw";
+import StoreList from "@/components/StoreList";
+import storeinfo from "../components/storeInfo";
 import Order from "@/components/Order";
-import ComfirmOrder from "@/components/ComfirmOrder";
+import Comfirmed from "@/components/Comfirmed";
 import NotFound from "@/components/NotFound";
 import Member from "../components/Member";
+import homepage from "../components/homepage.vue";
 
 Vue.use(Router);
 
@@ -16,6 +22,31 @@ export default new Router({
       name: "App",
       component: App,
       children: [
+        {
+          path: "register",
+          name: "register",
+          component: Register
+        },
+        {
+          path: "login",
+          name: "login",
+          component: Login
+        },
+        {
+          path: "forgotpw",
+          name: "forgotpw",
+          component: ForgotPw
+        },
+        {
+          path: "loading",
+          name: "homepage",
+          component: homepage
+        },
+        {
+          path: "storelist",
+          name: "storelist",
+          component: StoreList
+        },
         {
           path: "storeinfo/:storeId?",
           name: "storeinfo",
@@ -29,10 +60,15 @@ export default new Router({
           props: true
         },
         {
-          path: "comfirm_order",
-          name: "comfirm_order",
-          component: ComfirmOrder
-          // props: true
+          path: "comfirmed/:orderId?/:thisOrderKey?",
+          name: "comfirmed",
+          component: Comfirmed,
+          props: true
+        },
+        {
+          path: "result",
+          name: "result",
+          component: Result
         },
         {
           path: "not_found",
@@ -55,7 +91,9 @@ export default new Router({
     },
     {
       path: "*",
-      redirect: { name: "not_found" }
+      redirect: {
+        name: "not_found"
+      }
     }
   ]
 });
