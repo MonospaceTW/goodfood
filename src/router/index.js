@@ -5,8 +5,8 @@ import App from "@/App";
 import Register from "@/components/Register";
 import Login from "@/components/Login";
 import ForgotPw from "@/components/ForgotPw";
-import StoreList from "@/components/StoreList";
-import storeinfo from "../components/storeInfo";
+import StoreList from "../components/StoreList.vue";
+import StoreInfo from "../components/StoreInfo";
 import Order from "@/components/Order";
 import Comfirmed from "@/components/Comfirmed";
 import NotFound from "@/components/NotFound";
@@ -50,7 +50,7 @@ export default new Router({
         {
           path: "storeinfo/:storeId?",
           name: "storeinfo",
-          component: storeinfo,
+          component: StoreInfo,
           props: true
         },
         {
