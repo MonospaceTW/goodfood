@@ -10,6 +10,7 @@ import storeinfo from "../components/storeInfo";
 import Order from "@/components/Order";
 import Comfirmed from "@/components/Comfirmed";
 import NotFound from "@/components/NotFound";
+import Member from "../components/Member";
 import homepage from "../components/homepage.vue";
 
 Vue.use(Router);
@@ -47,7 +48,7 @@ export default new Router({
           component: StoreList
         },
         {
-          path: "storeinfo/:store_id?",
+          path: "storeinfo/:storeId?",
           name: "storeinfo",
           component: storeinfo,
           props: true
@@ -73,6 +74,18 @@ export default new Router({
           path: "not_found",
           name: "not_found",
           component: NotFound
+        },
+        {
+          path: "home",
+          name: "home",
+          component: App
+          // props: true
+        },
+        {
+          path: "member",
+          name: "member",
+          component: Member
+          // props: true
         }
       ]
     },
