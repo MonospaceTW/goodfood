@@ -5,6 +5,8 @@ import App from "./App";
 import router from "./router";
 import config from "./config";
 const firebase = require("firebase");
+require("./scss/setting.css");
+require("./scss/reset.css");
 
 Vue.config.productionTip = false;
 
@@ -14,6 +16,8 @@ firebase.initializeApp(config);
 new Vue({
   el: "#app",
   router,
-  components: { App },
+  components: {
+    App
+  },
   template: "<App/>"
 });
