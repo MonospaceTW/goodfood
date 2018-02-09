@@ -1,4 +1,4 @@
-# susy 學習筆記
+# susy 學習筆記 <img src="./imgs/lazyrabbit/lazyrabbit4.png" width="50">
 
 <font color='blue'><b>susy install</b></font>
 

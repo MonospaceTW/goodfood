@@ -5,18 +5,20 @@ import App from "./App";
 import router from "./router";
 import config from "./config";
 
-var firebase = require("firebase");
+const firebase = require("firebase");
+require("./scss/setting.css");
+require("./scss/reset.css");
 
 Vue.config.productionTip = false;
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-}
+firebase.initializeApp(config);
 
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
   router,
-  components: { App },
+  components: {
+    App
+  },
   template: "<App/>"
 });
