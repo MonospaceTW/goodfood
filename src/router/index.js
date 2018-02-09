@@ -5,13 +5,13 @@ import App from "@/App";
 import Register from "@/components/Register";
 import Login from "@/components/Login";
 import ForgotPw from "@/components/ForgotPw";
-import StoreList from "../components/StoreList.vue";
-import StoreInfo from "../components/StoreInfo";
+import StoreList from "@/components/StoreList";
+import StoreInfo from "@/components/StoreInfo";
 import Order from "@/components/Order";
 import Comfirmed from "@/components/Comfirmed";
 import NotFound from "@/components/NotFound";
-import Member from "../components/Member";
-import homepage from "../components/homepage.vue";
+import Member from "@/components/Member";
+import homepage from "@/components/homepage";
 
 Vue.use(Router);
 

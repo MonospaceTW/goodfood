@@ -11,7 +11,9 @@ require("./scss/reset.css");
 
 Vue.config.productionTip = false;
 
-firebase.initializeApp(config);
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 
 /* eslint-disable no-new */
 new Vue({
