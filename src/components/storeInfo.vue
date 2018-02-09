@@ -93,6 +93,10 @@ ol,
 ul {
   list-style: none;
 }
+img {
+  max-width: 100%;
+	height: auto;
+}
 .container {
   // font-size: 16px;
   font-family: "Noto Sans", sans-serif;
