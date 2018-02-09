@@ -52,7 +52,20 @@ export default {
   data() {
     return {
       orderId: "",
-      storeInfo: "",
+      storeInfo: {
+        orderIn: {
+          count: 0,
+          unit: 0
+        },
+        time: {
+          start: 0,
+          end: 0
+        },
+        tel: {
+          block: 0,
+          num: 0
+        }
+      },
       storeInfoAll: [],
       menus: [],
       orderData: {}
@@ -95,7 +108,7 @@ ul {
 }
 img {
   max-width: 100%;
-	height: auto;
+  height: auto;
 }
 .container {
   // font-size: 16px;
