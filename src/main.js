@@ -4,7 +4,6 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router";
 import config from "./config";
-<<<<<<< HEAD
 
 var firebase = require("firebase");
 
@@ -13,13 +12,6 @@ Vue.config.productionTip = false;
 if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
-=======
-const firebase = require("firebase");
-
-Vue.config.productionTip = false;
-
-firebase.initializeApp(config);
->>>>>>> develop
 
 /* eslint-disable no-new */
 new Vue({
