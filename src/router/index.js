@@ -1,9 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import App from '@/App'
-import Order from '@/components/Order'
-import ComfirmOrder from '@/components/ComfirmOrder'
-import NotFound from '@/components/NotFound'
+import Vue from 'vue';
+import Router from 'vue-router';
+import App from '@/App';
+import StoreList from "../components/StoreList.vue";
+import Order from '@/components/Order';
+import ComfirmOrder from '@/components/ComfirmOrder';
+import NotFound from '@/components/NotFound';
 
 Vue.use(Router)
 
@@ -15,6 +16,11 @@ export default new Router({
       component: App,
       children: [
 
+        {
+          path: "storelist",
+          name: "storelist",
+          component: StoreList
+        },
         {
           path: 'order/:store_id?/:order_id?',
           name: 'order',
