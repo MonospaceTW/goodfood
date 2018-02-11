@@ -2,6 +2,26 @@
 
 > 訂便當系統
 
+## Config File
+
+```
+  $ cp src/config_default.js src/config.js
+```
+
+填入 firebase 的設定
+
+```javascript
+export default {
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: ""
+};
+
+```
+
 ## Build Setup
 
 ``` bash
