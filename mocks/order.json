@@ -2,6 +2,7 @@
   "orderID": {
     "store": {
       "name": "店家名稱",
+      "address": "店家地址",
       "orderIn": {
         "unit": "元 / 份",
         "count": 300

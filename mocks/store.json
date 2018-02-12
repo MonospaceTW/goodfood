@@ -1,5 +1,6 @@
 {
   "name": "店家名稱",
+  "address": "店家地址",
   "orderIn": {
     "unit": "元 / 份",
     "count": 300
@@ -12,7 +13,7 @@
     "block": "區碼",
     "num": "號碼"
   },
-  "mark": "", //備註
+  "mark": "",
   "menus": {
     "menuId": {
       "name": "玉米濃湯麵",
