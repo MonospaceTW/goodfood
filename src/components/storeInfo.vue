@@ -2,44 +2,64 @@
   <div class="container">
     <div class="banner"></div>
     <h1>{{storeInfo.name}}</h1>
+
       <ul>
+
+        <!-- v-for 渲染 menus -->
         <li v-for="menu in menus" :key="menu.id">
           <div class="dishName">{{menu.name}}</div>
           <div class="dishPrice">${{menu.price}}</div>
         </li>
+        <!-- ************************************* -->
+
         <li>
           <p  class="endTime">開團後半小時截止</p>
         </li>
       </ul>
+
       <div class="storeInfo">
         <p>滿{{storeInfo.orderIn.count}}{{storeInfo.orderIn.unit}}可外送</p>
         <p>營業時間：{{storeInfo.time.start}}~{{storeInfo.time.end}}</p>
         <p>地址：台中市北區美德街</p>
         <p id="lastInfo">電話：{{storeInfo.tel.block}}-{{storeInfo.tel.num}}</p>
       </div>
-      <router-link :to="{
-        name:'order',
-        params: { storeId: this.storeId, orderId: this.orderId}
-      }" @click.native="openTeamOrder" class="open-team-order">
+
+      <router-link
+        class="open-team-order"
+        :to="{
+          name:'order',
+          params: {
+            storeId: this.storeId,
+            orderId: this.orderId
+          },
+        }"
+        @click.native="openTeamOrder"
+      >
         我要團購
       </router-link>
+
       <footer>
         <div class="home">
           <router-link to="home">
             <img src="../assets/images/icon-home.svg" alt="">
           </router-link>
         </div>
+
         <div class="member">
           <router-link to="member">
             <img src="../assets/images/icon-member.svg" alt="">
           </router-link>
         </div>
       </footer>
+
   </div>
 </template>
 <script>
 import config from "../config";
 const firebase = require("firebase");
+
+// #TOFIX: 已經在 Vue Cli 程式進入點 main.js 中進行過判斷與 initializeApp ，
+//         但是在這邊沒有進行 initializeApp 在 Console 中會出現 firebase 錯誤訊息。
 if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
@@ -52,26 +72,45 @@ export default {
   data() {
     return {
       orderId: "",
-      storeInfo: "",
+      storeInfo: {
+        orderIn: {
+          count: 0,
+          unit: 0
+        },
+        time: {
+          start: 0,
+          end: 0
+        },
+        tel: {
+          block: 0,
+          num: 0
+        }
+      },
       storeInfoAll: [],
-      menus: [],
-      orderData: {}
+      menus: []
     };
   },
   created() {
     const self = this;
     const storeId = this.storeId;
-    store.child(storeId).once("value").then(function(snapshot) {
-      // console.log(snapshot.val());
-      self.storeInfo = snapshot.val();
-      // console.log(self.storeInfo);
-    });
-    store.child(storeId).child("menus").once("value").then(function(snapshot) {
-      // console.log(snapshot.val());
-      snapshot.forEach(function(data) {
-        self.menus.push(data.val());
+    store
+      .child(storeId)
+      .once("value")
+      .then(function(snapshot) {
+        // console.log(snapshot.val());
+        self.storeInfo = snapshot.val();
+        // console.log(self.storeInfo);
       });
-    });
+    store
+      .child(storeId)
+      .child("menus")
+      .once("value")
+      .then(function(snapshot) {
+        // console.log(snapshot.val());
+        snapshot.forEach(function(data) {
+          self.menus.push(data.val());
+        });
+      });
     // console.log(self.menus);
   },
   methods: {
@@ -81,7 +120,10 @@ export default {
       const storeInfo = self.storeInfo;
       self.orderId = order.child(storeId).push().key;
       const orderId = self.orderId;
-      order.child(orderId).child(storeId).update(storeInfo);
+      order
+        .child(orderId)
+        .child(storeId)
+        .update(storeInfo);
     }
   }
 };
@@ -92,6 +134,10 @@ export default {
 ol,
 ul {
   list-style: none;
+}
+img {
+  max-width: 100%;
+  height: auto;
 }
 .container {
   // font-size: 16px;
@@ -134,7 +180,7 @@ li {
   display: flex;
   justify-content: space-between;
 }
-li:nth-last-child(n){
+li:nth-last-child(n) {
   padding: 0 0 12px 0;
 }
 .endTime {
@@ -198,7 +244,7 @@ footer {
   width: 100%;
   margin-top: 40px;
 }
-footer a{
+footer a {
   display: block;
   width: 100%;
   height: 47px;
@@ -215,7 +261,7 @@ footer a{
   align-items: center;
   justify-content: space-around;
 }
-.home img{
+.home img {
   width: 24px;
   height: 20px;
 }
@@ -232,9 +278,8 @@ footer a{
   align-items: center;
   justify-content: space-around;
 }
-.member img{
+.member img {
   width: 18px;
   height: 21px;
 }
-
 </style>
