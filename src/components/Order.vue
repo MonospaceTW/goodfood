@@ -1,8 +1,9 @@
 <script>
 /* eslint-disable */
-var firebase = require("firebase");
+import FirebaseManager from "@/utils/FirebaseManager";
 import ComfirmOrder from "./ComfirmOrder";
 import checkAuth from "@/checkAuth";
+import fp from "lodash/fp";
 
 export default {
   props: ["storeId", "orderId"],
@@ -34,19 +35,15 @@ export default {
         });
       });
 
-    firebase
-      .database()
-      .ref("store/" + this.storeId)
-      .child("menus")
-      .once("value")
-      .then(snapshot => {
-        let menu = snapshot.val();
-        for (let id in menu) {
-          menu[id].count = 0;
-        }
-        // 深層複製物件
-        this.dishes = JSON.parse(JSON.stringify(menu));
-      });
+    let route = `order/${this.orderId}/${this.storeId}/menus`;
+    FirebaseManager.getValue(route).then(menu => {
+      for (let id in menu) {
+        menu[id].count = 0;
+      }
+      //  深層複製物件以確保更新Vue的observer
+      this.dishes = fp.cloneDeep(menu);
+      console.log(this.dishes);
+    });
   },
   methods: {
     add(id) {
