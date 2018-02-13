@@ -1,4 +1,5 @@
 import Vue from "vue";
+import Index from "@/components/Index";
 import Result from "@/components/Result";
 import Router from "vue-router";
 import App from "@/App";
@@ -22,6 +23,11 @@ export default new Router({
       name: "App",
       component: App,
       children: [
+        {
+          path: "index",
+          name: "index",
+          component: Index
+        },
         {
           path: "register",
           name: "register",
