@@ -55,17 +55,10 @@
   </div>
 </template>
 <script>
-import config from "../config";
-const firebase = require("firebase");
+import FirebaseManager from "@/utils/FirebaseManager";
 
-// #TOFIX: 已經在 Vue Cli 程式進入點 main.js 中進行過判斷與 initializeApp ，
-//         但是在這邊沒有進行 initializeApp 在 Console 中會出現 firebase 錯誤訊息。
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-}
-
-const store = firebase.database().ref("store");
-const order = firebase.database().ref("order");
+const store = FirebaseManager.database.ref("store");
+const order = FirebaseManager.database.ref("order");
 
 export default {
   props: ["storeId"],
