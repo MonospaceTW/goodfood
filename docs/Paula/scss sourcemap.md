@@ -1,10 +1,12 @@
 # 引入gulp sourcemap流程 <img src="./imgs/lazyrabbit/lazyrabbit3.png" width="50">
+
+## step1 npm install source-map
 ---
-## step1 將這段引入至gulpfile.js
+## step2 將這段引入至gulpfile.js
 
 ![image](./imgs/one.png)
   
-## step2 引入這三段
+ ## step3 引入這三段
 ![image](./imgs/two.png)
 ![image](./imgs/three.png)
 
@@ -30,6 +32,12 @@
 ## step3
 
 ![image](./imgs/nin.png) compile後會產生.map的檔案在相對應的資料夾
+
+**於compile的.css中最後一行會出現以下(不是.map)** 
+```java
+/*# sourceMappingURL=debug/Parallax-scrolling.css.map */
+```
+
 
 <h3><font color="blue">
 如何於本機瀏覽狀態來編輯scss存檔後同步至vs code</font></h3>
