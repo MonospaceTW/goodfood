@@ -1,5 +1,5 @@
 <script>
-var firebase = require("firebase");
+import FirebaseManager from "@/utils/FirebaseManager";
 var SimpleVueValidation = require("simple-vue-validator");
 var Validator = SimpleVueValidation.Validator.create({
   templates: {
@@ -59,13 +59,11 @@ export default {
       this.submitted = true;
       this.$validate().then(success => {
         if (success) {
-          console.log("Validation succeeded!", this.email, this.password);
+          console.log("Validation succeeded!");
           let email = this.email;
           let password = this.password;
           let displayName = this.displayName;
-          firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password)
+          FirebaseManager.createUserWithEmailAndPassword(email, password)
             .then(user => {
               console.log("sucess", user);
 

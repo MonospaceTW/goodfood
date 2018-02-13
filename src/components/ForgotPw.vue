@@ -1,5 +1,5 @@
 <script>
-var firebase = require("firebase");
+import FirebaseManager from "@/utils/FirebaseManager";
 var SimpleVueValidation = require("simple-vue-validator");
 var Validator = SimpleVueValidation.Validator.create({
   templates: {
@@ -29,16 +29,16 @@ export default {
       this.$validate().then(success => {
         if (success) {
           console.log("Validation succeeded!");
-          var auth = firebase.auth();
+          // var auth = firebase.auth();
           var emailAddress = this.email;
           // var actionCodeSettings = {
           //   url: "http://localhost:8080/#/storelist"
           // };
-          auth
+          FirebaseManager
             // .sendPasswordResetEmail(emailAddress, actionCodeSettings)
             .sendPasswordResetEmail(emailAddress)
             .then(() => {
-              console.log("sucess");
+              console.log("重設密碼信已寄出");
               this.sentVerify = true;
             })
             .catch(error => {

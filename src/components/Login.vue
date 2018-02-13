@@ -1,5 +1,5 @@
 <script>
-var firebase = require("firebase");
+import FirebaseManager from "@/utils/FirebaseManager";
 var SimpleVueValidation = require("simple-vue-validator");
 var Validator = SimpleVueValidation.Validator.create({
   templates: {
@@ -47,9 +47,7 @@ export default {
         if (success) {
           console.log("Validation succeeded!");
 
-          firebase
-            .auth()
-            .signInWithEmailAndPassword(this.email, this.password)
+          FirebaseManager.signInWithEmailAndPassword(this.email, this.password)
             .then(user => {
               this.$router.go(-1);
             })
