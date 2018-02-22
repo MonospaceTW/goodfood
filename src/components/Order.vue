@@ -1,7 +1,7 @@
 <script>
 /* eslint-disable */
 import FirebaseManager from "@/utils/FirebaseManager";
-import ComfirmOrder from "./ComfirmOrder";
+import ConfirmOrder from "./ConfirmOrder";
 import checkAuth from "@/checkAuth";
 import lodashfp from "lodash/fp";
 
@@ -14,12 +14,13 @@ export default {
       mark: "",
       user: {},
       thisOrder: [],
-      comfirmed: false,
+      ConfirmOrder: false,
+      storeName: "",
       dishes: {}
     };
   },
   components: {
-    ComfirmOrder
+    ConfirmOrder
   },
   created() {
     checkAuth
@@ -35,8 +36,11 @@ export default {
         });
       });
 
-    let route = `order/${this.orderId}/${this.storeId}/menus`;
-    FirebaseManager.getValue(route).then(menu => {
+    let route = `order/${this.orderId}/${this.storeId}`;
+    FirebaseManager.getValue(route).then(store => {
+      this.storeName = store.name;
+
+      let menu = store.menus;
       for (let id in menu) {
         menu[id].count = 0;
       }
@@ -78,11 +82,11 @@ export default {
       user.order = this.thisOrder;
       this.user = JSON.parse(JSON.stringify(user));
 
-      this.comfirmed = true;
+      this.ConfirmOrder = true;
       console.log(this.thisOrder);
     },
     cancelOrder() {
-      this.comfirmed = false;
+      this.ConfirmOrder = false;
     }
   },
   computed: {
@@ -105,8 +109,8 @@ export default {
 
 <template>
 <div class="container">
-  <comfirm-order v-show="comfirmed" :user="user" :orderId="orderId" :storeId="storeId" :uid="uid" @cancelOrder="cancelOrder"></comfirm-order>
-  <h1 class="store_name">便當店名</h1>
+  <confirm-order v-show="ConfirmOrder" :user="user" :orderId="orderId" :storeId="storeId" :uid="uid" @cancelOrder="cancelOrder"></confirm-order>
+  <h1 class="store_name">{{storeName}}</h1>
   <ul>
     <li class="item" v-for="(dish,id) in dishes" v-bind:key="id">
       <div class="menu">
