@@ -9,89 +9,135 @@ import ForgotPw from "@/components/ForgotPw";
 import StoreList from "@/components/StoreList";
 import StoreInfo from "@/components/StoreInfo";
 import Order from "@/components/Order";
-import Comfirmed from "@/components/Comfirmed";
+import Confirmed from "@/components/Confirmed";
 import NotFound from "@/components/NotFound";
-import Member from "@/components/Member";
 import homepage from "@/components/homepage";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: "/",
       name: "App",
       component: App,
+      meta: {
+        title: route => {
+          return "訂便當系統";
+        }
+      },
       children: [
         {
           path: "index",
           name: "index",
-          component: Index
+          component: Index,
+          meta: {
+            title: route => {
+              return "訂便當 首頁";
+            }
+          }
         },
         {
           path: "register",
           name: "register",
-          component: Register
+          component: Register,
+          meta: {
+            title: route => {
+              return "會員註冊";
+            }
+          }
         },
         {
           path: "login",
           name: "login",
-          component: Login
+          component: Login,
+          meta: {
+            title: route => {
+              return "會員登入";
+            }
+          }
         },
         {
           path: "forgotpw",
           name: "forgotpw",
-          component: ForgotPw
+          component: ForgotPw,
+          meta: {
+            title: route => {
+              return "忘記密碼";
+            }
+          }
         },
         {
           path: "loading",
           name: "homepage",
-          component: homepage
+          component: homepage,
+          meta: {
+            title: route => {
+              return "訂便當系統";
+            }
+          }
         },
         {
           path: "storelist",
           name: "storelist",
-          component: StoreList
+          component: StoreList,
+          meta: {
+            title: route => {
+              return "店家列表";
+            }
+          }
         },
         {
           path: "storeinfo/:storeId?",
           name: "storeinfo",
           component: StoreInfo,
-          props: true
+          props: true,
+          meta: {
+            title: route => {
+              return "店家資訊";
+            }
+          }
         },
         {
-          path: "order/:storeId?/:orderId?",
+          path: "order/:storeId?/:orderId?/:storeName?",
           name: "order",
           component: Order,
-          props: true
+          props: true,
+          meta: {
+            title: route => {
+              return (route.params.storeName || "便當") + "訂購頁";
+            }
+          }
         },
         {
-          path: "comfirmed/:orderId?/:thisOrderKey?",
-          name: "comfirmed",
-          component: Comfirmed,
-          props: true
+          path: "confirmed",
+          name: "confirmed",
+          component: Confirmed,
+          meta: {
+            title: route => {
+              return "訂購完成";
+            }
+          }
         },
         {
           path: "result",
           name: "result",
-          component: Result
+          component: Result,
+          meta: {
+            title: route => {
+              return "訂購結果";
+            }
+          }
         },
         {
           path: "not_found",
           name: "not_found",
-          component: NotFound
-        },
-        {
-          path: "home",
-          name: "home",
-          component: App
-          // props: true
-        },
-        {
-          path: "member",
-          name: "member",
-          component: Member
-          // props: true
+          component: NotFound,
+          meta: {
+            title: route => {
+              return "訂便當系統";
+            }
+          }
         }
       ]
     },
@@ -103,3 +149,10 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title(to);
+  next();
+});
+
+export default router;
