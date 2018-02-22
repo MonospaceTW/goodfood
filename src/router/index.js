@@ -66,9 +66,10 @@ export default new Router({
           props: true
         },
         {
-          path: "result",
+          path: "result/:storeId?/:orderId?",
           name: "result",
-          component: Result
+          component: Result,
+          props: true
         },
         {
           path: "not_found",
