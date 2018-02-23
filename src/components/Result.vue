@@ -1,5 +1,5 @@
 <template>
-
+<div>
 <div class="container">
     <h1 class="result_title">團訂結果</h1>
     <hr />
@@ -23,18 +23,18 @@
           }"
           @click.native="backOrder"
        >
-        我要團購
+        返回訂購頁
       </router-link>
         <div class="listtop_2">訂單明細</div>
 
       <div class="order-detail-list">
-        <div class="user" v-for=" (userValue, userKey) in users">
+        <div class="user" v-for=" (userValue, userKey) in users" :key="userKey.id">
           <div class="user-name">{{userValue.name}}</div>
           <div class="user-order-detail" >
-            <div class="order-detail" v-for="(orderValue, orderKey) in userValue.order">
+            <div class="order-detail" v-for="(orderValue, orderKey) in userValue.order" :key="orderKey.id">
               <div class="order-food">{{orderValue.name}}</div>
               <div class="order-count">x{{orderValue.count}}</div>
-              <div class="order-price">${{orderValue.price * orderValue.count}}</div> 
+              <div class="order-price">${{orderValue.price * orderValue.count}}</div>
             </div>
           </div>
           <div class="user-mark">{{userValue.mark}}</div>
@@ -42,7 +42,6 @@
       </div>
 
         <div class="listtop_1">訂單</div>
-
 
         <div class="region_down">
           <div class="row" v-for="item in totalOrder" :key="item.id">
@@ -64,9 +63,10 @@
             <div>${{totalPrice}}</div>
         </div>
         
-        <footer-component></footer-component>
+        
 </div>
-
+<footer-component></footer-component>
+</div>
 </template>
 <script>
 import config from "../config";
@@ -201,7 +201,11 @@ export default {
       // const storeId = self.storeId;
 
       self.$router.push({
-        path: "/order/" + this.$route.params.storeId + "/" + orderId,
+        path:
+          "/order/" +
+          this.$route.params.storeId +
+          "/" +
+          this.$route.params.orderId,
         params: {
           storeId: this.storeId,
           orderId: this.orderId
@@ -280,7 +284,6 @@ hr {
   width: 100%;
   line-height: 18px;
   text-align: left;
-  margin: 13px 10px;
 }
 .row_digital {
   display: flex;
@@ -290,6 +293,10 @@ hr {
   letter-spacing: 2px;
   margin-top: 3px;
   margin-bottom: 13px;
+}
+
+.region_down {
+  margin: 1.5% 0.75%;
 }
 
 .remarks {
@@ -312,6 +319,7 @@ hr {
 }
 .item {
   width: 60%;
+  margin-right: 36.5%;
 }
 
 .item_2 {
@@ -338,8 +346,7 @@ hr {
 }
 .user-order-detail {
   display: flex;
-  flex: 1;
-  flex-shrink: 1;
+
   flex-wrap: wrap;
   width: 77%;
 }
@@ -362,13 +369,17 @@ hr {
   justify-content: space-between;
 }
 .order-food {
-  // width: 45%;
+  width: 60%;
+  display: flex;
+  justify-content: flex-start;
 }
 .order-count {
-  // width: 3.7%;
+  width: 20%;
 }
 .order-price {
-  // width: 8%;
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .back-order {
@@ -379,7 +390,7 @@ hr {
   background-color: #ffffff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
   border: solid 1px #f8a654;
-  padding: 11px 24px 13px 24px;
+  padding: 11px 16px 13px 16px;
   font-size: 14px;
   font-weight: normal;
   font-style: normal;

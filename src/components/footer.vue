@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="home">
-      <router-link 
+      <router-link
       :to="{
         path: '/home'
       }"
@@ -32,6 +32,7 @@ footer {
   justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
+  box-shadow: 0 -1px 4px 3px rgba(194, 194, 194, 0.15);
 }
 footer a {
   display: block;
