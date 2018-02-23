@@ -78,7 +78,7 @@ export default {
                   console.log(error.message);
                 });
               // this.$router.go(-2);
-              this.$router.push({ name: "storelist" });
+              this.$router.push({ name: "index" });
             })
             .catch(error => {
               console.log(error.message, error.code);
@@ -109,62 +109,75 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+    <div class="container">
     <h1 class="register_title">會員註冊</h1>
-    <div class="layout-form">
-  <form action="" @submit.prevent="register">
-    <div class="form-group" :class="{error: validation.hasError('email')}">
-      <div class="label">E-mail</div>
-      <div class="content">
-        <input type="email" class="form-control" v-model="email" />
+
+    <form action="" @submit.prevent="register">
+      <div class="layout-form">
+        <div class="form-group" :class="{error: validation.hasError('email')}">
+          <div class="label">E-mail</div>
+          <div class="content">
+            <input type="email" class="form-control" v-model="email" />
+          </div>
+          <div class="message">{{ validation.firstError('email') }}{{errorMsg}}</div>
+        </div>
+        <div class="form-group">
+          <div class="label">暱稱</div>
+          <div class="content">
+            <input type="text" class="form-control" v-model="displayName" />
+          </div>
+          <div class="message">{{ validation.firstError('displayName') }}</div>
+        </div>
+        <div class="form-group" :class="{error: validation.hasError('password')}">
+          <div class="label">密碼</div>
+          <div class="content">
+            <input type="password" class="form-control" placeholder="密碼需大於六字元" v-model="password" />
+          </div>
+          <div class="message">{{ validation.firstError('password') }}</div>
+        </div>
+        <div class="form-group" :class="{error: validation.hasError('repeat')}">
+          <div class="label">確認密碼</div>
+          <div class="content">
+            <input type="password" class="form-control" v-model="repeat" />
+          </div>
+          <div class="message">{{ validation.firstError('repeat') }}</div>
+        </div>
+        
       </div>
-      <div class="message">{{ validation.firstError('email') }}{{errorMsg}}</div>
-    </div>
-    <div class="form-group" >
-      <div class="label">暱稱</div>
-      <div class="content">
-        <input type="text" class="form-control" v-model="displayName" />
-      </div>
-      <div class="message">{{ validation.firstError('displayName') }}</div>
-    </div>
-    <div class="form-group" :class="{error: validation.hasError('password')}">
-      <div class="label">密碼</div>
-      <div class="content">
-        <input type="password" class="form-control" v-model="password" />
-      </div>
-      <div class="message">{{ validation.firstError('password') }}</div>
-    </div>
-    <div class="form-group" :class="{error: validation.hasError('repeat')}">
-      <div class="label">確認密碼</div>
-      <div class="content">
-        <input type="password" class="form-control" v-model="repeat" />
-      </div>
-      <div class="message">{{ validation.firstError('repeat') }}</div>
-    </div>
-    <div class="form-group">
-      <div class="actions">
-        <button type="button" class="btn" @click="cancelRegister">取消</button>
-        <button type="submit" class="btn btn-primary">送出</button>
-      </div>
-    </div>
-  </form>
-</div>
+      <div class="form-group">
+          <div class="actions">
+            <button type="button" class="btn" @click="cancelRegister">取消</button>
+            <button type="submit" class="btn btn-primary">送出</button>
+          </div>
+        </div>
+    </form>
   </div>
 </template>
 
 <style lang="scss" scoped>
+@import "../scss/index.scss";
+
 * {
   box-sizing: border-box;
+}
+
+.container {
+  width: 90%;
+  font-size: 14px;
+  margin: 0 auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .register_title {
   font-size: 20px;
   text-align: center;
+  margin-bottom: 47px;
 }
 
 .layout-form {
   width: 296px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
   padding: 15px;
   border-radius: 15px;
   box-shadow: 0 5px 8px 3px #e2e2e2;
@@ -173,18 +186,22 @@ export default {
   margin-bottom: 15px;
 
   .label {
-    color: #f7a654;
+    color: $orange;
     font-size: 14px;
   }
 
   .form-control {
     display: inline-block;
     width: 100%;
-    // border-bottom: 1px solid gray;
+    height: 25px;
+    margin-top: 10px;
+    border-style: none;
+    border-bottom: 2px solid #e0dfdf;
   }
   .message {
     color: #f75454;
     font-size: 12px;
+    margin-bottom: 20px;
   }
 
   .actions {
@@ -194,9 +211,10 @@ export default {
   .btn {
     width: 120px;
     height: 46px;
-    background-color: white;
-    border: #f7a654 1px solid;
+    background-color: $gray_one;
+    border: $gray_one 1px solid;
     border-radius: 21px;
+    box-shadow: 0 3px 5px 2px #e2e2e2;
   }
 
   .btn-primary {
