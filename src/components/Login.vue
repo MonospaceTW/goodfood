@@ -84,20 +84,22 @@ export default {
 
 <template>
 <div class="container">
-  <h1>會員登入</h1>
+      <img src="../assets/images/logo.svg" alt="">
+  <div class="logo_title">SET <br>LUNCH</div>
   <div class="layout-form">
     <form action="" @submit.prevent="login">
       <div class="form-group" :class="{error: validation.hasError('email')}">
-        <div class="label">E-mail</div>
         <div class="content">
-          <input type="text" class="form-control" v-model="email" @focus="resetErrMsg" />
+          <div class="label">帳號</div>
+          <input type="text" class="form-control" placeholder="example@gmail.com" v-model="email" @focus="resetErrMsg" />
         </div>
         <div class="message">{{ validation.firstError('email') }}{{errorMail}}</div>
       </div>
       
       <div class="form-group" :class="{error: validation.hasError('password')}">
-        <div class="label">密碼</div>
         <div class="content">
+          <div class="label">密碼</div>
+          
           <input type="password" class="form-control" v-model="password" @focus="resetErrMsg" />
         </div>
         <div class="message">{{ validation.firstError('password') }}{{errorPw}}</div>
@@ -105,17 +107,99 @@ export default {
       
       <div class="form-group">
         <div class="actions">
-          <button type="submit" class="btn btn-primary">登入</button>
+          <button type="submit" class="btn login_btn">登入</button>
         </div>
       </div>
     </form>
   </div>
   <div>
-    <router-link :to="{name:'register'}" replace>註冊</router-link>
+    <router-link class="btn" :to="{name:'register'}" replace>註冊</router-link>
   </div>
   <div>
-    <router-link :to="{name:'forgotpw'}">忘記密碼</router-link>
+    <router-link class="forgotpw" :to="{name:'forgotpw'}">忘記密碼</router-link>
   </div>
   
 </div>
 </template>
+
+<style lang="scss" scoped>
+@import "../scss/index.scss";
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  font-size: 14px;
+  margin: 0 auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.logo_title {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #4a4a4a;
+  text-align: center;
+  padding-top: 16px;
+  padding-bottom: 56px;
+}
+
+.form-group {
+  .content {
+    width: 240px;
+    margin: 20px 0 0;
+    display: flex;
+    // justify-content: space-between;
+    border-bottom: 2px solid #e0dfdf;
+
+    .label {
+      width: 40px;
+    }
+
+    .form-control {
+      flex-grow: 2;
+    }
+  }
+
+  .message {
+    margin: 6px 0;
+    font-size: 12px;
+    color: $red;
+  }
+
+  .actions {
+    padding-top: 60px;
+    .login_btn {
+      margin: 0 auto;
+    }
+  }
+}
+
+.btn {
+  display: block;
+  width: 120px;
+  height: 40px;
+  margin: 17px 0 0;
+  color: $orange;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: center;
+  border: 1px $orange solid;
+  border-radius: 30px;
+  background-color: white;
+}
+
+.forgotpw {
+  display: block;
+  margin: 20px 0;
+  color: $dark_orange;
+}
+</style>
+
