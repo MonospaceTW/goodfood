@@ -27,7 +27,7 @@
       <router-link
         class="open-team-order"
         :to="{
-          name:'order',
+          path: '/order/' + this.$route.params.storeId + '/' + orderId,
           params: {
             storeId: this.storeId,
             orderId: this.orderId
@@ -38,23 +38,12 @@
         我要團購
       </router-link>
 
-      <footer>
-        <div class="home">
-          <router-link to="home">
-            <img src="../assets/images/icon-home.svg" alt="">
-          </router-link>
-        </div>
-
-        <div class="member">
-          <router-link to="member">
-            <img src="../assets/images/icon-member.svg" alt="">
-          </router-link>
-        </div>
-      </footer>
+      <footer-component></footer-component>
 
   </div>
 </template>
 <script>
+import footerComponent from "./footer";
 import config from "../config";
 const firebase = require("firebase");
 
@@ -69,6 +58,9 @@ const order = firebase.database().ref("order");
 
 export default {
   props: ["storeId"],
+  components: {
+    footerComponent
+  },
   data() {
     return {
       orderId: "",
@@ -124,6 +116,13 @@ export default {
         .child(orderId)
         .child(storeId)
         .update(storeInfo);
+      self.$router.push({
+        path: "/order/" + this.$route.params.storeId + "/" + orderId,
+        params: {
+          storeId: this.storeId,
+          orderId: this.orderId
+        }
+      });
     }
   }
 };
@@ -225,6 +224,7 @@ p {
   height: 6.9%;
   padding: 13px 38px 13px 38px;
   margin-top: 39px;
+  margin-bottom: 40px;
   font-size: 14px;
   font-weight: normal;
   font-style: normal;
@@ -234,52 +234,5 @@ p {
   text-align: left;
   color: #f8a654;
   text-decoration: none;
-}
-footer {
-  display: flex;
-  height: 47px;
-  align-items: flex-end;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  width: 100%;
-  margin-top: 40px;
-}
-footer a {
-  display: block;
-  width: 100%;
-  height: 47px;
-}
-.home {
-  flex: 1;
-  display: flex;
-  height: 47px;
-  align-items: flex-end;
-  justify-content: space-around;
-}
-.home a {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.home img {
-  width: 24px;
-  height: 20px;
-}
-
-.member {
-  flex: 1;
-  display: flex;
-  height: 47px;
-  align-items: flex-end;
-  justify-content: space-around;
-}
-.member a {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.member img {
-  width: 18px;
-  height: 21px;
 }
 </style>
