@@ -143,8 +143,7 @@ export default {
         self.users = newUsers; // 將新物件指定給 data 的 users
         // console.log(self.users);
       });
-
-    // 撈取 user 裡的 order 訂購細節資料 將每人的訂購清單推到 usersTotal 裡
+    // 撈取 user 裡的 order 訂購細節資料 將每人的訂購清單合併成總訂單
     db
       .ref("order")
       .child(orderId)
@@ -155,7 +154,7 @@ export default {
         snapshot.forEach(function(data) {
           data.child("order").forEach(function(newData) {
             const value = newData.val();
-
+            console.log(value);
             // 處裡所有訂單， 將訂單整理成總訂單
             const result = {
               name: value.name,
@@ -180,21 +179,28 @@ export default {
             if (!isSameOrder) {
               self.totalOrder.push(result);
             }
+            // 將每個使用者定的項目加進 usersTotal
+            self.usersTotal.push(value);
           });
         });
+
+        // 計算本次團訂的的總金額，並將總金額指定給 data 裡的 totalPrice
+        self.totalPrice = self.usersTotal.reduce((acc, cur) => {
+          return acc + cur.price * cur.count;
+        }, 0);
       });
 
-    // 撈取團訂總金額
-    db
-      .ref("order")
-      .child(orderId)
-      .child("result")
-      .child("total")
-      .once("value")
-      .then(function(snapshot) {
-        // 將從 DB 中撈取到的總金額指定給 data 裡的 totalPrice
-        self.totalPrice = fp.cloneDeep(snapshot.val());
-      });
+    // // 撈取團訂總金額
+    // db
+    //   .ref("order")
+    //   .child(orderId)
+    //   .child("result")
+    //   .child("total")
+    //   .once("value")
+    //   .then(function(snapshot) {
+    //     // 將從 DB 中撈取到的總金額指定給 data 裡的 totalPrice
+    //     self.totalPrice = fp.cloneDeep(snapshot.val());
+    //   });
 
     // 撈取店家資訊
     db
