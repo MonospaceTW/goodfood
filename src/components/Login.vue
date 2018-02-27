@@ -15,7 +15,8 @@ export default {
       email: "",
       password: "",
       errorMail: "",
-      errorPw: ""
+      errorPw: "",
+      isBtnDisabled: false
     };
   },
   created() {
@@ -46,13 +47,15 @@ export default {
       this.$validate().then(success => {
         if (success) {
           console.log("Validation succeeded!");
-
+          this.isBtnDisabled = true;
           FirebaseManager.signInWithEmailAndPassword(this.email, this.password)
             .then(user => {
               this.$router.go(-1);
             })
             .catch(error => {
               console.log(error.code);
+              this.isBtnDisabled = false;
+
               this.validateLogin(error.code);
             });
         }
@@ -91,7 +94,7 @@ export default {
       <div class="form-group" :class="{error: validation.hasError('email')}">
         <div class="content">
           <div class="label">帳號</div>
-          <input type="text" class="form-control" placeholder="example@gmail.com" v-model="email" @focus="resetErrMsg" />
+          <input type="text" class="form-control input" placeholder="example@gmail.com" v-model="email" @focus="resetErrMsg" />
         </div>
         <div class="message">{{ validation.firstError('email') }}{{errorMail}}</div>
       </div>
@@ -100,20 +103,20 @@ export default {
         <div class="content">
           <div class="label">密碼</div>
           
-          <input type="password" class="form-control" v-model="password" @focus="resetErrMsg" />
+          <input type="password" class="form-control input" v-model="password" @focus="resetErrMsg" />
         </div>
         <div class="message">{{ validation.firstError('password') }}{{errorPw}}</div>
       </div>
       
       <div class="form-group">
         <div class="actions">
-          <button type="submit" class="btn login_btn">登入</button>
+          <button type="submit" :disabled="isBtnDisabled" class="btn login_btn form-control">登入</button>
         </div>
       </div>
     </form>
   </div>
   <div>
-    <router-link class="btn" :to="{name:'register'}" replace>註冊</router-link>
+    <router-link class="btn" :to="{name:'register'}">註冊</router-link>
   </div>
   <div>
     <router-link class="forgotpw" :to="{name:'forgotpw'}">忘記密碼</router-link>
@@ -163,7 +166,7 @@ a {
       width: 40px;
     }
 
-    .form-control {
+    .input {
       flex-grow: 2;
     }
   }
