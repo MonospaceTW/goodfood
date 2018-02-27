@@ -76,7 +76,7 @@ export default {
     <div>重設密碼信已寄出</div>
     <router-link :to="{name:'storelist'}">回到首頁</router-link>
   </div>
-  <h1>忘記密碼</h1>
+  <h1 class="forgotpw_title">重設密碼</h1>
   <div class="layout-form">
     <form action="" @submit.prevent="sendPasswordResetEmail">
       <div class="form-group" :class="{error: validation.hasError('email')}">
@@ -88,7 +88,7 @@ export default {
       </div>
       <div class="form-group">
         <div class="actions">
-          <button type="submit" class="btn btn-primary">送出</button>
+          <button type="submit" class="btn">送出</button>
         </div>
       </div>
     </form>
@@ -97,6 +97,8 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@import "../scss/index.scss";
+
 .sent_verify {
   display: none;
   position: absolute;
@@ -109,5 +111,57 @@ export default {
 
 .show {
   display: block;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  font-size: 14px;
+  margin: 0 auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.forgotpw_title {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 47px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  display: block;
+  width: 120px;
+  height: 40px;
+  margin: 17px 0 0;
+  color: $orange;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: center;
+  border: 1px $orange solid;
+  border-radius: 30px;
+  background-color: white;
+}
+
+.form-control {
+  display: inline-block;
+  width: 230px;
+  height: 25px;
+  margin-top: 10px;
+  border-style: none;
+  border-bottom: 2px solid #e0dfdf;
+}
+.message {
+  color: $red;
+  font-size: 12px;
+  margin-top: 6px;
+  margin-bottom: 20px;
 }
 </style>
