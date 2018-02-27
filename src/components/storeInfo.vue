@@ -27,10 +27,11 @@
       <router-link
         class="open-team-order"
         :to="{
-          path: '/order/' + this.$route.params.storeId + '/' + orderId,
+          name: 'order',
           params: {
             storeId: this.storeId,
-            orderId: this.orderId
+            orderId: this.orderId,
+            storeName: this.storeInfo.name
           },
         }"
         @click.native="openTeamOrder"
@@ -117,10 +118,11 @@ export default {
         .child(storeId)
         .update(storeInfo);
       self.$router.push({
-        path: "/order/" + this.$route.params.storeId + "/" + orderId,
+        name: "order",
         params: {
           storeId: this.storeId,
-          orderId: this.orderId
+          orderId: this.orderId,
+          storeName: this.storeInfo.name
         }
       });
     }

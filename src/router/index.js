@@ -54,7 +54,7 @@ export default new Router({
           props: true
         },
         {
-          path: "order/:storeId?/:orderId?",
+          path: "order/:storeId?/:orderId?/:storeName?",
           name: "order",
           component: Order,
           props: true
