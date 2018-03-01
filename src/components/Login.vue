@@ -1,5 +1,5 @@
 <script>
-var firebase = require("firebase");
+import FirebaseManager from "@/utils/FirebaseManager";
 var SimpleVueValidation = require("simple-vue-validator");
 var Validator = SimpleVueValidation.Validator.create({
   templates: {
@@ -15,7 +15,8 @@ export default {
       email: "",
       password: "",
       errorMail: "",
-      errorPw: ""
+      errorPw: "",
+      isBtnDisabled: false
     };
   },
   created() {
@@ -46,15 +47,15 @@ export default {
       this.$validate().then(success => {
         if (success) {
           console.log("Validation succeeded!");
-
-          firebase
-            .auth()
-            .signInWithEmailAndPassword(this.email, this.password)
+          this.isBtnDisabled = true;
+          FirebaseManager.signInWithEmailAndPassword(this.email, this.password)
             .then(user => {
               this.$router.go(-1);
             })
             .catch(error => {
               console.log(error.code);
+              this.isBtnDisabled = false;
+
               this.validateLogin(error.code);
             });
         }
@@ -86,38 +87,122 @@ export default {
 
 <template>
 <div class="container">
-  <h1>會員登入</h1>
+      <img src="../assets/images/logo.svg" alt="">
+  <div class="logo_title">SET <br>LUNCH</div>
   <div class="layout-form">
     <form action="" @submit.prevent="login">
       <div class="form-group" :class="{error: validation.hasError('email')}">
-        <div class="label">E-mail</div>
         <div class="content">
-          <input type="text" class="form-control" v-model="email" @focus="resetErrMsg" />
+          <div class="label">帳號</div>
+          <input type="text" class="form-control input" placeholder="example@gmail.com" v-model="email" @focus="resetErrMsg" />
         </div>
         <div class="message">{{ validation.firstError('email') }}{{errorMail}}</div>
       </div>
       
       <div class="form-group" :class="{error: validation.hasError('password')}">
-        <div class="label">密碼</div>
         <div class="content">
-          <input type="password" class="form-control" v-model="password" @focus="resetErrMsg" />
+          <div class="label">密碼</div>
+          
+          <input type="password" class="form-control input" v-model="password" @focus="resetErrMsg" />
         </div>
         <div class="message">{{ validation.firstError('password') }}{{errorPw}}</div>
       </div>
       
       <div class="form-group">
         <div class="actions">
-          <button type="submit" class="btn btn-primary">登入</button>
+          <button type="submit" :disabled="isBtnDisabled" class="btn login_btn form-control">登入</button>
         </div>
       </div>
     </form>
   </div>
   <div>
-    <router-link :to="{name:'register'}" replace>註冊</router-link>
+    <router-link class="btn" :to="{name:'register'}">註冊</router-link>
   </div>
   <div>
-    <router-link :to="{name:'forgotpw'}">忘記密碼</router-link>
+    <router-link class="forgotpw" :to="{name:'forgotpw'}">忘記密碼</router-link>
   </div>
   
 </div>
 </template>
+
+<style lang="scss" scoped>
+@import "../scss/index.scss";
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  font-size: 14px;
+  margin: 0 auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.logo_title {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #4a4a4a;
+  text-align: center;
+  padding-top: 16px;
+  padding-bottom: 56px;
+}
+
+.form-group {
+  .content {
+    width: 240px;
+    margin: 20px 0 0;
+    display: flex;
+    // justify-content: space-between;
+    border-bottom: 2px solid #e0dfdf;
+
+    .label {
+      width: 40px;
+    }
+
+    .input {
+      flex-grow: 2;
+    }
+  }
+
+  .message {
+    margin: 6px 0;
+    font-size: 12px;
+    color: $red;
+  }
+
+  .actions {
+    padding-top: 60px;
+    .login_btn {
+      margin: 0 auto;
+    }
+  }
+}
+
+.btn {
+  display: block;
+  width: 120px;
+  height: 40px;
+  margin: 17px 0 0;
+  color: $orange;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: center;
+  border: 1px $orange solid;
+  border-radius: 30px;
+  background-color: white;
+}
+
+.forgotpw {
+  display: block;
+  margin: 20px 0;
+  color: $dark_orange;
+}
+</style>
+

@@ -68,13 +68,10 @@
 </div>
 </template>
 <script>
-import config from "../config";
 import footerComponent from "./footer";
-var firebase = require("firebase");
+import FirebaseManager from "@/utils/FirebaseManager";
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-}
+const firebase = FirebaseManager.getFirebaselib();
 
 // 載入 lodash
 const fp = require("lodash/fp");

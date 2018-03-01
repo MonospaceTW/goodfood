@@ -1,8 +1,10 @@
 <script>
 /* eslint-disable */
-var firebase = require("firebase");
-import ComfirmOrder from "./ComfirmOrder";
+
+import FirebaseManager from "@/utils/FirebaseManager";
+import ConfirmOrder from "./ConfirmOrder";
 import checkAuth from "@/checkAuth";
+import lodashfp from "lodash/fp";
 
 export default {
   props: ["storeId", "orderId"],
@@ -13,12 +15,14 @@ export default {
       mark: "",
       user: {},
       thisOrder: [],
-      comfirmed: false,
-      dishes: {}
+      ConfirmOrder: false,
+      storeName: "",
+      dishes: {},
+      lightbox: false
     };
   },
   components: {
-    ComfirmOrder
+    ConfirmOrder
   },
   created() {
     checkAuth
@@ -34,19 +38,18 @@ export default {
         });
       });
 
-    firebase
-      .database()
-      .ref("store/" + this.storeId)
-      .child("menus")
-      .once("value")
-      .then(snapshot => {
-        let menu = snapshot.val();
-        for (let id in menu) {
-          menu[id].count = 0;
-        }
-        // 深層複製物件
-        this.dishes = JSON.parse(JSON.stringify(menu));
-      });
+    let route = `order/${this.orderId}/${this.storeId}`;
+    FirebaseManager.getValue(route).then(store => {
+      this.storeName = store.name;
+
+      let menu = store.menus;
+      for (let id in menu) {
+        menu[id].count = 0;
+      }
+      //  深層複製物件以確保更新Vue的observer
+      this.dishes = lodashfp.cloneDeep(menu);
+      console.log(this.dishes);
+    });
   },
   methods: {
     add(id) {
@@ -81,11 +84,17 @@ export default {
       user.order = this.thisOrder;
       this.user = JSON.parse(JSON.stringify(user));
 
-      this.comfirmed = true;
+      this.ConfirmOrder = true;
       console.log(this.thisOrder);
     },
     cancelOrder() {
-      this.comfirmed = false;
+      this.ConfirmOrder = false;
+    },
+    closeBox() {
+      this.lightbox = false;
+    },
+    showLightbox() {
+      this.lightbox = true;
     }
   },
   computed: {
@@ -107,50 +116,90 @@ export default {
 </script>
 
 <template>
+<div class="container_lightbox">
 <div class="container">
-  <comfirm-order v-show="comfirmed" :user="user" :orderId="orderId" :storeId="storeId" :uid="uid" @cancelOrder="cancelOrder"></comfirm-order>
-  <h1 class="store_name">便當店名</h1>
-    <ul>
-      <li class="item" v-for="(dish,id) in dishes" v-bind:key="id">
-        <div class="menu">
-          <div class="menu_name">{{dish.name}}</div>
-          <div class="price">${{dish.price}}</div>
+  <confirm-order 
+    v-show="ConfirmOrder" 
+    :user="user" 
+    :orderId="orderId" 
+    :storeId="storeId" 
+    :uid="uid" 
+    @cancelOrder="cancelOrder"
+  ></confirm-order>
+  <h1 class="store_name">{{storeName}}</h1>
+  <ul>
+    <li class="item" v-for="(dish,id) in dishes" v-bind:key="id">
+      <div class="menu">
+        <div class="menu_name">{{dish.name}}</div>
+        <div class="price">${{dish.price}}</div>
+      </div>
+      <div class="menu">
+        <div class="counter">
+          <button class="subtract" @click="subtract(id)">-</button>
+          <div class="count">{{dish.count}}</div>
+          <button class="add" @click="add(id)">+</button>
         </div>
-        <div class="menu">
-          <div class="counter">
-            <button @click="subtract(id)">-</button>
-            <div>{{dish.count}}</div>
-            <button @click="add(id)">+</button>
-          </div>
-          <div class="subtotal">${{subtotal(id)}}</div>
-        </div>
-      </li>
-    </ul>
- <div class="total">總共{{total}}元</div>
-<div>
-  我是{{displayName}}
+        <div class="subtotal">${{subtotal(id)}}</div>
+      </div>
+    </li>
+  </ul>
+  <div class="total">
+    <span>總計</span>＄{{total}}</div>
+  <div class="name">
+    我是{{displayName}}
+  </div>
+  <div class="btn_group">
+    <!-- 備註：<input type="text" v-model="mark"></div> -->
+    <a class="order_btn" href="#" @click="order">下訂單</a>
+    <router-link 
+    class="result_btn" 
+    :to="{
+      name:'result',
+      params: { storeId: this.storeId, orderId: this.orderId}
+      }">看團定結果</router-link>
+    <a class="share_btn" href="#" @click="showLightbox">分享這頁</a>
+    
+ 
+
 </div>
-<div>
-  備註：<input type="text" v-model="mark"></div>
-  <a class="order_btn" href="#" @click="order">下訂單</a>
-  <a class="result_btn" href="#">看團定結果</a>
-  <a class="share_btn" href="#">分享這頁</a>
+ </div>
+  <!-- 分享lightbox -->
+        <div class="lightbox" @click="closeBox" :class="{show:lightbox}">
+          <div class="msg">
+            <div class="close" @click="closeBox">x</div>
+            <div class="boxtitle">邀請大家來團訂吧！</div>
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <div class="addthis_inline_share_toolbox"></div>
+          </div>
+        </div>
 </div>
 </template>
 
 
 <style lang="scss" scoped>
+@import "../scss/index.scss";
+
+a {
+  color: $orange;
+  text-decoration: none;
+}
+
 li {
   list-style: none;
 }
 
 .container {
   width: 90%;
+  font-size: 14px;
   margin: 0 auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
   position: relative;
 }
 
 .store_name {
+  margin-bottom: 24px;
+  font-size: 17px;
   text-align: center;
 }
 
@@ -158,33 +207,105 @@ li {
   padding: 10px;
   margin: 10px 0;
   border-radius: 15px;
-  background-color: rgb(223, 222, 222);
+  background-color: $gray_one;
 }
 
 .menu,
 .counter {
+  padding: 6px 6px 6px 0;
   display: flex;
   justify-content: space-between;
+}
+
+.subtract,
+.add {
+  width: 20px;
+  height: 23px;
+  padding-right: 15px;
+  color: $orange;
+  border: $orange 1px solid;
+  border-radius: 50%;
+  background-color: $gray_one;
+}
+
+.count {
+  padding: 0 8px;
+  margin: 0 10px;
+  line-height: 20px;
+  background-color: white;
+}
+
+.btn_group {
+  display: flex;
+  justify-content: space-around;
 }
 
 .order_btn,
 .result_btn,
 .share_btn {
   display: block;
-  margin: 0 auto;
-  width: 200px;
+  margin: 0 6px;
+  width: 100px;
   height: 50px;
   line-height: 50px;
   text-align: center;
-  border: 1px orange solid;
-  border-radius: 20px;
+  border: 1px $orange solid;
+  border-radius: 30px;
 }
 
 .total {
   text-align: right;
+  span {
+    color: $blue;
+  }
 }
 
-.order_btn {
-  background-color: orange;
+.name {
+  padding: 20px 0;
+}
+
+.lightbox {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.lightbox .msg {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  width: 60%;
+  margin: auto;
+  height: 100px;
+  background-color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.lightbox .msg .boxtitle {
+  font-size: 1.1rem;
+}
+
+.lightbox .msg .close {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.show {
+  display: block;
 }
 </style>

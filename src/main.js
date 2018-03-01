@@ -3,17 +3,11 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
-import config from "./config";
 
-const firebase = require("firebase");
 require("./scss/setting.css");
 require("./scss/reset.css");
 
 Vue.config.productionTip = false;
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-}
 
 /* eslint-disable no-new */
 new Vue({

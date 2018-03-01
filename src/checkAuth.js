@@ -1,9 +1,9 @@
-var firebase = require("firebase");
+import FirebaseManager from "./utils/FirebaseManager";
 
 export default {
   checkAuth: () => {
     return new Promise((resolve, reject) => {
-      firebase.auth().onAuthStateChanged(user => {
+      FirebaseManager.auth.onAuthStateChanged(user => {
         if (user) {
           let userInfo = {};
           userInfo.uid = user.uid;

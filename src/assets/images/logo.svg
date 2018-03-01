@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70">
+    <defs>
+        <linearGradient id="a" x1="8.669%" x2="50%" y1="87.591%" y2="50%">
+            <stop offset="0%" stop-color="#F9CC6A" stop-opacity="-.166"/>
+            <stop offset="0%" stop-color="#F8C361" stop-opacity=".027"/>
+            <stop offset="100%" stop-color="#EF9133"/>
+        </linearGradient>
+        <filter id="b" width="130.8%" height="132.2%" x="-15.4%" y="-11.2%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <linearGradient id="c" x1="50%" x2="94.575%" y1="68.944%" y2="95.259%">
+            <stop offset="0%" stop-color="#DEDDDD"/>
+            <stop offset="100%" stop-color="#FFF"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <circle cx="35" cy="35" r="35" fill="#F8A654"/>
+        <path fill="url(#a)" d="M52.141 46.271l1.563 2.465-17.638 21.148A5.046 5.046 0 0 1 35 70C20.487 70 8.037 61.167 2.734 48.584A34.89 34.89 0 0 1 0 35l18.92-13.702L46.962 41.06l5.18 5.211z"/>
+        <g filter="url(#b)" transform="rotate(1 -659.032 716.532)">
+            <path fill="url(#c)" d="M28.816 22.623c-1.08 6.623 23.373 17.93 3.827 17.93S3.224 39.909 3.224 21.809s9.87-18.1 30.063-18.1c15.154 0 6.143 7.28 0 13.534-2.043 2.08-4.201 3.726-4.47 5.38z" transform="rotate(-10 25.218 22.376)"/>
+            <path fill="#FFF" d="M19.717 40.943C10.78 41.015 5.67 37.586 3.55 25.558.407 7.735 9.997 6.044 29.62 2.584 43.455.144 37.914 7.208 37 8.742c-.913 1.534-1.634 2.923-4.903 7.89-2.936 4.833-5.518 9.537-7.745 14.11-1.879 3.86-3.423 7.26-4.635 10.201z"/>
+            <ellipse cx="25.558" cy="11.333" fill="#F8A654" rx="1.539" ry="1.442" transform="rotate(-10 25.558 11.333)"/>
+        </g>
+    </g>
+</svg>
