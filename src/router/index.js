@@ -28,7 +28,7 @@ const router = new Router({
       },
       children: [
         {
-          path: "index",
+          path: "",
           name: "index",
           component: Index,
           meta: {
@@ -120,7 +120,7 @@ const router = new Router({
           }
         },
         {
-          path: "result",
+          path: "result/:storeId?/:orderId?",
           name: "result",
           component: Result,
           meta: {
