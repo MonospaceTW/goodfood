@@ -1,0 +1,35 @@
+{
+  "name": "店家名稱",
+  "address": "店家地址",
+  "orderIn": {
+    "unit": "元 / 份",
+    "count": 300
+  },
+  "time": {
+    "start": "09:00",
+    "end": "17:00"
+  },
+  "tel": {
+    "block": "區碼",
+    "num": "號碼"
+  },
+  "mark": "",
+  "menus": {
+    "menuId": {
+      "name": "玉米濃湯麵",
+      "price": 100,
+      "options": [
+        {
+          "max": 1,
+          "min": 1,
+          "chooses": [{ "name": "烏龍麵" }, { "name": "油麵" }]
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "chooses": [{ "name": "加辣" }, { "name": "不加辣" }]
+        }
+      ]
+    }
+  }
+}

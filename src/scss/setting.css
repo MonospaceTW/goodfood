@@ -1,0 +1,5 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+body {
+  font-family: 'Noto Sans TC', 'sans-serif' !important;
+  letter-spacing: 2.5px;
+}

@@ -1,7 +1,8 @@
 <script>
-var firebase = require("firebase");
+import FirebaseManager from "@/utils/FirebaseManager";
 import Order from "./Order";
 // import checkAuth from "@/checkAuth";
+const firebase = FirebaseManager.getFirebaselib();
 export default {
   props: [],
   data() {
