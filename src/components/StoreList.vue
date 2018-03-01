@@ -56,8 +56,8 @@ export default {
         </router-link>
         <div class="info_box">
           <div class="store_name">{{value.name}}</div>
-          <div class="open_time">營業時間：{{value.openTime}}~{{value.closeTime}}</div>
-          <div class="store_phone">04 2222-2222</div>   
+          <div class="open_time">營業時間：{{value.time.start}}~{{value.time.end}}</div>
+          <div class="store_phone">{{value.tel.block}} {{value.tel.num}}</div>   
         </div>
       </li>
     
