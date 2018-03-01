@@ -12,6 +12,9 @@ class FirebaseManagerClass {
     this.auth = firebase.auth();
   }
 
+  getFirebaselib() {
+    return firebase;
+  }
   uploadFile(file) {
     const route = `/${file.name}`;
     return this.storage

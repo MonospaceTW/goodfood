@@ -16,137 +16,136 @@ import homepage from "@/components/homepage";
 Vue.use(Router);
 
 const router = new Router({
-  routes: [
+  routes: [{
+    path: "/",
+    name: "App",
+    component: App,
+    meta: {
+      title: route => {
+        return "訂便當系統";
+      }
+    },
+    children: [{
+      path: "",
+      name: "index",
+      component: Index,
+      meta: {
+        title: route => {
+          return "訂便當 首頁";
+        }
+      }
+    },
     {
-      path: "/",
-      name: "App",
-      component: App,
+      path: "register",
+      name: "register",
+      component: Register,
+      meta: {
+        title: route => {
+          return "會員註冊";
+        }
+      }
+    },
+    {
+      path: "login",
+      name: "login",
+      component: Login,
+      meta: {
+        title: route => {
+          return "會員登入";
+        }
+      }
+    },
+    {
+      path: "forgotpw",
+      name: "forgotpw",
+      component: ForgotPw,
+      meta: {
+        title: route => {
+          return "忘記密碼";
+        }
+      }
+    },
+    {
+      path: "loading",
+      name: "homepage",
+      component: homepage,
       meta: {
         title: route => {
           return "訂便當系統";
         }
-      },
-      children: [
-        {
-          path: "",
-          name: "index",
-          component: Index,
-          meta: {
-            title: route => {
-              return "訂便當 首頁";
-            }
-          }
-        },
-        {
-          path: "register",
-          name: "register",
-          component: Register,
-          meta: {
-            title: route => {
-              return "會員註冊";
-            }
-          }
-        },
-        {
-          path: "login",
-          name: "login",
-          component: Login,
-          meta: {
-            title: route => {
-              return "會員登入";
-            }
-          }
-        },
-        {
-          path: "forgotpw",
-          name: "forgotpw",
-          component: ForgotPw,
-          meta: {
-            title: route => {
-              return "忘記密碼";
-            }
-          }
-        },
-        {
-          path: "loading",
-          name: "homepage",
-          component: homepage,
-          meta: {
-            title: route => {
-              return "訂便當系統";
-            }
-          }
-        },
-        {
-          path: "storelist",
-          name: "storelist",
-          component: StoreList,
-          meta: {
-            title: route => {
-              return "店家列表";
-            }
-          }
-        },
-        {
-          path: "storeinfo/:storeId?",
-          name: "storeinfo",
-          component: StoreInfo,
-          props: true,
-          meta: {
-            title: route => {
-              return "店家資訊";
-            }
-          }
-        },
-        {
-          path: "order/:storeId?/:orderId?/:storeName?",
-          name: "order",
-          component: Order,
-          props: true,
-          meta: {
-            title: route => {
-              return (route.params.storeName || "便當") + "訂購頁";
-            }
-          }
-        },
-        {
-          path: "confirmed",
-          name: "confirmed",
-          component: Confirmed,
-          meta: {
-            title: route => {
-              return "訂購完成";
-            }
-          }
-        },
-        {
-          path: "result/:storeId?/:orderId?",
-          name: "result",
-          component: Result,
-          meta: {
-            title: route => {
-              return "訂購結果";
-            }
-          }
-        },
-        {
-          path: "not_found",
-          name: "not_found",
-          component: NotFound,
-          meta: {
-            title: route => {
-              return "訂便當系統";
-            }
-          }
-        }
-      ]
+      }
     },
     {
-      path: "*",
-      redirect: {
-        name: "not_found"
+      path: "storelist",
+      name: "storelist",
+      component: StoreList,
+      meta: {
+        title: route => {
+          return "店家列表";
+        }
+      }
+    },
+    {
+      path: "storeinfo/:storeId?",
+      name: "storeinfo",
+      component: StoreInfo,
+      props: true,
+      meta: {
+        title: route => {
+          return "店家資訊";
+        }
+      }
+    },
+    {
+      path: "order/:storeId?/:orderId?/:storeName?",
+      name: "order",
+      component: Order,
+      props: true,
+      meta: {
+        title: route => {
+          return (route.params.storeName || "便當") + "訂購頁";
+        }
+      }
+    },
+    {
+      path: "confirmed",
+      name: "confirmed",
+      component: Confirmed,
+      meta: {
+        title: route => {
+          return "訂購完成";
+        }
+      }
+    },
+    {
+      path: "result/:storeId?/:orderId?",
+      name: "result",
+      component: Result,
+      meta: {
+        title: route => {
+          return "訂購結果";
+        }
+      },
+      props: true
+    },
+    {
+      path: "not_found",
+      name: "not_found",
+      component: NotFound,
+      meta: {
+        title: route => {
+          return "訂便當系統";
+        }
       }
     }
+    ]
+  },
+  {
+    path: "*",
+    redirect: {
+      name: "not_found"
+    }
+  }
   ]
 });
 
