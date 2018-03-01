@@ -15,10 +15,11 @@
         <router-link
           class="back-order"
           :to="{
-            path: '/order/' + this.$route.params.storeId + '/' + orderId,
+            name: 'order',
             params: {
               storeId: this.storeId,
               orderId: this.orderId,
+              storeName: this.storeInfo.name
             },
           }"
           @click.native="backOrder"
@@ -70,6 +71,7 @@
 <script>
 import footerComponent from "./footer";
 import FirebaseManager from "@/utils/FirebaseManager";
+import checkAuth from "@/checkAuth";
 
 const firebase = FirebaseManager.getFirebaselib();
 
@@ -104,6 +106,20 @@ export default {
   },
   created() {
     const self = this;
+    // firebase.auth().signOut(); // 登出
+
+    // 檢查登入狀態
+    checkAuth
+      .checkAuth()
+      .then(userInfo => {
+        this.uid = userInfo.uid;
+        this.displayName = userInfo.displayName;
+      })
+      .catch(() => {
+        this.$router.push({
+          name: "login"
+        });
+      });
 
     // 將網址上的 orderId 指定給 orderId 變數(常數)
     const orderId = self.orderId;
@@ -123,8 +139,7 @@ export default {
         self.users = newUsers; // 將新物件指定給 data 的 users
         // console.log(self.users);
       });
-
-    // 撈取 user 裡的 order 訂購細節資料 將每人的訂購清單推到 usersTotal 裡
+    // 撈取 user 裡的 order 訂購細節資料 將每人的訂購清單合併成總訂單
     db
       .ref("order")
       .child(orderId)
@@ -135,7 +150,7 @@ export default {
         snapshot.forEach(function(data) {
           data.child("order").forEach(function(newData) {
             const value = newData.val();
-
+            console.log(value);
             // 處裡所有訂單， 將訂單整理成總訂單
             const result = {
               name: value.name,
@@ -146,7 +161,7 @@ export default {
             // 將餐點重複訂購狀態預設值設為 false
             let isSameOrder = false;
 
-            // 判斷餐點名餐是否已存在，如果有只家總數量
+            // 判斷餐點名餐是否已存在，如果有只加總數量
             self.totalOrder.forEach(function(order) {
               if (order.name === result.name) {
                 // 如果餐點名稱重複則將餐點重複訂購狀態改為 true
@@ -160,21 +175,28 @@ export default {
             if (!isSameOrder) {
               self.totalOrder.push(result);
             }
+            // 將每個使用者定的項目加進 usersTotal
+            self.usersTotal.push(value);
           });
         });
+
+        // 計算本次團訂的的總金額，並將總金額指定給 data 裡的 totalPrice
+        self.totalPrice = self.usersTotal.reduce((acc, cur) => {
+          return acc + cur.price * cur.count;
+        }, 0);
       });
 
-    // 撈取團訂總金額
-    db
-      .ref("order")
-      .child(orderId)
-      .child("result")
-      .child("total")
-      .once("value")
-      .then(function(snapshot) {
-        // 將從 DB 中撈取到的總金額指定給 data 裡的 totalPrice
-        self.totalPrice = fp.cloneDeep(snapshot.val());
-      });
+    // // 撈取團訂總金額
+    // db
+    //   .ref("order")
+    //   .child(orderId)
+    //   .child("result")
+    //   .child("total")
+    //   .once("value")
+    //   .then(function(snapshot) {
+    //     // 將從 DB 中撈取到的總金額指定給 data 裡的 totalPrice
+    //     self.totalPrice = fp.cloneDeep(snapshot.val());
+    //   });
 
     // 撈取店家資訊
     db
@@ -197,14 +219,11 @@ export default {
       // const storeId = self.storeId;
 
       self.$router.push({
-        path:
-          "/order/" +
-          this.$route.params.storeId +
-          "/" +
-          this.$route.params.orderId,
+        name: "order",
         params: {
           storeId: this.storeId,
-          orderId: this.orderId
+          orderId: this.orderId,
+          storeName: this.storeInfo.name
         }
       });
     }
@@ -338,6 +357,8 @@ hr {
   flex-wrap: wrap;
 }
 .user-name {
+  display: flex;
+  justify-content: flex-start;
   width: 23%;
 }
 .user-order-detail {
