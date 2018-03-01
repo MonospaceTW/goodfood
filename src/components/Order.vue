@@ -1,5 +1,6 @@
 <script>
 /* eslint-disable */
+
 import FirebaseManager from "@/utils/FirebaseManager";
 import ConfirmOrder from "./ConfirmOrder";
 import checkAuth from "@/checkAuth";
@@ -16,7 +17,8 @@ export default {
       thisOrder: [],
       ConfirmOrder: false,
       storeName: "",
-      dishes: {}
+      dishes: {},
+      lightbox: false
     };
   },
   components: {
@@ -87,6 +89,12 @@ export default {
     },
     cancelOrder() {
       this.ConfirmOrder = false;
+    },
+    closeBox() {
+      this.lightbox = false;
+    },
+    showLightbox() {
+      this.lightbox = true;
     }
   },
   computed: {
@@ -108,8 +116,16 @@ export default {
 </script>
 
 <template>
+<div class="container_lightbox">
 <div class="container">
-  <confirm-order v-show="ConfirmOrder" :user="user" :orderId="orderId" :storeId="storeId" :uid="uid" @cancelOrder="cancelOrder"></confirm-order>
+  <confirm-order 
+    v-show="ConfirmOrder" 
+    :user="user" 
+    :orderId="orderId" 
+    :storeId="storeId" 
+    :uid="uid" 
+    @cancelOrder="cancelOrder"
+  ></confirm-order>
   <h1 class="store_name">{{storeName}}</h1>
   <ul>
     <li class="item" v-for="(dish,id) in dishes" v-bind:key="id">
@@ -135,9 +151,27 @@ export default {
   <div class="btn_group">
     <!-- 備註：<input type="text" v-model="mark"></div> -->
     <a class="order_btn" href="#" @click="order">下訂單</a>
-    <a class="result_btn" href="#">看團定結果</a>
-    <a class="share_btn" href="#">分享這頁</a>
-  </div>
+    <router-link 
+    class="result_btn" 
+    :to="{
+      name:'result',
+      params: { storeId: this.storeId, orderId: this.orderId}
+      }">看團定結果</router-link>
+    <a class="share_btn" href="#" @click="showLightbox">分享這頁</a>
+    
+ 
+
+</div>
+ </div>
+  <!-- 分享lightbox -->
+        <div class="lightbox" @click="closeBox" :class="{show:lightbox}">
+          <div class="msg">
+            <div class="close" @click="closeBox">x</div>
+            <div class="boxtitle">邀請大家來團訂吧！</div>
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <div class="addthis_inline_share_toolbox"></div>
+          </div>
+        </div>
 </div>
 </template>
 
@@ -228,5 +262,50 @@ li {
 
 .name {
   padding: 20px 0;
+}
+
+.lightbox {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.lightbox .msg {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  width: 60%;
+  margin: auto;
+  height: 100px;
+  background-color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.lightbox .msg .boxtitle {
+  font-size: 1.1rem;
+}
+
+.lightbox .msg .close {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.show {
+  display: block;
 }
 </style>
