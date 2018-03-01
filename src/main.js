@@ -9,12 +9,12 @@ Vue.config.productionTip = false
 
 
 var config = {
-  apiKey: "AIzaSyBMRANtWtuf5Quz26GxkEnb4rRJ1t7OAkg",
-  authDomain: "goodfood-39158.firebaseapp.com",
-  databaseURL: "https://goodfood-39158.firebaseio.com",
-  projectId: "goodfood-39158",
-  storageBucket: "goodfood-39158.appspot.com",
-  messagingSenderId: "940303768399"
+  apiKey: "AIzaSyDt2_EF30nrXcNKl40a9raKp20t_iQ5gtA",
+  authDomain: "goodfood-new.firebaseapp.com",
+  databaseURL: "https://goodfood-new.firebaseio.com",
+  projectId: "goodfood-new",
+  storageBucket: "goodfood-new.appspot.com",
+  messagingSenderId: "730228409428"
 };
 firebase.initializeApp(config);
 

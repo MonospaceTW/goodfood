@@ -1,4 +1,6 @@
 <script>
+import Order from "./Order";
+// import checkAuth from "@/checkAuth";
 export default {
   props: [],
   data() {
@@ -9,23 +11,38 @@ export default {
       user: {},
       thisOrder: [],
       comfirmed: false,
-      list: [
-        {storeName: "AAA"},
-        {storeName: "2aaa"},
-        {storeName: "3AAA"},
-        {storeName: "4AAA"},
-        {storeName: "5AAA"},
-        {storeName: "6AAA"},
-        {storeName: "7AAA"},
-        {storeName: "8AAA"},
-        {storeName: "9AAA"},
-        {storeName: "10AAA"}
+      stores: [
+        
       ]
     };
   },
   components: {
-   
+   Order
   },
+  created() {
+    /* 登入驗證 */
+    // checkAuth
+    //   .checkAuth()
+    //   .then(userInfo => {
+    //     this.uid = userInfo.uid;
+    //     this.displayName = userInfo.displayName;
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     this.$router.push({
+    //       name: "login"
+    //     });
+    //   });
+    firebase.database().ref('store').once('value').then(function (snapshot) {
+      console.log(snapshot.key);
+      stores = snapshot.val();
+      console.log(stores);
+      // vm.updateStore();
+      // snapshot.forEach(function (data) {
+      //   console.log(data.val().menuImage);
+      // })
+    });
+  }
 }
 </script>
 
@@ -38,7 +55,7 @@ export default {
   <div class="content">
     <ul>
       
-      <li v-for="items in list">
+      <li v-for="items in stores">
         <a href="#">
           <img src="https://fakeimg.pl/128x90/?text=Food&font=lobster" alt="">
         </a>
@@ -49,68 +66,8 @@ export default {
           <div class="store_phone">04 2222-2222</div>   
         </div>
       </li>
-      
-      <!-- <li>
-        <a href="#">
-          <img src="https://fakeimg.pl/128x90/?text=Food&font=lobster" alt="">
-        </a>
-        <div class="info_box">
-          <div class="store_name">八方雲集</div>
-          <div class="store_type">中式料理</div>
-          <div class="open_time">營業時間： 9:00 ~ 21:00</div>
-          <div class="store_phone">04 2222-2222</div>   
-        </div>
-      </li>
-      
-      <li>
-        <a href="#">
-          <img src="https://fakeimg.pl/128x90/?text=Food&font=lobster" alt="">
-        </a>
-        <div class="info_box">
-          <div class="store_name">八方雲集</div>
-          <div class="store_type">中式料理</div>
-          <div class="open_time">營業時間： 9:00 ~ 21:00</div>
-          <div class="store_phone">04 2222-2222</div>   
-        </div>
-      </li>
-        
-      <li>
-        <a href="#">
-          <img src="https://fakeimg.pl/128x90/?text=Food&font=lobster" alt="">
-        </a>
-        <div class="info_box">
-          <div class="store_name">八方雲集</div>
-          <div class="store_type">中式料理</div>
-          <div class="open_time">營業時間： 9:00 ~ 21:00</div>
-          <div class="store_phone">04 2222-2222</div>   
-        </div>
-      </li>
-      
-      <li>
-        <a href="#">
-          <img src="https://fakeimg.pl/128x90/?text=Food&font=lobster" alt="">
-        </a>
-        <div class="info_box">
-          <div class="store_name">八方雲集</div>
-          <div class="store_type">中式料理</div>
-          <div class="open_time">營業時間： 9:00 ~ 21:00</div>
-          <div class="store_phone">04 2222-2222</div>   
-        </div>
-      </li>
-      
-      <li>
-        <a href="#">
-          <img src="https://fakeimg.pl/128x90/?text=Food&font=lobster" alt="">
-        </a>
-        <div class="info_box">
-          <div class="store_name">八方雲集</div>
-          <div class="store_type">中式料理</div>
-          <div class="open_time">營業時間： 9:00 ~ 21:00</div>
-          <div class="store_phone">04 2222-2222</div>   
-        </div>
-      </li> -->
     
-      <li class="loading" v-if="loading">Lording...</li>
+      <!-- <li class="loading" v-if="loading">Lording...</li> -->
       
     </ul>
   </div>
