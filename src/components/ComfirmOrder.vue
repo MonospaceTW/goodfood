@@ -1,67 +1,13 @@
 <script>
-var firebase = require("firebase");
+// var firebase = require("firebase");
 
 export default {
-  props: ["user", "storeId", "orderId", "uid"],
-  data() {
-    return {
-      total: 0
-    };
-  },
-  mounted() {
-    firebase
-      .database()
-      .ref("order/" + this.orderId + "/result")
-      .child("total")
-      .once("value")
-      .then(snapshot => {
-        this.total = snapshot.val();
-        console.log(this.total);
-      });
-  },
+  props: ["thisOrder", "total"],
+
+  mounted() {},
   methods: {
-    comfirmOrder() {
-      // 先獲取資料庫的總訂單金額，加上此次訂單金額，再更新上去
-      firebase
-        .database()
-        .ref("order/" + this.orderId + "/result")
-        .child("total")
-        .once("value")
-        .then(snapshot => {
-          this.total = snapshot.val();
-          console.log(this.total);
-          this.total += this.user.total;
-          console.log(this.total);
-        })
-        .then(() => {
-          firebase
-            .database()
-            .ref("order/" + this.orderId + "/result")
-            .child("total")
-            .set(this.total);
-        });
-
-      console.log(this.user);
-      // this.thisOrderKey = firebase
-      //   .database()
-      //   .ref("order/" + this.orderId + "/result/users")
-      //   .push(this.user).key;
-      // console.log(this.thisOrderKey);
-      let update = {};
-      update[this.uid] = this.user;
-      firebase
-        .database()
-        .ref("order/" + this.orderId + "/result/users")
-        .update(update);
-
-      this.$router.replace({
-        name: "comfirmed",
-        params: { orderId: this.orderId }
-      });
-    },
-    cancelOrder() {
-      this.$emit("cancelOrder");
-      this.$router.go(-1);
+    cancel() {
+      this.$emit("cancel");
     }
   }
 };
@@ -71,22 +17,23 @@ export default {
   <div class="comfirm_item">
     <h1 class="comfirm_title">訂購確認</h1>
     <ul>
-      <li class="order_detail" v-for="(dish,id) in user.order" :key="id">
+      <li class="order_detail" v-for="(dish,index) in thisOrder" :key="index">
         <div class="flex">
-          <div>{{dish.name}}</div>
+          <div>{{dish.dishName}}</div>
           <div>{{dish.count}}</div>
         </div>
-        <div class="comfirm_subtotal">${{dish.total}}</div>
+        <div class="comfirm_subtotal">${{dish.subtotal}}</div>
         
       </li>
     </ul>
-    <div class="comfirm_total">總共{{user.total}}元</div>
-    <a href="#" class="comfirm_btn" @click="comfirmOrder">確認訂單</a>
-    <a href="#" class="cancel_btn" @click="cancelOrder">取消</a>
+    <div class="comfirm_total">總共{{total}}元</div>
+    <a href="#" class="comfirm_btn">確認訂單</a>
+    <a href="#" class="cancel_btn" @click="cancel">取消</a>
+  <!-- {{this.thisOrder}} -->
   </div>
 </template>
 
-<style scoped>
+<style>
 li {
   list-style: none;
 }

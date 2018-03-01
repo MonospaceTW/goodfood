@@ -1,6 +1,6 @@
-# goodfood
+# 菜雞筆記
 
-> 訂便當系統
+> ### [vue-cli 環境建置](https://github.com/MonospaceTW/goodfood/blob/Ryin/docs/R-yin/vue-cli_creat/vue-cli%20creat.md)
 
 ## Config File
 
