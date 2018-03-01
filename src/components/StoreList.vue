@@ -49,10 +49,8 @@ export default {
     <ul>
       
       <li v-for="(value, key) in stores">
-        <router-link to="/order/:key">
-        <a href="#">
+        <router-link :to="{path:'/order/'+key}">
           <img src="https://fakeimg.pl/128x90/?text=Food&font=lobster" alt="">
-        </a>
         </router-link>
         <div class="info_box">
           <div class="store_name">{{value.name}}</div>
