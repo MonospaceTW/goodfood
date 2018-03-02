@@ -50,7 +50,8 @@ export default {
         .then(data => {
           console.log(data);
           this.$router.push({
-            name: "confirmed"
+            name: "confirmed",
+            params: { storeId: this.storeId, orderId: this.orderId }
           });
         });
     },

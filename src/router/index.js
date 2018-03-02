@@ -86,7 +86,7 @@ const router = new Router({
       }
     },
     {
-      path: "storeinfo/:storeId?",
+      path: "storeinfo/:storeId",
       name: "storeinfo",
       component: StoreInfo,
       props: true,
@@ -97,7 +97,7 @@ const router = new Router({
       }
     },
     {
-      path: "order/:storeId?/:orderId?/:storeName?",
+      path: "order/:orderId/:storeId/:storeName?",
       name: "order",
       component: Order,
       props: true,
@@ -108,17 +108,18 @@ const router = new Router({
       }
     },
     {
-      path: "confirmed",
+      path: "confirmed/:orderId?/:storeId?",
       name: "confirmed",
       component: Confirmed,
       meta: {
         title: route => {
           return "訂購完成";
         }
-      }
+      },
+      props: true
     },
     {
-      path: "result/:storeId?/:orderId?",
+      path: "result/:orderId/:storeId",
       name: "result",
       component: Result,
       meta: {
