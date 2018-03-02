@@ -20,12 +20,18 @@ module.exports = {
   // add your custom rules here
   rules: {
     "space-before-function-paren": ["error", "never"],
-    "no-trailing-spaces": [2, { skipBlankLines: true, ignoreComments: true }],
+    "no-trailing-spaces": [2, {
+      skipBlankLines: true,
+      ignoreComments: true
+    }],
     semi: [2, "always"],
     quotes: [2, "double"],
     // allow async-await
     "generator-star-spacing": "off",
     // allow debugger during development
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
+    "no-multiple-empty-lines": ["warn", {
+      max: 2
+    }]
   }
 };
