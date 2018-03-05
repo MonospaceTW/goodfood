@@ -3,7 +3,7 @@
     <div class="home">
       <router-link
       :to="{
-        path: '/home'
+        name: 'index'
       }"
       >
         <img src="../assets/images/icon-home.svg" alt="">
