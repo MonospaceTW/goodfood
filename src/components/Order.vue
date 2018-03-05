@@ -18,7 +18,7 @@ export default {
       ConfirmOrder: false,
       storeName: "",
       dishes: {},
-      lightbox: false
+      hideLightbox: true
     };
   },
   components: {
@@ -91,10 +91,10 @@ export default {
       this.ConfirmOrder = false;
     },
     closeBox() {
-      this.lightbox = false;
+      this.hideLightbox = true;
     },
     showLightbox() {
-      this.lightbox = true;
+      this.hideLightbox = false;
     }
   },
   computed: {
@@ -164,7 +164,7 @@ export default {
 </div>
  </div>
   <!-- 分享lightbox -->
-        <div class="lightbox" @click="closeBox" :class="{show:lightbox}">
+        <div class="lightbox" @click="closeBox" :class="{hide:hideLightbox}">
           <div class="msg">
             <div class="close" @click="closeBox">x</div>
             <div class="boxtitle">邀請大家來團訂吧！</div>
@@ -265,7 +265,7 @@ li {
 }
 
 .lightbox {
-  display: none;
+  // display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -290,6 +290,7 @@ li {
 
 .lightbox .msg .boxtitle {
   font-size: 1.1rem;
+  margin: 10px;
 }
 
 .lightbox .msg .close {
@@ -305,7 +306,7 @@ li {
   cursor: pointer;
 }
 
-.show {
-  display: block;
+.hide {
+  display: none;
 }
 </style>
