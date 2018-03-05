@@ -73,13 +73,7 @@ import footerComponent from "./footer";
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
 
-const firebase = FirebaseManager.getFirebaselib();
-
-// 載入 lodash
 const fp = require("lodash/fp");
-
-// 將 firebase 的 database 方法指定給 db 變數(常數)
-const db = firebase.database();
 
 export default {
   props: ["orderId", "storeId"],
@@ -121,103 +115,103 @@ export default {
         });
       });
 
-    // 將網址上的 orderId 指定給 orderId 變數(常數)
+    // 將網址上的 orderId (props) 指定給 orderId 變數(常數)
     const orderId = self.orderId;
 
-    // 將網址上的 storeId 指定給 storeId 變數(常數)
+    // 將網址上的 storeId (props) 指定給 storeId 變數(常數)
     const storeId = self.storeId;
 
-    // 撈取 users 資料
-    db
-      .ref("order")
-      .child(orderId)
-      .child("result")
-      .child("users")
-      .once("value")
-      .then(function(snapshot) {
-        const newUsers = fp.cloneDeep(snapshot.val()); // 透過 lodash 將撈取到的 users (Promise 物件)轉成另外一個不同的新物件
-        self.users = newUsers; // 將新物件指定給 data 的 users
-        // console.log(self.users);
-      });
-    // 撈取 user 裡的 order 訂購細節資料 將每人的訂購清單合併成總訂單
-    db
-      .ref("order")
-      .child(orderId)
-      .child("result")
-      .child("users")
-      .once("value")
-      .then(function(snapshot) {
-        snapshot.forEach(function(data) {
-          data.child("order").forEach(function(newData) {
-            const value = newData.val();
-            console.log(value);
-            // 處裡所有訂單， 將訂單整理成總訂單
-            const result = {
-              name: value.name,
-              count: value.count,
-              price: value.price
-            };
+    /* 
+      將撈取到的 users 透過 loadash 轉成新的物件，
+      便將新的物件指定 data 裡的 users，
+      以便在 template 中使用 v-for 渲染訂單明細。
+    */
+    // 將預撈取的 users 在 database 中的路徑指定給 usersRoute 變數
+    const usersRoute = `order/${orderId}/result/users`;
 
-            // 將餐點重複訂購狀態預設值設為 false
-            let isSameOrder = false;
+    function updateUsersValue(snapshot) {
+      const value = snapshot.val();
+      const newUsers = fp.cloneDeep(value);
+      self.users = newUsers;
+    }
 
+    // 使用 firebaseManager 的 bindAsyncFunc Method 在有新的訂單時更新訂單明細的畫面顯示
+    FirebaseManager.bindAsyncFunc(usersRoute, updateUsersValue);
+
+    /* 
+      先撈取每個人訂的所有餐點，
+      在透過篩選加總餐點數量，
+      最後在計算總金額。
+    */
+    // 將預撈取的每筆訂單在 database 裡的路徑指定給 orderTotalRoute 變數
+    const orderTotalRoute = `order/${orderId}/result/users`;
+
+    function updateTotalOrder(snapshot) {
+      snapshot.forEach(function(data) {
+        data.child("order").forEach(function(newData) {
+          const value = newData.val();
+
+          const result = {
+            name: value.name,
+            count: value.count,
+            price: value.price
+          };
+
+          // 將餐點重複訂購狀態預設值設為 false
+          let isSameOrder = false;
+
+          /* 
+            透過 forEach 檢查每筆要進行合併的各項餐點，
+            如果名稱重複則只增加餐點數量。
+          */
+          self.totalOrder.forEach(function(order) {
             // 判斷餐點名餐是否已存在，如果有只加總數量
-            self.totalOrder.forEach(function(order) {
-              if (order.name === result.name) {
-                // 如果餐點名稱重複則將餐點重複訂購狀態改為 true
-                isSameOrder = true;
-                order.count += result.count;
-              }
-            });
-
-            // 將餐點重複訂購狀態取反值，能夠將餐點新增進整體訂單裡
-            // 再將 整理好的整體訂單推進 data 裡的 totalOrder 以便取用資料
-            if (!isSameOrder) {
-              self.totalOrder.push(result);
+            if (order.name === result.name) {
+              isSameOrder = true; // 如果餐點名稱重複則將餐點重複訂購狀態改為 true
+              order.count += result.count;
             }
-            // 將每個使用者定的項目加進 usersTotal
-            self.usersTotal.push(value);
           });
+
+          /* 
+            將餐點重複訂購狀態取反值，確保沒有重複新增餐點，
+            如果沒有重複則將 result 加進 data 的 totalOrder。
+          */
+          if (!isSameOrder) {
+            self.totalOrder.push(result); // 將整理好的整體訂單推進 data 裡的 totalOrder 以便取用資料
+          }
+
+          // 將每個使用者的訂單加進 usersTotal 以便計算總計額
+          self.usersTotal.push(value);
         });
-
-        // 計算本次團訂的的總金額，並將總金額指定給 data 裡的 totalPrice
-        self.totalPrice = self.usersTotal.reduce((acc, cur) => {
-          return acc + cur.price * cur.count;
-        }, 0);
       });
+      // 計算本次團訂的的總金額，並將總金額指定給 data 裡的 totalPrice
+      self.totalPrice = self.usersTotal.reduce((acc, cur) => {
+        return acc + cur.price * cur.count;
+      }, 0);
+    }
 
-    // // 撈取團訂總金額
-    // db
-    //   .ref("order")
-    //   .child(orderId)
-    //   .child("result")
-    //   .child("total")
-    //   .once("value")
-    //   .then(function(snapshot) {
-    //     // 將從 DB 中撈取到的總金額指定給 data 裡的 totalPrice
-    //     self.totalPrice = fp.cloneDeep(snapshot.val());
-    //   });
+    // 透過 FirebaseManager 的 bindAsyncFunc Method 來更新總訂單的畫面顯示
+    FirebaseManager.bindAsyncFunc(orderTotalRoute, updateTotalOrder);
 
-    // 撈取店家資訊
-    db
-      .ref("order")
-      .child(orderId)
-      .child(storeId)
-      .once("value")
-      .then(function(snapshot) {
-        self.storeInfo = fp.cloneDeep(snapshot.val());
-      });
+    /* 
+      撈取店家資訊，
+      以便在 template 中渲染店家資訊。
+    */
+    // 將預撈取的店家資訊 database 路徑指定給 storeRoute 變數
+    const storeRoute = `order/${orderId}/${storeId}`;
+
+    // 透過 FirebaseManger 的 getValue Method 來撈取店家資訊
+    FirebaseManager.getValue(storeRoute).then(function(store) {
+      self.storeInfo = fp.cloneDeep(store);
+    });
   },
   methods: {
+    /* 
+      點擊返回訂購頁的按鈕會觸發 backOrder Method ，
+      透過 $router.push 的方法能夠返回訂購頁，
+      可將需要的參數加進 params 裡。
+    */
     backOrder() {
-      const self = this;
-
-      // // 將網址上的 orderId 指定給 orderId 變數(常數)
-      // const orderId = self.orderId;
-
-      // // 將網址上的 storeId 指定給 storeId 變數(常數)
-      // const storeId = self.storeId;
-
       self.$router.push({
         name: "order",
         params: {
