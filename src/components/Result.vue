@@ -11,21 +11,22 @@
         <p>電話：{{storeInfo.tel.block}}-{{storeInfo.tel.num}}</p>
     </div>
         <div class="deadline">截止時間：{{storeInfo.endTime}}</div>
-        <!-- <div class="result_btn">返回訂購頁</div> -->
-        <router-link
-          class="back-order"
-          :to="{
-            name: 'order',
-            params: {
-              storeId: this.storeId,
-              orderId: this.orderId,
-              storeName: this.storeInfo.name
-            },
-          }"
-          @click.native="backOrder"
-       >
-        返回訂購頁
-      </router-link>
+        <div class="back-order">
+          <router-link
+            class="back-order-page"
+            :to="{
+              name: 'order',
+              params: {
+                storeId: this.storeId,
+                orderId: this.orderId,
+                storeName: this.storeInfo.name
+              },
+            }"
+            @click.native="backOrder"
+         >
+          返回訂購頁
+        </router-link>
+      </div>
         <div class="listtop_2">訂單明細</div>
 
       <div class="order-detail-list">
@@ -234,30 +235,39 @@ $font-m: 13px;
 $font-s: 12px;
 
 .container {
-  margin: 30px 26px 0 26px;
+  margin: 37px 26px 0 26px;
   text-align: center;
   font-size: $font-m;
   color: $gray_two;
+  min-height: calc(100vh - 84px);
+  display: flex;
+  flex-direction: column;
 }
 .result_title {
   font-size: $font-xl;
   color: $black;
-  margin-bottom: 7px;
+  letter-spacing: 4px;
+  height: 27px;
+  line-height: 27px;
+  margin-bottom: 5px;
 }
 
 hr {
-  border: 0.8px solid $white;
-  margin-top: 5px;
+  width: 99%;
+  border: solid 0.5px $white;
+  margin: 0;
 }
 
 .result_subtitle {
   font-size: $font-l;
-  margin: 30px 0 9px 0;
+  height: 21px;
+  line-height: 21px;
+  margin: 20px 0 8px 0;
 }
 .result_info {
   font-size: $font-s;
   line-height: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 11px;
 }
 .result_btn {
   display: block;
@@ -275,14 +285,16 @@ hr {
 .deadline {
   font-size: $font-s;
   color: $red;
-  margin: 11px 0 12px 0;
+  margin: 0px 0 12px 0;
 }
 .listtop_1,
 .listtop_2 {
   font-size: $font-l;
-  border-bottom: 1.5px solid $white;
-  border-top: 1.5px solid $white;
+  border-bottom: 1px solid $white;
+  border-top: 1px solid $white;
   padding: 4px 0;
+  height: 24px;
+  line-height: 24px;
 }
 
 .listtop_2 {
@@ -392,8 +404,11 @@ hr {
   display: flex;
   justify-content: flex-end;
 }
-
 .back-order {
+  display: flex;
+  justify-content: center;
+}
+.back-order-page {
   box-sizing: border-box;
   border-radius: 20px;
   width: 130px;

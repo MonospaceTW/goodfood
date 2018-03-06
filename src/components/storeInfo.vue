@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="container">
     <div class="banner"></div>
     <h1>{{storeInfo.name}}</h1>
@@ -38,10 +39,9 @@
       >
         我要團購
       </router-link>
-
-      <footer-component></footer-component>
-
   </div>
+  <footer-component></footer-component>
+</div>
 </template>
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
@@ -134,7 +134,7 @@ img {
   height: auto;
 }
 .container {
-  // font-size: 16px;
+  min-height: calc(100vh - 47px);
   font-family: "Noto Sans", sans-serif;
   background: url(../assets/images/menu.jpeg) no-repeat;
   background-size: contain;

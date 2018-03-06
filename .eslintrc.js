@@ -21,6 +21,7 @@ module.exports = {
   rules: {
     "space-before-function-paren": ["error", "never"],
     "no-trailing-spaces": [2, { skipBlankLines: true, ignoreComments: true }],
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
     semi: [2, "always"],
     quotes: [2, "double"],
     // allow async-await

@@ -86,7 +86,7 @@ const router = new Router({
       }
     },
     {
-      path: "storeinfo/:storeId?",
+      path: "storeinfo/:storeId",
       name: "storeinfo",
       component: StoreInfo,
       props: true,
@@ -97,7 +97,7 @@ const router = new Router({
       }
     },
     {
-      path: "order/:storeId?/:orderId?/:storeName?",
+      path: "order/:storeId/:orderId/:storeName?",
       name: "order",
       component: Order,
       props: true,
@@ -118,7 +118,7 @@ const router = new Router({
       }
     },
     {
-      path: "result/:storeId?/:orderId?",
+      path: "result/:orderId/:storeId",
       name: "result",
       component: Result,
       meta: {
