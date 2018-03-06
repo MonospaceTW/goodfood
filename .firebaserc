@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "goodfood-39158"
+    "default": "goodfood-39158",
+    "goodfood-new": "goodfood-new"
   }
 }
