@@ -33,6 +33,7 @@ footer {
   flex-wrap: wrap;
   width: 100%;
   box-shadow: 0 -1px 4px 3px rgba(194, 194, 194, 0.15);
+  flex-shrink: 0;
 }
 footer a {
   display: block;
