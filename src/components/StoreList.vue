@@ -63,7 +63,6 @@ export default {
       
     </ul>
   </div>
-  <footer></footer>
 </div>
 
 </template>
@@ -123,12 +122,5 @@ ul {
       }
     }
   }
-}
-footer {
-  width: 375px;
-  height: 47px;
-  background: #000;
-  position: absolute;
-  top: 629px;
 }
 </style>

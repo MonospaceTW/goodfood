@@ -1,11 +1,13 @@
 <script>
 export default {
+  props: ["orderId", "storeId"],
   mounted() {
     setTimeout(() => {
       this.$router.push({
-        name: "result"
+        name: "result",
+        params: { orderId: this.orderId, storeId: this.storeId }
       });
-    }, 1000);
+    }, 500);
   }
 };
 </script>
