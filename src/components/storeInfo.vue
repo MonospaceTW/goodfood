@@ -24,28 +24,23 @@
         <p>地址：台中市北區美德街</p>
         <p id="lastInfo">電話：{{storeInfo.tel.block}}-{{storeInfo.tel.num}}</p>
       </div>
-
-      <router-link
+      <a
         class="open-team-order"
-        :to="{
-          name: 'order',
-          params: {
-            storeId: this.storeId,
-            orderId: this.orderId,
-            storeName: this.storeInfo.name
-          },
-        }"
-        @click.native="openTeamOrder"
+        @click="openTeamOrder"
       >
         我要團購
-      </router-link>
+      </a>
   </div>
   <footer-component></footer-component>
 </div>
 </template>
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
+import checkAuth from "@/checkAuth";
 import footerComponent from "./footer";
+
+const moment = require("moment");
+moment().format();
 
 const store = FirebaseManager.database.ref("store");
 const order = FirebaseManager.database.ref("order");
@@ -58,6 +53,7 @@ export default {
   data() {
     return {
       orderId: "",
+      orderEndTime: "",
       storeInfo: {
         orderIn: {
           count: 0,
@@ -70,52 +66,98 @@ export default {
         tel: {
           block: 0,
           num: 0
-        }
+        },
+        endTime: ""
       },
       storeInfoAll: [],
       menus: []
     };
   },
   created() {
-    const self = this;
     const storeId = this.storeId;
+
+    checkAuth
+      .checkAuth()
+      .then(userInfo => {
+        this.uid = userInfo.uid;
+        this.displayName = userInfo.displayName;
+      })
+      .catch(error => {
+        console.log(error);
+        this.$router.push({
+          name: "login"
+        });
+      });
+
+    /* 
+      撈取店家資訊，
+      並將撈取後的資料存到 data 中的 storeInfo 。 
+    */
     store
       .child(storeId)
       .once("value")
-      .then(function(snapshot) {
+      .then(snapshot => {
         // console.log(snapshot.val());
-        self.storeInfo = snapshot.val();
+        this.storeInfo = snapshot.val();
         // console.log(self.storeInfo);
       });
+
+    /* 
+      將店家的菜單逐筆加入 data 中的 menus 中，
+      以便在 template 中使用 v-for 渲染菜單列表。 
+    */
     store
       .child(storeId)
       .child("menus")
       .once("value")
-      .then(function(snapshot) {
+      .then(snapshot => {
         // console.log(snapshot.val());
-        snapshot.forEach(function(data) {
-          self.menus.push(data.val());
+        snapshot.forEach(data => {
+          this.menus.push(data.val());
         });
       });
     // console.log(self.menus);
   },
   methods: {
+    /* 
+      開起新的訂單，
+      這邊先把這次團訂的 order key 指定給 orderId 以便後續的操作，
+      
+    */
     openTeamOrder() {
       const self = this;
       const storeId = self.storeId;
       const storeInfo = self.storeInfo;
-      self.orderId = order.child(storeId).push().key;
+      self.orderId = order.child(storeId).push().key; // 存取 order key 給 data 中的 orderId
       const orderId = self.orderId;
+      const now = new Date(); // 將目前的時間指定給 now
+
+      /*
+        將截止時間加進此筆訂單:
+          1.透過 moment.js 將時間格式化便加上 30分鐘後，
+          2.將 data 中的 orderEndTime 更新到 database 中此筆訂單。
+      */
+      self.orderEndTime = moment(now)
+        .add(30, "m")
+        .format("HH:mm");
+      storeInfo.endTime = self.orderEndTime;
+
+      /*
+        將店家資訊加進 database 中的 order 裡，
+        以便後續取用店家資訊。
+      */
       order
         .child(orderId)
         .child(storeId)
         .update(storeInfo);
+
+      // 切換路由到 order component
       self.$router.push({
         name: "order",
         params: {
-          storeId: this.storeId,
-          orderId: this.orderId,
-          storeName: this.storeInfo.name
+          storeId: self.storeId,
+          orderId: self.orderId,
+          storeName: self.storeInfo.name
         }
       });
     }
