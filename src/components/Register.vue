@@ -71,14 +71,22 @@ export default {
                 .updateProfile({
                   displayName: displayName
                 })
-                .then(function() {
+                .then(() => {
                   console.log("update displayName sucess", user.displayName);
+                  const orderId = this.$route.query.orderId;
+                  const storeId = this.$route.query.storeId;
+                  if (orderId && storeId) {
+                    this.$router.push({
+                      name: "order",
+                      params: { orderId: orderId, storeId: storeId }
+                    });
+                  } else {
+                    this.$router.push({ name: "index" });
+                  }
                 })
                 .catch(function(error) {
                   console.log(error.message);
                 });
-              // this.$router.go(-2);
-              this.$router.push({ name: "index" });
             })
             .catch(error => {
               console.log(error.message, error.code);

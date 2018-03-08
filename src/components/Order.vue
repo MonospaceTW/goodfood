@@ -34,7 +34,8 @@ export default {
       .catch(error => {
         console.log(error);
         this.$router.push({
-          name: "login"
+          name: "login",
+          query: { orderId: this.orderId, storeId: this.storeId }
         });
       });
 
@@ -156,7 +157,7 @@ export default {
     :to="{
       name:'result',
       params: { storeId: this.storeId, orderId: this.orderId}
-      }">看團定結果</router-link>
+      }">看團訂結果</router-link>
     <a class="share_btn" href="#" @click="showLightbox">分享這頁</a>
     
  
