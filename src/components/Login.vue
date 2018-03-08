@@ -50,7 +50,16 @@ export default {
           this.isBtnDisabled = true;
           FirebaseManager.signInWithEmailAndPassword(this.email, this.password)
             .then(user => {
-              this.$router.go(-1);
+              const orderId = this.$route.query.orderId;
+              const storeId = this.$route.query.storeId;
+              if (orderId && storeId) {
+                this.$router.push({
+                  name: "order",
+                  params: { orderId: orderId, storeId: storeId }
+                });
+              } else {
+                this.$router.push({ name: "index" });
+              }
             })
             .catch(error => {
               console.log(error.code);
@@ -116,7 +125,10 @@ export default {
     </form>
   </div>
   <div>
-    <router-link class="btn" :to="{name:'register'}">註冊</router-link>
+    <router-link class="btn" :to="{
+      name:'register',
+      query: { orderId: this.$route.query.orderId, storeId: this.$route.query.storeId }
+      }">註冊</router-link>
   </div>
   <div>
     <router-link class="forgotpw" :to="{name:'forgotpw'}">忘記密碼</router-link>
