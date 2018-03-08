@@ -148,6 +148,7 @@ export default {
     const orderTotalRoute = `order/${orderId}/result/users`;
 
     function updateTotalOrder(snapshot) {
+      self.totalOrder = "";
       snapshot.forEach(function(data) {
         data.child("order").forEach(function(newData) {
           const value = newData.val();
