@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <div class="footer">
     <div class="home">
       <router-link
       :to="{
@@ -18,14 +18,14 @@
         <img src="../assets/images/icon-member.svg" alt="">
       </router-link>
     </div>
-  </footer>
+  </div>
 </template>
 
 <script>
 </script>
 
 <style lang="scss" scoped>
-footer {
+.footer {
   display: flex;
   height: 47px;
   align-items: flex-end;
@@ -35,7 +35,7 @@ footer {
   box-shadow: 0 -1px 4px 3px rgba(194, 194, 194, 0.15);
   flex-shrink: 0;
 }
-footer a {
+.footer a {
   display: block;
   width: 100%;
   height: 47px;

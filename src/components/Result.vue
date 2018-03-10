@@ -1,7 +1,9 @@
 <template>
-<div>
 <div class="container">
-    <h1 class="result_title">團訂結果</h1>
+<div class="header">
+  <h1 class="result_title">團訂結果</h1>
+</div>
+<div class="content">
     <hr />
     <div class="result_subtitle">{{storeInfo.name}}</div>
     <div class="result_info">
@@ -47,7 +49,7 @@
 
         <div class="region_down">
           <div class="row" v-for="item in totalOrder" :key="item.id">
-            <div class="item">{{item.name}}</div>
+            <div class="total-item">{{item.name}}</div>
             <div class="count">x{{item.count}}</div>
             <div class="price">${{item.count * item.price}}</div>
           </div>
@@ -69,6 +71,7 @@
 <footer-component></footer-component>
 </div>
 </template>
+
 <script>
 import footerComponent from "./footer";
 import FirebaseManager from "@/utils/FirebaseManager";
@@ -341,12 +344,17 @@ hr {
   text-align: right;
 }
 .item {
-  width: 60%;
-  margin-right: 36.5%;
+  width: 100%;
+  margin-right: 10%;
 }
 
 .item_2 {
   width: 35%;
+}
+.total-item {
+  width: 100%;
+  margin-right: 10%;
+  margin-bottom: 3px;
 }
 .name {
   width: 25%;
@@ -362,6 +370,7 @@ hr {
   display: flex;
   width: 100%;
   margin-top: 1%;
+  margin-bottom: 1%;
   flex-wrap: wrap;
 }
 .user-name {
@@ -392,6 +401,8 @@ hr {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  height: 18px;
+  line-height: 18px;
 }
 .order-food {
   width: 60%;
