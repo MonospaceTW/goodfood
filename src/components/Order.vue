@@ -151,7 +151,6 @@ export default {
   </div>
   <div class="btn_group">
     <!-- 備註：<input type="text" v-model="mark"></div> -->
-    <a class="order_btn" href="#" @click="order">下訂單</a>
     <router-link 
     class="result_btn" 
     :to="{
@@ -159,8 +158,7 @@ export default {
       params: { storeId: this.storeId, orderId: this.orderId}
       }">看團訂結果</router-link>
     <a class="share_btn" href="#" @click="showLightbox">分享這頁</a>
-    
- 
+    <a class="order_btn" href="#" @click="order">下訂單</a>
 
 </div>
  </div>
