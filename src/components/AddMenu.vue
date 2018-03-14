@@ -5,22 +5,15 @@
     </div>
     <div class="content">
       <h1>新增菜單</h1>
-      <input type="text" class="menu-name" v-model="menuName">
-      <input type="text" class="menu-price" v-model="menuPrice">
+      <input type="text" placeholder="請輸入菜名" class="menu-name" v-model="menuName">
+      <input type="text" placeholder="$  請輸入價格" class="menu-price" v-model="menuPrice">
       <div class="menu-option">
         <span class="add-menu-option">新增副選項</span>
-        <span class="show-menu-option"><img src="../assets/images/add.png" alt=""></span>
+        <span class="show-menu-option" @click="addOption($event)"><img src="../assets/images/add.png" alt=""></span>
       </div>
       <div class="menu-option-example">如: 烏龍麵、米粉、冬粉。若無請跳過</div>
       <div class="menu-option-area">
-        <!-- <div class="menu-option-inputs"> -->
-          <input type="text" class="menu-option-input">
-          <input type="text" class="menu-option-input">
-          <input type="text" class="menu-option-input">
-          <input type="text" class="menu-option-input">
-          <!-- <input type="text" class="menu-option-input">
-          <input type="text" class="menu-option-input"> -->
-        <!-- </div> -->
+          <input type="text" class="menu-option-input" v-if="showOption" v-for="(menuOption, index) in menuOptions" :key="menuOption.id" v-model="menuOptions[index].name">
       </div>
 
     </div>
@@ -42,6 +35,8 @@ export default {
     return {
       menuName: "",
       menuPrice: "",
+      showOption: false,
+      menuOptions: [],
       menus: {
         name: "玉米濃湯麵",
         price: 100,
@@ -61,7 +56,7 @@ export default {
     };
   },
   created() {
-    /* 檢查登入狀態 */
+    /* check login status */
     checkAuth
       .checkAuth()
       .then(userInfo => {
@@ -73,21 +68,29 @@ export default {
           name: "login"
         });
       });
-    /* 新增一個餐點 */
   },
   mounted() {},
   methods: {
-    /* 確認菜單並新增 */
+    /* 
+      click confirm menu link,
+      and emit confirmMenu method to add new menu name and price,
+    */
     confirmMenu() {
       let menus = this.menus;
       const menuName = this.menuName;
       const menuPrice = this.menuPrice;
       this.menus.name = menuName;
       this.menus.price = menuPrice;
+      this.menus.options[0].chooses = this.menuOptions;
       store
         .child(this.storeId)
         .child("menus")
         .push(menus);
+    },
+    addOption($event) {
+      // console.log($event);
+      this.showOption = true;
+      this.menuOptions.push({ name: "最多5個字" });
     }
   }
 };
@@ -110,10 +113,22 @@ export default {
 }
 .menu-name {
   width: 68%;
+  height: 46px;
+  border-radius: 6px;
+  background-color: #f4f4f4;
+  box-sizing: border-box;
+  border: 0;
+  padding: 0 82px;
   margin-top: 16px;
 }
 .menu-price {
   width: 68%;
+  height: 46px;
+  border-radius: 6px;
+  background-color: #f4f4f4;
+  box-sizing: border-box;
+  border: 0;
+  padding: 0 82px;
   margin-top: 13px;
   margin-bottom: 59px;
 }
@@ -136,7 +151,6 @@ export default {
   width: 78.4%;
   padding: 0 8.8% 0 12.8%;
   display: flex;
-  height: 100px;
   flex-wrap: wrap;
 }
 // .menu-option-inputs {
@@ -150,6 +164,7 @@ export default {
   background-color: #f4f4f4;
   margin: 0;
   margin-right: 8px;
+  margin-bottom: 21px;
   padding: 0;
   border: 0;
 }
