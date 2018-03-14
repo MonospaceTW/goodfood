@@ -11,7 +11,18 @@
         <span class="add-menu-option">新增副選項</span>
         <span class="show-menu-option"><img src="../assets/images/add.png" alt=""></span>
       </div>
-      <div class="menu-remark">如: 烏龍麵、米粉、冬粉。若無請跳過</div>
+      <div class="menu-option-example">如: 烏龍麵、米粉、冬粉。若無請跳過</div>
+      <div class="menu-option-area">
+        <!-- <div class="menu-option-inputs"> -->
+          <input type="text" class="menu-option-input">
+          <input type="text" class="menu-option-input">
+          <input type="text" class="menu-option-input">
+          <input type="text" class="menu-option-input">
+          <!-- <input type="text" class="menu-option-input">
+          <input type="text" class="menu-option-input"> -->
+        <!-- </div> -->
+      </div>
+
     </div>
     <div class="footer">
       <a href="#" class="confirm-menu" @click="confirmMenu">確認菜單</a>
@@ -118,8 +129,29 @@ export default {
   height: 20px;
   display: inline-block;
 }
-.menu-remark {
-  margin-bottom: 218px;
+.menu-option-example {
+  margin-bottom: 16px;
+}
+.menu-option-area {
+  width: 78.4%;
+  padding: 0 8.8% 0 12.8%;
+  display: flex;
+  height: 100px;
+  flex-wrap: wrap;
+}
+// .menu-option-inputs {
+//   display: flex;
+//   width: 286px;
+// }
+.menu-option-input {
+  width: 30.615%;
+  height: 46px;
+  border-radius: 6px;
+  background-color: #f4f4f4;
+  margin: 0;
+  margin-right: 8px;
+  padding: 0;
+  border: 0;
 }
 .footer {
   height: 106px;
