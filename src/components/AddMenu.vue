@@ -81,11 +81,15 @@ export default {
       const menuPrice = this.menuPrice;
       this.menus.name = menuName;
       this.menus.price = menuPrice;
-      this.menus.options[0].chooses = this.menuOptions;
+      this.menus.options[0].chooses = this.menuOptions; // assign menu options to Vue data's menu object's chooses propoty
       store
         .child(this.storeId)
         .child("menus")
         .push(menus);
+      this.$router.push({
+        name: "confirmnewaddmenu",
+        params: { storeId: this.storeId }
+      });
     },
     addOption($event) {
       // console.log($event);
