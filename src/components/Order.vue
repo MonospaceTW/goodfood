@@ -5,6 +5,7 @@ import FirebaseManager from "@/utils/FirebaseManager";
 import ConfirmOrder from "./ConfirmOrder";
 import checkAuth from "@/checkAuth";
 import lodashfp from "lodash/fp";
+import footerComponent from "./footer";
 
 export default {
   props: ["storeId", "orderId"],
@@ -22,7 +23,8 @@ export default {
     };
   },
   components: {
-    ConfirmOrder
+    ConfirmOrder,
+    footerComponent
   },
   created() {
     checkAuth
@@ -151,7 +153,6 @@ export default {
   </div>
   <div class="btn_group">
     <!-- 備註：<input type="text" v-model="mark"></div> -->
-    <a class="order_btn" href="#" @click="order">下訂單</a>
     <router-link 
     class="result_btn" 
     :to="{
@@ -159,8 +160,7 @@ export default {
       params: { storeId: this.storeId, orderId: this.orderId}
       }">看團訂結果</router-link>
     <a class="share_btn" href="#" @click="showLightbox">分享這頁</a>
-    
- 
+    <a class="order_btn" href="#" @click="order">下訂單</a>
 
 </div>
  </div>
@@ -173,6 +173,7 @@ export default {
             <div class="addthis_inline_share_toolbox"></div>
           </div>
         </div>
+        <footer-component></footer-component>  
 </div>
 </template>
 
@@ -187,6 +188,10 @@ a {
 
 li {
   list-style: none;
+}
+
+.container_lightbox {
+  min-height: calc(100vh - 47px);
 }
 
 .container {
