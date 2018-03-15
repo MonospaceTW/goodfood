@@ -1,6 +1,6 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
-// import checkAuth from "@/checkAuth";
+import checkAuth from "@/checkAuth";
 import "swiper/dist/css/swiper.css";
 import "../scss/swiper-style.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       uid: "",
-      displayName: "",
+      displayName: "Guest",
       lottery: "",
       recommend: [],
       // swiper的選項
@@ -70,19 +70,10 @@ export default {
       }
       return result;
     }
-    // checkAuth
-    //   .checkAuth()
-    //   .then(userInfo => {
-    //     this.uid = userInfo.uid;
-    //     this.displayName = userInfo.displayName;
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     this.$router.push({
-    //       name: "login",
-    //       query: { orderId: this.orderId, storeId: this.storeId }
-    //     });
-    //   });
+    checkAuth.checkAuth().then(userInfo => {
+      this.uid = userInfo.uid;
+      this.displayName = userInfo.displayName;
+    });
   },
   methods: {
     signOut() {
@@ -99,6 +90,7 @@ export default {
 
 <template>
   <div class="container">
+    <span class="hello">Hi, {{displayName}}</span>
     <a class="signout" @click="signOut">登出</a>
     <div class="wrapper">
       <img src="../assets/images/logo.svg" alt="">
@@ -151,11 +143,18 @@ a {
   display: inline-block;
   right: 0;
   font-size: 13px;
+  cursor: pointer;
 }
 .container {
+  position: relative;
   width: 375px;
   margin: 5px auto;
   padding: 0 15px;
+
+  .hello {
+    font-size: 12px;
+    color: $font_primry;
+  }
 }
 .wrapper {
   display: flex;
