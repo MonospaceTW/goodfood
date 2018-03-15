@@ -1,16 +1,16 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
 import Order from "./Order";
-// import checkAuth from "@/checkAuth";
+import checkAuth from "@/checkAuth";
 const firebase = FirebaseManager.getFirebaselib();
 export default {
   props: [],
   data() {
     return {
-      // uid: "",
-      // displayName: "",
-      // mark: "",
-      // user: {},
+      uid: "",
+      displayName: "",
+      mark: "",
+      user: {},
       stores: {}
     };
   },
@@ -19,18 +19,18 @@ export default {
   },
   created() {
     /* 登入驗證 */
-    // checkAuth
-    //   .checkAuth()
-    //   .then(userInfo => {
-    //     this.uid = userInfo.uid;
-    //     this.displayName = userInfo.displayName;
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     this.$router.push({
-    //       name: "login"
-    //     });
-    //   });
+    checkAuth
+      .checkAuth()
+      .then(userInfo => {
+        this.uid = userInfo.uid;
+        this.displayName = userInfo.displayName;
+      })
+      .catch(error => {
+        console.log(error);
+        this.$router.push({
+          name: "login"
+        });
+      });
     firebase
       .database()
       .ref("store")
@@ -46,29 +46,24 @@ export default {
 <template>
 <div class="container">
   <h1 class="list_title">合作店家</h1>
-  <div class="content">
-    <ul>
+  <ul class="content">
       <li v-for="(value, key) in stores" :key="key.id">
         <router-link :to="{path:'/storeinfo/'+key}">
-          <img src="https://fakeimg.pl/128x90/?text=Food&font=lobster" alt="">
+          <img src="https://fakeimg.pl/120x90/?text=Food&font=lobster" alt="">
+          <div class="info_box">
+            <div class="store_name">{{value.name}}</div>
+            <div class="open_time">營業時間：{{value.time.start}}~{{value.time.end}}</div>
+            <div class="store_phone">{{value.tel.block}} {{value.tel.num}}</div>
+          </div>
         </router-link>
-        <div class="info_box">
-          <div class="store_name">{{value.name}}</div>
-          <div class="open_time">營業時間：{{value.time.start}}~{{value.time.end}}</div>
-          <div class="store_phone">{{value.tel.block}} {{value.tel.num}}</div>
-        </div>
       </li>
-    
       <!-- <li class="loading" v-if="loading">Lording...</li> -->
-      
-    </ul>
-  </div>
+  </ul>
 </div>
 
 </template>
 
 <style lang="scss" scoped>
-/*至此結束Reset*/
 
 .container {
   height: 667px;
@@ -76,51 +71,40 @@ export default {
 }
 .list_title {
   margin-top: 30px;
-  font-family: MicrosoftJhengHei;
+  // font-family: MicrosoftJhengHei;
   font-size: 20px;
   letter-spacing: 2.4px;
   text-align: center;
   color: #f8a654;
-  font-weight: 600;
+  font-weight: bold;
 }
-ul {
-  margin-top: 17px;
-  //   border: 1px solid blue;
-  li {
-    // border: 1px solid green;
-    margin-bottom: 22px;
-    height: 90px;
-    width: 375px;
-    a {
-      width: 128px;
-      margin-left: 28px;
-      float: left;
+ul.content{
+  max-width: 375px;
+  margin: 0 auto;
+  li{
+    // border: 1px solid red;
+    margin-top: 22px;
+    a{
+      display: flex;
+      text-decoration:none;
     }
-    .info_box {
-      float: left;
+    img{
+      margin-left: 28px;
+      justify-content: flex-start;
+    }
+    .info_box{
       margin-left: 18px;
-      div {
-        margin-left: 18px;
-      }
-      .store_name {
-        font-family: NotoSansCJKtc;
-        font-size: 14px;
-        letter-spacing: 1px;
-        text-align: left;
-        color: #000;
+      justify-content: flex-end;
+      color: #000;
+      .store_name{
         margin-top: 13px;
       }
-      .store_type,
-      .open_time,
-      .store_phone {
-        font-family: NotoSansCJKtc;
-        font-size: 11px;
-        letter-spacing: 1px;
-        text-align: left;
-        color: #333333;
+      .open_time,.store_phone{
         margin-top: 6px;
+        font-size: 13px;
       }
     }
   }
 }
+
 </style>
