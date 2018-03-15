@@ -32,6 +32,7 @@ module.exports = {
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-multiple-empty-lines": ["warn", {
       max: 2
-    }]
+    }],
+    "allowTemplateLiterals": true
   }
 };

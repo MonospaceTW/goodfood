@@ -12,6 +12,8 @@ import Order from "@/components/Order";
 import Confirmed from "@/components/Confirmed";
 import NotFound from "@/components/NotFound";
 import homepage from "@/components/homepage";
+import AddMenu from "@/components/AddMenu";
+import ConfirmNewAddMenu from "@/components/ConfirmNewAddMenu";
 
 Vue.use(Router);
 
@@ -125,6 +127,28 @@ const router = new Router({
       meta: {
         title: route => {
           return "訂購結果";
+        }
+      },
+      props: true
+    },
+    {
+      path: "addmenu/:storeId",
+      name: "addmenu",
+      component: AddMenu,
+      meta: {
+        title: route => {
+          return "admin-新增菜單";
+        }
+      },
+      props: true
+    },
+    {
+      path: "confirmnewaddmenu/:storeId",
+      name: "confirmnewaddmenu",
+      component: ConfirmNewAddMenu,
+      meta: {
+        title: route => {
+          return "菜單確認新增-跳轉";
         }
       },
       props: true

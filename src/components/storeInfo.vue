@@ -82,8 +82,7 @@ export default {
         this.uid = userInfo.uid;
         this.displayName = userInfo.displayName;
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
         this.$router.push({
           name: "login"
         });
