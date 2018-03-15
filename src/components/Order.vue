@@ -5,6 +5,7 @@ import FirebaseManager from "@/utils/FirebaseManager";
 import ConfirmOrder from "./ConfirmOrder";
 import checkAuth from "@/checkAuth";
 import lodashfp from "lodash/fp";
+import footerComponent from "./footer";
 
 export default {
   props: ["storeId", "orderId"],
@@ -22,7 +23,8 @@ export default {
     };
   },
   components: {
-    ConfirmOrder
+    ConfirmOrder,
+    footerComponent
   },
   created() {
     checkAuth
@@ -171,6 +173,7 @@ export default {
             <div class="addthis_inline_share_toolbox"></div>
           </div>
         </div>
+        <footer-component></footer-component>  
 </div>
 </template>
 
@@ -185,6 +188,10 @@ a {
 
 li {
   list-style: none;
+}
+
+.container_lightbox {
+  min-height: calc(100vh - 47px);
 }
 
 .container {
