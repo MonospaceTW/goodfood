@@ -240,14 +240,25 @@ $font-m: 13px;
 $font-s: 12px;
 
 .container {
-  margin: 37px 26px 0 26px;
+  // margin: 37px 26px 0 26px;
   text-align: center;
   font-size: $font-m;
   color: $gray_two;
-  min-height: calc(100vh - 84px);
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
+
+.header {
+  margin-top: 37px;
+}
+
+.content {
+  flex: 1 0 auto;
+  margin-left: 26px;
+  margin-right: 26px;
+}
+
 .result_title {
   font-size: $font-xl;
   color: $black;
