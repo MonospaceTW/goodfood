@@ -101,7 +101,7 @@ require("./scss/reset.css");
 
 ![image](../imgs/mainjs-require-setting.png)
 
-另外在 footer 的部份我經加入
+另外在 footer 的部份我已經加入
 flex-shrink: 0;
 就不用在自己加入了。
 
