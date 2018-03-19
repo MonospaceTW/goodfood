@@ -1,4 +1,4 @@
-<template>
+    <template>
   <div class="container">
     <div class="header">
       <div class="cancle">取消</div>
@@ -19,7 +19,7 @@
     </div>
     <div class="footer">
       <a href="#" class="confirm-menu" @click="confirmMenu">確認菜單</a>
-      <a href="#" class="check-added-menu">查看已新增菜單</a>
+      <a href="#" class="check-added-menu" @click="lookUpMenus">查看已新增菜單</a>
     </div>
   </div>
 </template>
@@ -95,6 +95,14 @@ export default {
       // console.log($event);
       this.showOption = true;
       this.menuOptions.push({ name: "最多5個字" });
+    },
+    lookUpMenus() {
+      this.$router.push({
+        name: "storeinfo",
+        params: {
+          storeId: this.storeId
+        }
+      });
     }
   }
 };
