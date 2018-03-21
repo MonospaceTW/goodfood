@@ -1,9 +1,8 @@
 <template>
-<div>
-  <div class="container">
-    <div class="banner"></div>
-    <h1>{{storeInfo.name}}</h1>
-
+  <div class="container" :style="{backgroundImage:`url(${img})`}">
+    <div class="content">
+      <div class="banner"></div>
+      <h1>{{storeInfo.name}}</h1>
       <ul>
 
         <!-- v-for 渲染 menus -->
@@ -31,9 +30,10 @@
       >
         我要團購
       </a>
+      </div>
+      <footer-component></footer-component>
   </div>
-  <footer-component></footer-component>
-</div>
+
 </template>
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
@@ -53,6 +53,7 @@ export default {
   },
   data() {
     return {
+      img: require("@/assets/images/menu.jpeg"),
       orderId: "",
       orderEndTime: "",
       storeInfo: {
@@ -177,21 +178,25 @@ img {
   height: auto;
 }
 .container {
-  min-height: calc(100vh - 47px);
-  font-family: "Noto Sans", sans-serif;
-  background: url(../assets/images/menu.jpeg) no-repeat;
-  background-size: contain;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  background: no-repeat;
+  background-size: contain;
+}
+
+.content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
 ul {
   padding-left: 0;
-  width: 80%;
-  align-self: center;
+  width: 80.835%;
+  // align-self: center;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
   border-radius: 14px;
   background: #ffffff;
@@ -199,8 +204,7 @@ ul {
   margin: 63px 0 43px 0;
 }
 h1 {
-  margin-top: 27.9%;
-  margin-bottom: 0;
+  margin-top: 101px;
   font-family: MicrosoftJhengHei;
   font-size: 17px;
   font-weight: normal;
