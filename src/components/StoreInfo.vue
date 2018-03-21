@@ -1,7 +1,7 @@
 <template>
   <div class="container" :style="{backgroundImage:`url(${img})`}">
     <div class="content">
-      <div class="banner"></div>
+      <!-- <div class="banner"></div> -->
       <h1>{{storeInfo.name}}</h1>
       <ul>
 
@@ -195,7 +195,7 @@ img {
 
 ul {
   padding-left: 0;
-  width: 80.835%;
+  width: 77.6%;
   // align-self: center;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
   border-radius: 14px;
