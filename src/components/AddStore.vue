@@ -25,17 +25,23 @@
           <li>^</li>
         </ul>
       </div> -->
-      <input type="text" class="remark" placeholder="備註" v-model="store.remark">
-      <a href="#" class="confirm">確認</a>
+      <input type="text" class="remark" placeholder="備註" v-model="store.mark">
+      <a href="#" class="confirm" @click="addStore">確認</a>
     </div>
   </div>
 </template>
 <script>
+import FirebaseManager from "@/utils/FirebaseManager";
+import checkAuth from "@/checkAuth";
+
+const store = FirebaseManager.database.ref("store");
+
 export default {
+  props: ["storeId"],
   data() {
     return {
       selected: "",
-      phoneNumber: "",
+      phoneNumber: "店家電話",
       store: {
         name: "店家名稱",
         address: "店家地址",
@@ -55,7 +61,31 @@ export default {
       }
     };
   },
-  created() {}
+  created() {
+    /* check login status */
+    checkAuth
+      .checkAuth()
+      .then(userInfo => {
+        this.uid = userInfo.uid;
+        this.displayName = userInfo.displayName;
+      })
+      .catch(() => {
+        this.$router.push({
+          name: "login"
+        });
+      });
+  },
+  methods: {
+    addStore() {
+      const newPhoneNumber = this.phoneNumber.split("-", 2);
+      let addStoreInfo = this.store;
+      console.log(newPhoneNumber);
+      this.store.tel.block = newPhoneNumber[0];
+      this.store.tel.num = newPhoneNumber[1];
+      this.store.orderIn.unit = this.selected;
+      store.push(addStoreInfo);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

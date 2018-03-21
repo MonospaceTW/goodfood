@@ -21,10 +21,11 @@
       <div class="storeInfo">
         <p>滿{{storeInfo.orderIn.count}}{{storeInfo.orderIn.unit}}可外送</p>
         <p>營業時間：{{storeInfo.time.start}}~{{storeInfo.time.end}}</p>
-        <p>地址：台中市北區美德街</p>
+        <p>地址：{{storeInfo.address}}</p>
         <p id="lastInfo">電話：{{storeInfo.tel.block}}-{{storeInfo.tel.num}}</p>
       </div>
       <a
+        href="#"
         class="open-team-order"
         @click="openTeamOrder"
       >
@@ -55,6 +56,7 @@ export default {
       orderId: "",
       orderEndTime: "",
       storeInfo: {
+        address: "台中市北區美德街",
         orderIn: {
           count: 0,
           unit: 0
@@ -231,8 +233,9 @@ li:nth-last-child(n) {
   margin-bottom: 0;
 }
 .storeInfo {
-  width: 44.5%;
-  margin: 0 27.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .storeInfo p {
   font-family: Arial;

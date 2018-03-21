@@ -69,11 +69,10 @@ export default {
         });
       });
   },
-  mounted() {},
   methods: {
     /* 
-      click confirm menu link,
-      and emit confirmMenu method to add new menu name and price,
+      when click confirm menu link,
+      and then emit confirmMenu method to add new menu name and price,
     */
     confirmMenu() {
       let menus = this.menus;

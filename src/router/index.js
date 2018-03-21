@@ -133,15 +133,14 @@ const router = new Router({
       props: true
     },
     {
-      path: "addstore/:storeId",
+      path: "addstore",
       name: "addstore",
       component: AddStore,
       meta: {
         title: route => {
           return "admin-新增店家";
         }
-      },
-      props: true
+      }
     },
     {
       path: "addmenu/:storeId",
