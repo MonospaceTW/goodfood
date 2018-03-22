@@ -44,17 +44,89 @@ import footerComponent from "./footer";
 
 ## 修改 container 的 SCSS
 
-在 style 中的 .container 加入 min-hight 屬性並使用 calc 來將 footer 置於底部，如果沒有設 margin-top 只需要減掉 47px (footer 的高度)，反之，如果在 .container 中有設 margin-top 則要減掉的數值必須加上 margin-top 的高度，以確保 footer 位置正確。
+
+
+在 style 中的 .container 加上 hight: 100%; 、 display: flex; 與 flex-direction: column;
 
 ```
-  // container 沒 margin-top
-  min-height: calc(100vh - 47px);
-
-  // container 有 margin-top 37px
-  // 37px + 47px = 84px
-  min-height: calc(100vh - 84px);
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 ```
 
 如下圖:
 
-![image](../imgs/container_minhight_calc_footer.jpg)
+![image](../imgs/container.png)
+
+
+接著在 .content 中加入 flex: 1 0 auto;
+
+```
+.content {
+  flex: 1 0 auto;
+}
+```
+
+如下圖:
+
+![image](../imgs/content.png)
+
+---
+
+補充說明：
+這部份我已經替大家完成了不用跟著做，須替 html, body, #app 加上 height: 100%; 的樣式，才能讓 footer 定位在頁面底部
+， 我是加 scss 資料夾裡的 setting.css 裡，
+
+```
+html,
+body,
+#app {
+  height: 100%;
+}
+```
+如下圖:
+
+![image](../imgs/setting.png)
+
+
+setting.css 在 main.js 中用 require 的方式載入
+
+```
+require("./scss/reset.css");
+```
+
+如下圖:
+
+![image](../imgs/mainjs-require-setting.png)
+
+另外在 footer 的部份我已經加入
+flex-shrink: 0;
+就不用在自己加入了。
+
+```
+.footer{
+  flex-shrink: 0;
+}
+```
+
+如下圖:
+
+![image](../imgs/flex-shrink.png)
+
+
+---
+參考資料
+
+
+[Sticky Footer, Five Ways](https://css-tricks.com/couple-takes-sticky-footer/)
+
+
+
+
+
+
+
+
+

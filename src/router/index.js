@@ -12,6 +12,7 @@ import Order from "@/components/Order";
 import Confirmed from "@/components/Confirmed";
 import NotFound from "@/components/NotFound";
 import homepage from "@/components/homepage";
+import AddStore from "@/components/AddStore";
 import AddMenu from "@/components/AddMenu";
 import ConfirmNewAddMenu from "@/components/ConfirmNewAddMenu";
 
@@ -130,6 +131,16 @@ const router = new Router({
         }
       },
       props: true
+    },
+    {
+      path: "addstore",
+      name: "addstore",
+      component: AddStore,
+      meta: {
+        title: route => {
+          return "admin-新增店家";
+        }
+      }
     },
     {
       path: "addmenu/:storeId",

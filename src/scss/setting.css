@@ -1,4 +1,10 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+html,
+body,
+#app {
+  height: 100%;
+}
+
 body {
   font-family: 'Noto Sans TC', 'sans-serif' !important;
   letter-spacing: 2.5px;
