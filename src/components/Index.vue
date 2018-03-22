@@ -127,6 +127,8 @@ export default {
       <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
       <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
     </swiper>
+          <router-link class="addstore_btn" :to="{name:'addstore'}">新增店家</router-link>
+    
   </div>
 </template>
 
@@ -238,5 +240,18 @@ a {
       color: $font_primry;
     }
   }
+}
+
+.addstore_btn {
+  display: block;
+  width: 340px;
+  height: 40px;
+  margin: 0 auto;
+  line-height: 40px;
+  text-align: center;
+  color: white;
+
+  border-radius: 21px;
+  background: #75bafa;
 }
 </style>
