@@ -1,9 +1,8 @@
 <template>
-<div>
-  <div class="container">
-    <div class="banner"></div>
-    <h1>{{storeInfo.name}}</h1>
-
+  <div class="container" :style="{backgroundImage:`url(${img})`}">
+    <div class="content">
+      <!-- <div class="banner"></div> -->
+      <h1>{{storeInfo.name}}</h1>
       <ul>
 
         <!-- v-for 渲染 menus -->
@@ -21,18 +20,20 @@
       <div class="storeInfo">
         <p>滿{{storeInfo.orderIn.count}}{{storeInfo.orderIn.unit}}可外送</p>
         <p>營業時間：{{storeInfo.time.start}}~{{storeInfo.time.end}}</p>
-        <p>地址：台中市北區美德街</p>
+        <p>地址：{{storeInfo.address}}</p>
         <p id="lastInfo">電話：{{storeInfo.tel.block}}-{{storeInfo.tel.num}}</p>
       </div>
       <a
+        href="#"
         class="open-team-order"
         @click="openTeamOrder"
       >
         我要團購
       </a>
+      </div>
+      <footer-component></footer-component>
   </div>
-  <footer-component></footer-component>
-</div>
+
 </template>
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
@@ -52,9 +53,11 @@ export default {
   },
   data() {
     return {
+      img: require("@/assets/images/menu.jpeg"),
       orderId: "",
       orderEndTime: "",
       storeInfo: {
+        address: "台中市北區美德街",
         orderIn: {
           count: 0,
           unit: 0
@@ -175,21 +178,25 @@ img {
   height: auto;
 }
 .container {
-  min-height: calc(100vh - 47px);
-  font-family: "Noto Sans", sans-serif;
-  background: url(../assets/images/menu.jpeg) no-repeat;
-  background-size: contain;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  background: no-repeat;
+  background-size: contain;
+}
+
+.content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
 ul {
   padding-left: 0;
-  width: 80%;
-  align-self: center;
+  width: 77.6%;
+  // align-self: center;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
   border-radius: 14px;
   background: #ffffff;
@@ -197,8 +204,7 @@ ul {
   margin: 63px 0 43px 0;
 }
 h1 {
-  margin-top: 27.9%;
-  margin-bottom: 0;
+  margin-top: 101px;
   font-family: MicrosoftJhengHei;
   font-size: 17px;
   font-weight: normal;
@@ -231,8 +237,9 @@ li:nth-last-child(n) {
   margin-bottom: 0;
 }
 .storeInfo {
-  width: 44.5%;
-  margin: 0 27.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .storeInfo p {
   font-family: Arial;

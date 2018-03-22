@@ -1,7 +1,7 @@
-<template>
+    <template>
   <div class="container">
     <div class="header">
-      <div class="cancle">取消</div>
+      <a href="#" class="cancle" @click="cancle">取消</a>
     </div>
     <div class="content">
       <h1>新增菜單</h1>
@@ -13,13 +13,13 @@
       </div>
       <div class="menu-option-example">如: 烏龍麵、米粉、冬粉。若無請跳過</div>
       <div class="menu-option-area">
-          <input type="text" class="menu-option-input" v-if="showOption" v-for="(menuOption, index) in menuOptions" :key="menuOption.id" v-model="menuOptions[index].name">
+          <input type="text" class="menu-option-input" v-if="showOption" v-for="(menuOption, index) in menuOptions" :key="menuOption.id" v-model="menuOptions[index].name" placeholder="最多5個字">
       </div>
 
     </div>
     <div class="footer">
       <a href="#" class="confirm-menu" @click="confirmMenu">確認菜單</a>
-      <a href="#" class="check-added-menu">查看已新增菜單</a>
+      <a href="#" class="check-added-menu" @click="lookUpMenus">查看已新增菜單</a>
     </div>
   </div>
 </template>
@@ -69,11 +69,10 @@ export default {
         });
       });
   },
-  mounted() {},
   methods: {
     /* 
-      click confirm menu link,
-      and emit confirmMenu method to add new menu name and price,
+      when click confirm menu link,
+      and then emit confirmMenu method to add new menu name and price,
     */
     confirmMenu() {
       let menus = this.menus;
@@ -94,13 +93,27 @@ export default {
     addOption($event) {
       // console.log($event);
       this.showOption = true;
-      this.menuOptions.push({ name: "最多5個字" });
+      this.menuOptions.push({ name: "" });
+    },
+    lookUpMenus() {
+      this.$router.push({
+        name: "storeinfo",
+        params: {
+          storeId: this.storeId
+        }
+      });
+    },
+    cancle() {
+      this.$router.push({
+        name: "index"
+      });
     }
   }
 };
 </script>
 <style lang="scss" scoped>
 .container {
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -110,10 +123,29 @@ export default {
   margin-top: 28px;
   margin-bottom: 37px;
 }
+.cancle {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-align: left;
+  color: #f8a654;
+  margin-right: 17px;
+  text-decoration: none;
+}
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1 0 auto;
+}
+// input::input-placeholder {
+//   text-align: center;
+// }
+input[type="text"] {
+  text-align: center;
 }
 .menu-name {
   width: 68%;
@@ -122,9 +154,10 @@ export default {
   background-color: #f4f4f4;
   box-sizing: border-box;
   border: 0;
-  padding: 0 82px;
+  // padding: 0 90px;
   margin-top: 16px;
 }
+
 .menu-price {
   width: 68%;
   height: 46px;
@@ -132,7 +165,7 @@ export default {
   background-color: #f4f4f4;
   box-sizing: border-box;
   border: 0;
-  padding: 0 82px;
+  // padding: 0 90px;
   margin-top: 13px;
   margin-bottom: 59px;
 }
@@ -150,6 +183,14 @@ export default {
 }
 .menu-option-example {
   margin-bottom: 16px;
+  height: 17px;
+  font-size: 11px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  color: #f75454;
 }
 .menu-option-area {
   width: 78.4%;
@@ -172,8 +213,41 @@ export default {
   padding: 0;
   border: 0;
 }
+.confirm-menu {
+  height: 80px;
+  border-radius: 20px;
+  background-image: linear-gradient(92deg, #75bafa, #579cfe);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  display: block;
+  text-align: center;
+  font-family: MicrosoftJhengHei;
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  padding-top: 14px;
+  color: #ffffff;
+}
+.check-added-menu {
+  height: 40px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 48px;
+  z-index: 999;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding-top: 18px;
+  font-family: MicrosoftJhengHei;
+  font-size: 16px;
+  color: #f8a654;
+  letter-spacing: 3px;
+  text-decoration: none;
+}
 .footer {
   height: 106px;
+  position: relative;
 }
 </style>
 
