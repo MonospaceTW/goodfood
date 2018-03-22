@@ -8,17 +8,18 @@
       <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
       <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
       <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber">
-      <div class="sotre-time">
+      <div class="store-time">
         <input type="text" class="open-time" placeholder="營業時間" v-model="store.time.start">
         <input type="text" class="close-time" placeholder="打烊時間" v-model="store.time.end">
       </div>
-
-      <input type="text" class="delivery-condition" placeholder="外送條件" v-model="store.orderIn.count">
-      <select v-model="selected">
-        <option disabled value="">展開選項</option>
-        <option>元</option>
-        <option>份</option>
-      </select>
+      <div class="delivery-area">
+        <input type="text" class="delivery-condition" placeholder="外送條件" v-model="store.orderIn.count">
+        <select v-model="selected">
+          <option disabled value="">展開選項</option>
+          <option>元</option>
+          <option>份</option>
+        </select>
+      </div>
       <!-- <div  class="unfold-option-area">
         <span class="unfold-option">展開選項</span>
         <span class="arrow">ˇ</span>
@@ -40,9 +41,9 @@ import checkAuth from "@/checkAuth";
 const store = FirebaseManager.database.ref("store");
 
 export default {
-  props: ["storeId"],
   data() {
     return {
+      storeId: "",
       selected: "",
       phoneNumber: "",
       store: {
@@ -86,7 +87,14 @@ export default {
       this.store.tel.block = newPhoneNumber[0];
       this.store.tel.num = newPhoneNumber[1];
       this.store.orderIn.unit = this.selected;
-      store.push(addStoreInfo);
+      this.storeId = store.push(addStoreInfo).key;
+
+      this.$router.push({
+        name: "addmenu",
+        params: {
+          storeId: this.storeId
+        }
+      });
     },
     cancel() {
       this.$router.push({
@@ -143,6 +151,47 @@ input {
 }
 .store-time {
   display: flex;
+  width: 81.334%;
+  justify-content: space-between;
+}
+.open-time,
+.close-time {
+  width: 47.218%;
+}
+
+.delivery-area {
+  display: flex;
+  width: 81.3%;
+  justify-content: space-between;
+}
+
+.delivery-condition {
+  width: 47.5%;
+}
+
+select {
+  width: 34%;
+  height: 20px;
+}
+
+.remark {
+  height: 79px;
+  margin-bottom: 49px;
+}
+
+.confirm {
+  width: 32%;
+  height: 46px;
+  line-height: 46px;
+  border-radius: 21.5px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border: solid 1px #f7a654;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: #f7a654;
 }
 </style>
 
