@@ -1,15 +1,18 @@
 <template>
   <div class="container">
     <div class="header">
-      <span class="cancel">取消</span>
+      <a href="#" class="cancel" @click="cancel">取消</a>
     </div>
     <div class="content">
       <h1>新增店家</h1>
       <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
       <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
       <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber">
-      <input type="text" class="open-time" placeholder="營業時間" v-model="store.time.start">
-      <input type="text" class="close-time" placeholder="打烊時間" v-model="store.time.end">
+      <div class="sotre-time">
+        <input type="text" class="open-time" placeholder="營業時間" v-model="store.time.start">
+        <input type="text" class="close-time" placeholder="打烊時間" v-model="store.time.end">
+      </div>
+
       <input type="text" class="delivery-condition" placeholder="外送條件" v-model="store.orderIn.count">
       <select v-model="selected">
         <option disabled value="">展開選項</option>
@@ -41,17 +44,17 @@ export default {
   data() {
     return {
       selected: "",
-      phoneNumber: "店家電話",
+      phoneNumber: "",
       store: {
-        name: "店家名稱",
-        address: "店家地址",
+        name: "",
+        address: "",
         orderIn: {
-          unit: "元 / 份",
-          count: 300
+          unit: "",
+          count: ""
         },
         time: {
-          start: "09:00",
-          end: "17:00"
+          start: "",
+          end: ""
         },
         tel: {
           block: "區碼",
@@ -84,12 +87,61 @@ export default {
       this.store.tel.num = newPhoneNumber[1];
       this.store.orderIn.unit = this.selected;
       store.push(addStoreInfo);
+    },
+    cancel() {
+      this.$router.push({
+        name: "index"
+      });
     }
   }
 };
 </script>
 <style lang="scss" scoped>
 .container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 29px;
+  margin-right: 17px;
+}
+.cancel {
+  // text-align: right;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #f8a654;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.content {
+  flex: 1 0 auto;
+  margin-top: 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+h1 {
+  margin-bottom: 19px;
+}
+
+input {
+  width: 80.8%;
+  height: 46px;
+  border-radius: 14px;
+  background-color: #f4f4f4;
+  border: 0;
+  margin-bottom: 3.2%;
+  text-align: center;
+}
+.store-time {
   display: flex;
 }
 </style>
