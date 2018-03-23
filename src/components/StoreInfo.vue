@@ -26,7 +26,7 @@
       <a
         href="#"
         class="open-team-order"
-        @click="openTeamOrder"
+        @click.prevent="openTeamOrder"
       >
         我要團購
       </a>
