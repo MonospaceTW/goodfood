@@ -1,6 +1,7 @@
 {
   "projects": {
     "default": "goodfood-39158",
-    "goodfood-new": "goodfood-new"
+    "goodfood-new": "goodfood-new",
+    "goodfood-beta": "goodfood-beta"
   }
 }
