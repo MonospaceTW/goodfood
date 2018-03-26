@@ -23,6 +23,7 @@ export default {
       thisOrder: [],
       ConfirmOrder: false,
       storeName: "",
+      endTime: "",
       dishes: {},
       hideLightbox: true,
       tooltip_opacity: 0
@@ -50,7 +51,7 @@ export default {
     let route = `order/${this.orderId}/${this.storeId}`;
     FirebaseManager.getValue(route).then(store => {
       this.storeName = store.name;
-
+      this.endTime = store.endTime;
       let menu = store.menus;
       for (let id in menu) {
         menu[id].count = 0;
@@ -108,9 +109,9 @@ export default {
     },
     showTooltip() {
       this.tooltip_opacity = 100;
-      setTimeout(()=> {
+      setTimeout(() => {
         this.tooltip_opacity = 0;
-      },2000)
+      }, 2000);
     }
   },
   computed: {
@@ -180,7 +181,7 @@ export default {
         <div class="close" @click="closeBox">x</div>
         <div class="boxtitle">邀請大家來團訂吧！</div>
         <div class="flex copy_location" >
-          <div id="location" class="location">{{location}}</div>
+          <div id="location" class="location">{{storeName}}團訂 {{endTime}}截止 {{location}}</div>
           <button class="copy_btn copy_target" @click="showTooltip" data-clipboard-target="#location">
           </button>
         </div>
