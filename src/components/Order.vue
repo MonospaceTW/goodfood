@@ -5,7 +5,7 @@ import FirebaseManager from "@/utils/FirebaseManager";
 import ConfirmOrder from "./ConfirmOrder";
 import checkAuth from "@/checkAuth";
 import lodashfp from "lodash/fp";
-import footerComponent from "./footer";
+import footerComponent from "./Footer";
 
 export default {
   props: ["storeId", "orderId"],

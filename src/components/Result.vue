@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import footerComponent from "./footer";
+import footerComponent from "./Footer";
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
 

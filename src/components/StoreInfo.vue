@@ -38,7 +38,7 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
-import footerComponent from "./footer";
+import footerComponent from "./Footer";
 
 const moment = require("moment");
 moment().format();
