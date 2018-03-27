@@ -2,6 +2,8 @@
   "projects": {
     "default": "goodfood-39158",
     "goodfood-new": "goodfood-new",
-    "goodfood-beta": "goodfood-beta"
+    "goodfood-beta": "goodfood-beta",
+    "hosting": "goodfood-hosting",
+    "main": "goodfood-main"
   }
 }
