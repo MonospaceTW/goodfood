@@ -28,7 +28,10 @@ export default {
           prevEl: ".swiper-button-prev"
         }
         // autoplay: false,
-        // loop: true
+        // loop: true,
+        // slidesPerGroup: 3,
+        // loopFillGroupWithBlank: true,
+        // loopedSlides: 5
       }
     };
   },
@@ -49,7 +52,7 @@ export default {
           store.key = data.key;
           stores.push(store);
         });
-        var recommendNum = 5;
+        var recommendNum = 6;
         var recommend = randomStore(stores, recommendNum);
         this.recommend = recommend;
         console.log(recommend);
@@ -94,47 +97,50 @@ export default {
     <a class="signout" @click="signOut">登出</a>
     <div class="wrapper">
       <img src="../assets/images/logo.svg" alt="">
-      <div class="logo_title">SET <br>LUNCH</div>
+      <div class="logo_title">SET
+        <br>LUNCH</div>
       <div class="lottery_wrapper">
-          <router-link class="lottery btn" :to="{name:'storeinfo', params:{storeId:this.lottery.key}}">
-            <img class="icon_lottery" src="../assets/images/icon_lottery.svg" alt="">
-            好手氣
-          </router-link>
-          <router-link class="storelist btn" :to="{name:'storelist'}">
-            <img class="icon_storelist" src="../assets/images/icon_storelist.svg" alt="">
-            看所有店家
-          </router-link>
-      
+        <router-link class="lottery btn" :to="{name:'storeinfo', params:{storeId:this.lottery.key}}">
+          <img class="icon_lottery" src="../assets/images/icon_lottery.svg" alt=""> 好手氣
+        </router-link>
+        <router-link class="storelist btn" :to="{name:'storelist'}">
+          <img class="icon_storelist" src="../assets/images/icon_storelist.svg" alt=""> 看所有店家
+        </router-link>
+
       </div>
-      
-     
+
+
     </div>
     <div class="recommend_title">
-      <img class="icon_storelist" src="../assets/images/icon_recommend.svg" alt="">
-      今日推薦
+      <img class="icon_storelist" src="../assets/images/icon_recommend.svg" alt=""> 今日推薦
     </div>
-
-    <swiper :options="swiperOption" class="mt-4 mb-5 recommend_wrapper">
-      <swiperSlide class="recommend" v-for="(store,idx) in recommend" :key="idx">
+    <div class="slider_wrapper">
+      <swiper :options="swiperOption" class="mt-4 mb-5 recommend_wrapper">
+        <swiperSlide class="recommend" v-for="(store,idx) in recommend" :key="idx">
           <router-link class="store" :to="{name:'storeinfo', params:{storeId:store.key}}">
-          
-          <img class="cover_img" src="../assets/images/cover3.jpg" alt="">
-          <div class="store_name">{{store.name}}</div>
+
+            <img class="cover_img" src="../assets/images/cover3.jpg" alt="">
+            <div class="store_name">{{store.name}}</div>
             <!-- {{store.name}} -->
           </router-link>
-      </swiperSlide>
-      <div class="swiper-pagination" slot="pagination"></div>
-      <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-      <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-    </swiper>
-          <router-link class="addstore_btn" :to="{name:'addstore'}">新增店家</router-link>
-    
+        </swiperSlide>
+        <div class="swiper-pagination" slot="pagination"></div>
+        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+      </swiper>
+    </div>
+    <router-link class="addstore_btn" :to="{name:'addstore'}">新增店家</router-link>
+
   </div>
 </template>
 
 
 <style lang="scss" scoped>
 @import "../scss/index.scss";
+* {
+  box-sizing: border-box;
+}
+
 a {
   color: $orange;
   text-decoration: none;
@@ -149,9 +155,10 @@ a {
 }
 .container {
   position: relative;
-  width: 375px;
+  // width: 375px;
   margin: 5px auto;
   padding: 0 15px;
+  
 
   .hello {
     font-size: 12px;
@@ -203,10 +210,16 @@ a {
 
 .recommend_title {
   padding: 14px 0 19px 23px;
+  width: 360px;
+  margin: 0 auto;
 
   img {
     vertical-align: middle;
   }
+}
+.slider_wrapper {
+  width: 360px;
+  margin: 0 auto;
 }
 
 .recommend_wrapper {
