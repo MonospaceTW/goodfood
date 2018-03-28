@@ -1,21 +1,21 @@
 # 好食在 – 團訂便當系統
 
-<font size=5>[Demo](https://goodfood-beta.firebaseapp.com/#/)<font>
+## <font size=5>[Demo](https://goodfood-beta.firebaseapp.com/#/)<font>
 
 ## 計畫成員
-**Front-end**
+**Front-end**：
 [Clover](https://github.com/raindot) 
 [Jimmy](https://github.com/yingming25) 
 [Paula](https://github.com/jade2018) 
 [Ryin](https://github.com/Ryin0424)
 
-**Back-end**
+**Back-end**：
 po-chun ckw bochen 
 
-**UI Design**
+**UI Design**：
 [Hungyu](https://github.com/HungYu-Chen)
 
-**Mentor**
+**Mentor**：
 [Tomas](https://github.com/horsekitlin)
 
 ## 緣起與痛點
@@ -29,7 +29,9 @@ A：應該是有人會忘記寫而沒訂到便當
 ---
 
 ## 使用技術
+
 Front-end Framework: Vue.js
+
 Back-end: Firebase Node.js
 
 
