@@ -18,8 +18,8 @@
 
     </div>
     <div class="footer">
-      <a href="#" class="confirm-menu" @click="confirmMenu">確認菜單</a>
-      <a href="#" class="check-added-menu" @click="lookUpMenus">查看已新增菜單</a>
+      <a href="#" class="confirm-menu" @click.prevent="confirmMenu">確認菜單</a>
+      <a href="#" class="check-added-menu" @click.prevent="lookUpMenus">查看已新增菜單</a>
     </div>
   </div>
 </template>

@@ -13,7 +13,7 @@
         <input type="text" class="close-time" placeholder="打烊時間" v-model="store.time.end">
       </div>
       <div class="delivery-area">
-        <input type="text" class="delivery-condition" placeholder="外送條件" v-model="store.orderIn.count">
+        <input type="number" class="delivery-condition" placeholder="外送條件" v-model="store.orderIn.count">
         <select v-model="selected">
           <option disabled value="">展開選項</option>
           <option>元</option>
@@ -83,7 +83,7 @@ export default {
     addStore() {
       const newPhoneNumber = this.phoneNumber.split("-", 2);
       let addStoreInfo = this.store;
-      console.log(newPhoneNumber);
+      // console.log(newPhoneNumber);
       this.store.tel.block = newPhoneNumber[0];
       this.store.tel.num = newPhoneNumber[1];
       this.store.orderIn.unit = this.selected;
