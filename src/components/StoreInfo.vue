@@ -13,7 +13,7 @@
         <!-- ************************************* -->
 
         <li>
-          <p  class="endTime">開團後半小時截止</p>
+          <p class="endTime">開團後半小時截止</p>
         </li>
       </ul>
 
@@ -23,15 +23,11 @@
         <p>地址：{{storeInfo.address}}</p>
         <p id="lastInfo">電話：{{storeInfo.tel.block}}-{{storeInfo.tel.num}}</p>
       </div>
-      <a
-        href="#"
-        class="open-team-order"
-        @click.prevent="openTeamOrder"
-      >
+      <a href="#" class="open-team-order" @click.prevent="openTeamOrder">
         我要團購
       </a>
-      </div>
-      <footer-component></footer-component>
+    </div>
+    <footer-component></footer-component>
   </div>
 
 </template>
@@ -39,6 +35,7 @@
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
 import footerComponent from "./Footer";
+import axios from "axios";
 
 const moment = require("moment");
 moment().format();
@@ -153,6 +150,13 @@ export default {
         .child(storeId)
         .update(storeInfo);
 
+      const shareUrl = `
+        ${window.location.protocol}//${window.location.host}/#/order/${
+        self.orderId
+      }/${self.storeId}`;
+
+      self.toSlackBot(shareUrl, self.storeInfo.name, self.storeInfo.endTime);
+
       // 切換路由到 order component
       self.$router.push({
         name: "order",
@@ -162,6 +166,27 @@ export default {
           storeName: self.storeInfo.name
         }
       });
+    },
+    toSlackBot(shareUrl, storeName, endTime) {
+      axios({
+        method: "post",
+        url: "https://goodfood-beta.trunksys.com/message",
+        data: {
+          // message: "<!here|here> 測試",
+          message: `<!here|here> ${storeName}團訂 ${endTime} 截止 ${shareUrl}`,
+          // message: "測試",
+          channel: "#test-bot",
+          botname: "訂便當小助手"
+        },
+        headers: { Authorization: "test" }
+      })
+        .then(function(response) {
+          console.log(response.data); // {ok: true} will print
+          alert("團訂訊息已發送至slack");
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };
@@ -267,7 +292,7 @@ p {
   height: 6.9%;
   padding: 13px 38px 13px 38px;
   margin-top: 39px;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   font-size: 14px;
   font-weight: normal;
   font-style: normal;
