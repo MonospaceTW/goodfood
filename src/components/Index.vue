@@ -13,6 +13,7 @@ export default {
       displayName: "Guest",
       lottery: "",
       recommend: [],
+      logined: false,
       // swiper的選項
       swiperOption: {
         slidesPerView: 2.2,
@@ -40,6 +41,8 @@ export default {
     swiperSlide
   },
   created() {
+    this.checkLogin();
+
     // 抽出首頁要推薦的n個店家
     FirebaseManager.database
       .ref("store")
@@ -73,19 +76,28 @@ export default {
       }
       return result;
     }
-    checkAuth.checkAuth().then(userInfo => {
-      this.uid = userInfo.uid;
-      this.displayName = userInfo.displayName;
-    });
   },
   methods: {
     signOut() {
-      FirebaseManager.signOut().then(function() {
-        // Sign-out successful.
+      FirebaseManager.signOut().then(() => {
+        this.checkLogin();
+        this.displayName = "Guest";
       });
       // .catch(function(error) {
       //   // An error happened.
       // });
+    },
+    checkLogin() {
+      checkAuth
+        .checkAuth()
+        .then(userInfo => {
+          this.uid = userInfo.uid;
+          this.displayName = userInfo.displayName;
+          this.logined = true;
+        })
+        .catch(() => {
+          this.logined = false;
+        });
     }
   }
 };
@@ -93,8 +105,12 @@ export default {
 
 <template>
   <div class="container">
-    <span class="hello">Hi, {{displayName}}</span>
-    <a class="signout" @click="signOut">登出</a>
+    <div class="topmenu">
+      <span class="hello">Hi, {{displayName}}</span>
+      <a class="sign" @click="signOut" v-if="logined">登出</a>
+      <router-link class="sign" :to="{name:'login'}" v-else>登入</router-link>
+    </div>
+
     <div class="wrapper">
       <img src="../assets/images/logo.svg" alt="">
       <div class="logo_title">SET
@@ -146,7 +162,7 @@ a {
   text-decoration: none;
 }
 
-.signout {
+.sign {
   position: absolute;
   display: inline-block;
   right: 0;
@@ -158,7 +174,6 @@ a {
   // width: 375px;
   margin: 5px auto;
   padding: 0 15px;
-  
 
   .hello {
     font-size: 12px;
@@ -217,7 +232,9 @@ a {
     vertical-align: middle;
   }
 }
-.slider_wrapper {
+.slider_wrapper,
+.topmenu {
+  position: relative;
   width: 360px;
   margin: 0 auto;
 }
