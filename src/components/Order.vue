@@ -6,7 +6,12 @@ import ConfirmOrder from "./ConfirmOrder";
 import checkAuth from "@/checkAuth";
 import lodashfp from "lodash/fp";
 import footerComponent from "./footer";
-
+import ClipboardJS from "clipboard";
+new ClipboardJS(".copy_btn", {
+  text: function() {
+    return window.location.href;
+  }
+});
 export default {
   props: ["storeId", "orderId"],
   data() {
@@ -18,8 +23,10 @@ export default {
       thisOrder: [],
       ConfirmOrder: false,
       storeName: "",
+      endTime: "",
       dishes: {},
-      hideLightbox: true
+      hideLightbox: true,
+      tooltip_opacity: 0
     };
   },
   components: {
@@ -44,7 +51,7 @@ export default {
     let route = `order/${this.orderId}/${this.storeId}`;
     FirebaseManager.getValue(route).then(store => {
       this.storeName = store.name;
-
+      this.endTime = store.endTime;
       let menu = store.menus;
       for (let id in menu) {
         menu[id].count = 0;
@@ -98,6 +105,13 @@ export default {
     },
     showLightbox() {
       this.hideLightbox = false;
+      this.showTooltip();
+    },
+    showTooltip() {
+      this.tooltip_opacity = 100;
+      setTimeout(() => {
+        this.tooltip_opacity = 0;
+      }, 2000);
     }
   },
   computed: {
@@ -113,68 +127,72 @@ export default {
         return previousVal + currentVal;
       }, 0);
       return total;
+    },
+    location() {
+      return window.location.href;
     }
   }
 };
 </script>
 
 <template>
-<div class="container_lightbox">
-<div class="container">
-  <confirm-order 
-    v-show="ConfirmOrder" 
-    :user="user" 
-    :orderId="orderId" 
-    :storeId="storeId" 
-    :uid="uid" 
-    @cancelOrder="cancelOrder"
-  ></confirm-order>
-  <h1 class="store_name">{{storeName}}</h1>
-  <ul>
-    <li class="item" v-for="(dish,id) in dishes" v-bind:key="id">
-      <div class="menu">
-        <div class="menu_name">{{dish.name}}</div>
-        <div class="price">${{dish.price}}</div>
-      </div>
-      <div class="menu">
-        <div class="counter">
-          <button class="subtract" @click="subtract(id)">-</button>
-          <div class="count">{{dish.count}}</div>
-          <button class="add" @click="add(id)">+</button>
+  <div class="container">
+    <confirm-order v-show="ConfirmOrder" :user="user" :orderId="orderId" :storeId="storeId" :uid="uid" @cancelOrder="cancelOrder"></confirm-order>
+    <h1 class="store_name">{{storeName}}</h1>
+    <ul>
+      <li class="item" v-for="(dish,id) in dishes" v-bind:key="id">
+        <div class="menu">
+          <div class="menu_name">{{dish.name}}</div>
+          <div class="price">${{dish.price}}</div>
         </div>
-        <div class="subtotal">${{subtotal(id)}}</div>
-      </div>
-    </li>
-  </ul>
-  <div class="total">
-    <span>總計</span>＄{{total}}</div>
-  <div class="name">
-    我是{{displayName}}
-  </div>
-  <div class="btn_group">
-    <!-- 備註：<input type="text" v-model="mark"></div> -->
-    <router-link 
-    class="result_btn" 
-    :to="{
-      name:'result',
-      params: { storeId: this.storeId, orderId: this.orderId}
-      }">看團訂結果</router-link>
-    <a class="share_btn" href="#" @click="showLightbox">分享這頁</a>
-    <a class="order_btn" href="#" @click="order">下訂單</a>
-
-</div>
- </div>
-  <!-- 分享lightbox -->
-        <div class="lightbox" @click="closeBox" :class="{hide:hideLightbox}">
-          <div class="msg">
-            <div class="close" @click="closeBox">x</div>
-            <div class="boxtitle">邀請大家來團訂吧！</div>
-            <!-- Go to www.addthis.com/dashboard to customize your tools -->
-            <div class="addthis_inline_share_toolbox"></div>
+        <div class="menu">
+          <div class="counter">
+            <button class="subtract" @click="subtract(id)">-</button>
+            <div class="count">{{dish.count}}</div>
+            <button class="add" @click="add(id)">+</button>
           </div>
+          <div class="subtotal">${{subtotal(id)}}</div>
         </div>
-        <footer-component></footer-component>  
-</div>
+      </li>
+    </ul>
+    <div class="total">
+      <span>總計</span>＄{{total}}</div>
+    <div class="name">
+      我是{{displayName}}
+    </div>
+    <div class="btn_group">
+      <!-- 備註：<input type="text" v-model="mark"></div> -->
+      <router-link class="result_btn" :to="{
+        name:'result',
+        params: { storeId: this.storeId, orderId: this.orderId}
+        }">看團訂結果</router-link>
+      <div 
+        class="share_btn copy_btn" 
+        @click="showLightbox" 
+        data-clipboard-text="">
+        分享這頁
+      </div>
+      <a class="order_btn" href="#" @click="order">下訂單</a>
+
+    </div>
+    <!-- 分享lightbox -->
+    <div class="lightbox" :class="{hide:hideLightbox}">
+      <div class="msg">
+        <div class="close" @click="closeBox">x</div>
+        <div class="boxtitle">邀請大家來團訂吧！</div>
+        <div class="flex copy_location" >
+          <div id="location" class="location">{{storeName}}團訂 {{endTime}}截止 {{location}}</div>
+          <button class="copy_btn copy_target" @click="showTooltip" data-clipboard-target="#location">
+          </button>
+        </div>
+        <div class="tooltip" :style="{opacity:tooltip_opacity}">網址已複製</div>
+      </div>
+    </div>
+    <footer-component></footer-component>
+
+  </div>
+
+
 </template>
 
 
@@ -190,17 +208,19 @@ li {
   list-style: none;
 }
 
-.container_lightbox {
-  min-height: calc(100vh - 47px);
-}
-
 .container {
-  width: 90%;
-  font-size: 14px;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  // min-height: calc(100vh - 47px);
   margin: 0 auto;
   padding-top: 60px;
   padding-bottom: 60px;
-  position: relative;
+  font-size: 14px;
+}
+
+.flex {
+  display: flex;
 }
 
 .store_name {
@@ -210,8 +230,9 @@ li {
 }
 
 .item {
+  width: 310px;
   padding: 10px;
-  margin: 10px 0;
+  margin: 10px auto;
   border-radius: 15px;
   background-color: $gray_one;
 }
@@ -253,10 +274,13 @@ li {
   margin: 0 6px;
   width: 100px;
   height: 50px;
+  cursor: pointer;
   line-height: 50px;
   text-align: center;
   border: 1px $orange solid;
   border-radius: 30px;
+  color: $orange;
+  background-color: white;
 }
 
 .total {
@@ -281,13 +305,13 @@ li {
 }
 
 .lightbox .msg {
-  position: absolute;
-  top: 100px;
+  position: fixed;
+  bottom: calc(100vh/2 - 50px);
   left: 0;
   right: 0;
-  width: 60%;
+  width: 90%;
   margin: auto;
-  height: 100px;
+  height: 150px;
   background-color: white;
   text-align: center;
   padding: 10px;
@@ -295,7 +319,7 @@ li {
 }
 
 .lightbox .msg .boxtitle {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin: 10px;
 }
 
@@ -314,5 +338,39 @@ li {
 
 .hide {
   display: none;
+}
+
+.location {
+  width: 90%;
+  line-height: 25px;
+  overflow: scroll;
+  white-space: nowrap;
+}
+.copy_location {
+  border: 2px solid $gray_one;
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.copy_target {
+  width: 30px;
+  height: 25px;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: $gray_one;
+  background-image: url(../assets/images/clippy.svg);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.tooltip {
+  margin: 15px auto;
+  width: 100px;
+  line-height: 25px;
+  background-color: $gray_one;
+  font-size: 12px;
+  border-radius: 15px;
+  color: $gray_two;
+  transition: all linear 0.2s;
 }
 </style>

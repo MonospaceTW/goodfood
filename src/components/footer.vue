@@ -26,6 +26,8 @@
 
 <style lang="scss" scoped>
 .footer {
+  position: fixed;
+  bottom: 0;
   display: flex;
   height: 47px;
   align-items: flex-end;
@@ -34,6 +36,7 @@
   width: 100%;
   box-shadow: 0 -1px 4px 3px rgba(194, 194, 194, 0.15);
   flex-shrink: 0;
+  background-color: white;
 }
 .footer a {
   display: block;
