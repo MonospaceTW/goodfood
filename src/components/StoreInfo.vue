@@ -34,7 +34,7 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
-import footerComponent from "./footer";
+import footerComponent from "./Footer";
 import axios from "axios";
 
 const moment = require("moment");
@@ -151,7 +151,9 @@ export default {
         .update(storeInfo);
 
       const shareUrl = `
-        ${window.location.protocol}//${window.location.host}/#/order/${self.orderId}/${self.storeId}`;
+        ${window.location.protocol}//${window.location.host}/#/order/${
+        self.orderId
+      }/${self.storeId}`;
 
       self.toSlackBot(shareUrl, self.storeInfo.name, self.storeInfo.endTime);
 

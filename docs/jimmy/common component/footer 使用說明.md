@@ -23,12 +23,12 @@ template 的 HTML 結構如下:
 ### 2.在 script 中增加
 
 ```
-import footerComponent from "./footer";
+import footerComponent from "./Footer";
 ```
 
 如下圖:
 
-![image](../imgs/import_footer_component.jpg)
+![image](../imgs/import_footer_component.png)
 
 ### 3.在 export dafault 的 components 中加入 footer component
 
