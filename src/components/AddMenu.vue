@@ -9,7 +9,10 @@
         <input type="text" placeholder="請輸入菜名" class="menu-name" v-model="menuName">
         <div class="message">{{ validation.firstError('menuName') }}</div>
       </div>
+      <div class="form-group" :class="{error: validation.hasError('menuPrice')}">
       <input type="text" placeholder="$  請輸入價格" class="menu-price" v-model="menuPrice">
+      <div class="message menu-price-message">{{ validation.firstError('menuPrice') }}</div>
+      </div>
       <div class="menu-option">
         <span class="add-menu-option">新增副選項</span>
         <span class="show-menu-option" @click="addOption($event)"><img src="../assets/images/add.png" alt=""></span>
@@ -83,6 +86,9 @@ export default {
   mixins: [require("simple-vue-validator").mixin],
   validators: {
     menuName: function(value) {
+      return Validator.value(value).required();
+    },
+    menuPrice: function(value) {
       return Validator.value(value).required();
     }
   },
@@ -179,8 +185,11 @@ input[type="text"] {
 .message {
   width: 100%;
   text-align: center;
-  margin-top: 10px;
+  // margin-top: 10px;
   color: #f75454;
+}
+.menu-price-message {
+  // margin-bottom: 59px;
 }
 
 .menu-name {
@@ -203,10 +212,11 @@ input[type="text"] {
   border: 0;
   // padding: 0 90px;
   margin-top: 13px;
-  margin-bottom: 59px;
+  // margin-bottom: 59px;
 }
 .menu-option {
   margin-bottom: 1.8%;
+  margin-top: 59px;
 }
 .show-menu-option {
   width: 20px;
