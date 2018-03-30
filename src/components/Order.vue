@@ -5,7 +5,7 @@ import FirebaseManager from "@/utils/FirebaseManager";
 import ConfirmOrder from "./ConfirmOrder";
 import checkAuth from "@/checkAuth";
 import lodashfp from "lodash/fp";
-import footerComponent from "./footer";
+import footerComponent from "./Footer";
 import ClipboardJS from "clipboard";
 new ClipboardJS(".copy_btn", {
   text: function() {

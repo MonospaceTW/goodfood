@@ -2,7 +2,10 @@
 import FirebaseManager from "@/utils/FirebaseManager";
 import Order from "./Order";
 import checkAuth from "@/checkAuth";
+import footerComponent from "./Footer";
+
 const firebase = FirebaseManager.getFirebaselib();
+
 export default {
   props: [],
   data() {
@@ -15,7 +18,8 @@ export default {
     };
   },
   components: {
-    Order
+    Order,
+    footerComponent
   },
   created() {
     /* 登入驗證 */
@@ -59,15 +63,18 @@ export default {
       </li>
       <!-- <li class="loading" v-if="loading">Lording...</li> -->
   </ul>
+  <footer-component></footer-component>
 </div>
 
 </template>
 
 <style lang="scss" scoped>
-
 .container {
   height: 667px;
   margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .list_title {
   margin-top: 30px;
@@ -78,33 +85,34 @@ export default {
   color: #f8a654;
   font-weight: bold;
 }
-ul.content{
+ul.content {
   max-width: 375px;
   margin: 0 auto;
-  li{
+  flex: 1 0 auto;
+  li {
     // border: 1px solid red;
     margin-top: 22px;
-    a{
+    a {
       display: flex;
-      text-decoration:none;
+      text-decoration: none;
     }
-    img{
+    img {
       margin-left: 28px;
       justify-content: flex-start;
     }
-    .info_box{
+    .info_box {
       margin-left: 18px;
       justify-content: flex-end;
       color: #000;
-      .store_name{
+      .store_name {
         margin-top: 13px;
       }
-      .open_time,.store_phone{
+      .open_time,
+      .store_phone {
         margin-top: 6px;
         font-size: 13px;
       }
     }
   }
 }
-
 </style>

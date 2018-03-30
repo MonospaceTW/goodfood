@@ -5,8 +5,14 @@
     </div>
     <div class="content">
       <h1>新增菜單</h1>
-      <input type="text" placeholder="請輸入菜名" class="menu-name" v-model="menuName">
+      <div class="form-group" :class="{error: validation.hasError('menuName')}">
+        <input type="text" placeholder="請輸入菜名" class="menu-name" v-model="menuName">
+        <div class="message">{{ validation.firstError('menuName') }}</div>
+      </div>
+      <div class="form-group" :class="{error: validation.hasError('menuPrice')}">
       <input type="text" placeholder="$  請輸入價格" class="menu-price" v-model="menuPrice">
+      <div class="message menu-price-message">{{ validation.firstError('menuPrice') }}</div>
+      </div>
       <div class="menu-option">
         <span class="add-menu-option">新增副選項</span>
         <span class="show-menu-option" @click="addOption($event)"><img src="../assets/images/add.png" alt=""></span>
@@ -18,14 +24,22 @@
 
     </div>
     <div class="footer">
-      <a href="#" class="confirm-menu" @click="confirmMenu">確認菜單</a>
-      <a href="#" class="check-added-menu" @click="lookUpMenus">查看已新增菜單</a>
+      <a href="#" class="confirm-menu" @click.prevent="confirmMenu">確認菜單</a>
+      <a href="#" class="check-added-menu" @click.prevent="lookUpMenus">查看已新增菜單</a>
     </div>
   </div>
 </template>
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
+
+const SimpleVueValidation = require("simple-vue-validator");
+
+const Validator = SimpleVueValidation.Validator.create({
+  templates: {
+    required: "此欄位為必填"
+  }
+});
 
 const store = FirebaseManager.database.ref("store");
 
@@ -69,25 +83,38 @@ export default {
         });
       });
   },
+  mixins: [require("simple-vue-validator").mixin],
+  validators: {
+    menuName: function(value) {
+      return Validator.value(value).required();
+    },
+    menuPrice: function(value) {
+      return Validator.value(value).required();
+    }
+  },
   methods: {
     /* 
       when click confirm menu link,
       and then emit confirmMenu method to add new menu name and price,
     */
     confirmMenu() {
-      let menus = this.menus;
-      const menuName = this.menuName;
-      const menuPrice = this.menuPrice;
-      this.menus.name = menuName;
-      this.menus.price = menuPrice;
-      this.menus.options[0].chooses = this.menuOptions; // assign menu options to Vue data's menu object's chooses propoty
-      store
-        .child(this.storeId)
-        .child("menus")
-        .push(menus);
-      this.$router.push({
-        name: "confirmnewaddmenu",
-        params: { storeId: this.storeId }
+      this.$validate().then(success => {
+        if (success) {
+          let menus = this.menus;
+          const menuName = this.menuName;
+          const menuPrice = this.menuPrice;
+          this.menus.name = menuName;
+          this.menus.price = menuPrice;
+          this.menus.options[0].chooses = this.menuOptions; // assign menu options to Vue data's menu object's chooses propoty
+          store
+            .child(this.storeId)
+            .child("menus")
+            .push(menus);
+          this.$router.push({
+            name: "confirmnewaddmenu",
+            params: { storeId: this.storeId }
+          });
+        }
       });
     },
     addOption($event) {
@@ -147,6 +174,24 @@ export default {
 input[type="text"] {
   text-align: center;
 }
+
+.form-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.message {
+  width: 100%;
+  text-align: center;
+  // margin-top: 10px;
+  color: #f75454;
+}
+.menu-price-message {
+  // margin-bottom: 59px;
+}
+
 .menu-name {
   width: 68%;
   height: 46px;
@@ -167,10 +212,11 @@ input[type="text"] {
   border: 0;
   // padding: 0 90px;
   margin-top: 13px;
-  margin-bottom: 59px;
+  // margin-bottom: 59px;
 }
 .menu-option {
   margin-bottom: 1.8%;
+  margin-top: 59px;
 }
 .show-menu-option {
   width: 20px;
