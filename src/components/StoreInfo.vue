@@ -149,10 +149,12 @@ export default {
         .child(orderId)
         .child(storeId)
         .update(storeInfo);
-
+      /* eslint-disable */
       const shareUrl = `
-        ${window.location.protocol}//${window.location.host}/#/order/${self.orderId}/${self.storeId}`;
-
+        ${window.location.protocol}//${window.location.host}/#/order/${
+        self.orderId
+      }/${self.storeId}`;
+      /* eslint-enable */
       self.toSlackBot(shareUrl, self.storeInfo.name, self.storeInfo.endTime);
 
       // 切換路由到 order component
@@ -173,8 +175,9 @@ export default {
           // message: "<!here|here> 測試",
           message: `<!here|here> ${storeName}團訂 ${endTime} 截止 ${shareUrl}`,
           // message: "測試",
-          channel: "#test-bot",
-          botname: "訂便當小助手"
+          channel: "#general",
+          botname: "訂便當小助手",
+          iconurl: "https://goodfood-main.firebaseapp.com/static/logo.png"
         },
         headers: { Authorization: "test" }
       })
