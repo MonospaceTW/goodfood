@@ -15,6 +15,7 @@ import homepage from "@/components/homepage";
 import AddStore from "@/components/AddStore";
 import AddMenu from "@/components/AddMenu";
 import ConfirmNewAddMenu from "@/components/ConfirmNewAddMenu";
+import AdminStoreInfo from "@/components/AdminStoreInfo";
 
 Vue.use(Router);
 
@@ -96,6 +97,17 @@ const router = new Router({
       meta: {
         title: route => {
           return "店家資訊";
+        }
+      }
+    },
+    {
+      path: "storeinfo/:storeId",
+      name: "adminstoreinfo",
+      component: AdminStoreInfo,
+      props: true,
+      meta: {
+        title: route => {
+          return "店家資訊-admin";
         }
       }
     },
