@@ -101,7 +101,7 @@ const router = new Router({
       }
     },
     {
-      path: "storeinfo/:storeId",
+      path: "adminstoreinfo/:storeId",
       name: "adminstoreinfo",
       component: AdminStoreInfo,
       props: true,
