@@ -3,29 +3,32 @@
     <div class="content">
       <!-- <div class="banner"></div> -->
       <h1>{{storeInfo.name}}</h1>
-      <ul>
 
-        <!-- v-for 渲染 menus -->
-        <li v-for="menu in menus" :key="menu.id">
-          <div class="dishName">{{menu.name}}</div>
-          <div class="dishPrice">${{menu.price}}</div>
-        </li>
+      <div class="menus">
+        <ul>
+          <!-- v-for 渲染 menus -->
+          <li v-for="menu in menus" :key="menu.id">
+            <div class="dishName">{{menu.name}}</div>
+            <div class="dishPrice">${{menu.price}}</div>
+          </li>
         <!-- ************************************* -->
 
-        <li>
-          <p class="endTime">開團後半小時截止</p>
-        </li>
-      </ul>
+          <!-- <li>
+            <p class="endTime">開團後半小時截止</p>
+          </li> -->
+        </ul>
+      </div>
+      
 
-      <div class="storeInfo">
+      <!-- <div class="storeInfo">
         <p>滿{{storeInfo.orderIn.count}}{{storeInfo.orderIn.unit}}可外送</p>
         <p>營業時間：{{storeInfo.time.start}}~{{storeInfo.time.end}}</p>
         <p>地址：{{storeInfo.address}}</p>
         <p id="lastInfo">電話：{{storeInfo.tel.block}}-{{storeInfo.tel.num}}</p>
-      </div>
-      <a href="#" class="open-team-order" @click.prevent="openTeamOrder">
+      </div> -->
+      <!-- <a href="#" class="open-team-order" @click.prevent="openTeamOrder">
         我要團購
-      </a>
+      </a> -->
     </div>
     <footer-component></footer-component>
   </div>
@@ -209,6 +212,7 @@ img {
   flex-direction: column;
   background: no-repeat;
   background-size: contain;
+  overflow: hidden;
 }
 
 .content {
@@ -216,17 +220,25 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 42px;
 }
-
-ul {
-  padding-left: 0;
+.menus {
   width: 77.6%;
-  // align-self: center;
+  height: 405px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
   border-radius: 14px;
   background: #ffffff;
-  padding: 25px 11px 0px 14px;
-  margin: 63px 0 43px 0;
+  padding: 30px 7px 20px 17px;
+}
+
+ul {
+  width: 100%;
+  height: 320px;
+  // align-self: center;
+  overflow: auto;
 }
 h1 {
   margin-top: 101px;
@@ -239,6 +251,9 @@ h1 {
   letter-spacing: 3.5px;
   text-align: left;
   color: #ffffff;
+  height: 22px;
+  line-height: 22px;
+  margin-bottom: 50px;
 }
 li {
   padding: 0 0 25px 0;
