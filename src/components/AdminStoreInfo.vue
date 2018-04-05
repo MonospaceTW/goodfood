@@ -8,7 +8,12 @@
         <ul>
           <!-- v-for 渲染 menus -->
           <li v-for="menu in menus" :key="menu.id">
-            <div class="dishName">{{menu.name}}</div>
+            <div class="menu-align-area1">
+              <div class="remove">
+                <span class="remove-inner"></span>
+              </div>
+              <div class="dishName">{{menu.name}}</div>
+            </div>
             <div class="dishPrice">${{menu.price}}</div>
           </li>
         <!-- ************************************* -->
@@ -17,6 +22,7 @@
             <p class="endTime">開團後半小時截止</p>
           </li> -->
         </ul>
+        <div class="check-bar"></div>
       </div>
       
 
@@ -222,24 +228,7 @@ img {
   align-items: center;
   padding-bottom: 42px;
 }
-.menus {
-  width: 77.6%;
-  height: 405px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
-  border-radius: 14px;
-  background: #ffffff;
-  padding: 30px 7px 20px 17px;
-}
 
-ul {
-  width: 100%;
-  height: 320px;
-  // align-self: center;
-  overflow: auto;
-}
 h1 {
   margin-top: 101px;
   font-family: MicrosoftJhengHei;
@@ -255,15 +244,72 @@ h1 {
   line-height: 22px;
   margin-bottom: 50px;
 }
+
+.menus {
+  width: 77.6%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 30px 7px 20px 17px;
+}
+
+ul {
+  width: 100%;
+  height: 320px;
+  // align-self: center;
+  overflow: auto;
+}
+
 li {
-  padding: 0 0 25px 0;
-  // border-bottom: 1px solid #e9e9e9;
+  height: 50px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e9e9e9;
 }
-li:nth-last-child(n) {
-  padding: 0 0 12px 0;
+.menu-align-area1 {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
 }
+.remove {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  border: solid 1px #f75454;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0;
+}
+
+.remove-inner {
+  width: 10px;
+  height: 2px;
+  background-color: #f75454;
+}
+
+.dishName {
+  height: 20px;
+  line-height: 20px;
+  display: inline-block;
+  margin-left: 13px;
+}
+
+.dishPrice {
+  height: 20px;
+  line-height: 20px;
+}
+
+.check-bar {
+  display: flex;
+  width: 100%;
+  height: 55px;
+}
+
 .endTime {
   font-family: MicrosoftJhengHei;
   font-size: 14px;
@@ -276,11 +322,13 @@ li:nth-last-child(n) {
   color: #f75454;
   margin-bottom: 0;
 }
+
 .storeInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .storeInfo p {
   font-family: Arial;
   font-size: 12px;
@@ -293,12 +341,15 @@ li:nth-last-child(n) {
   color: #000000;
   margin-bottom: 7px;
 }
+
 #lastInfo {
   margin-bottom: 0;
 }
+
 p {
   margin-top: 0;
 }
+
 .open-team-order {
   border-radius: 21px;
   background-color: #ffffff;
