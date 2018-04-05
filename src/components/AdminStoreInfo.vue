@@ -22,7 +22,17 @@
             <p class="endTime">開團後半小時截止</p>
           </li> -->
         </ul>
-        <div class="check-bar"></div>
+        <div class="check-bar">
+          <a href="#" class="add-menu">新增菜單</a>
+          <div class="select-area">
+            <a href="#">
+              <img class="cancel" src="../assets/images/cancel.png" alt="">
+            </a>
+            <a href="#">
+              <img class="check" src="../assets/images/check.png" alt="">
+            </a>
+          </div>
+        </div>
       </div>
       
 
@@ -202,6 +212,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 // @import "../scss/_color.scss";
+@import "../scss/index.scss";
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans");
 ol,
 ul {
@@ -253,12 +264,12 @@ h1 {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
   border-radius: 14px;
   background: #ffffff;
-  padding: 30px 7px 20px 17px;
+  padding: 30px 7px 0 17px;
 }
 
 ul {
   width: 100%;
-  height: 320px;
+  height: 307px;
   // align-self: center;
   overflow: auto;
 }
@@ -308,65 +319,25 @@ li {
   display: flex;
   width: 100%;
   height: 55px;
-}
-
-.endTime {
-  font-family: MicrosoftJhengHei;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 1.3px;
-  text-align: left;
-  color: #f75454;
-  margin-bottom: 0;
-}
-
-.storeInfo {
-  display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 
-.storeInfo p {
-  font-family: Arial;
-  font-size: 12px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 2px;
-  text-align: center;
-  color: #000000;
-  margin-bottom: 7px;
+.add-menu {
+  color: #f8a654;
+  text-decoration: none;
+  margin-left: 25px;
 }
 
-#lastInfo {
-  margin-bottom: 0;
+.check {
+  margin-left: 30px;
+}
+
+.select-area {
+  margin-right: 35px;
 }
 
 p {
   margin-top: 0;
-}
-
-.open-team-order {
-  border-radius: 21px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-  border: solid 1px #f8a654;
-  height: 6.9%;
-  padding: 13px 38px 13px 38px;
-  margin-top: 39px;
-  margin-bottom: 60px;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 4px;
-  text-align: left;
-  color: #f8a654;
-  text-decoration: none;
 }
 </style>
