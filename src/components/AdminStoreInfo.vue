@@ -7,15 +7,26 @@
       <div class="menus">
         <ul>
           <!-- v-for 渲染 menus -->
-          <li v-for="menu in menus" :key="menu.id">
+          <!-- <li v-for="menu in menus" :key="menu.id">
             <div class="menu-align-area1">
-              <div class="remove">
+              <div class="remove" @click="removeMenu($event, key)">
                 <span class="remove-inner"></span>
               </div>
               <div class="dishName">{{menu.name}}</div>
             </div>
             <div class="dishPrice">${{menu.price}}</div>
+          </li> -->
+          <li v-for="(menu, key) in menus" :key="key.id">
+            <div class="menu-align-area1">
+              <a href="#" class="remove" @click.prevent="removeMenu($event, key)">
+                <span class="remove-inner"></span>
+              </a>
+              <div class="dishName">{{menu.name}}</div>
+            </div>
+            <div class="dishPrice">${{menu.price}}</div>
           </li>
+
+
         <!-- ************************************* -->
 
           <!-- <li>
@@ -89,7 +100,7 @@ export default {
         endTime: ""
       },
       storeInfoAll: [],
-      menus: []
+      menus: {}
     };
   },
   created() {
@@ -121,7 +132,7 @@ export default {
       });
 
     /* 
-      將店家的菜單逐筆加入 data 中的 menus 中，
+      將店家的菜單加入 data 中的 menus 中，
       以便在 template 中使用 v-for 渲染菜單列表。 
     */
     store
@@ -130,11 +141,22 @@ export default {
       .once("value")
       .then(snapshot => {
         // console.log(snapshot.val());
-        snapshot.forEach(data => {
-          this.menus.push(data.val());
-        });
+        // snapshot.forEach(data => {
+        //   this.menus.push(data.val());
+        // });
+        this.menus = snapshot.val();
       });
     // console.log(self.menus);
+  },
+  mounted() {
+    const self = this;
+    const storeId = self.storeId;
+    store
+      .child(storeId)
+      .child("menus")
+      .on("value", snapshot => {
+        this.menus = snapshot.val();
+      });
   },
   methods: {
     /* 
@@ -206,6 +228,15 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    removeMenu($event, key) {
+      const self = this;
+      const storeId = self.storeId;
+      store
+        .child(storeId)
+        .child("menus")
+        .child(key)
+        .remove();
     }
   }
 };
