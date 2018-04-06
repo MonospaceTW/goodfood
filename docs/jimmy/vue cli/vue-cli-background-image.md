@@ -16,6 +16,26 @@
 ![image](../imgs/v-bind:style-background-image.png)
 
 
+接下來給這個 div 的 class confirm-new-add-menu 固定的寬高以顯示圖片大小
+
+```
+.confirm-new-add-menu {
+  height: 205px;
+  width: 205px;
+}
+```
+
+![image](../imgs/background-image-width-height.png)
+
+設定完寬高後圖片就能正常顯示了
+如下圖：
+
+![image](../imgs/background-image-result.png)
+
+
+
+
+
 補充說明：
 如果有出現 ESlint 錯誤可能是沒有允許模板字符串，在 ESlint rule 中 加入
 
