@@ -100,7 +100,8 @@ export default {
         endTime: ""
       },
       storeInfoAll: [],
-      menus: {}
+      menus: {},
+      removeMenus: []
     };
   },
   created() {
@@ -147,6 +148,8 @@ export default {
         this.menus = snapshot.val();
       });
     // console.log(self.menus);
+
+    self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys"));
   },
   mounted() {
     const self = this;
@@ -232,11 +235,20 @@ export default {
     removeMenu($event, key) {
       const self = this;
       const storeId = self.storeId;
-      store
-        .child(storeId)
-        .child("menus")
-        .child(key)
-        .remove();
+
+      let removeMenus = self.removeMenus;
+
+      /* click remove icon for remove menu*/
+      // store
+      //   .child(storeId)
+      //   .child("menus")
+      //   .child(key)
+      //   .remove();
+
+      /* click remove icon to add  menu to localstorage for remove menu from firebase*/
+      removeMenus.push(key);
+
+      localStorage.setItem("removeMenuKeys", JSON.stringify(removeMenus));
     }
   }
 };
