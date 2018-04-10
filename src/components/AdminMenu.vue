@@ -14,7 +14,7 @@
         </ul>
 
         <div class="check-bar">
-          <a href="#" class="add-menu">新增菜單</a>
+          <a href="#" class="add-menu" @click.prevent="addMenu" >新增菜單</a>
           <div class="select-area">
             <a href="#">
               <img class="cancel" src="../assets/images/cancel.png" alt="">
@@ -58,11 +58,20 @@ export default {
         // this.menus.push(data.val());
         // });
         this.menus = snapshot.val();
-        console.log(snapshot.val());
       });
     // console.log(self.menus);
 
     self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys"));
+  },
+  methods: {
+    addMenu() {
+      this.$router.push({
+        name: "addmenulocalstorage",
+        params: {
+          storeId: this.storeId
+        }
+      });
+    }
   }
 };
 </script>
