@@ -23,10 +23,24 @@
         <p>地址：{{storeInfo.address}}</p>
         <p id="lastInfo">電話：{{storeInfo.tel.block}}-{{storeInfo.tel.num}}</p>
       </div>
-      <a href="#" class="open-team-order" @click.prevent="openTeamOrder">
+      <a href="#" class="open-team-order" @click.prevent="showLightbox">
         我要團購
       </a>
+      <!-- lightbox -->
+       <div class="lightbox" :class="{hide:hideLightbox}">
+      <div class="msg">
+        <div class="close" @click="closeBox">x</div>
+        <div class="boxtitle">請輸入要發送通知的channel</div>
+        <div class="boxmsg">預設為general</div>
+        <span class="channel">Channel:#</span><input type="text" class="channel_input" v-model="channel">
+        <div class="btn_group">
+          <button class="btn" @click="openTeamOrder">僅開團不通知</button>
+          <button class="btn" @click="teamOrderToSlack">開團並通知</button>
+        </div>
+      </div>
+  </div>
     </div>
+    
     <footer-component></footer-component>
   </div>
 
@@ -70,7 +84,9 @@ export default {
         endTime: ""
       },
       storeInfoAll: [],
-      menus: []
+      menus: [],
+      hideLightbox: true,
+      channel: "general"
     };
   },
   created() {
@@ -123,6 +139,10 @@ export default {
       這邊先把這次團訂的 order key 指定給 orderId 以便後續的操作，
       
     */
+    teamOrderToSlack() {
+      this.openTeamOrder();
+      this.toSlackBot();
+    },
     openTeamOrder() {
       const self = this;
       const storeId = self.storeId;
@@ -149,13 +169,6 @@ export default {
         .child(orderId)
         .child(storeId)
         .update(storeInfo);
-      /* eslint-disable */
-      const shareUrl = `
-        ${window.location.protocol}//${window.location.host}/#/order/${
-        self.orderId
-      }/${self.storeId}`;
-      /* eslint-enable */
-      self.toSlackBot(shareUrl, self.storeInfo.name, self.storeInfo.endTime);
 
       // 切換路由到 order component
       self.$router.push({
@@ -167,22 +180,42 @@ export default {
         }
       });
     },
-    toSlackBot(shareUrl, storeName, endTime) {
+    showLightbox() {
+      this.hideLightbox = false;
+    },
+    closeBox() {
+      this.hideLightbox = true;
+    },
+    toSlackBot() {
+      /* eslint-disable */
+      const shareUrl = `
+        ${window.location.protocol}//${window.location.host}/#/order/${
+        self.orderId
+      }/${self.storeId}`;
+      /* eslint-enable */
+
+      let storeName = this.storeInfo.name;
+      let endTime = this.storeInfo.endTime;
+      let channel = this.channel;
       axios({
         method: "post",
         url: "https://goodfood-beta.trunksys.com/message",
         data: {
-          // message: "<!here|here> 測試",
           message: `<!here|here> ${storeName}團訂 ${endTime} 截止 ${shareUrl}`,
           // message: "測試",
-          channel: "#general",
+          channel: "#" + channel,
           botname: "訂便當小助手",
-          iconurl: "https://goodfood-main.firebaseapp.com/static/logo.png"
+          /* eslint-disable */
+          iconurl: `${window.location.protocol}//${
+            window.location.host
+          }/static/logo.png`
+          /* eslint-enable */
         },
         headers: { Authorization: "test" }
       })
         .then(function(response) {
           console.log(response.data); // {ok: true} will print
+          console.log(storeName, endTime, shareUrl);
           alert("團訂訊息已發送至slack");
         })
         .catch(function(error) {
@@ -194,6 +227,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 // @import "../scss/_color.scss";
+@import "../scss/index.scss";
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans");
 ol,
 ul {
@@ -213,6 +247,8 @@ img {
 }
 
 .content {
+  position: relative;
+
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
@@ -303,5 +339,86 @@ p {
   text-align: left;
   color: #f8a654;
   text-decoration: none;
+}
+
+.lightbox {
+  /* display: none; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  .msg {
+    position: fixed;
+    bottom: calc(100vh/2 - 50px);
+    left: 0;
+    right: 0;
+    width: 90%;
+    margin: auto;
+    height: 180px;
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+
+    .boxtitle {
+      font-size: 1rem;
+      margin: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: -5px;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      border: 1px solid gray;
+      border-radius: 50%;
+      background-color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .boxmsg {
+      padding: 10px;
+      font-size: 12px;
+      color: gray;
+    }
+
+    .channel {
+      font-size: 14px;
+    }
+
+    .channel_input {
+      border-style: none;
+      border-bottom: 2px solid #e0dfdf;
+    }
+
+    .btn_group {
+      display: flex;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .btn {
+      width: 150px;
+      height: 40px;
+      margin: 0 5px;
+      line-height: 40px;
+      font-size: 14px;
+      display: block;
+      text-align: center;
+      border: 1px $orange solid;
+      border-radius: 30px;
+      color: $orange;
+      background: white;
+    }
+  }
+}
+
+.hide {
+  display: none;
 }
 </style>
