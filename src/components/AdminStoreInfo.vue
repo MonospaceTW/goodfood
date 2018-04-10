@@ -1,21 +1,10 @@
 <template>
   <div class="container" :style="{backgroundImage:`url(${img})`}">
     <div class="content">
-      <!-- <div class="banner"></div> -->
       <h1>{{storeInfo.name}}</h1>
 
       <div class="menus">
         <ul>
-          <!-- v-for 渲染 menus -->
-          <!-- <li v-for="menu in menus" :key="menu.id">
-            <div class="menu-align-area1">
-              <div class="remove" @click="removeMenu($event, key)">
-                <span class="remove-inner"></span>
-              </div>
-              <div class="dishName">{{menu.name}}</div>
-            </div>
-            <div class="dishPrice">${{menu.price}}</div>
-          </li> -->
           <li v-for="(menu, key) in menus" :key="key.id">
             <div class="menu-align-area1">
               <a href="#" class="remove" @click.prevent="removeMenu($event, key)">
@@ -25,14 +14,8 @@
             </div>
             <div class="dishPrice">${{menu.price}}</div>
           </li>
-
-
-        <!-- ************************************* -->
-
-          <!-- <li>
-            <p class="endTime">開團後半小時截止</p>
-          </li> -->
         </ul>
+
         <div class="check-bar">
           <a href="#" class="add-menu">新增菜單</a>
           <div class="select-area">
@@ -44,18 +27,9 @@
             </a>
           </div>
         </div>
+        
       </div>
-      
 
-      <!-- <div class="storeInfo">
-        <p>滿{{storeInfo.orderIn.count}}{{storeInfo.orderIn.unit}}可外送</p>
-        <p>營業時間：{{storeInfo.time.start}}~{{storeInfo.time.end}}</p>
-        <p>地址：{{storeInfo.address}}</p>
-        <p id="lastInfo">電話：{{storeInfo.tel.block}}-{{storeInfo.tel.num}}</p>
-      </div> -->
-      <!-- <a href="#" class="open-team-order" @click.prevent="openTeamOrder">
-        我要團購
-      </a> -->
     </div>
     <footer-component></footer-component>
   </div>
