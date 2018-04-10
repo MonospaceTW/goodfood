@@ -180,6 +180,7 @@ a {
 
     .input {
       flex-grow: 2;
+      border-style: none;
     }
   }
 
