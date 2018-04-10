@@ -11,8 +11,13 @@
             </div>
             <div class="dishPrice">${{menu.price}}</div>
           </li>
-          <li v-for="(menu, key) in newMenus" :key="key.id">
-            <div class="dishName-new">{{menu.name}}</div>
+          <li v-for="(menu, index) in newMenus" :key="menu.id">
+            <div class="menu-align-area1">
+              <a href="#" class="remove" @click.prevent="removeLocalMenu">
+                <span class="remove-inner"></span>
+              </a>
+              <div class="dishName-new">{{menu.name}}</div>
+            </div>
             <div class="dishPrice-new">${{menu.price}}</div>
           </li>
         </ul>
@@ -23,7 +28,7 @@
             <a href="#">
               <img class="cancel" src="../assets/images/cancel.png" alt="">
             </a>
-            <a href="#">
+            <a href="#" @click.prevent="cofirmAddMenu">
               <img class="check" src="../assets/images/check.png" alt="">
             </a>
           </div>
@@ -42,6 +47,22 @@ export default {
   data() {
     return {
       menus: {},
+      menu: {
+        name: "玉米濃湯麵",
+        price: 100,
+        options: [
+          {
+            max: 1,
+            min: 1,
+            chooses: [{ name: "烏龍麵" }, { name: "油麵" }]
+          },
+          {
+            max: 1,
+            min: 1,
+            chooses: [{ name: "加辣" }, { name: "不加辣" }]
+          }
+        ]
+      },
       removeMenus: [],
       newMenus: {}
     };
@@ -76,6 +97,20 @@ export default {
         params: {
           storeId: this.storeId
         }
+      });
+    },
+    cofirmAddMenu() {
+      const self = this;
+      const storeId = self.storeId;
+
+      self.newMenus.forEach(localMenu => {
+        this.menu.name = localMenu.name;
+        this.menu.price = localMenu.price;
+        this.menu.options = localMenu.options;
+        store
+          .child(storeId)
+          .child("menus")
+          .push(self.menu);
       });
     }
   }
@@ -149,6 +184,13 @@ export default {
 .dishPrice {
   height: 20px;
   line-height: 20px;
+}
+
+.dishName-new {
+  height: 20px;
+  line-height: 20px;
+  display: inline-block;
+  margin-left: 13px;
 }
 
 .check-bar {
