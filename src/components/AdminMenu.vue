@@ -11,6 +11,10 @@
             </div>
             <div class="dishPrice">${{menu.price}}</div>
           </li>
+          <li v-for="(menu, key) in newMenus" :key="key.id">
+            <div class="dishName-new">{{menu.name}}</div>
+            <div class="dishPrice-new">${{menu.price}}</div>
+          </li>
         </ul>
 
         <div class="check-bar">
@@ -38,7 +42,8 @@ export default {
   data() {
     return {
       menus: {},
-      removeMenus: []
+      removeMenus: [],
+      newMenus: {}
     };
   },
   created() {
@@ -62,6 +67,7 @@ export default {
     // console.log(self.menus);
 
     self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys"));
+    self.newMenus = JSON.parse(localStorage.getItem("addMenus"));
   },
   methods: {
     addMenu() {
