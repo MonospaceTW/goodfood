@@ -53,8 +53,8 @@ export default {
     };
   },
   created() {
-    // const self = this;
-    // const storeId = self.storeId;
+    const self = this;
+    const storeId = self.storeId;
     // console.log(this.parentStoreId);
 
     checkAuth
@@ -73,14 +73,14 @@ export default {
       撈取店家資訊，
       並將撈取後的資料存到 data 中的 storeInfo 。 
     */
-    // store
-    //   .child(storeId)
-    //   .once("value")
-    //   .then(snapshot => {
-    //     // console.log(snapshot.val());
-    //     this.storeInfo = snapshot.val();
-    //     // console.log(self.storeInfo);
-    //   });
+    store
+      .child(storeId)
+      .once("value")
+      .then(snapshot => {
+        // console.log(snapshot.val());
+        this.storeInfo = snapshot.val();
+        // console.log(self.storeInfo);
+      });
   },
   mounted() {
     const self = this;
