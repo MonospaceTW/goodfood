@@ -85,7 +85,7 @@ export default {
   padding-bottom: 5px;
 }
 .menus {
-  width: 84.269%;
+  width: 77.87%;
   height: 100%;
   display: flex;
   flex-direction: column;
