@@ -27,7 +27,7 @@
             </a>
           </div>
         </div>
-        
+
       </div>
 
     </div>
@@ -97,14 +97,14 @@ export default {
       撈取店家資訊，
       並將撈取後的資料存到 data 中的 storeInfo 。 
     */
-    store
-      .child(storeId)
-      .once("value")
-      .then(snapshot => {
-        // console.log(snapshot.val());
-        this.storeInfo = snapshot.val();
-        // console.log(self.storeInfo);
-      });
+    // store
+    //   .child(storeId)
+    //   .once("value")
+    //   .then(snapshot => {
+    //     // console.log(snapshot.val());
+    //     this.storeInfo = snapshot.val();
+    //     // console.log(self.storeInfo);
+    //   });
 
     /* 
       將店家的菜單加入 data 中的 menus 中，
