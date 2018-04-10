@@ -49,7 +49,8 @@ export default {
         endTime: ""
       },
       storeInfoAll: [],
-      parentStoreId: this.$props.storeId
+      parentStoreId: this.$props.storeId,
+      removeMenus: []
     };
   },
   created() {
@@ -81,6 +82,8 @@ export default {
         this.storeInfo = snapshot.val();
         // console.log(self.storeInfo);
       });
+
+    self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys"));
   },
   mounted() {
     const self = this;

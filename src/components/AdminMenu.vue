@@ -13,7 +13,7 @@
           </li>
           <li v-for="(menu, index) in newMenus" :key="menu.id">
             <div class="menu-align-area1">
-              <a href="#" class="remove" @click.prevent="removeLocalMenu">
+              <a href="#" class="remove" @click.prevent="removeLocalMenu($event, index)">
                 <span class="remove-inner"></span>
               </a>
               <div class="dishName-new">{{menu.name}}</div>
@@ -25,10 +25,10 @@
         <div class="check-bar">
           <a href="#" class="add-menu" @click.prevent="addMenu" >新增菜單</a>
           <div class="select-area">
-            <a href="#">
+            <a href="#" @click.prevent="cancel">
               <img class="cancel" src="../assets/images/cancel.png" alt="">
             </a>
-            <a href="#" @click.prevent="cofirmAddMenu">
+            <a href="#" @click.prevent="confirm">
               <img class="check" src="../assets/images/check.png" alt="">
             </a>
           </div>
@@ -64,7 +64,7 @@ export default {
         ]
       },
       removeMenus: [],
-      newMenus: {}
+      newMenus: []
     };
   },
   created() {
@@ -87,8 +87,8 @@ export default {
       });
     // console.log(self.menus);
 
-    self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys"));
-    self.newMenus = JSON.parse(localStorage.getItem("addMenus"));
+    self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys")) || [];
+    self.newMenus = JSON.parse(localStorage.getItem("addMenus")) || [];
   },
   methods: {
     addMenu() {
@@ -99,7 +99,7 @@ export default {
         }
       });
     },
-    cofirmAddMenu() {
+    confirm() {
       const self = this;
       const storeId = self.storeId;
 
@@ -111,6 +111,35 @@ export default {
           .child(storeId)
           .child("menus")
           .push(self.menu);
+      });
+
+      localStorage.removeItem("addMenus");
+      localStorage.removeItem("removeMenuKeys");
+
+      this.$router.push({
+        name: "storeinfo",
+        params: {
+          storeId: this.storeId
+        }
+      });
+    },
+    removeLocalMenu($event, index) {
+      const self = this;
+      const storeId = self.storeId;
+      // if ($event.target.nodeName !== "A") {
+      //   return;
+      // }
+      self.newMenus.splice(index, 1);
+      localStorage.setItem("addMenus", JSON.stringify(self.newMenus));
+    },
+    cancel() {
+      localStorage.removeItem("addMenus");
+      localStorage.removeItem("removeMenuKeys");
+      this.$router.push({
+        name: "storeinfo",
+        params: {
+          storeId: this.storeId
+        }
       });
     }
   }
