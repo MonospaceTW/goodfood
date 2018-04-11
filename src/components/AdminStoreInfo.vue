@@ -128,13 +128,6 @@ export default {
         .child(storeId)
         .update(storeInfo);
 
-      const shareUrl = `
-        ${window.location.protocol}//${window.location.host}/#/order/${
-        self.orderId
-      }/${self.storeId}`;
-
-      self.toSlackBot(shareUrl, self.storeInfo.name, self.storeInfo.endTime);
-
       // 切換路由到 order component
       self.$router.push({
         name: "order",
@@ -144,27 +137,6 @@ export default {
           storeName: self.storeInfo.name
         }
       });
-    },
-    toSlackBot(shareUrl, storeName, endTime) {
-      axios({
-        method: "post",
-        url: "https://goodfood-beta.trunksys.com/message",
-        data: {
-          // message: "<!here|here> 測試",
-          message: `<!here|here> ${storeName}團訂 ${endTime} 截止 ${shareUrl}`,
-          // message: "測試",
-          channel: "#test-bot",
-          botname: "訂便當小助手"
-        },
-        headers: { Authorization: "test" }
-      })
-        .then(function(response) {
-          console.log(response.data); // {ok: true} will print
-          alert("團訂訊息已發送至slack");
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
     },
     removeMenu($event, key) {
       const self = this;
