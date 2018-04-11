@@ -30,7 +30,6 @@
   </div>
 </template>
 <script>
-import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
 
 const SimpleVueValidation = require("simple-vue-validator");
