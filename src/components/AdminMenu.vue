@@ -110,7 +110,8 @@ export default {
     confirm() {
       const self = this;
       const storeId = self.storeId;
-      self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys"));
+      self.removeMenus =
+        JSON.parse(localStorage.getItem("removeMenuKeys")) || [];
 
       self.newMenus.forEach(localMenu => {
         this.menu.name = localMenu.name;
