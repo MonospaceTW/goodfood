@@ -41,7 +41,7 @@ const Validator = SimpleVueValidation.Validator.create({
   }
 });
 
-const store = FirebaseManager.database.ref("store");
+// const store = FirebaseManager.database.ref("store");
 
 export default {
   props: ["storeId"],
