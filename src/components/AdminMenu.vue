@@ -4,7 +4,7 @@
         <ul>
           <li v-for="(menu, key) in menus" :key="key.id">
             <div class="menu-align-area1">
-              <a href="#" class="remove" @click.prevent="removeMenu($event, key)">
+              <a href="#" class="remove" @click.prevent="sendRemoveMenu($event, key)">
                 <span class="remove-inner"></span>
               </a>
               <div class="dishName">{{menu.name}}</div>
@@ -64,7 +64,8 @@ export default {
         ]
       },
       removeMenus: [],
-      newMenus: []
+      newMenus: [],
+      currentMenu: true
     };
   },
   created() {
@@ -87,7 +88,6 @@ export default {
       });
     // console.log(self.menus);
 
-    self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys")) || [];
     self.newMenus = JSON.parse(localStorage.getItem("addMenus")) || [];
   },
   methods: {
@@ -99,9 +99,18 @@ export default {
         }
       });
     },
+    sendRemoveMenu($event, key) {
+      const self = this;
+      self.$emit("remove-menu", {
+        menuKey: key
+      });
+
+      self.$delete(self.menus, key);
+    },
     confirm() {
       const self = this;
       const storeId = self.storeId;
+      self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys"));
 
       self.newMenus.forEach(localMenu => {
         this.menu.name = localMenu.name;
@@ -111,6 +120,15 @@ export default {
           .child(storeId)
           .child("menus")
           .push(self.menu);
+      });
+
+      self.removeMenus.forEach(localRemoveMenuKey => {
+        // console.log(localRemoveMenuKey);
+        store
+          .child(storeId)
+          .child("menus")
+          .child(localRemoveMenuKey)
+          .remove();
       });
 
       localStorage.removeItem("addMenus");

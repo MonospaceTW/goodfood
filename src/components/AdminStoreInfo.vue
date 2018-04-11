@@ -2,7 +2,7 @@
   <div class="container" :style="{backgroundImage:`url(${img})`}">
     <div class="content">
       <h1>{{storeInfo.name}}</h1>
-      <admin-menu :store-id="parentStoreId"></admin-menu>
+      <admin-menu :store-id="parentStoreId" @remove-menu="removeMenu"></admin-menu>
     </div>
     <footer-component></footer-component>
   </div>
@@ -82,7 +82,7 @@ export default {
         // console.log(self.storeInfo);
       });
 
-    self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys"));
+    self.removeMenus = JSON.parse(localStorage.getItem("removeMenuKeys")) || [];
   },
   mounted() {
     const self = this;
@@ -137,21 +137,16 @@ export default {
         }
       });
     },
-    removeMenu($event, key) {
+    removeMenu(menuKey) {
       const self = this;
       const storeId = self.storeId;
 
       let removeMenus = self.removeMenus;
 
       /* click remove icon for remove menu */
-      // store
-      //   .child(storeId)
-      //   .child("menus")
-      //   .child(key)
-      //   .remove();
 
       /* click remove icon to add  menu to localstorage for remove menu from firebase */
-      removeMenus.push(key);
+      removeMenus.push(menuKey.menuKey);
 
       localStorage.setItem("removeMenuKeys", JSON.stringify(removeMenus));
     }
