@@ -190,6 +190,18 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    /* 
+      when click edit menu icon will change router to name adminstoreinfo
+    */
+    editMenu() {
+      const self = this;
+      self.$router.push({
+        name: "adminstoreinfo",
+        params: {
+          storeId: self.storeId
+        }
+      });
     }
   }
 };
