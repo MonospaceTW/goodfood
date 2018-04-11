@@ -125,7 +125,7 @@ export default {
     },
     removeLocalMenu($event, index) {
       const self = this;
-      const storeId = self.storeId;
+      // const storeId = self.storeId;
       // if ($event.target.nodeName !== "A") {
       //   return;
       // }
