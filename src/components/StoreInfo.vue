@@ -216,6 +216,7 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 107px;
 }
 
 ul {
@@ -292,7 +293,7 @@ p {
   height: 6.9%;
   padding: 13px 38px 13px 38px;
   margin-top: 39px;
-  margin-bottom: 60px;
+  // margin-bottom: 60px;
   font-size: 14px;
   font-weight: normal;
   font-style: normal;
