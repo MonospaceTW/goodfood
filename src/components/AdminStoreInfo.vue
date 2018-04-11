@@ -13,7 +13,6 @@ import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
 import adminMenu from "./AdminMenu";
 import footerComponent from "./Footer";
-import axios from "axios";
 
 const moment = require("moment");
 moment().format();
