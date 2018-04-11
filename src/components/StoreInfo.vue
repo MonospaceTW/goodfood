@@ -3,19 +3,22 @@
     <div class="content">
       <!-- <div class="banner"></div> -->
       <h1>{{storeInfo.name}}</h1>
-      <ul>
+      
+      <div class="menus-list">
+        <a href="#" class="edit-icon" @click.prevent="editMenu"></a>
+        <ul>
+          <!-- v-for 渲染 menus -->
+          <li v-for="menu in menus" :key="menu.id">
+            <div class="dishName">{{menu.name}}</div>
+            <div class="dishPrice">${{menu.price}}</div>
+          </li>
+          <!-- ************************************* -->
 
-        <!-- v-for 渲染 menus -->
-        <li v-for="menu in menus" :key="menu.id">
-          <div class="dishName">{{menu.name}}</div>
-          <div class="dishPrice">${{menu.price}}</div>
-        </li>
-        <!-- ************************************* -->
-
-        <li>
-          <p class="endTime">開團後半小時截止</p>
-        </li>
-      </ul>
+          <li>
+            <p class="endTime">開團後半小時截止</p>
+          </li>
+        </ul>
+      </div>
 
       <div class="storeInfo">
         <p>滿{{storeInfo.orderIn.count}}{{storeInfo.orderIn.unit}}可外送</p>
@@ -217,9 +220,17 @@ img {
   flex-direction: column;
   align-items: center;
   margin-bottom: 107px;
+}
+
+.menus-list {
+  width: 77.6%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   ul {
     padding-left: 0;
-    width: 77.6%;
+    width: 100%;
     // align-self: center;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
     border-radius: 14px;
@@ -236,6 +247,18 @@ img {
   li:nth-last-child(n) {
     padding: 0 0 12px 0;
   }
+}
+
+.edit-icon {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 40px;
+  right: -30px;
+  background-color: red;
+  background: url(../assets/images/edit-icon.svg);
+  background-size: contain;
 }
 
 h1 {
