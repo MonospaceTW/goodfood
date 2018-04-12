@@ -2,23 +2,40 @@
   <div class="container">
       <div class="menus">
         <ul>
+          <!--  v-for 渲染 firebase 中每項餐點 -->
           <li v-for="(menu, key) in menus" :key="key.id">
-            <div class="menu-align-area1">
+            <div class="menu-align-areas">
+              <div class="menu-align-area1">
               <a href="#" class="remove" @click.prevent="sendRemoveMenu($event, key)">
-                <span class="remove-inner"></span>
+              <span class="remove-inner"></span>
               </a>
               <div class="dishName">{{menu.name}}</div>
+              </div>
+              <div class="menu-align-area2">
+                <div class="dishPrice">${{menu.price}}</div>
+              </div>
             </div>
-            <div class="dishPrice">${{menu.price}}</div>
+            
+             <!-- v-for渲染餐點副選項 -->
+             <div class="options"  v-for="menu in menus" :key="menu.id"><span v-for="option in menu.options[0].chooses" :key="option.id">{{option.name}}、</span></div>
           </li>
+
+          <!-- v-for 渲染 LocalStorage 中的新增餐點 -->
           <li v-for="(menu, index) in newMenus" :key="menu.id">
-            <div class="menu-align-area1">
-              <a href="#" class="remove" @click.prevent="removeLocalMenu($event, index)">
-                <span class="remove-inner"></span>
-              </a>
-              <div class="dishName-new">{{menu.name}}</div>
+            <div class="menu-align-areas">
+              <div class="menu-align-area1">
+                <a href="#" class="remove" @click.prevent="removeLocalMenu($event, index)">
+                  <span class="remove-inner"></span>
+                </a>
+                <div class="dishName-new">{{menu.name}}</div>
+              </div>
+              <div class="menu-align-area2">
+                <div class="dishPrice-new">${{menu.price}}</div>
+              </div>
             </div>
-            <div class="dishPrice-new">${{menu.price}}</div>
+
+            <!-- v-for渲染餐點副選項 -->
+            <div class="options"  v-for="menu in newMenus" :key="menu.id"><span v-for="option in menu.options[0].chooses" :key="option.id">{{option.name}}、</span></div>
           </li>
         </ul>
 
@@ -85,6 +102,7 @@ export default {
         // this.menus.push(data.val());
         // });
         this.menus = snapshot.val();
+        // console.log(this.menus);
       });
     // console.log(self.menus);
 
@@ -165,6 +183,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../scss/index.scss";
+
 .container {
   width: 100%;
   height: 405px;
@@ -192,11 +212,17 @@ export default {
     li {
       height: 49px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #e9e9e9;
     }
   }
+}
+
+.menu-align-areas {
+  width: 100%;
+  display: flex;
 }
 
 .menu-align-area1 {
@@ -209,7 +235,7 @@ export default {
   width: 19px;
   height: 19px;
   border-radius: 50%;
-  border: solid 1px #f75454;
+  border: solid 1px $red;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -219,7 +245,7 @@ export default {
 .remove-inner {
   width: 10px;
   height: 2px;
-  background-color: #f75454;
+  background-color: $red;
 }
 
 .dishName {
@@ -239,6 +265,12 @@ export default {
   line-height: 20px;
   display: inline-block;
   margin-left: 13px;
+}
+
+.options {
+  font-size: 10px;
+  color: #a1a1a1;
+  margin-left: 35px;
 }
 
 .check-bar {
