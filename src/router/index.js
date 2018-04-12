@@ -15,6 +15,8 @@ import homepage from "@/components/homepage";
 import AddStore from "@/components/AddStore";
 import AddMenu from "@/components/AddMenu";
 import ConfirmNewAddMenu from "@/components/ConfirmNewAddMenu";
+import AdminStoreInfo from "@/components/AdminStoreInfo";
+import AddMenuLocalStorage from "@/components/AddMenuLocalStorage";
 
 Vue.use(Router);
 
@@ -100,6 +102,17 @@ const router = new Router({
       }
     },
     {
+      path: "adminstoreinfo/:storeId",
+      name: "adminstoreinfo",
+      component: AdminStoreInfo,
+      props: true,
+      meta: {
+        title: route => {
+          return "店家資訊-admin";
+        }
+      }
+    },
+    {
       path: "order/:orderId/:storeId/:storeName?",
       name: "order",
       component: Order,
@@ -149,6 +162,17 @@ const router = new Router({
       meta: {
         title: route => {
           return "admin-新增菜單";
+        }
+      },
+      props: true
+    },
+    {
+      path: "addmenulocalstorage/:storeId",
+      name: "addmenulocalstorage",
+      component: AddMenuLocalStorage,
+      meta: {
+        title: route => {
+          return "admin-新增菜單-LocalStorage";
         }
       },
       props: true

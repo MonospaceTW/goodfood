@@ -3,19 +3,22 @@
     <div class="content">
       <!-- <div class="banner"></div> -->
       <h1>{{storeInfo.name}}</h1>
-      <ul>
+      
+      <div class="menus-list">
+        <a href="#" class="edit-icon" @click.prevent="editMenu"></a>
+        <ul>
+          <!-- v-for 渲染 menus -->
+          <li v-for="menu in menus" :key="menu.id">
+            <div class="dishName">{{menu.name}}</div>
+            <div class="dishPrice">${{menu.price}}</div>
+          </li>
+          <!-- ************************************* -->
 
-        <!-- v-for 渲染 menus -->
-        <li v-for="menu in menus" :key="menu.id">
-          <div class="dishName">{{menu.name}}</div>
-          <div class="dishPrice">${{menu.price}}</div>
-        </li>
-        <!-- ************************************* -->
-
-        <li>
-          <p class="endTime">開團後半小時截止</p>
-        </li>
-      </ul>
+          <li>
+            <p class="endTime">開團後半小時截止</p>
+          </li>
+        </ul>
+      </div>
 
       <div class="storeInfo">
         <p>滿{{storeInfo.orderIn.count}}{{storeInfo.orderIn.unit}}可外送</p>
@@ -222,6 +225,18 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    /* 
+      when click edit menu icon will change router to name adminstoreinfo
+    */
+    editMenu() {
+      const self = this;
+      self.$router.push({
+        name: "adminstoreinfo",
+        params: {
+          storeId: self.storeId
+        }
+      });
     }
   }
 };
@@ -254,18 +269,48 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 107px;
 }
 
-ul {
-  padding-left: 0;
+.menus-list {
   width: 77.6%;
-  // align-self: center;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
-  border-radius: 14px;
-  background: #ffffff;
-  padding: 25px 11px 0px 14px;
-  margin: 63px 0 43px 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ul {
+    padding-left: 0;
+    width: 100%;
+    // align-self: center;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.17);
+    border-radius: 14px;
+    background: #ffffff;
+    padding: 25px 11px 0px 14px;
+    margin: 63px 0 43px 0;
+  }
+  li {
+    padding: 0 0 25px 0;
+    // border-bottom: 1px solid #e9e9e9;
+    display: flex;
+    justify-content: space-between;
+  }
+  li:nth-last-child(n) {
+    padding: 0 0 12px 0;
+  }
 }
+
+.edit-icon {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 40px;
+  right: -30px;
+  background-color: red;
+  background: url(../assets/images/edit-icon.svg);
+  background-size: contain;
+}
+
 h1 {
   margin-top: 101px;
   font-family: MicrosoftJhengHei;
@@ -277,15 +322,6 @@ h1 {
   letter-spacing: 3.5px;
   text-align: left;
   color: #ffffff;
-}
-li {
-  padding: 0 0 25px 0;
-  // border-bottom: 1px solid #e9e9e9;
-  display: flex;
-  justify-content: space-between;
-}
-li:nth-last-child(n) {
-  padding: 0 0 12px 0;
 }
 .endTime {
   font-family: MicrosoftJhengHei;
@@ -330,7 +366,7 @@ p {
   height: 6.9%;
   padding: 13px 38px 13px 38px;
   margin-top: 39px;
-  margin-bottom: 60px;
+  // margin-bottom: 60px;
   font-size: 14px;
   font-weight: normal;
   font-style: normal;
