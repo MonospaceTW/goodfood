@@ -190,13 +190,14 @@ export default {
       /* eslint-disable */
       const shareUrl = `
         ${window.location.protocol}//${window.location.host}/#/order/${
-        self.orderId
-      }/${self.storeId}`;
+        this.orderId
+      }/${this.storeId}`;
       /* eslint-enable */
 
       let storeName = this.storeInfo.name;
       let endTime = this.storeInfo.endTime;
       let channel = this.channel;
+
       axios({
         method: "post",
         url: "https://goodfood-beta.trunksys.com/message",
