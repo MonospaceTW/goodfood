@@ -15,9 +15,10 @@
                 <div class="dishPrice">${{menu.price}}</div>
               </div>
             </div>
+            <div class="options-area"><span  class="options" v-for="menu in menu.options[0].chooses" :key="menu.id">{{menu.name}}、</span></div>
             
              <!-- v-for渲染餐點副選項 -->
-             <div class="options"  v-for="menu in menus" :key="menu.id"><span v-for="option in menu.options[0].chooses" :key="option.id">{{option.name}}、</span></div>
+             <!-- <span class="options" v-for="(menu, index) in menusOptions" :key="menu.id"><span v-for="(choose, index) in menu.options[0].chooses" :key="choose.id">{{choose}}</span></span> -->
           </li>
 
           <!-- v-for 渲染 LocalStorage 中的新增餐點 -->
@@ -35,7 +36,7 @@
             </div>
 
             <!-- v-for渲染餐點副選項 -->
-            <div class="options"  v-for="menu in newMenus" :key="menu.id"><span v-for="option in menu.options[0].chooses" :key="option.id">{{option.name}}、</span></div>
+            <div class="options-area"><span  class="options" v-for="menu in menu.options[0].chooses" :key="menu.id">{{menu.name}}、</span></div>
           </li>
         </ul>
 
@@ -64,6 +65,7 @@ export default {
   data() {
     return {
       menus: {},
+      menusOptions: [],
       menu: {
         name: "玉米濃湯麵",
         price: 100,
@@ -102,7 +104,13 @@ export default {
         // this.menus.push(data.val());
         // });
         this.menus = snapshot.val();
-        // console.log(this.menus);
+        snapshot.forEach(data => {
+          // console.log(data.val().options);
+          this.menusOptions.push(data.val());
+        });
+        console.log(this.menusOptions);
+        // this.menusOptions.push(Object.values(this.menus));
+        // console.log(this.menusOptions);
       });
     // console.log(self.menus);
 
@@ -267,10 +275,15 @@ export default {
   margin-left: 13px;
 }
 
+.options-area {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 35px;
+}
+
 .options {
   font-size: 10px;
   color: #a1a1a1;
-  margin-left: 35px;
 }
 
 .check-bar {
