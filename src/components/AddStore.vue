@@ -5,6 +5,7 @@
     </div>
     <div class="content">
       <h1>新增店家</h1>
+      <input type="file" id="file" name="file" value="Upload image">
       <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
       <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
       <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber">
