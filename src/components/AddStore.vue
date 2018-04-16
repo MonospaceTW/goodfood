@@ -11,6 +11,7 @@
       <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber">
       <div class="store-time">
         <input type="text" class="open-time" placeholder="營業時間" v-model="store.time.start">
+        <span class="timeDash">-</span>
         <input type="text" class="close-time" placeholder="打烊時間" v-model="store.time.end">
       </div>
       <div class="delivery-area">
@@ -141,8 +142,8 @@ h1 {
   margin-bottom: 19px;
 }
 
-input {
-  width: 80.8%;
+.store-name, .store-address, .store-tel {
+  width: 81.335%;
   height: 46px;
   border-radius: 14px;
   background-color: #f4f4f4;
@@ -150,14 +151,33 @@ input {
   margin-bottom: 3.2%;
   text-align: center;
 }
+
+#file {
+  margin-bottom: 12px;
+}
+
 .store-time {
   display: flex;
+  height: 46px;
   width: 81.334%;
   justify-content: space-between;
+  margin-bottom: 12px;
 }
+
+.timeDash {
+  margin-top: 12px;
+}
+
 .open-time,
 .close-time {
-  width: 47.218%;
+  width: 47.215%;
+  height: 46px;
+  border-radius: 14px;
+  background-color: #f4f4f4;
+  border: 0;
+  margin-bottom: 3.2%;
+  padding: 0;
+  text-align: center;
 }
 
 .delivery-area {
@@ -167,7 +187,13 @@ input {
 }
 
 .delivery-condition {
-  width: 47.5%;
+  width: 47.236%;
+  height: 46px;
+  border-radius: 14px;
+  background-color: #f4f4f4;
+  border: 0;
+  margin-bottom: 3.2%;
+  text-align: center;
 }
 
 select {
@@ -176,8 +202,14 @@ select {
 }
 
 .remark {
+  width: 81.334%;
   height: 79px;
   margin-bottom: 49px;
+  border-radius: 14px;
+  background-color: #f4f4f4;
+  border: 0;
+  margin-bottom: 3.2%;
+  text-align: center;
 }
 
 .confirm {
