@@ -5,8 +5,10 @@
     </div>
     <div class="content">
       <h1>新增店家</h1>
-      <input type="file" id="file" name="file" value="Upload image">
       <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
+      <!-- <button type="button" @click="clickFileInput">上傳圖片</button> -->
+      <div>上傳店家圖片：</div>
+      <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)">
       <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
       <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber">
       <div class="store-time">
@@ -39,6 +41,7 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
+import firebase from "firebase";
 
 const store = FirebaseManager.database.ref("store");
 
@@ -102,6 +105,31 @@ export default {
       this.$router.push({
         name: "index"
       });
+    },
+    clickFileInput() {
+
+    },
+    uploadImages($event) {
+      // console.log($event.target.files[0]);
+
+      // Assign upload's file  to variable file
+      let file = $event.target.files[0];
+
+      // Assign Storage ref to storageRef variable
+      let storageRef = firebase.storage().ref("images/" + file.name);
+
+      // Assign upload file to task variable 
+      let task = storageRef.put(file);
+
+      // check upload status
+      task.on("state_changed", function(snapshot) {
+        console.log(snapshot.task.state_);
+        if(snapshot.task.state_ == "success") {
+          alert("店家圖片上傳成功！");
+        }
+      }).catch(error=> {
+        console.log(error);
+      })
     }
   }
 };
@@ -154,6 +182,7 @@ h1 {
 
 #file {
   margin-bottom: 12px;
+  margin-top: 12px;
 }
 
 .store-time {
