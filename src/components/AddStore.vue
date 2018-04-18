@@ -123,13 +123,11 @@ export default {
 
       // check upload status
       task.on("state_changed", function(snapshot) {
-        console.log(snapshot.task.state_);
+        console.log(snapshot.task);
         if(snapshot.task.state_ == "success") {
           alert("店家圖片上傳成功！");
         }
-      }).catch(error=> {
-        console.log(error);
-      })
+      });
     }
   }
 };
