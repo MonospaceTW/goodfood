@@ -73,11 +73,10 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  height: 667px;
-  // margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
+
 .list_title {
   margin-top: 30px;
   // font-family: MicrosoftJhengHei;
@@ -87,6 +86,7 @@ export default {
   color: #f8a654;
   font-weight: bold;
 }
+
 ul.content {
   max-width: 375px;
   margin: 0 auto;

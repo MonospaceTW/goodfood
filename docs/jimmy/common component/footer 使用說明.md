@@ -46,7 +46,7 @@ import footerComponent from "./Footer";
 
 
 
-在 style 中的 .container 加上 hight: 100%; 、 display: flex; 與 flex-direction: column;
+在 style 中的 .container 加上 display: flex; 與 flex-direction: column;
 
 ```
 .container {
