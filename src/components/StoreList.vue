@@ -74,8 +74,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   height: 667px;
-  margin: 0 auto;
-  height: 100%;
+  // margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
@@ -92,6 +91,7 @@ ul.content {
   max-width: 375px;
   margin: 0 auto;
   flex: 1 0 auto;
+  padding-bottom: 69px;
   li {
     // border: 1px solid red;
     margin-top: 22px;
