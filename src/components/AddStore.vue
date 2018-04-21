@@ -43,6 +43,14 @@ import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
 import firebase from "firebase";
 
+const SimpleVueValidation = require("simple-vue-validator");
+
+const Validator = SimpleVueValidation.Validator.create({
+  templates: {
+    required: "此欄位為必填"
+  }
+});
+
 const store = FirebaseManager.database.ref("store");
 
 export default {
@@ -83,6 +91,13 @@ export default {
           name: "login"
         });
       });
+  },
+  /* 
+    require simple-vue-validator mixin
+  */
+  mixins: [require("simple-vue-validator").mixin],
+  validators: {
+
   },
   methods: {
     addStore() {
