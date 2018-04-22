@@ -5,7 +5,10 @@
     </div>
     <div class="content">
       <h1>新增店家</h1>
+      <div class="form-group" :class="{error: validation.hasError('store.name')}">
       <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
+      <div class="message">{{ validation.firstError('store.name') }}</div>
+      </div>
       <!-- <button type="button" @click="clickFileInput">上傳圖片</button> -->
       <div>上傳店家圖片：</div>
       <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)">
@@ -44,6 +47,7 @@ import checkAuth from "@/checkAuth";
 import firebase from "firebase";
 
 const SimpleVueValidation = require("simple-vue-validator");
+// const Validator = SimpleVueValidation.Validator;
 
 const Validator = SimpleVueValidation.Validator.create({
   templates: {
@@ -97,22 +101,28 @@ export default {
   */
   mixins: [require("simple-vue-validator").mixin],
   validators: {
-
+    "store.name" : function(value) {
+      return Validator.value(value).required().regex(/[A-Za-z0-9_\u4e00-\u9fa5]/g, "請勿輸入特殊字元");
+    }
   },
   methods: {
     addStore() {
-      const newPhoneNumber = this.phoneNumber.split("-", 2);
-      let addStoreInfo = this.store;
-      // console.log(newPhoneNumber);
-      this.store.tel.block = newPhoneNumber[0];
-      this.store.tel.num = newPhoneNumber[1];
-      this.store.orderIn.unit = this.selected;
-      this.storeId = store.push(addStoreInfo).key;
+      this.$validate().then(success => {
+        if (success) {
+          const newPhoneNumber = this.phoneNumber.split("-", 2);
+          let addStoreInfo = this.store;
+          // console.log(newPhoneNumber);
+          this.store.tel.block = newPhoneNumber[0];
+          this.store.tel.num = newPhoneNumber[1];
+          this.store.orderIn.unit = this.selected;
+          this.storeId = store.push(addStoreInfo).key;
 
-      this.$router.push({
-        name: "addmenu",
-        params: {
-          storeId: this.storeId
+          this.$router.push({
+            name: "addmenu",
+            params: {
+              storeId: this.storeId
+            }
+          });
         }
       });
     },
@@ -139,7 +149,7 @@ export default {
       // check upload status
       task.on("state_changed", function(snapshot) {
         console.log(snapshot.task);
-        if(snapshot.task.state_ == "success") {
+        if (snapshot.task.state_ === "success") {
           alert("店家圖片上傳成功！");
         }
       });
@@ -181,6 +191,20 @@ export default {
 
 h1 {
   margin-bottom: 19px;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.message {
+  width: 100%;
+  text-align: center;
+  // margin-top: 10px;
+  color: #f75454;
 }
 
 .store-name, .store-address, .store-tel {
