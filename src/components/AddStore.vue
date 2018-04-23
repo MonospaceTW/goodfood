@@ -40,9 +40,9 @@
         </div>
       </div>
       <div class="delivery-area">
-        <div class="form-group" :class="{error: validation.hasError('store.orderIn.count')}">
+        <div class="form-group delivery-condition-area" :class="{error: validation.hasError('store.orderIn.count')}">
           <input type="text" class="delivery-condition" placeholder="外送條件" v-model="store.orderIn.count">
-          <div class="message">{{ validation.firstError('store.orderIn.count') }}</div>
+          <div class="message delivery-condition-error">{{ validation.firstError('store.orderIn.count') }}</div>
         </div>
         <select v-model="selected">
           <option disabled value="">展開選項</option>
@@ -139,6 +139,9 @@ export default {
     },
     "store.time.end": function(value) {
       return Validator.value(value).required().regex("^[0-9]*[0-9]:[0-9][0-9]$", "ex: 20:00");
+    },
+    "store.orderIn.count": function(value) {
+      return Validator.value(value).regex("^[0-9]+$", "ex: 300 or 5").maxLength(4);
     }
 
   },
@@ -310,6 +313,7 @@ h1 {
   text-align: center;
 }
 
+
 .delivery-area {
   display: flex;
   width: 81.3%;
@@ -321,8 +325,11 @@ h1 {
   border-radius: 14px;
   background-color: #f4f4f4;
   border: 0;
-  margin-bottom: 12px;
   text-align: center;
+}
+
+.delivery-condition-error {
+  text-align: left;
 }
 
 select {
@@ -333,6 +340,7 @@ select {
 .remark {
   width: 81.334%;
   height: 79px;
+  margin-top: 12px;
   margin-bottom: 49px;
   border-radius: 14px;
   background-color: #f4f4f4;
