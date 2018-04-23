@@ -50,7 +50,10 @@
           <option>份</option>
         </select>
       </div>
-      <input type="text" class="remark" placeholder="備註" v-model="store.mark">
+      <div class="form-group store-mark-area" :class="{error: validation.hasError('store.mark')}">
+        <input type="text" class="remark" placeholder="備註" v-model="store.mark">
+        <div class="message">{{ validation.firstError('store.mark') }}</div>
+      </div>
       <a href="#" class="confirm" @click="addStore">確認</a>
     </div>
   </div>
@@ -142,6 +145,9 @@ export default {
     },
     "store.orderIn.count": function(value) {
       return Validator.value(value).regex("^[0-9]+$", "ex: 300 or 5").maxLength(4);
+    },
+    "store.mark": function(value) {
+      return Validator.value(value).regex("^[A-Za-z0-9\u4E00-\u9FFF]+$", "請勿輸入特殊字元").maxLength(20);
     }
 
   },
@@ -149,11 +155,10 @@ export default {
     addStore() {
       this.$validate().then(success => {
         if (success) {
-          const newPhoneNumber = this.phoneNumber.split("-", 2);
           let addStoreInfo = this.store;
           // console.log(newPhoneNumber);
-          this.store.tel.block = newPhoneNumber[0];
-          this.store.tel.num = newPhoneNumber[1];
+          // this.store.tel.block = newPhoneNumber[0];
+          // this.store.tel.num = newPhoneNumber[1];
           this.store.orderIn.unit = this.selected;
           this.storeId = store.push(addStoreInfo).key;
 
@@ -164,6 +169,8 @@ export default {
             }
           });
         }
+      }).catch(err=>{
+        console.log(err);
       });
     },
     cancel() {
@@ -335,6 +342,11 @@ h1 {
 select {
   width: 34%;
   height: 20px;
+}
+
+.store-mark-area {
+  display: flex;
+  justify-content: center;
 }
 
 .remark {
