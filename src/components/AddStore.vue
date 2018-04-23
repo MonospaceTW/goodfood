@@ -13,7 +13,18 @@
       <div>上傳店家圖片：</div>
       <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)">
       <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
-      <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber">
+      <!-- <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber"> -->
+      <div class="store-tel">
+        <div class="form-group" :class="{error: validation.hasError('store.tel.block')}">
+        <input type="text" class="store-tel-block" placeholder="電話區碼" v-model="store.tel.block">
+        <div class="message">{{ validation.firstError('store.tel.block') }}</div>
+        </div>
+        <span class="telDash">-</span>
+        <div class="form-group" :class="{error: validation.hasError('store.tel.num')}">
+        <input type="text" class="store-tel-num" placeholder="電話號碼" v-model="store.tel.num">
+        <div class="message">{{ validation.firstError('store.tel.num') }}</div>
+        </div>
+      </div>
       <div class="store-time">
         <input type="text" class="open-time" placeholder="營業時間" v-model="store.time.start">
         <span class="timeDash">-</span>
@@ -51,7 +62,9 @@ const SimpleVueValidation = require("simple-vue-validator");
 
 const Validator = SimpleVueValidation.Validator.create({
   templates: {
-    required: "此欄位為必填"
+    required: "此欄位必填",
+    digit: "請輸入數字",
+    maxLength: "字數超過限制"
   }
 });
 
@@ -62,7 +75,7 @@ export default {
     return {
       storeId: "",
       selected: "",
-      phoneNumber: "",
+      // phoneNumber: "",
       store: {
         name: "",
         address: "",
@@ -75,8 +88,8 @@ export default {
           end: ""
         },
         tel: {
-          block: "區碼",
-          num: "號碼"
+          block: "",
+          num: ""
         },
         mark: ""
       }
@@ -103,6 +116,12 @@ export default {
   validators: {
     "store.name" : function(value) {
       return Validator.value(value).required().regex("^[A-Za-z0-9\u4E00-\u9FFF]+$", "請勿輸入特殊字元").maxLength(10);
+    },
+    "store.tel.block" : function(value) {
+      return Validator.value(value).digit();
+    },
+    "store.tel.num": function(value) {
+      return Validator.value(value).digit();
     }
   },
   methods: {
@@ -202,19 +221,18 @@ h1 {
 
 .message {
   width: 100%;
-  text-align: center;  margin-bottom: 3.2%;
+  text-align: center;
   // margin-top: 10px;
   color: #f75454;
-  margin-bottom: 3.2%;
 }
 
-.store-name, .store-address, .store-tel {
+.store-name, .store-address {
   width: 81.335%;
   height: 46px;
   border-radius: 14px;
   background-color: #f4f4f4;
   border: 0;
-  margin-bottom: 3.2%;
+  margin-bottom: 12px;
   text-align: center;
 }
 
@@ -228,11 +246,33 @@ h1 {
   margin-top: 12px;
 }
 
+.store-tel {
+  width: 81.3%;
+  box-sizing: border-box;
+  display: flex;
+  margin: 0 9.3%;
+}
+
+.store-tel-block, .store-tel-num {
+  width: 97.04%;
+  height: 46px;
+  border-radius: 14px;
+  background-color: #f4f4f4;
+  border: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.telDash {
+  margin-top: 15px;
+}
+
 .store-time {
   display: flex;
   height: 46px;
   width: 81.334%;
   justify-content: space-between;
+  margin-top: 12px;
   margin-bottom: 12px;
 }
 
