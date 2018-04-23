@@ -5,9 +5,9 @@
     </div>
     <div class="content">
       <h1>新增店家</h1>
-      <div class="form-group" :class="{error: validation.hasError('store.name')}">
-      <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
-      <div class="message">{{ validation.firstError('store.name') }}</div>
+      <div class="form-group store-name-area" :class="{error: validation.hasError('store.name')}">
+        <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
+        <div class="message">{{ validation.firstError('store.name') }}</div>
       </div>
       <!-- <button type="button" @click="clickFileInput">上傳圖片</button> -->
       <div>上傳店家圖片：</div>
@@ -16,22 +16,31 @@
       <!-- <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber"> -->
       <div class="store-tel">
         <div class="form-group" :class="{error: validation.hasError('store.tel.block')}">
-        <input type="text" class="store-tel-block" placeholder="電話區碼" v-model="store.tel.block">
-        <div class="message">{{ validation.firstError('store.tel.block') }}</div>
+          <input type="text" class="store-tel-block" placeholder="電話區碼" v-model="store.tel.block">
+          <div class="message">{{ validation.firstError('store.tel.block') }}</div>
         </div>
         <span class="telDash">-</span>
         <div class="form-group" :class="{error: validation.hasError('store.tel.num')}">
-        <input type="text" class="store-tel-num" placeholder="電話號碼" v-model="store.tel.num">
-        <div class="message">{{ validation.firstError('store.tel.num') }}</div>
+          <input type="text" class="store-tel-num" placeholder="電話號碼" v-model="store.tel.num">
+          <div class="message">{{ validation.firstError('store.tel.num') }}</div>
         </div>
       </div>
       <div class="store-time">
-        <input type="text" class="open-time" placeholder="營業時間" v-model="store.time.start">
+        <div class="form-group" :class="{error: validation.hasError('store.time.start')}">
+          <input type="text" class="open-time" placeholder="營業時間" v-model="store.time.start">
+          <div class="message">{{ validation.firstError('store.time.start') }}</div>
+        </div>
         <span class="timeDash">-</span>
-        <input type="text" class="close-time" placeholder="打烊時間" v-model="store.time.end">
+        <div class="form-group" :class="{error: validation.hasError('store.time.end')}">
+          <input type="text" class="close-time" placeholder="打烊時間" v-model="store.time.end">
+          <div class="message">{{ validation.firstError('store.time.end') }}</div>
+        </div>
       </div>
       <div class="delivery-area">
-        <input type="number" class="delivery-condition" placeholder="外送條件" v-model="store.orderIn.count">
+        <div class="form-group" :class="{error: validation.hasError('store.orderIn.count')}">
+          <input type="text" class="delivery-condition" placeholder="外送條件" v-model="store.orderIn.count">
+          <div class="message">{{ validation.firstError('store.orderIn.count') }}</div>
+        </div>
         <select v-model="selected">
           <option disabled value="">展開選項</option>
           <option>元</option>
@@ -113,16 +122,27 @@ export default {
     require simple-vue-validator mixin
   */
   mixins: [require("simple-vue-validator").mixin],
+
+  /* 
+    custom validator rules 
+  */
   validators: {
     "store.name" : function(value) {
       return Validator.value(value).required().regex("^[A-Za-z0-9\u4E00-\u9FFF]+$", "請勿輸入特殊字元").maxLength(10);
     },
     "store.tel.block" : function(value) {
-      return Validator.value(value).digit();
+      return Validator.value(value).required().regex("^[0-9]+$", "ex: 04 or 09xx").maxLength(4);
     },
     "store.tel.num": function(value) {
-      return Validator.value(value).digit();
+      return Validator.value(value).required().regex("^[0-9]+$", "ex: 22012870 or 456789").maxLength(8);
+    },
+    "store.time.start": function(value) {
+      return Validator.value(value).required().regex("^[0-9]*[0-9]:[0-9][0-9]$", "ex: 9:00");
+    },
+    "store.time.end": function(value) {
+      return Validator.value(value).required().regex("^[0-9]*[0-9]:[0-9][0-9]$", "ex: 20:00")
     }
+
   },
   methods: {
     addStore() {
@@ -215,8 +235,12 @@ h1 {
 .form-group {
   width: 100%;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+}
+
+.store-name-area {
+  justify-content: center;
+  margin-bottom: 12px;
 }
 
 .message {
@@ -269,7 +293,6 @@ h1 {
 
 .store-time {
   display: flex;
-  height: 46px;
   width: 81.334%;
   justify-content: space-between;
   margin-top: 12px;
@@ -282,7 +305,7 @@ h1 {
 
 .open-time,
 .close-time {
-  width: 47.215%;
+  width: 97%;
   height: 46px;
   border-radius: 14px;
   background-color: #f4f4f4;
@@ -295,11 +318,10 @@ h1 {
 .delivery-area {
   display: flex;
   width: 81.3%;
-  justify-content: space-between;
 }
 
 .delivery-condition {
-  width: 47.236%;
+  width: 63.4%;
   height: 46px;
   border-radius: 14px;
   background-color: #f4f4f4;
