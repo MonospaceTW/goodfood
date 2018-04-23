@@ -202,7 +202,7 @@ h1 {
 
 .message {
   width: 100%;
-  text-align: center;
+  text-align: center;  margin-bottom: 3.2%;
   // margin-top: 10px;
   color: #f75454;
   margin-bottom: 3.2%;
@@ -216,6 +216,10 @@ h1 {
   border: 0;
   margin-bottom: 3.2%;
   text-align: center;
+}
+
+.store-name {
+  margin-bottom: 0;
 }
 
 
