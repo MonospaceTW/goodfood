@@ -37,7 +37,8 @@ const SimpleVueValidation = require("simple-vue-validator");
 
 const Validator = SimpleVueValidation.Validator.create({
   templates: {
-    required: "此欄位為必填"
+    required: "此欄位為必填",
+    maxLength: "字數超過限制"
   }
 });
 
@@ -86,10 +87,10 @@ export default {
   mixins: [require("simple-vue-validator").mixin],
   validators: {
     menuName: function(value) {
-      return Validator.value(value).required();
+      return Validator.value(value).required().regex("^[A-Za-z0-9\u4E00-\u9FFF]+$", "請勿輸入特殊字元").maxLength(10);
     },
     menuPrice: function(value) {
-      return Validator.value(value).required();
+      return Validator.value(value).required().regex("^[0-9]+$", "請輸入數字").maxLength(4);
     }
   },
   methods: {

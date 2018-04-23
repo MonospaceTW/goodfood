@@ -22,6 +22,7 @@ template 的 HTML 結構如下:
 
 ### 2.在 script 中增加
 
+import footer 組件
 ```
 import footerComponent from "./Footer";
 ```
@@ -46,11 +47,10 @@ import footerComponent from "./Footer";
 
 
 
-在 style 中的 .container 加上 hight: 100%; 、 display: flex; 與 flex-direction: column;
+在 style 中的 .container 加上 display: flex; 與 flex-direction: column;
 
 ```
 .container {
-  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -61,23 +61,41 @@ import footerComponent from "./Footer";
 ![image](../imgs/container.png)
 
 
-接著在 .content 中加入 flex: 1 0 auto;
+接著在 .content 中加入 flex: 1 0 auto; 
 
 ```
 .content {
   flex: 1 0 auto;
 }
 ```
-
 如下圖:
 
 ![image](../imgs/content.png)
 
+
+因為 footer 有設定 positon: fixed; 所以必須在 .content 中給 paddin-bottom 高度( footer 的高度)才不會把內容遮住
+
+```
+.content {
+  flex: 1 0 auto;
+  margin-left: 26px;
+  margin-right: 26px;
+  padding-bottom: 47px;
+}
+```
+
+![image](../imgs/content-padding-bottom.png)
+
+
+
+
+
+
 ---
 
 補充說明：
-這部份我已經替大家完成了不用跟著做，須替 html, body, #app 加上 height: 100%; 的樣式，才能讓 footer 定位在頁面底部
-， 我是加 scss 資料夾裡的 setting.css 裡，
+這部份我已經替大家完成了不用跟著做，須替 html, body, #app 加上 height: 100%; 的樣式，才能讓 footer 內容不足時定位在頁面底部
+， 我是加在 scss 資料夾裡的 setting.css 裡，
 
 ```
 html,

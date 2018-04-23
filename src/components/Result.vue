@@ -244,7 +244,6 @@ $font-s: 12px;
   text-align: center;
   font-size: $font-m;
   color: $gray_two;
-  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -257,6 +256,7 @@ $font-s: 12px;
   flex: 1 0 auto;
   margin-left: 26px;
   margin-right: 26px;
+  padding-bottom: 47px;
 }
 
 .result_title {

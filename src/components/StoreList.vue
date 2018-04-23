@@ -14,7 +14,8 @@ export default {
       displayName: "",
       mark: "",
       user: {},
-      stores: {}
+      stores: {},
+      src: [{url: ""}]
     };
   },
   components: {
@@ -44,6 +45,8 @@ export default {
         console.log(list);
         this.stores = JSON.parse(JSON.stringify(list));
       });
+
+    // console.log(firebase.storage().child("images").Storage);
   }
 };
 </script>
@@ -53,7 +56,7 @@ export default {
   <ul class="content">
       <li v-for="(value, key) in stores" :key="key.id">
         <router-link :to="{path:'/storeinfo/'+key}">
-          <img src="https://fakeimg.pl/120x90/?text=Food&font=lobster" alt="">
+          <img :src="src.url">
           <div class="info_box">
             <div class="store_name">{{value.name}}</div>
             <div class="open_time">營業時間：{{value.time.start}}~{{value.time.end}}</div>
@@ -70,12 +73,10 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  height: 667px;
-  margin: 0 auto;
-  height: 100%;
   display: flex;
   flex-direction: column;
 }
+
 .list_title {
   margin-top: 30px;
   // font-family: MicrosoftJhengHei;
@@ -85,10 +86,12 @@ export default {
   color: #f8a654;
   font-weight: bold;
 }
+
 ul.content {
   max-width: 375px;
   margin: 0 auto;
   flex: 1 0 auto;
+  padding-bottom: 69px;
   li {
     // border: 1px solid red;
     margin-top: 22px;
@@ -99,6 +102,9 @@ ul.content {
     img {
       margin-left: 28px;
       justify-content: flex-start;
+      width: 120px;
+      height: 90px;
+      
     }
     .info_box {
       margin-left: 18px;

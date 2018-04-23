@@ -5,31 +5,55 @@
     </div>
     <div class="content">
       <h1>新增店家</h1>
-      <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
-      <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
-      <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber">
+      <div class="form-group store-name-area" :class="{error: validation.hasError('store.name')}">
+        <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
+        <div class="message">{{ validation.firstError('store.name') }}</div>
+      </div>
+      <!-- <button type="button" @click="clickFileInput">上傳圖片</button> -->
+      <div>上傳店家圖片：</div>
+      <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)">
+      <div class="form-group store-address-area" :class="{error: validation.hasError('store.address')}">
+        <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
+        <div class="message">{{ validation.firstError('store.address') }}</div>
+      </div>
+      <!-- <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber"> -->
+      <div class="store-tel">
+        <div class="form-group" :class="{error: validation.hasError('store.tel.block')}">
+          <input type="text" class="store-tel-block" placeholder="電話區碼" v-model="store.tel.block">
+          <div class="message">{{ validation.firstError('store.tel.block') }}</div>
+        </div>
+        <span class="telDash">-</span>
+        <div class="form-group" :class="{error: validation.hasError('store.tel.num')}">
+          <input type="text" class="store-tel-num" placeholder="電話號碼" v-model="store.tel.num">
+          <div class="message">{{ validation.firstError('store.tel.num') }}</div>
+        </div>
+      </div>
       <div class="store-time">
-        <input type="text" class="open-time" placeholder="營業時間" v-model="store.time.start">
-        <input type="text" class="close-time" placeholder="打烊時間" v-model="store.time.end">
+        <div class="form-group" :class="{error: validation.hasError('store.time.start')}">
+          <input type="text" class="open-time" placeholder="營業時間" v-model="store.time.start">
+          <div class="message">{{ validation.firstError('store.time.start') }}</div>
+        </div>
+        <span class="timeDash">-</span>
+        <div class="form-group" :class="{error: validation.hasError('store.time.end')}">
+          <input type="text" class="close-time" placeholder="打烊時間" v-model="store.time.end">
+          <div class="message">{{ validation.firstError('store.time.end') }}</div>
+        </div>
       </div>
       <div class="delivery-area">
-        <input type="number" class="delivery-condition" placeholder="外送條件" v-model="store.orderIn.count">
+        <div class="form-group delivery-condition-area" :class="{error: validation.hasError('store.orderIn.count')}">
+          <input type="text" class="delivery-condition" placeholder="外送條件" v-model="store.orderIn.count">
+          <div class="message delivery-condition-error">{{ validation.firstError('store.orderIn.count') }}</div>
+        </div>
         <select v-model="selected">
           <option disabled value="">展開選項</option>
           <option>元</option>
           <option>份</option>
         </select>
       </div>
-      <!-- <div  class="unfold-option-area">
-        <span class="unfold-option">展開選項</span>
-        <span class="arrow">ˇ</span>
-        <ul class="delivery-options">
-          <li>元</li>
-          <li>份</li>
-          <li>^</li>
-        </ul>
-      </div> -->
-      <input type="text" class="remark" placeholder="備註" v-model="store.mark">
+      <div class="form-group store-mark-area" :class="{error: validation.hasError('store.mark')}">
+        <input type="text" class="remark" placeholder="備註" v-model="store.mark">
+        <div class="message">{{ validation.firstError('store.mark') }}</div>
+      </div>
       <a href="#" class="confirm" @click="addStore">確認</a>
     </div>
   </div>
@@ -37,6 +61,18 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
+import firebase from "firebase";
+
+const SimpleVueValidation = require("simple-vue-validator");
+// const Validator = SimpleVueValidation.Validator;
+
+const Validator = SimpleVueValidation.Validator.create({
+  templates: {
+    required: "此欄位必填",
+    digit: "請輸入數字",
+    maxLength: "字數超過限制"
+  }
+});
 
 const store = FirebaseManager.database.ref("store");
 
@@ -45,7 +81,7 @@ export default {
     return {
       storeId: "",
       selected: "",
-      phoneNumber: "",
+      // phoneNumber: "",
       store: {
         name: "",
         address: "",
@@ -58,8 +94,8 @@ export default {
           end: ""
         },
         tel: {
-          block: "區碼",
-          num: "號碼"
+          block: "",
+          num: ""
         },
         mark: ""
       }
@@ -79,26 +115,88 @@ export default {
         });
       });
   },
+  /* 
+    require simple-vue-validator mixin
+  */
+  mixins: [require("simple-vue-validator").mixin],
+
+  /* 
+    custom validator rules 
+  */
+
+  validators: {
+    "store.name": function(value) {
+      return Validator.value(value).required().regex("^[A-Za-z0-9\u4E00-\u9FFF]+$", "請勿輸入特殊字元").maxLength(10);
+    },
+    "store.address": function(value) {
+      return Validator.value(value).required().regex("^[0-9-\u4E00-\u9FFF]+$", "請輸入正確地址").maxLength(20);
+    },
+    "store.tel.block": function(value) {
+      return Validator.value(value).required().regex("^[0-9]+$", "ex: 04 or 09xx").maxLength(4);
+    },
+    "store.tel.num": function(value) {
+      return Validator.value(value).required().regex("^[0-9]+$", "ex: 22012870 or 456789").maxLength(8);
+    },
+    "store.time.start": function(value) {
+      return Validator.value(value).required().regex("^[0-9]*[0-9]:[0-9][0-9]$", "ex: 9:00");
+    },
+    "store.time.end": function(value) {
+      return Validator.value(value).required().regex("^[0-9]*[0-9]:[0-9][0-9]$", "ex: 20:00");
+    },
+    "store.orderIn.count": function(value) {
+      return Validator.value(value).regex("^[0-9]+$", "ex: 300 or 5").maxLength(4);
+    },
+    "store.mark": function(value) {
+      return Validator.value(value).regex("^[A-Za-z0-9\u4E00-\u9FFF]+$", "請勿輸入特殊字元").maxLength(20);
+    }
+
+  },
   methods: {
     addStore() {
-      const newPhoneNumber = this.phoneNumber.split("-", 2);
-      let addStoreInfo = this.store;
-      // console.log(newPhoneNumber);
-      this.store.tel.block = newPhoneNumber[0];
-      this.store.tel.num = newPhoneNumber[1];
-      this.store.orderIn.unit = this.selected;
-      this.storeId = store.push(addStoreInfo).key;
+      this.$validate().then(success => {
+        if (success) {
+          let addStoreInfo = this.store;
+          // console.log(newPhoneNumber);
+          // this.store.tel.block = newPhoneNumber[0];
+          // this.store.tel.num = newPhoneNumber[1];
+          this.store.orderIn.unit = this.selected;
+          this.storeId = store.push(addStoreInfo).key;
 
-      this.$router.push({
-        name: "addmenu",
-        params: {
-          storeId: this.storeId
+          this.$router.push({
+            name: "addmenu",
+            params: {
+              storeId: this.storeId
+            }
+          });
         }
       });
     },
     cancel() {
       this.$router.push({
         name: "index"
+      });
+    },
+    clickFileInput() {
+
+    },
+    uploadImages($event) {
+      // console.log($event.target.files[0]);
+
+      // Assign upload's file  to variable file
+      let file = $event.target.files[0];
+
+      // Assign Storage ref to storageRef variable
+      let storageRef = firebase.storage().ref("images/" + file.name);
+
+      // Assign upload file to task variable 
+      let task = storageRef.put(file);
+
+      // check upload status
+      task.on("state_changed", function(snapshot) {
+        console.log(snapshot.task);
+        if (snapshot.task.state_ === "success") {
+          alert("店家圖片上傳成功！");
+        }
       });
     }
   }
@@ -140,33 +238,103 @@ h1 {
   margin-bottom: 19px;
 }
 
-input {
-  width: 80.8%;
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.store-name-area, .store-address-area {
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.message {
+  width: 100%;
+  text-align: center;
+  // margin-top: 10px;
+  color: #f75454;
+}
+
+.store-name, .store-address {
+  width: 81.335%;
+  height: 46px;
+  border-radius: 14px;
+  background-color: #f4f4f4;
+  border: 0;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+#file {
+  margin-bottom: 12px;
+  margin-top: 12px;
+}
+
+.store-tel {
+  width: 81.3%;
+  box-sizing: border-box;
+  display: flex;
+  margin: 0 9.3%;
+  justify-content: space-between;
+}
+
+.store-tel-block, .store-tel-num {
+  // width: 97.04%;
+  width: 100%;
+  height: 46px;
+  border-radius: 14px;
+  background-color: #f4f4f4;
+  border: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.telDash {
+  margin-top: 15px;
+}
+
+.store-time {
+  display: flex;
+  width: 81.334%;
+  justify-content: space-between;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.timeDash {
+  margin-top: 12px;
+}
+
+.open-time,
+.close-time {
+  width: 100%;
   height: 46px;
   border-radius: 14px;
   background-color: #f4f4f4;
   border: 0;
   margin-bottom: 3.2%;
+  padding: 0;
   text-align: center;
 }
-.store-time {
-  display: flex;
-  width: 81.334%;
-  justify-content: space-between;
-}
-.open-time,
-.close-time {
-  width: 47.218%;
-}
+
 
 .delivery-area {
   display: flex;
   width: 81.3%;
-  justify-content: space-between;
 }
 
 .delivery-condition {
-  width: 47.5%;
+  width: 63.4%;
+  height: 46px;
+  border-radius: 14px;
+  background-color: #f4f4f4;
+  border: 0;
+  text-align: center;
+}
+
+.delivery-condition-error {
+  text-align: left;
 }
 
 select {
@@ -174,9 +342,21 @@ select {
   height: 20px;
 }
 
+.store-mark-area {
+  display: flex;
+  justify-content: center;
+}
+
 .remark {
+  width: 81.334%;
   height: 79px;
+  margin-top: 12px;
   margin-bottom: 49px;
+  border-radius: 14px;
+  background-color: #f4f4f4;
+  border: 0;
+  margin-bottom: 3.2%;
+  text-align: center;
 }
 
 .confirm {
