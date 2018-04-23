@@ -12,7 +12,10 @@
       <!-- <button type="button" @click="clickFileInput">上傳圖片</button> -->
       <div>上傳店家圖片：</div>
       <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)">
-      <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
+      <div class="form-group store-address-area" :class="{error: validation.hasError('store.address')}">
+        <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
+        <div class="message">{{ validation.firstError('store.address') }}</div>
+      </div>
       <!-- <input type="text" class="store-tel" placeholder="店家電話" v-model="phoneNumber"> -->
       <div class="store-tel">
         <div class="form-group" :class="{error: validation.hasError('store.tel.block')}">
@@ -117,9 +120,13 @@ export default {
   /* 
     custom validator rules 
   */
+
   validators: {
     "store.name": function(value) {
       return Validator.value(value).required().regex("^[A-Za-z0-9\u4E00-\u9FFF]+$", "請勿輸入特殊字元").maxLength(10);
+    },
+    "store.address": function(value) {
+      return Validator.value(value).required().regex("^[0-9-\u4E00-\u9FFF]+$", "請輸入正確地址").maxLength(20);
     },
     "store.tel.block": function(value) {
       return Validator.value(value).required().regex("^[0-9]+$", "ex: 04 or 09xx").maxLength(4);
@@ -229,7 +236,7 @@ h1 {
   flex-wrap: wrap;
 }
 
-.store-name-area {
+.store-name-area, .store-address-area {
   justify-content: center;
   margin-bottom: 12px;
 }
@@ -247,14 +254,9 @@ h1 {
   border-radius: 14px;
   background-color: #f4f4f4;
   border: 0;
-  margin-bottom: 12px;
+  margin-bottom: 0px;
   text-align: center;
 }
-
-.store-name {
-  margin-bottom: 0;
-}
-
 
 #file {
   margin-bottom: 12px;
@@ -266,10 +268,12 @@ h1 {
   box-sizing: border-box;
   display: flex;
   margin: 0 9.3%;
+  justify-content: space-between;
 }
 
 .store-tel-block, .store-tel-num {
-  width: 97.04%;
+  // width: 97.04%;
+  width: 100%;
   height: 46px;
   border-radius: 14px;
   background-color: #f4f4f4;
@@ -296,7 +300,7 @@ h1 {
 
 .open-time,
 .close-time {
-  width: 97%;
+  width: 100%;
   height: 46px;
   border-radius: 14px;
   background-color: #f4f4f4;
@@ -317,7 +321,7 @@ h1 {
   border-radius: 14px;
   background-color: #f4f4f4;
   border: 0;
-  margin-bottom: 3.2%;
+  margin-bottom: 12px;
   text-align: center;
 }
 
