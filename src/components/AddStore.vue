@@ -47,15 +47,6 @@
           <option>份</option>
         </select>
       </div>
-      <!-- <div  class="unfold-option-area">
-        <span class="unfold-option">展開選項</span>
-        <span class="arrow">ˇ</span>
-        <ul class="delivery-options">
-          <li>元</li>
-          <li>份</li>
-          <li>^</li>
-        </ul>
-      </div> -->
       <input type="text" class="remark" placeholder="備註" v-model="store.mark">
       <a href="#" class="confirm" @click="addStore">確認</a>
     </div>
@@ -127,10 +118,10 @@ export default {
     custom validator rules 
   */
   validators: {
-    "store.name" : function(value) {
+    "store.name": function(value) {
       return Validator.value(value).required().regex("^[A-Za-z0-9\u4E00-\u9FFF]+$", "請勿輸入特殊字元").maxLength(10);
     },
-    "store.tel.block" : function(value) {
+    "store.tel.block": function(value) {
       return Validator.value(value).required().regex("^[0-9]+$", "ex: 04 or 09xx").maxLength(4);
     },
     "store.tel.num": function(value) {
@@ -140,7 +131,7 @@ export default {
       return Validator.value(value).required().regex("^[0-9]*[0-9]:[0-9][0-9]$", "ex: 9:00");
     },
     "store.time.end": function(value) {
-      return Validator.value(value).required().regex("^[0-9]*[0-9]:[0-9][0-9]$", "ex: 20:00")
+      return Validator.value(value).required().regex("^[0-9]*[0-9]:[0-9][0-9]$", "ex: 20:00");
     }
 
   },

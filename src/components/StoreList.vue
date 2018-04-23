@@ -46,7 +46,7 @@ export default {
         this.stores = JSON.parse(JSON.stringify(list));
       });
 
-      console.log(firebase.storage().child("images").Storage);
+    // console.log(firebase.storage().child("images").Storage);
   }
 };
 </script>

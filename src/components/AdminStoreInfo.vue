@@ -139,7 +139,7 @@ export default {
     },
     removeMenu(menuKey) {
       const self = this;
-      const storeId = self.storeId;
+      // const storeId = self.storeId;
 
       let removeMenus = self.removeMenus;
 
