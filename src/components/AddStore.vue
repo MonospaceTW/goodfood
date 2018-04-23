@@ -102,7 +102,7 @@ export default {
   mixins: [require("simple-vue-validator").mixin],
   validators: {
     "store.name" : function(value) {
-      return Validator.value(value).required().regex(/[A-Za-z0-9_\u4e00-\u9fa5]/g, "請勿輸入特殊字元");
+      return Validator.value(value).required().regex("^[A-Za-z0-9\u4E00-\u9FFF]+$", "請勿輸入特殊字元").maxLength(10);
     }
   },
   methods: {
@@ -205,6 +205,7 @@ h1 {
   text-align: center;
   // margin-top: 10px;
   color: #f75454;
+  margin-bottom: 3.2%;
 }
 
 .store-name, .store-address, .store-tel {
@@ -216,6 +217,7 @@ h1 {
   margin-bottom: 3.2%;
   text-align: center;
 }
+
 
 #file {
   margin-bottom: 12px;
