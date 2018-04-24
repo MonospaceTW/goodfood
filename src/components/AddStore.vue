@@ -254,6 +254,7 @@ h1 {
   text-align: center;
   // margin-top: 10px;
   color: #f75454;
+  font-size: 14px;
 }
 
 .store-name, .store-address {
