@@ -129,7 +129,7 @@ export default {
       return Validator.value(value).required().regex("^[A-Za-z0-9\u4E00-\u9FFF]+$", "請勿輸入特殊字元").maxLength(10);
     },
     "store.address": function(value) {
-      return Validator.value(value).required().regex("^[0-9-\u4E00-\u9FFF]+$", "請輸入正確地址").maxLength(20);
+      return Validator.value(value).required().regex("^[A-Za-z0-9-\u4E00-\u9FFF]+$", "請輸入正確地址").maxLength(20);
     },
     "store.tel.block": function(value) {
       return Validator.value(value).required().regex("^[0-9]+$", "ex: 04 or 09xx").maxLength(4);
