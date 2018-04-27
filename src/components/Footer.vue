@@ -10,7 +10,7 @@
       </router-link>
     </div>
     <div class="member">
-      <router-link
+      <router-link v-if="process.env.DONE"
       :to="{
         path: '/member'
       }"
@@ -22,6 +22,17 @@
 </template>
 
 <script>
+console.log(process.env.DONE);
+export default {
+  data() {
+    return {
+
+    };
+  },
+  created() {
+    
+  }
+};
 </script>
 
 <style lang="scss" scoped>
