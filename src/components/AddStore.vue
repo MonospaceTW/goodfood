@@ -54,7 +54,7 @@
         <input type="text" class="remark" placeholder="備註" v-model="store.mark">
         <div class="message">{{ validation.firstError('store.mark') }}</div>
       </div>
-      <a href="#" class="confirm" @click="addStore">確認</a>
+      <a href="#" class="confirm" @click.prevent="addStore">確認</a>
     </div>
   </div>
 </template>
