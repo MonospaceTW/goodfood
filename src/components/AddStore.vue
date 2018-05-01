@@ -10,8 +10,18 @@
         <div class="message">{{ validation.firstError('store.name') }}</div>
       </div>
       <!-- <button type="button" @click="clickFileInput">上傳圖片</button> -->
-      <div>上傳店家圖片：</div>
-      <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)">
+      <!-- <div>上傳店家圖片：</div>
+      <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)"> -->
+      <el-upload
+        class="upload-demo"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-preview="handlePreview"
+        :on-remove="handleRemove"
+        :file-list="fileList2"
+        list-type="picture">
+        <el-button size="small" type="primary">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+      </el-upload>
       <div class="form-group store-address-area" :class="{error: validation.hasError('store.address')}">
         <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
         <div class="message">{{ validation.firstError('store.address') }}</div>
@@ -61,7 +71,7 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
-import firebase from "firebase";
+// import firebase from "firebase";
 
 const SimpleVueValidation = require("simple-vue-validator");
 // const Validator = SimpleVueValidation.Validator;
@@ -82,6 +92,7 @@ export default {
       storeId: "",
       selected: "",
       // phoneNumber: "",
+      fileList2: [{name: "default.jpeg", url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"}],
       store: {
         name: "",
         address: "",
@@ -179,25 +190,40 @@ export default {
     clickFileInput() {
 
     },
-    uploadImages($event) {
-      // console.log($event.target.files[0]);
+    // uploadImages($event) {
+    //   // console.log($event.target.files[0]);
 
-      // Assign upload's file  to variable file
-      let file = $event.target.files[0];
+    //   // Assign upload's file  to variable file
+    //   let file = $event.target.files[0];
 
-      // Assign Storage ref to storageRef variable
-      let storageRef = firebase.storage().ref("images/" + file.name);
+    //   // Assign Storage ref to storageRef variable
+    //   let storageRef = firebase.storage().ref("images/" + file.name);
 
-      // Assign upload file to task variable 
-      let task = storageRef.put(file);
+    //   // Assign upload file to task variable 
+    //   let task = storageRef.put(file);
 
-      // check upload status
-      task.on("state_changed", function(snapshot) {
-        console.log(snapshot.task);
-        if (snapshot.task.state_ === "success") {
-          alert("店家圖片上傳成功！");
-        }
-      });
+    //   // check upload status
+    //   task.on("state_changed", function(snapshot) {
+    //     console.log(snapshot.task);
+    //     if (snapshot.task.state_ === "success") {
+    //       alert("店家圖片上傳成功！");
+    //     }
+    //   });
+    // }
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
+    },
+    beforeAvatarUpload(file) {
+
     }
   }
 };
