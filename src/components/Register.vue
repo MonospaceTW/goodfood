@@ -1,6 +1,8 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
+import footerComponent from "./Footer";
 var SimpleVueValidation = require("simple-vue-validator");
+
 var Validator = SimpleVueValidation.Validator.create({
   templates: {
     required: "此欄位為必填",
@@ -43,6 +45,9 @@ export default {
           .match(password);
       }
     }
+  },
+  components: {
+    footerComponent
   },
   created() {
     // firebase.auth().onAuthStateChanged(function(user) {
@@ -159,6 +164,8 @@ export default {
           </div>
         </div>
     </form>
+    <footer-component></footer-component>
+    
   </div>
 </template>
 
@@ -170,6 +177,7 @@ export default {
 }
 
 .container {
+  position: relative;
   width: 90%;
   font-size: 14px;
   margin: 0 auto;

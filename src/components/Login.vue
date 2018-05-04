@@ -1,5 +1,7 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
+import footerComponent from "./Footer";
+
 var SimpleVueValidation = require("simple-vue-validator");
 var Validator = SimpleVueValidation.Validator.create({
   templates: {
@@ -18,6 +20,9 @@ export default {
       errorPw: "",
       isBtnDisabled: false
     };
+  },
+  components: {
+    footerComponent
   },
   created() {
     // firebase.auth().onAuthStateChanged(function(user) {
@@ -133,6 +138,7 @@ export default {
   <div>
     <router-link class="forgotpw" :to="{name:'forgotpw'}">忘記密碼</router-link>
   </div>
+    <footer-component></footer-component>
   
 </div>
 </template>
@@ -154,6 +160,7 @@ a {
   margin: 0 auto;
   padding-top: 60px;
   padding-bottom: 60px;
+  position: relative;
 }
 
 .logo_title {
