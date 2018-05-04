@@ -1,5 +1,6 @@
 {
   "name": "店家名稱",
+  "imageUrl":"",
   "address": "店家地址",
   "orderIn": {
     "unit": "元 / 份",
