@@ -12,19 +12,7 @@
       <!-- <button type="button" @click="clickFileInput">上傳圖片</button> -->
       <!-- <div>上傳店家圖片：</div>
       <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)"> -->
-      <el-upload
-        class="upload-demo"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :on-preview="handlePreview"
-        :on-remove="handleRemove"
-        :before-remove="beforeRemove"
-        multiple
-        :limit="3"
-        :on-exceed="handleExceed"
-        :file-list="fileList">
-        <el-button size="small" type="primary">上傳店家圖片</el-button>
-        <div slot="tip" class="el-upload__tip">只能上傳jpg/png檔，且不超過500kb</div>
-      </el-upload>
+
       <div class="form-group store-address-area" :class="{error: validation.hasError('store.address')}">
         <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
         <div class="message">{{ validation.firstError('store.address') }}</div>
@@ -74,7 +62,6 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
-// import firebase from "firebase";
 
 const SimpleVueValidation = require("simple-vue-validator");
 // const Validator = SimpleVueValidation.Validator;
@@ -96,7 +83,7 @@ export default {
       selected: "",
       // phoneNumber: "",
       // fileList2: [{name: "default.jpeg", url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"}],
-      fileList: [{name: "food.jpeg", url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"}],
+      fileList: [],
       store: {
         name: "",
         address: "",
@@ -171,12 +158,14 @@ export default {
       this.$validate().then(success => {
         if (success) {
           let addStoreInfo = this.store;
-          // console.log(newPhoneNumber);
-          // this.store.tel.block = newPhoneNumber[0];
-          // this.store.tel.num = newPhoneNumber[1];
-          this.store.orderIn.unit = this.selected;
-          this.storeId = store.push(addStoreInfo).key;
 
+          // assign order conditions unit to this.store.orderIn.unit
+          this.store.orderIn.unit = this.selected;
+
+          // create new store key
+          this.storeId = store.push(addStoreInfo).key;
+          
+          // change router
           this.$router.push({
             name: "addmenu",
             params: {
@@ -185,24 +174,13 @@ export default {
           });
         }
       });
+     
     },
     cancel() {
       this.$router.push({
         name: "index"
       });
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
-    },
-    handleExceed(files, fileList) {
-      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-    },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`);
-    }
   }
 };
 </script>
