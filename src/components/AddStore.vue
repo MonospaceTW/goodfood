@@ -12,7 +12,10 @@
       <!-- <button type="button" @click="clickFileInput">上傳圖片</button> -->
       <!-- <div>上傳店家圖片：</div>
       <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)"> -->
-
+      <label>
+        <span class="upload-button">上傳店家圖片</span>
+        <input type="file" accept="image/*" id="upload" name="upload">
+      </label>
       <div class="form-group store-address-area" :class="{error: validation.hasError('store.address')}">
         <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
         <div class="message">{{ validation.firstError('store.address') }}</div>
@@ -247,9 +250,27 @@ h1 {
   text-align: center;
 }
 
-#file {
-  margin-bottom: 12px;
+.store-address {
   margin-top: 12px;
+}
+
+label {
+  margin: 12px 0;
+}
+
+.upload-button {
+  background: #efeeee;
+  color: #333;
+  border: 0;
+  height: 47px;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 12px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,.1), 0 0 10px rgba(0,0,0,.12);
+}
+
+#upload  {
+  display: none;
 }
 
 .store-tel {
