@@ -9,9 +9,10 @@
         <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
         <div class="message">{{ validation.firstError('store.name') }}</div>
       </div>
-      <!-- <button type="button" @click="clickFileInput">上傳圖片</button> -->
-      <!-- <div>上傳店家圖片：</div>
-      <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)"> -->
+      <label>
+        <span class="upload-button">上傳店家圖片</span>
+        <input type="file" accept="image/*" id="upload" name="upload">
+      </label>
 
       <div class="form-group store-address-area" :class="{error: validation.hasError('store.address')}">
         <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
@@ -174,13 +175,12 @@ export default {
           });
         }
       });
-     
     },
     cancel() {
       this.$router.push({
         name: "index"
       });
-    },
+    }
   }
 };
 </script>
@@ -239,6 +239,10 @@ h1 {
   font-size: 14px;
 }
 
+::placeholder {
+  color: #a1a1a1;
+}
+
 .store-name, .store-address {
   width: 81.335%;
   height: 46px;
@@ -247,6 +251,32 @@ h1 {
   border: 0;
   margin-bottom: 0px;
   text-align: center;
+}
+
+.store-name {
+  margin-bottom: 12px;
+}
+
+.store-address {
+  margin-top: 12px;
+}
+
+label {
+  margin-bottom: 12px;
+}
+
+.upload-button {
+  background: #efeeee;
+  color: #a1a1a1;
+  border: 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,.1), 0 0 10px rgba(0,0,0,.12);
+}
+
+#upload {
+  display: none;
 }
 
 .store-tel {
