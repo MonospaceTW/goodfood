@@ -11,9 +11,9 @@
       </div>
       <label>
         <span class="upload-button">上傳店家圖片</span>
-        <input type="file" accept="image/*" id="upload" name="upload">
+        <input type="file" accept="image/*" id="upload" name="upload" @change="handleFiles($event)">
       </label>
-
+      <p class="file-list" v-if="fileList.length >= 1">{{fileList[0].name}}<span class="remove-file" @click="removeFile">刪除</span></p>
       <div class="form-group store-address-area" :class="{error: validation.hasError('store.address')}">
         <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
         <div class="message">{{ validation.firstError('store.address') }}</div>
@@ -180,6 +180,13 @@ export default {
       this.$router.push({
         name: "index"
       });
+    },
+    handleFiles($event) {
+      console.log($event.target.files);
+      this.fileList = Array.from($event.target.files);
+    },
+    removeFile() {
+      this.fileList.splice(0, 1);
     }
   }
 };
@@ -277,6 +284,19 @@ label {
 
 #upload {
   display: none;
+}
+
+.file-list {
+  margin-top: 12px;
+}
+
+.remove-file {
+  background: #efeeee;
+  color: #a1a1a1;
+  border: 0;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,.1), 0 0 10px rgba(0,0,0,.12);
 }
 
 .store-tel {
