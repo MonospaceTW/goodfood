@@ -31,9 +31,12 @@ export default {
 
 <template>
 <div class="container">
+  <div class="wrapper">
     <div class="title">Hi, {{displayName}}</div>
     <div class="title">請先登入Monospace slack</div>
-    <a class="btn" v-bind:href="'https://slack.com/oauth/authorize?client_id=244526419584.320607325620&scope=read&state=' + uid">綁定slack</a>
+    <a class="btn" target="_blank" v-bind:href="'https://slack.com/oauth/authorize?client_id=244526419584.320607325620&scope=read&state=' + uid">綁定slack</a>
+  </div>
+    
     <footer-component></footer-component>
     
 </div>
@@ -48,10 +51,19 @@ a {
 
 .container {
   display: flex;
+  height: 100%;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   position: relative;
-  padding-top: 30%;
+  // padding-top: 30%;
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 .title {
   text-align: center;
@@ -61,7 +73,7 @@ a {
   display: block;
   width: 120px;
   height: 40px;
-  margin: 17px 0 0;
+  margin: 30px 0 0;
   color: $orange;
   font-size: 14px;
   line-height: 40px;
