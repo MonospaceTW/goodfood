@@ -85,6 +85,7 @@ export default {
       // phoneNumber: "",
       // fileList2: [{name: "default.jpeg", url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"}],
       fileList: [],
+      downloadUrl: "",
       store: {
         name: "",
         address: "",
@@ -156,15 +157,26 @@ export default {
   },
   methods: {
     addStore() {
-      this.$validate().then(success => {
+      this.$validate().then(async success => {
         if (success) {
           let addStoreInfo = this.store;
+          let downloadUrl = this.downloadUrl;
 
           // assign order conditions unit to this.store.orderIn.unit
           this.store.orderIn.unit = this.selected;
 
           // create new store key
           this.storeId = store.push(addStoreInfo).key;
+
+          // Upload file to firebase's storage
+          if (this.fileList.length >= 1) {
+            downloadUrl = await FirebaseManager.uploadFile(this.fileList[0]);
+
+            // FirebaseManager.setImageUrl(`store/${this.storeId}/imageUrl`, downloadUrl);
+            FirebaseManager.setImageUrl(`store/${this.storeId}/imageUrl`, downloadUrl.url);
+          } else {
+            // FirebaseManager.setImageUrl(`store/${this.storeId}/imageUrl`, downloadUrl);
+          }
           
           // change router
           this.$router.push({
@@ -182,8 +194,8 @@ export default {
       });
     },
     handleFiles($event) {
-      console.log($event.target.files);
       this.fileList = Array.from($event.target.files);
+      // console.log(this.fileList);
     },
     removeFile() {
       this.fileList.splice(0, 1);
