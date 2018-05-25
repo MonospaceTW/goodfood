@@ -175,7 +175,7 @@ export default {
             // FirebaseManager.setImageUrl(`store/${this.storeId}/imageUrl`, downloadUrl);
             FirebaseManager.setImageUrl(`store/${this.storeId}/imageUrl`, downloadUrl.url);
           } else {
-            // FirebaseManager.setImageUrl(`store/${this.storeId}/imageUrl`, downloadUrl);
+            FirebaseManager.setImageUrl(`store/${this.storeId}/imageUrl`, "https://firebasestorage.googleapis.com/v0/b/goodfood-beta.appspot.com/o/shop-1.png?alt=media&token=464aa67a-f8c7-4c4b-851d-838de68e8a9b");
           }
           
           // change router
