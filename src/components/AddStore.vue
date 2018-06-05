@@ -9,9 +9,11 @@
         <input type="text" class="store-name" placeholder="店家名稱" v-model="store.name">
         <div class="message">{{ validation.firstError('store.name') }}</div>
       </div>
-      <!-- <button type="button" @click="clickFileInput">上傳圖片</button> -->
-      <div>上傳店家圖片：</div>
-      <input type="file" id="file" name="file" value="Upload image" @change="uploadImages($event)">
+      <label>
+        <span class="upload-button">上傳店家圖片</span>
+        <input type="file" accept="image/*" id="upload" name="upload" @change="handleFiles($event)">
+      </label>
+      <p class="file-list" v-if="fileList.length >= 1">{{fileList[0].name}}<span class="remove-file" @click="removeFile">刪除</span></p>
       <div class="form-group store-address-area" :class="{error: validation.hasError('store.address')}">
         <input type="text" class="store-address" placeholder="店家地址" v-model="store.address">
         <div class="message">{{ validation.firstError('store.address') }}</div>
@@ -61,7 +63,6 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
 import checkAuth from "@/checkAuth";
-import firebase from "firebase";
 
 const SimpleVueValidation = require("simple-vue-validator");
 // const Validator = SimpleVueValidation.Validator;
@@ -82,6 +83,9 @@ export default {
       storeId: "",
       selected: "",
       // phoneNumber: "",
+      // fileList2: [{name: "default.jpeg", url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"}],
+      fileList: [],
+      downloadUrl: "",
       store: {
         name: "",
         address: "",
@@ -153,15 +157,28 @@ export default {
   },
   methods: {
     addStore() {
-      this.$validate().then(success => {
+      this.$validate().then(async success => {
         if (success) {
           let addStoreInfo = this.store;
-          // console.log(newPhoneNumber);
-          // this.store.tel.block = newPhoneNumber[0];
-          // this.store.tel.num = newPhoneNumber[1];
+          let downloadUrl = this.downloadUrl;
+
+          // assign order conditions unit to this.store.orderIn.unit
           this.store.orderIn.unit = this.selected;
+
+          // create new store key
           this.storeId = store.push(addStoreInfo).key;
 
+          // Upload file to firebase's storage
+          if (this.fileList.length >= 1) {
+            downloadUrl = await FirebaseManager.uploadFile(this.fileList[0]);
+
+            // FirebaseManager.setImageUrl(`store/${this.storeId}/imageUrl`, downloadUrl);
+            FirebaseManager.setImageUrl(`store/${this.storeId}/imageUrl`, downloadUrl.url);
+          } else {
+            FirebaseManager.setImageUrl(`store/${this.storeId}/imageUrl`, "https://firebasestorage.googleapis.com/v0/b/goodfood-beta.appspot.com/o/default.png?alt=media&token=1e8518c9-16d5-4de8-b3d2-0daa95f9b0dd");
+          }
+          
+          // change router
           this.$router.push({
             name: "addmenu",
             params: {
@@ -176,28 +193,12 @@ export default {
         name: "index"
       });
     },
-    clickFileInput() {
-
+    handleFiles($event) {
+      this.fileList = Array.from($event.target.files);
+      // console.log(this.fileList);
     },
-    uploadImages($event) {
-      // console.log($event.target.files[0]);
-
-      // Assign upload's file  to variable file
-      let file = $event.target.files[0];
-
-      // Assign Storage ref to storageRef variable
-      let storageRef = firebase.storage().ref("images/" + file.name);
-
-      // Assign upload file to task variable 
-      let task = storageRef.put(file);
-
-      // check upload status
-      task.on("state_changed", function(snapshot) {
-        console.log(snapshot.task);
-        if (snapshot.task.state_ === "success") {
-          alert("店家圖片上傳成功！");
-        }
-      });
+    removeFile() {
+      this.fileList.splice(0, 1);
     }
   }
 };
@@ -257,6 +258,10 @@ h1 {
   font-size: 14px;
 }
 
+::placeholder {
+  color: #a1a1a1;
+}
+
 .store-name, .store-address {
   width: 81.335%;
   height: 46px;
@@ -267,9 +272,43 @@ h1 {
   text-align: center;
 }
 
-#file {
+.store-name {
   margin-bottom: 12px;
+}
+
+.store-address {
   margin-top: 12px;
+}
+
+label {
+  margin-bottom: 12px;
+}
+
+.upload-button {
+  background: #efeeee;
+  color: #a1a1a1;
+  border: 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,.1), 0 0 10px rgba(0,0,0,.12);
+}
+
+#upload {
+  display: none;
+}
+
+.file-list {
+  margin-top: 12px;
+}
+
+.remove-file {
+  background: #efeeee;
+  color: #a1a1a1;
+  border: 0;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,.1), 0 0 10px rgba(0,0,0,.12);
 }
 
 .store-tel {
