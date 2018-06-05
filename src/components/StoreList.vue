@@ -1,6 +1,5 @@
 <script>
 import FirebaseManager from "@/utils/FirebaseManager";
-import Order from "./Order";
 import checkAuth from "@/checkAuth";
 import footerComponent from "./Footer";
 
@@ -10,31 +9,23 @@ export default {
   props: [],
   data() {
     return {
-      uid: "",
-      displayName: "",
+      userInfo: {},
       mark: "",
       user: {},
       stores: {},
-      src: [{url: ""}]
+      src: [{ url: "" }]
     };
   },
   components: {
-    Order,
     footerComponent
   },
   created() {
     /* 登入驗證 */
     checkAuth
       .checkAuth()
-      .then(userInfo => {
-        this.uid = userInfo.uid;
-        this.displayName = userInfo.displayName;
-      })
+      .then(info => this.updateUserInfo(info))
       .catch(error => {
-        console.log(error);
-        this.$router.push({
-          name: "login"
-        });
+        console.log(error.message);
       });
     firebase
       .database()
@@ -42,11 +33,17 @@ export default {
       .once("value")
       .then(snapshot => {
         let list = snapshot.val();
-        console.log(list);
+        // console.log(list);
         this.stores = JSON.parse(JSON.stringify(list));
       });
 
     // console.log(firebase.storage().child("images").Storage);
+  },
+  methods: {
+    updateUserInfo({ uid, displayName }) {
+      this.$set(this.userInfo, "uid", uid);
+      this.$set(this.userInfo, "displayName", displayName);
+    }
   }
 };
 </script>
@@ -104,7 +101,6 @@ ul.content {
       justify-content: flex-start;
       width: 120px;
       height: 90px;
-      
     }
     .info_box {
       margin-left: 18px;
