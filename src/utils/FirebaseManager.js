@@ -59,6 +59,12 @@ class FirebaseManagerClass {
       });
   }
 
+  setImageUrl(route, url) {
+    return this.database
+      .ref(route)
+      .set(url);
+  }
+
   removeChild(route, key) {
     return this.database
       .ref(route)

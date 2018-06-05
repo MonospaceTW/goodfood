@@ -56,7 +56,7 @@ export default {
   <ul class="content">
       <li v-for="(value, key) in stores" :key="key.id">
         <router-link :to="{path:'/storeinfo/'+key}">
-          <img :src="src.url">
+          <img :src="value.imageUrl">
           <div class="info_box">
             <div class="store_name">{{value.name}}</div>
             <div class="open_time">營業時間：{{value.time.start}}~{{value.time.end}}</div>
