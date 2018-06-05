@@ -10,7 +10,7 @@
       </router-link>
     </div>
     <div class="member">
-      <router-link v-if="config.onlyDev"
+      <router-link
       :to="{
         path: '/member'
       }"
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       config: {
-        onlyDev: process.env.DONE
+        onlyDev: process.env.DEV
       }
     };
   },
