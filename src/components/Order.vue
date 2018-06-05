@@ -16,8 +16,7 @@ export default {
   props: ["storeId", "orderId"],
   data() {
     return {
-      uid: "",
-      displayName: "",
+      userInfo: {},
       mark: "",
       user: {},
       thisOrder: [],
@@ -36,10 +35,7 @@ export default {
   created() {
     checkAuth
       .checkAuth()
-      .then(userInfo => {
-        this.uid = userInfo.uid;
-        this.displayName = userInfo.displayName;
-      })
+      .then(info => this.updateUserInfo(info))
       .catch(error => {
         console.log(error);
         this.$router.push({
@@ -62,6 +58,10 @@ export default {
     });
   },
   methods: {
+    updateUserInfo({ uid, displayName }) {
+      this.$set(this.userInfo, "uid", uid);
+      this.$set(this.userInfo, "displayName", displayName);
+    },
     add(id) {
       this.dishes[id].count += 1;
     },
@@ -158,7 +158,7 @@ export default {
     <div class="total">
       <span>總計</span>＄{{total}}</div>
     <div class="name">
-      我是{{displayName}}
+      我是{{userInfo.displayName}}
     </div>
     <div class="btn_group">
       <!-- 備註：<input type="text" v-model="mark"></div> -->
@@ -306,7 +306,7 @@ li {
 
 .lightbox .msg {
   position: fixed;
-  bottom: calc(100vh/2 - 50px);
+  bottom: calc(100vh / 2 - 50px);
   left: 0;
   right: 0;
   width: 90%;

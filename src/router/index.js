@@ -17,6 +17,8 @@ import AddMenu from "@/components/AddMenu";
 import ConfirmNewAddMenu from "@/components/ConfirmNewAddMenu";
 import AdminStoreInfo from "@/components/AdminStoreInfo";
 import AddMenuLocalStorage from "@/components/AddMenuLocalStorage";
+import Member from "@/components/Member";
+
 
 Vue.use(Router);
 
@@ -67,6 +69,16 @@ const router = new Router({
       meta: {
         title: route => {
           return "忘記密碼";
+        }
+      }
+    },
+    {
+      path: "member",
+      name: "member",
+      component: Member,
+      meta: {
+        title: route => {
+          return "會員中心";
         }
       }
     },
