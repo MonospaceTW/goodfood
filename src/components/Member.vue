@@ -5,8 +5,7 @@ import footerComponent from "./Footer";
 export default {
   data() {
     return {
-      uid: "",
-      displayName: ""
+      userInfo: {}
     };
   },
   components: {
@@ -15,16 +14,19 @@ export default {
   created() {
     checkAuth
       .checkAuth()
-      .then(userInfo => {
-        this.uid = userInfo.uid;
-        this.displayName = userInfo.displayName;
-      })
+      .then(info => this.updateUserInfo(info))
       .catch(error => {
         console.log(error);
         this.$router.push({
           name: "login"
         });
       });
+  },
+  methods: {
+    updateUserInfo({ uid, displayName }) {
+      this.$set(this.userInfo, "uid", uid);
+      this.$set(this.userInfo, "displayName", displayName);
+    }
   }
 };
 </script>
@@ -32,9 +34,9 @@ export default {
 <template>
 <div class="container">
   <div class="wrapper">
-    <div class="title">Hi, {{displayName}}</div>
+    <div class="title">Hi, {{userInfo.displayName}}</div>
     <div class="title">請先登入Monospace slack</div>
-    <a class="btn" target="_blank" v-bind:href="'https://slack.com/oauth/authorize?client_id=244526419584.320607325620&scope=read&state=' + uid">綁定slack</a>
+    <a class="btn" target="_blank" v-bind:href="'https://slack.com/oauth/authorize?client_id=244526419584.320607325620&scope=read&state=' + userInfo.uid">綁定slack</a>
   </div>
     
     <footer-component></footer-component>
