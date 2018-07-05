@@ -262,6 +262,12 @@ img {
   background-size: contain;
 }
 
+@media only screen and (min-width: 769px) {
+  .container {
+    background-size: 100% 100%;
+  }
+}
+
 .content {
   position: relative;
 
