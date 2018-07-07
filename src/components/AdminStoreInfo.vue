@@ -171,8 +171,7 @@ img {
   display: flex;
   flex-direction: column;
   background: no-repeat;
-  background-size: contain;
-  overflow: hidden;
+  background-size: 100% 100%;
 }
 
 @media only screen and (min-width: 769px) {
@@ -180,8 +179,6 @@ img {
     background-size: 100% 100%;
   }
 }
-
-
 
 .content {
   flex: 1 0 auto;
