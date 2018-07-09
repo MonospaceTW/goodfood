@@ -35,6 +35,7 @@ export default {
   created() {
     checkAuth
       .checkAuth()
+      //.then(console.log(info))
       .then(info => this.updateUserInfo(info))
       .catch(error => {
         console.log(error);
@@ -54,7 +55,7 @@ export default {
       }
       //  深層複製物件以確保更新Vue的observer
       this.dishes = lodashfp.cloneDeep(menu);
-      console.log(this.dishes);
+      // console.log(this.dishes);
     });
   },
   methods: {
@@ -87,8 +88,8 @@ export default {
       }
 
       let user = {};
-      user.id = this.uid;
-      user.name = this.displayName;
+      user.id = this.userInfo.uid;
+      user.name = this.userInfo.displayName;
       user.total = this.total;
       user.mark = this.mark;
       user.order = this.thisOrder;
@@ -137,7 +138,7 @@ export default {
 
 <template>
   <div class="container">
-    <confirm-order v-show="ConfirmOrder" :user="user" :orderId="orderId" :storeId="storeId" :uid="uid" @cancelOrder="cancelOrder"></confirm-order>
+    <confirm-order v-show="ConfirmOrder" :user="user" :orderId="orderId" :storeId="storeId" :userInfo="userInfo.uid" @cancelOrder="cancelOrder"></confirm-order>
     <h1 class="store_name">{{storeName}}</h1>
     <ul>
       <li class="item" v-for="(dish,id) in dishes" v-bind:key="id">
