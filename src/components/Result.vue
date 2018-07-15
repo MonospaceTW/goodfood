@@ -218,7 +218,7 @@ export default {
       可將需要的參數加進 params 裡。
     */
     backOrder() {
-      self.$router.push({
+      this.$router.push({
         name: "order",
         params: {
           storeId: this.storeId,
