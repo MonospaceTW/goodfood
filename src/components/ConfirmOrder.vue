@@ -2,7 +2,7 @@
 import FirebaseManager from "@/utils/FirebaseManager";
 
 export default {
-  props: ["user", "storeId", "orderId", "userInfo"],
+  props: ["user", "storeId", "orderId", "uid"],
   data() {
     return {
       total: 0,
@@ -48,13 +48,12 @@ export default {
 
       // let update = {};
       // update[this.uid] = this.user;
-      vm.$set(vm.update, vm.userInfo, this.user);
+      vm.$set(vm.update, vm.uid, this.user);
 
       FirebaseManager.database
         .ref("order/" + this.orderId + "/result/users")
         .update(vm.update)
         .then(data => {
-          console.log(data);
           this.$router.push({
             name: "confirmed",
             params: { storeId: this.storeId, orderId: this.orderId }

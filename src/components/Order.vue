@@ -138,7 +138,7 @@ export default {
 
 <template>
   <div class="container">
-    <confirm-order v-show="ConfirmOrder" :user="user" :orderId="orderId" :storeId="storeId" :userInfo="userInfo.uid" @cancelOrder="cancelOrder"></confirm-order>
+    <confirm-order v-show="ConfirmOrder" :user="user" :orderId="orderId" :storeId="storeId" :uid="userInfo.uid" @cancelOrder="cancelOrder"></confirm-order>
     <h1 class="store_name">{{storeName}}</h1>
     <ul>
       <li class="item" v-for="(dish,id) in dishes" v-bind:key="id">
