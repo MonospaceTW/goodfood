@@ -2,12 +2,15 @@
 import FirebaseManager from "@/utils/FirebaseManager";
 
 export default {
-  props: ["user", "storeId", "orderId", "uid"],
+  props: ["user", "storeId", "orderId", "userInfo"],
   data() {
     return {
       total: 0,
+      update: {},
       comfirmed: false
     };
+  },
+  created() {
   },
   mounted() {
     FirebaseManager.database
@@ -22,6 +25,7 @@ export default {
 
   methods: {
     comfirmOrder() {
+      const vm = this;
       // 先獲取資料庫的總訂單金額，加上此次訂單金額，再更新上去
       FirebaseManager.database
         .ref("order/" + this.orderId + "/result")
@@ -40,13 +44,15 @@ export default {
             .set(this.total);
         });
 
-      console.log(this.user);
+      // console.log(this.user);
 
-      let update = {};
-      update[this.uid] = this.user;
+      // let update = {};
+      // update[this.uid] = this.user;
+      vm.$set(vm.update, vm.userInfo, this.user);
+
       FirebaseManager.database
         .ref("order/" + this.orderId + "/result/users")
-        .update(update)
+        .update(vm.update)
         .then(data => {
           console.log(data);
           this.$router.push({
